@@ -1,0 +1,69 @@
+{
+  "sources": {
+    "german_financial": [
+      {"name": "Handelsblatt", "url": "handelsblatt.com", "priority": 1},
+      {"name": "FAZ / FAS", "url": "faz.net", "priority": 1},
+      {"name": "Börsen-Zeitung", "url": "boersen-zeitung.de", "priority": 1},
+      {"name": "finanzen.net", "url": "finanzen.net", "priority": 1},
+      {"name": "Süddeutsche Zeitung", "url": "sueddeutsche.de", "priority": 2},
+      {"name": "WirtschaftsWoche", "url": "wiwo.de", "priority": 2},
+      {"name": "Manager Magazin", "url": "manager-magazin.de", "priority": 2},
+      {"name": "Der Spiegel", "url": "spiegel.de", "priority": 2},
+      {"name": "boerse.de", "url": "boerse.de", "priority": 2},
+      {"name": "dpa-AFX", "url": "dpa-afx.de", "priority": 1}
+    ],
+    "german_industry": [
+      {"name": "Fonds Professionell", "url": "fondsprofessionell.de", "priority": 1},
+      {"name": "DAS INVESTMENT", "url": "dasinvestment.com", "priority": 1},
+      {"name": "Citywire Deutschland", "url": "citywire.de", "priority": 1},
+      {"name": "Institutional Money", "url": "institutional-money.com", "priority": 1},
+      {"name": "e-fundresearch", "url": "e-fundresearch.com", "priority": 2},
+      {"name": "PLATOW", "url": "platow.de", "priority": 2}
+    ],
+    "swiss_financial": [
+      {"name": "Finanz und Wirtschaft", "url": "fuw.ch", "priority": 1},
+      {"name": "NZZ", "url": "nzz.ch", "priority": 1},
+      {"name": "Cash", "url": "cash.ch", "priority": 2},
+      {"name": "Moneycab", "url": "moneycab.com", "priority": 2},
+      {"name": "payoff", "url": "payoff.ch", "priority": 2}
+    ],
+    "international_financial": [
+      {"name": "Reuters", "url": "reuters.com", "priority": 1},
+      {"name": "Financial Times", "url": "ft.com", "priority": 1},
+      {"name": "Bloomberg", "url": "bloomberg.com", "priority": 1},
+      {"name": "Wall Street Journal", "url": "wsj.com", "priority": 1},
+      {"name": "CNBC", "url": "cnbc.com", "priority": 2},
+      {"name": "Fortune", "url": "fortune.com", "priority": 2},
+      {"name": "Axios", "url": "axios.com", "priority": 2}
+    ],
+    "international_industry": [
+      {"name": "IPE", "url": "ipe.com", "priority": 1},
+      {"name": "Citywire Global", "url": "citywire.com", "priority": 1},
+      {"name": "Morningstar", "url": "morningstar.com", "priority": 2},
+      {"name": "Seeking Alpha", "url": "seekingalpha.com", "priority": 2},
+      {"name": "The TRADE", "url": "thetradenews.com", "priority": 2}
+    ],
+    "crypto_digital": [
+      {"name": "CoinDesk", "url": "coindesk.com", "priority": 1},
+      {"name": "FinTech Weekly", "url": "fintechweekly.com", "priority": 2},
+      {"name": "Disruption Banking", "url": "disruptionbanking.com", "priority": 2}
+    ],
+    "real_estate": [
+      {"name": "CBRE Research", "url": "cbre.com", "priority": 1},
+      {"name": "Cushman & Wakefield", "url": "cushmanwakefield.com", "priority": 1},
+      {"name": "JLL", "url": "jll.com", "priority": 2},
+      {"name": "Immobilien Zeitung", "url": "iz.de", "priority": 2}
+    ],
+    "institutions": [
+      {"name": "IEA", "url": "iea.org", "priority": 1},
+      {"name": "EZB", "url": "ecb.europa.eu", "priority": 1},
+      {"name": "Fed", "url": "federalreserve.gov", "priority": 1},
+      {"name": "Bundesbank", "url": "bundesbank.de", "priority": 2},
+      {"name": "OECD", "url": "oecd.org", "priority": 2}
+    ]
+  },
+  "schedule": {
+    "daily_briefing": "07:00 CET",
+    "timezone": "Europe/Berlin"
+  }
+}
