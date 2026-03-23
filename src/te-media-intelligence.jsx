@@ -36,9 +36,9 @@ Genau diese Mischung aus schwächerem Wachstum und höherem Inflationsdruck ist 
     title: "Stagflationsangst wird vom Rand ins Zentrum geschoben",
     body: `Die heutige Marktsicht lässt sich so zusammenfassen: Investoren fragen sich inzwischen offen, ob sie auf Stagflation setzen müssen. Die Flash-PMIs am Dienstag werden die erste harte Stimmungsprobe seit Kriegsbeginn liefern.
 
-Für die beobachteten Häuser ist das deswegen zentral, weil die heutige Medienagenda nicht mehr nur „höheres Öl = höhere Inflation" lautet, sondern zunehmend: höheres Öl + schwächere Aktivität + unsichere Margen + restriktivere Zentralbanken. Das ist für Multi-Asset-, Fixed-Income- und Equity-Strategien zugleich relevant.
+Für die beobachteten Häuser ist das deswegen zentral, weil die heutige Medienagenda nicht mehr nur "höheres Öl = höhere Inflation" lautet, sondern zunehmend: höheres Öl + schwächere Aktivität + unsichere Margen + restriktivere Zentralbanken. Das ist für Multi-Asset-, Fixed-Income- und Equity-Strategien zugleich relevant.
 
-Die Commerzbank schätzt, dass die Inflation im Euroraum bei einem mehrmonatigen Krieg um mindestens einen Prozentpunkt steigen und das Wirtschaftswachstum um einige Zehntel sinken würde. Für Deutschland, das 2026 ohnehin nur mit etwa einem Prozent Wachstum rechnete, wäre das besonders schmerzhaft. Franklin Templetons Chef-Kapitalmarktstratege Martin Lück warnte im ZDF, dass sich der Golf-Krieg längst zu einem „wirtschaftlichen Flächenbrand" entwickelt habe.`
+Die Commerzbank schätzt, dass die Inflation im Euroraum bei einem mehrmonatigen Krieg um mindestens einen Prozentpunkt steigen und das Wirtschaftswachstum um einige Zehntel sinken würde. Für Deutschland, das 2026 ohnehin nur mit etwa einem Prozent Wachstum rechnete, wäre das besonders schmerzhaft. Franklin Templetons Chef-Kapitalmarktstratege Martin Lück warnte im ZDF, dass sich der Golf-Krieg längst zu einem "wirtschaftlichen Flächenbrand" entwickelt habe.`
   },
   {
     id: "t4",
@@ -46,23 +46,23 @@ Die Commerzbank schätzt, dass die Inflation im Euroraum bei einem mehrmonatigen
     title: "Liquidität schlägt Diversifikation — Gold im freien Fall",
     body: `Auffällig an der heutigen Tonlage ist, dass Investoren nicht einfach nur in klassische Schutzräume umschichten. Gold — der Inbegriff des Safe Havens — ist seit seinem Allzeithoch von 5.589 Dollar (Ende Januar 2026) um rund 13 Prozent auf etwa 4.291 Dollar gefallen. Am 19. März kam es zu einem regelrechten Flash Crash: Gold fiel an einem Tag um 6,9 Prozent, Silber um über 12,5 Prozent.
 
-Der Mechanismus: Als die Energiepreise explodierten und Aktienmärkte unter Druck gerieten, mussten institutionelle Anleger ihre liquidesten Gewinnpositionen verkaufen, um Margin Calls zu bedienen. Gold wurde nicht verkauft, weil es als schlecht angesehen wird, sondern gerade weil es liquide ist. Ole Hansen von der Saxo Bank kommentierte treffend: „Volatilität nährt sich selbst."
+Der Mechanismus: Als die Energiepreise explodierten und Aktienmärkte unter Druck gerieten, mussten institutionelle Anleger ihre liquidesten Gewinnpositionen verkaufen, um Margin Calls zu bedienen. Gold wurde nicht verkauft, weil es als schlecht angesehen wird, sondern gerade weil es liquide ist. Ole Hansen von der Saxo Bank kommentierte treffend: "Volatilität nährt sich selbst."
 
 Die Fed-Entscheidung, nur noch einen Zinsschnitt für 2026 zu signalisieren, hat Gold zusätzlich belastet: Die 10-jährige Treasury-Rendite stieg auf 4,2 Prozent, der Dollar-Index kletterte Richtung 100 — beides direkte Gegenwinde für zinslose Anlagen. J.P. Morgan hält dennoch an einem Jahresende-Ziel von 6.300 Dollar fest, Deutsche Bank bei 6.000 Dollar.
 
-Für die Asset-Management-Branche ist das relevant, weil es auf ein Umfeld hindeutet, in dem Marktteilnehmer nicht primär „optimieren", sondern erst einmal Liquidität sichern. Für PIMCO, PGIM, Franklin Templeton und T.\u00a0Rowe Price ist das relevant im Blick auf Mittelzuflüsse/-abflüsse, Kundengespräche, taktische Allokation und die Positionierung zwischen liquiden und weniger liquiden Strategien.`
+Für die Asset-Management-Branche ist das relevant, weil es auf ein Umfeld hindeutet, in dem Marktteilnehmer nicht primär "optimieren", sondern erst einmal Liquidität sichern. Für PIMCO, PGIM, Franklin Templeton und T.\u00a0Rowe Price ist das relevant im Blick auf Mittelzuflüsse/-abflüsse, Kundengespräche, taktische Allokation und die Positionierung zwischen liquiden und weniger liquiden Strategien.`
   },
   {
     id: "t5",
     num: "5",
     title: "Private Credit rückt unter massive Beobachtung",
-    body: `Neben Energie und Zinsen ist das heute wichtigste branchenspezifische Thema die wachsende Nervosität im Private-Credit-Markt. Fortune titelte vergangene Woche: „The $265 billion private credit meltdown." NPR, Axios, Reuters und CNBC berichten breit über die Spannungen.
+    body: `Neben Energie und Zinsen ist das heute wichtigste branchenspezifische Thema die wachsende Nervosität im Private-Credit-Markt. Fortune titelte vergangene Woche: "The $265 billion private credit meltdown." NPR, Axios, Reuters und CNBC berichten breit über die Spannungen.
 
 Die konkreten Fakten: Blackstones Flaggschiff-Fonds BCRED (82 Milliarden Dollar) erlebte im Q1 erstmals Netto-Abflüsse — Anleger forderten 3,7 Milliarden Dollar Rückzahlung, Blackstone und sein Management schossen 400 Millionen Dollar aus eigenen Mitteln zu. BlackRock hat Rücknahmen bei seinem 26-Milliarden-Dollar-HPS-Lending-Fund eingeschränkt (Redemption Requests bei 9,3 Prozent des NAV). Morgan Stanley begrenzte Rücknahmen bei seinem North Haven Private Income Fund (Rücknahme-Requests bei 10,9 Prozent). Blue Owl Capital verkauft 1,4 Milliarden Dollar an Assets aus drei Fonds und hat bei einem Fonds die Rücknahmen dauerhaft gestoppt.
 
 Der Private-Credit-Markt ist laut Morgan Stanley auf rund 3 Billionen Dollar angewachsen. US-Banken hatten per Mitte 2025 fast 300 Milliarden Dollar an Krediten an Private-Credit-Anbieter ausstehen, plus 340 Milliarden Dollar an ungenutzten Kreditlinien (Moody's). JPMorgan begrenzt bereits seine Kreditvergabe an Private-Credit-Firmen.
 
-Für MK Global Kapital gilt das in besonderem Maß: Das Haus hat sich seit Jahresbeginn als Managementgesellschaft des Impact-Fonds „Alternative" positioniert und über Bitfinex Securities tokenisierte Anleihen emittiert — also an der Schnittstelle zwischen Private Credit, Impact Investing und Innovation. Die Differenzierung von MK Global Kapital gegenüber dem Mainstream-Private-Credit-Markt wird in diesem Umfeld kommunikativ besonders wichtig.`
+Für MK Global Kapital gilt das in besonderem Maß: Das Haus hat sich seit Jahresbeginn als Managementgesellschaft des Impact-Fonds "Alternative" positioniert und über Bitfinex Securities tokenisierte Anleihen emittiert — also an der Schnittstelle zwischen Private Credit, Impact Investing und Innovation. Die Differenzierung von MK Global Kapital gegenüber dem Mainstream-Private-Credit-Markt wird in diesem Umfeld kommunikativ besonders wichtig.`
   },
   {
     id: "t6",
@@ -80,9 +80,9 @@ Das ist nicht bloß ein Indien-Thema, sondern ein Frühindikator dafür, wie sta
     id: "t7",
     num: "7",
     title: "Krypto, Digital Assets & Tokenisierung: Regulierungsklarheit trifft Liquiditätskrise",
-    body: `Am 17. März veröffentlichten SEC und CFTC eine gemeinsame 68-seitige Interpretation, die 16 Krypto-Assets — darunter Bitcoin, Ether, Solana, XRP, Dogecoin — explizit als „Digital Commodities" klassifiziert und damit aus dem Wertpapierrecht herausnimmt. SEC-Chair Paul Atkins sagte beim DC Blockchain Summit: „We're not the 'securities and everything commission' anymore." Das ist die bedeutendste US-Krypto-Regulierungsentscheidung seit Jahren und hat das Potenzial, institutionelle Kapitalflüsse in den Sektor weiter zu beschleunigen.
+    body: `Am 17. März veröffentlichten SEC und CFTC eine gemeinsame 68-seitige Interpretation, die 16 Krypto-Assets — darunter Bitcoin, Ether, Solana, XRP, Dogecoin — explizit als "Digital Commodities" klassifiziert und damit aus dem Wertpapierrecht herausnimmt. SEC-Chair Paul Atkins sagte beim DC Blockchain Summit: "We're not the 'securities and everything commission' anymore." Das ist die bedeutendste US-Krypto-Regulierungsentscheidung seit Jahren und hat das Potenzial, institutionelle Kapitalflüsse in den Sektor weiter zu beschleunigen.
 
-Bernstein spricht von einem bevorstehenden „Tokenisierungs-Superzyklus" für 2026 und erwartet, dass der Wert tokenisierter On-Chain-Assets von 37 auf 80 Milliarden Dollar steigen wird. Morgan Stanley arbeitet an einem Spot-Bitcoin-ETF. S&P Dow Jones Indices hat den S&P 500 an eine Tokenisierungsplattform lizenziert, was den ersten offiziellen Perpetual-Futures-Kontrakt auf dem Index via Blockchain ermöglicht.
+Bernstein spricht von einem bevorstehenden "Tokenisierungs-Superzyklus" für 2026 und erwartet, dass der Wert tokenisierter On-Chain-Assets von 37 auf 80 Milliarden Dollar steigen wird. Morgan Stanley arbeitet an einem Spot-Bitcoin-ETF. S&P Dow Jones Indices hat den S&P 500 an eine Tokenisierungsplattform lizenziert, was den ersten offiziellen Perpetual-Futures-Kontrakt auf dem Index via Blockchain ermöglicht.
 
 Bitcoin handelt aktuell bei rund 60.000–70.000 Dollar — deutlich unter dem Bernstein-Jahresendziel von 150.000 Dollar. Die Krypto-Märkte leiden unter derselben Liquiditätskrise wie Gold: institutionelle Verkäufe zur Deckung von Margin Calls in anderen Assetklassen.
 
@@ -92,13 +92,13 @@ Für MK Global Kapital ist die Tokenisierungsdynamik direkt relevant: Der ALTERN
     id: "t8",
     num: "8",
     title: "Gewerbliche und Wohnimmobilienmärkte: Energiekosten als neuer Gegenwind",
-    body: `CBRE's European Real Estate Market Outlook 2026 konstatiert, dass die europäischen Immobilienmärkte „fest im nächsten Zyklus" angekommen sind, aber mit einem entscheidenden Unterschied: Langfristige Zinsen bleiben hoch, Renditekompression ist limitiert, und Erträge werden primär durch Mieteinnahmen und aktives Management getrieben.
+    body: `CBRE's European Real Estate Market Outlook 2026 konstatiert, dass die europäischen Immobilienmärkte "fest im nächsten Zyklus" angekommen sind, aber mit einem entscheidenden Unterschied: Langfristige Zinsen bleiben hoch, Renditekompression ist limitiert, und Erträge werden primär durch Mieteinnahmen und aktives Management getrieben.
 
 Der Iran-Krieg fügt dem nun einen neuen Gegenwind hinzu: steigende Energiekosten belasten Bau- und Betriebskosten, die wieder anziehende Inflation reduziert die Wahrscheinlichkeit von Zinssenkungen, und die Unsicherheit bremst Transaktionsvolumina. Die EZB-Kreditvergabestandards für Gewerbeimmobilien hatten sich gerade erst leicht gelockert — dieser Trend steht jetzt unter Druck.
 
-Sektorale Differenzierung: Logistik und Datenzentren bleiben die stärksten Segmente (E-Commerce, KI-Infrastruktur). Wohnimmobilien in Europa profitieren von strukturellem Nachfrageüberhang. Büroflächen bleiben unter Druck (Leerstand über 18 Prozent in vielen Märkten), mit einer scharfen „Flight to Quality" — 75 Prozent der Neuvermietung konzentriert sich auf Premiumlagen.
+Sektorale Differenzierung: Logistik und Datenzentren bleiben die stärksten Segmente (E-Commerce, KI-Infrastruktur). Wohnimmobilien in Europa profitieren von strukturellem Nachfrageüberhang. Büroflächen bleiben unter Druck (Leerstand über 18 Prozent in vielen Märkten), mit einer scharfen "Flight to Quality" — 75 Prozent der Neuvermietung konzentriert sich auf Premiumlagen.
 
-PGIM Real Estate hatte in seinem 2026 Outlook betont, dass Immobilienbewertungen nahe zyklischer Tiefs liegen und 2026 ein „compelling investment vintage" sein könnte. Die Energiekrise verändert diese Rechnung — insbesondere für energieintensive Büro- und Einzelhandelsflächen in Europa.`
+PGIM Real Estate hatte in seinem 2026 Outlook betont, dass Immobilienbewertungen nahe zyklischer Tiefs liegen und 2026 ein "compelling investment vintage" sein könnte. Die Energiekrise verändert diese Rechnung — insbesondere für energieintensive Büro- und Einzelhandelsflächen in Europa.`
   },
   {
     id: "t9",
@@ -108,7 +108,7 @@ PGIM Real Estate hatte in seinem 2026 Outlook betont, dass Immobilienbewertungen
 
 Die Energiekrise reaktiviert die Debatte um Energiesicherheit vs. Klimapolitik. Deutschlands Rückkehr zu fossilen Reservefreigaben (IEA-Beschluss vom 11. März) steht in direktem Spannungsfeld zur langfristigen Dekarbonisierungsstrategie. Für ESG-Portfolios bedeutet das: Energieaktien (BP, Shell, TotalEnergies) performen kurzfristig stark, was ESG-Screening und Ausschlusskriterien unter Druck setzt.
 
-Eurizon hat sich als „European Asset Management Firm of the Year" (Funds Europe Awards 2025) positioniert und betont eine ESG-Durchdringung von rund 70 Prozent der verwalteten Vermögen. PIMCO klassifiziert seinen neuen AAA-CLO-Fonds als Artikel 8 unter der SFDR (Sustainable Finance Disclosure Regulation).
+Eurizon hat sich als "European Asset Management Firm of the Year" (Funds Europe Awards 2025) positioniert und betont eine ESG-Durchdringung von rund 70 Prozent der verwalteten Vermögen. PIMCO klassifiziert seinen neuen AAA-CLO-Fonds als Artikel 8 unter der SFDR (Sustainable Finance Disclosure Regulation).
 
 Das CLARITY Act in den USA — das Krypto-Assets reguliert — hat auch ESG-Implikationen, da es die regulatorische Behandlung von tokenisierten Green Bonds und Carbon Credits betrifft. Luxemburgs ELTIF 2.0 und die wachsende Retailisierung alternativer Investments berühren ESG-Kriterien, da institutionelle Anleger zunehmend ESG-Konformität als Eintrittsvoraussetzung fordern.
 
@@ -134,7 +134,7 @@ Für die beobachteten Häuser gilt: Es gibt heute keine großen unternehmensspez
     id: "t11",
     num: "11",
     title: "Was daraus heute konkret für die beobachteten Häuser folgt",
-    body: `PGIM und PIMCO: Die Berichterstattung dreht sich heute um Rates, Inflation, Staatsanleiherenditen, Credit-Spreads und Liquidität. PIMCO wurde am 18. März als „Asset Manager of the Year 2026" von Envestnet ausgezeichnet. PGIM erhielt am 12. März fünf LSEG Lipper Fund Awards — zum 16. Mal in Folge. Für beide Häuser stehen Duration-Positionierung, Inflationsschutz, Öl-Weitergabe und geopolitische Risikoaufschläge im Mittelpunkt. PIMCOs Empfehlung, Cash in hochwertige Anleihen umzuschichten, steht nun im Spannungsfeld mit dem hawkishen Fed-Pivot.
+    body: `PGIM und PIMCO: Die Berichterstattung dreht sich heute um Rates, Inflation, Staatsanleiherenditen, Credit-Spreads und Liquidität. PIMCO wurde am 18. März als "Asset Manager of the Year 2026" von Envestnet ausgezeichnet. PGIM erhielt am 12. März fünf LSEG Lipper Fund Awards — zum 16. Mal in Folge. Für beide Häuser stehen Duration-Positionierung, Inflationsschutz, Öl-Weitergabe und geopolitische Risikoaufschläge im Mittelpunkt. PIMCOs Empfehlung, Cash in hochwertige Anleihen umzuschichten, steht nun im Spannungsfeld mit dem hawkishen Fed-Pivot.
 
 T.\u00a0Rowe Price: Hier kommt zusätzlich das Aktienmarkt- und Bewertungsbild stärker hinein: höhere Diskontsätze, Druck auf Wachstumswerte, erhöhte Unsicherheit über Gewinnpfade und über die Frage, ob die PMIs am Dienstag eine echte Wachstumsdelle signalisieren. Der Verlust von Fixed-Income-Trader Chris O'Donoghue an Franklin Templeton fällt in eine Phase, in der Rentenhandelskompetenz besonders gefragt ist.
 
@@ -184,7 +184,7 @@ const calendar = [
     day: "Mittwoch, 25.03.",
     events: [
       "UK: Verbraucherpreise Februar (07:00 UK-Zeit)",
-      "EZB: Lagarde spricht bei „The ECB and Its Watchers" (09:45), Lane folgt (10:15) — WICHTIG für Zinspfad-Signale",
+      "EZB: Lagarde spricht bei 'The ECB and Its Watchers' (09:45), Lane folgt (10:15) — WICHTIG für Zinspfad-Signale",
       "Ungarn: Zentralbank Zinsentscheid (14:00)",
       "USA: Richmond Fed Herstellerindex (15:00)",
       "ANTA Sports: Quartalszahlen (Asien)"
