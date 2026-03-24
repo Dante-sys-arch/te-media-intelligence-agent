@@ -1,13 +1,9 @@
-# TE Communications Daily Media Intelligence Agent
-# Placeholder workflow — currently the briefing is generated via Claude.ai
-# Future: automate via Anthropic API with web search
-
-name: Daily Media Intelligence Briefing
+name: TE Daily Media Intelligence
 
 on:
   schedule:
     - cron: '0 6 * * *'  # 06:00 UTC = 07:00 CET
-  workflow_dispatch:
+  workflow_dispatch:       # Manual trigger
 
 permissions:
   contents: write
@@ -15,20 +11,39 @@ permissions:
 jobs:
   daily-briefing:
     runs-on: ubuntu-latest
+    env:
+      ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Generate briefing placeholder
+      - name: Setup Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
         run: |
-          echo "Daily Media Intelligence Briefing"
-          echo "Date: $(TZ='Europe/Berlin' date '+%A, %d. %B %Y — %H:%M CET')"
-          echo ""
-          echo "NOTE: The full briefing is currently generated via Claude.ai"
-          echo "This workflow serves as a placeholder for future API-based automation."
-          echo ""
-          echo "To generate today's briefing:"
-          echo "1. Open Claude.ai"
-          echo "2. Use the Daily Media Intelligence prompt with today's date"
-          echo "3. Claude will perform live web research across all 12 topic areas"
-          echo "4. The output is rendered as an interactive React dashboard"
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Run Daily Media Intelligence Agent
+        run: python -m src.main
+
+      - name: Commit and push report
+        run: |
+          git config user.name "TE Media Intelligence Agent"
+          git config user.email "sdj@te-communications.com"
+          git add output/ || true
+          git diff --staged --quiet || git commit -m "📊 Daily Briefing $(TZ='Europe/Berlin' date '+%Y-%m-%d %H:%M CET')"
+          git push
+
+      - name: Upload report as artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: daily-briefing-${{ github.run_id }}
+          path: |
+            output/*.html
+            output/*.txt
+          retention-days: 90
