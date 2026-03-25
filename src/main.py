@@ -126,6 +126,8 @@ Gestern: {previous_summary[:800]}
 
 Stand: {date_str}, {time_str} CET. Durchsuche Handelsblatt, FAZ, Boersen-Zeitung, finanzen.net, Reuters, FT, Bloomberg, Fonds Professionell, Citywire, DAS INVESTMENT, NZZ, CNBC u.v.m.
 
+WICHTIG ZUR AKTUALITAET: Es ist jetzt {time_str} Uhr CET am {date_str}. Du musst die Berichterstattung der LETZTEN 24 STUNDEN erfassen — also von gestern {time_str} Uhr bis jetzt. Aeltere Berichte nur erwaehnen, wenn sie fuer den heutigen Kontext wichtig sind. Bei jedem Fakt, jeder Zahl, jedem Kurs: nenne die Quelle und wann die Information veroeffentlicht wurde (Datum, moeglichst Uhrzeit). Wenn du nur aeltere Daten findest, sage das offen.
+
 AKTUELLE GOOGLE NEWS SCHLAGZEILEN (als Kontext fuer deine Recherche):
 {headlines_block}
 
@@ -154,15 +156,21 @@ Datum, Uhrzeit, Land, Termin, Relevanz.
 ## Gesamtfazit
 2-3 Saetze: Was ist das uebergeordnete Narrativ heute? Welche groesseren Trends oder Verschiebungen werden sichtbar?
 
+## Quellenverzeichnis
+Liste ALLE Quellen auf, die du fuer diesen Report verwendet hast. Format pro Quelle:
+- Medienname: "Artikeltitel oder Thema" (Datum/Uhrzeit falls bekannt) — URL
+Sortiert nach Relevanz. Nur Quellen, die du tatsaechlich gelesen und ausgewertet hast. Keine erfundenen Links.
+
 Regeln: Nicht halluzinieren. Quellenbasiert. Deutsch. Keine Trading-Sprache. Stattdessen: "Anschlussfaehig ueber...", "Pitch-Idee:", "Gastbeitrag-Thema:".
 
 KRITISCHE QUALITAETSREGELN:
+- AKTUALITAET: Verwende NUR Informationen aus den letzten 24 Stunden. Wenn ein Fakt aelter ist, kennzeichne ihn explizit mit dem Datum.
+- QUELLEN: Nenne bei JEDEM Fakt die Quelle (Medienname + Datum). Bei Kursen/Zahlen immer Zeitpunkt angeben.
 - Schreibe NUR ueber Themen, die du durch deine Web-Recherche tatsaechlich verifiziert hast.
 - Wenn du dir bei einem Fakt nicht sicher bist, schreibe es NICHT. Lieber lueckenhaft als falsch.
-- Nenne bei Zahlen (Kurse, Indizes, Prozente) immer die Quelle und das Datum.
 - Wenn du fuer einen Kunden keine anschlussfaehige Positionierung findest, schreibe das offen.
-- Erfinde KEINE Zitate, KEINE Kurse, KEINE Termine. Nur was du gefunden hast.
-- Wenn die Google News Headlines und deine Web-Recherche sich widersprechen, weise darauf hin.
+- Erfinde KEINE Zitate, KEINE Kurse, KEINE Termine, KEINE URLs. Nur was du gefunden hast.
+- Das Quellenverzeichnis am Ende muss ALLE verwendeten Quellen mit echten URLs enthalten.
 """
 
 
@@ -192,9 +200,10 @@ def run_briefing():
     previous_summary = previous.get("summary", "") if previous else None
     
     # Step 1: Fetch Google News RSS headlines
-    print(f"[{time_str} CET] Fetching Google News RSS feeds ({len(GOOGLE_NEWS_FEEDS)} feeds)...")
+    rss_fetch_time = (datetime.utcnow() + timedelta(hours=1)).strftime("%H:%M")
+    print(f"[{rss_fetch_time} CET] Fetching Google News RSS feeds ({len(GOOGLE_NEWS_FEEDS)} feeds)...")
     rss_headlines = fetch_google_news_headlines()
-    print(f"[{time_str} CET] Collected {len(rss_headlines)} unique headlines from Google News")
+    print(f"[{rss_fetch_time} CET] Collected {len(rss_headlines)} unique headlines from Google News")
     
     # Step 2: Build prompt with RSS context
     prompt = build_prompt(date_str, time_str, previous_summary, rss_headlines)
@@ -354,10 +363,13 @@ def generate_html(report_text, date_str, time_str, previous_summary):
         elif line.startswith("- ") or line.startswith("* "):
             item = line[2:]
             item = re.sub(r'\*\*(.+?)\*\*', r'<strong>\1</strong>', item)
+            item = re.sub(r'(https?://[^\s<>"\')\]]+)', r'<a href="\1" target="_blank">\1</a>', item)
             body_html += f'<div class="list-item"><span class="bullet">&#9679;</span>{item}</div>'
         else:
             # Handle inline markers
             p_html = re.sub(r'\*\*(.+?)\*\*', r'<strong>\1</strong>', line)
+            # Auto-link URLs
+            p_html = re.sub(r'(https?://[^\s<>"\')\]]+)', r'<a href="\1" target="_blank">\1</a>', p_html)
             # Style delta markers
             p_html = p_html.replace("[NEU]", '<span class="tag tag-new">NEU</span>')
             p_html = p_html.replace("[ESKALATION]", '<span class="tag tag-esc">ESKALATION</span>')
@@ -485,6 +497,8 @@ def generate_html(report_text, date_str, time_str, previous_summary):
     padding-top: 12px; border-top: 1px solid rgba(0,42,62,0.06);
   }}
   p {{ margin: 0 0 12px; font-size: 14.2px; }}
+  p a {{ color: #002a3e; text-decoration: underline; }}
+  p a:hover {{ color: #0066aa; }}
   strong {{ color: #111827; }}
   .list-item {{
     font-size: 13.5px; line-height: 1.6; padding-left: 16px;
@@ -538,6 +552,7 @@ def generate_html(report_text, date_str, time_str, previous_summary):
   <div class="label">TE Communications — Daily Media Intelligence Agent</div>
   <h1>Tagesauswertung Medienbeobachtung &amp; Einordnung</h1>
   <div class="date">{date_str} — {time_str} CET</div>
+  <div style="font-size:11px;color:#9ca3af;margin-top:4px;">Datenstand: Google News RSS abgerufen um {time_str} CET | Web-Recherche abgeschlossen um {time_str} CET | Letzte 24h erfasst</div>
   <div class="badges">
     <span class="badge">PGIM</span>
     <span class="badge">T. Rowe Price</span>
