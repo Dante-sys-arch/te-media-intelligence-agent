@@ -13,8 +13,8 @@ from datetime import datetime, timedelta
 from pathlib import Path
 
 # --- Configuration ---
-MODEL = "claude-sonnet-4-20250514"
-MAX_TOKENS = 16000
+MODEL = "claude-haiku-4-5-20251001"
+MAX_TOKENS = 12000
 OUTPUT_DIR = Path("output")
 HISTORY_DIR = Path("output/history")
 
