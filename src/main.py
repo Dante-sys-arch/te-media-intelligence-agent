@@ -30,6 +30,7 @@ GOOGLE_NEWS_FEEDS = [
     "https://news.google.com/rss/search?q=Private+Credit+Private+Debt+2026&hl=de&gl=DE&ceid=DE:de",
     "https://news.google.com/rss/search?q=Immobilien+REIT+Gewerbeimmobilien+2026&hl=de&gl=DE&ceid=DE:de",
     "https://news.google.com/rss/search?q=Bitcoin+Krypto+Tokenisierung+2026&hl=de&gl=DE&ceid=DE:de",
+    "https://news.google.com/rss/search?q=%22Bitcoin+Suisse%22+OR+MiCA+Krypto+Deutschland&hl=de&gl=DE&ceid=DE:de",
     "https://news.google.com/rss/search?q=ESG+Sustainable+Finance+Regulierung+2026&hl=de&gl=DE&ceid=DE:de",
     "https://news.google.com/rss/search?q=Emerging+Markets+Schwellenländer+Rupie+2026&hl=de&gl=DE&ceid=DE:de",
     # English feeds
@@ -121,6 +122,7 @@ Gestern: {previous_summary[:800]}
 - PIMCO: Fixed Income, Alternatives, Commodities
 - Eurizon: Euro Fixed Income, EM Debt, ESG
 - Temasek: Singapurer Staatsfonds, globale Investments, Infrastruktur, Tech, Life Sciences, DACH-Praesenz
+- Bitcoin Suisse: Schweizer Krypto-Finanzdienstleister, MiCA/Liechtenstein-Lizenz, Markteintritt Deutschland, Custody, Staking, Handel
 
 Stand: {date_str}, {time_str} CET. Durchsuche Handelsblatt, FAZ, Boersen-Zeitung, finanzen.net, Reuters, FT, Bloomberg, Fonds Professionell, Citywire, DAS INVESTMENT, NZZ, CNBC u.v.m.
 
