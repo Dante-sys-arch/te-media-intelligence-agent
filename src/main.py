@@ -15,8 +15,8 @@ from datetime import datetime, timedelta
 from pathlib import Path
 
 # --- Configuration ---
-MODEL = "claude-haiku-4-5-20251001"
-MAX_TOKENS = 8000
+MODEL = "claude-sonnet-4-20250514"
+MAX_TOKENS = 12000
 OUTPUT_DIR = Path("output")
 HISTORY_DIR = Path("output/history")
 
@@ -155,10 +155,18 @@ Datum, Uhrzeit, Land, Termin, Relevanz.
 2-3 Saetze: Was ist das uebergeordnete Narrativ heute? Welche groesseren Trends oder Verschiebungen werden sichtbar?
 
 Regeln: Nicht halluzinieren. Quellenbasiert. Deutsch. Keine Trading-Sprache. Stattdessen: "Anschlussfaehig ueber...", "Pitch-Idee:", "Gastbeitrag-Thema:".
+
+KRITISCHE QUALITAETSREGELN:
+- Schreibe NUR ueber Themen, die du durch deine Web-Recherche tatsaechlich verifiziert hast.
+- Wenn du dir bei einem Fakt nicht sicher bist, schreibe es NICHT. Lieber lueckenhaft als falsch.
+- Nenne bei Zahlen (Kurse, Indizes, Prozente) immer die Quelle und das Datum.
+- Wenn du fuer einen Kunden keine anschlussfaehige Positionierung findest, schreibe das offen.
+- Erfinde KEINE Zitate, KEINE Kurse, KEINE Termine. Nur was du gefunden hast.
+- Wenn die Google News Headlines und deine Web-Recherche sich widersprechen, weise darauf hin.
 """
 
 
-def api_call_with_retry(func, max_retries=5, initial_wait=30):
+def api_call_with_retry(func, max_retries=5, initial_wait=60):
     """Call an API function with exponential backoff retry."""
     for attempt in range(max_retries):
         try:
@@ -541,8 +549,9 @@ def generate_html(report_text, date_str, time_str, previous_summary):
 {body_html}
 
 <div class="footer">
-  <strong>Methodik:</strong> Automatisierte Recherche via Anthropic Claude API mit Web Search uber alle relevanten deutsch- und englischsprachigen Finanz-, Wirtschafts- und Branchenmedien. 
-  Systematische Abdeckung von 13 Themenfeldern. Vergleich mit Vortagesreport fur Delta-Kennzeichnung. Keine Halluzinationen — alle Fakten sind quellenbasiert.<br><br>
+  <strong>Methodik:</strong> Automatisierte Recherche via Anthropic Claude Sonnet API mit Web Search + Google News RSS-Feeds uber alle relevanten deutsch- und englischsprachigen Finanz-, Wirtschafts- und Branchenmedien. 
+  Systematische Abdeckung von 8+ Themenfeldern. Vergleich mit Vortagesreport fur Delta-Kennzeichnung.<br><br>
+  <strong>Qualitaetshinweis:</strong> Dieser Report wird automatisiert erstellt. Die Fakten basieren auf Web-Recherche und Google News zum Erstellungszeitpunkt. Trotz Anti-Halluzinations-Massnahmen koennen einzelne Angaben unvollstaendig oder veraltet sein. Kurse und Zahlen sollten vor der Verwendung in Kundenkommunikation gegen eine zweite Quelle geprueft werden. Der Report ersetzt keine eigene Recherche, sondern dient als strukturierte Ausgangsbasis fuer den Arbeitstag.<br><br>
   <strong>Quellen:</strong> Reuters, Handelsblatt, FAZ, FT, Bloomberg, IEA, ZDF, Borsen-Zeitung, SZ, WiWo, Spiegel, MM, FoPro, Citywire, DAS INVESTMENT, finanzen.net, IPE, NZZ, FuW, CoinDesk, CBRE, Cushman &amp; Wakefield, Morningstar, dpa-AFX u.v.m.<br><br>
   <strong>TE Communications GmbH</strong> | Frankfurt &middot; Zurich &middot; St. Gallen &middot; Lausanne
 </div>
