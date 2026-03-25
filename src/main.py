@@ -82,6 +82,7 @@ GOOGLE_NEWS_FEEDS = [
     "https://news.google.com/rss/search?q=%22private+equity%22+%22private+markets%22+fundraising+buyout&hl=en&gl=US&ceid=US:en",
     "https://news.google.com/rss/search?q=%22Bitcoin+Suisse%22+OR+%22crypto+regulation%22+MiCA&hl=en&gl=US&ceid=US:en",
     "https://news.google.com/rss/search?q=Temasek+investments+Asia&hl=en&gl=US&ceid=US:en",
+    "https://news.google.com/rss/search?q=KKR+private+equity+infrastructure+credit&hl=en&gl=US&ceid=US:en",
 ]
 
 THEMENFELDER = [
@@ -187,6 +188,7 @@ Gestern: {previous_summary[:800]}
 - Eurizon: Euro Fixed Income, EM Debt, ESG
 - Temasek: Singapurer Staatsfonds, globale Investments, Infrastruktur, Tech, Life Sciences, DACH-Praesenz
 - Bitcoin Suisse: Schweizer Krypto-Finanzdienstleister, MiCA/Liechtenstein-Lizenz, Markteintritt Deutschland, Custody, Staking, Handel
+- KKR: Globaler Investmentmanager, Private Equity, Infrastruktur, Real Estate, Credit, DACH-Expansion
 
 Stand: {date_str}, {time_str} CET. Durchsuche Handelsblatt, FAZ, Boersen-Zeitung, finanzen.net, Reuters, FT, Bloomberg, Fonds Professionell, Citywire, DAS INVESTMENT, NZZ, CNBC u.v.m.
 
@@ -624,6 +626,9 @@ def generate_html(report_text, date_str, time_str, previous_summary):
     <span class="badge">Franklin Templeton</span>
     <span class="badge">PIMCO</span>
     <span class="badge">Eurizon</span>
+    <span class="badge">Temasek</span>
+    <span class="badge">Bitcoin Suisse</span>
+    <span class="badge">KKR</span>
   </div>
 </div>
 
