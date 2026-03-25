@@ -94,19 +94,20 @@ async function loadReports() {
     const dateStr = dateMatch ? `${dateMatch[3]}.${dateMatch[2]}.${dateMatch[1]}` : latest.name;
     const rawUrl = `https://raw.githubusercontent.com/${REPO}/main/output/${latest.name}`;
     
+    // Latest report - link to GitHub Pages hosted version
     document.getElementById("latest-section").innerHTML = `
       <div class="status">
         <h2>Aktueller Report: ${dateStr}</h2>
         <p class="info">Generiert via Claude Sonnet + Web Search + Google News RSS.<br>
         8 Kunden | 8+ Themenfelder | PR-Berater-Perspektive | Vortagesvergleich</p>
       </div>
-      <a class="report-link" href="${rawUrl}" target="_blank">&#9658; Aktuellen Report &ouml;ffnen</a>`;
+      <a class="report-link" href="latest.html">&#9658; Aktuellen Report &ouml;ffnen</a>`;
     
     // Archive list
     const listHtml = reports.map(r => {
       const m = r.name.match(/^(\d{4})(\d{2})(\d{2})/);
       const d = m ? `${m[3]}.${m[2]}.${m[1]}` : r.name;
-      const url = `https://raw.githubusercontent.com/${REPO}/main/output/${r.name}`;
+      const url = `https://htmlpreview.github.io/?https://raw.githubusercontent.com/${REPO}/main/output/${r.name}`;
       return `<li><a href="${url}" target="_blank">${d} — Daily Media Intelligence</a></li>`;
     }).join("");
     document.getElementById("report-list").innerHTML = listHtml;
