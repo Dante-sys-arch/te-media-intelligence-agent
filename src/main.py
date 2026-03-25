@@ -1,6 +1,6 @@
 """
 TE Communications — Daily Media Intelligence Agent
-Automated morning briefing via Anthropic API + Web Search
+Automated morning briefing via Anthropic API + Web Search + Google News RSS
 Runs daily at 07:00 CET via GitHub Actions
 """
 
@@ -9,6 +9,8 @@ import json
 import os
 import hashlib
 import time
+import urllib.request
+import xml.etree.ElementTree as ET
 from datetime import datetime, timedelta
 from pathlib import Path
 
@@ -17,6 +19,25 @@ MODEL = "claude-haiku-4-5-20251001"
 MAX_TOKENS = 8000
 OUTPUT_DIR = Path("output")
 HISTORY_DIR = Path("output/history")
+
+# Google News RSS feeds for pre-research
+GOOGLE_NEWS_FEEDS = [
+    "https://news.google.com/rss/search?q=Finanzmärkte+Kapitalmärkte+aktuell&hl=de&gl=DE&ceid=DE:de",
+    "https://news.google.com/rss/search?q=DAX+Börse+heute&hl=de&gl=DE&ceid=DE:de",
+    "https://news.google.com/rss/search?q=EZB+Fed+Zinsen+Inflation+2026&hl=de&gl=DE&ceid=DE:de",
+    "https://news.google.com/rss/search?q=Ölpreis+Energie+Nahost+Iran+2026&hl=de&gl=DE&ceid=DE:de",
+    "https://news.google.com/rss/search?q=Asset+Management+Fonds+ETF+2026&hl=de&gl=DE&ceid=DE:de",
+    "https://news.google.com/rss/search?q=Private+Credit+Private+Debt+2026&hl=de&gl=DE&ceid=DE:de",
+    "https://news.google.com/rss/search?q=Immobilien+REIT+Gewerbeimmobilien+2026&hl=de&gl=DE&ceid=DE:de",
+    "https://news.google.com/rss/search?q=Bitcoin+Krypto+Tokenisierung+2026&hl=de&gl=DE&ceid=DE:de",
+    "https://news.google.com/rss/search?q=ESG+Sustainable+Finance+Regulierung+2026&hl=de&gl=DE&ceid=DE:de",
+    "https://news.google.com/rss/search?q=Emerging+Markets+Schwellenländer+Rupie+2026&hl=de&gl=DE&ceid=DE:de",
+    # English feeds
+    "https://news.google.com/rss/search?q=PIMCO+OR+PGIM+OR+%22Franklin+Templeton%22+OR+%22T+Rowe+Price%22+OR+Eurizon&hl=en&gl=US&ceid=US:en",
+    "https://news.google.com/rss/search?q=oil+price+Iran+war+markets+today&hl=en&gl=US&ceid=US:en",
+    "https://news.google.com/rss/search?q=gold+price+crash+liquidity+2026&hl=en&gl=US&ceid=US:en",
+    "https://news.google.com/rss/search?q=private+credit+BCRED+BlackRock+withdrawal+2026&hl=en&gl=US&ceid=US:en",
+]
 
 THEMENFELDER = [
     "Makro/Konjunktur (BIP, PMI, ifo, ZEW)",
@@ -28,8 +49,6 @@ THEMENFELDER = [
     "Krypto/Tokenisierung, Immobilien, ESG/Regulierung",
     "M&A/Deals/IPOs im Asset Management",
 ]
-
-QUELLEN_HINWEIS = """Durchsuche systematisch die wichtigsten Finanz-/Wirtschaftsmedien: Handelsblatt, FAZ, Börsen-Zeitung, finanzen.net, Reuters, FT, Bloomberg, Fonds Professionell, Citywire, DAS INVESTMENT, NZZ, CNBC und weitere."""
 
 
 def get_today_str():
@@ -51,54 +70,88 @@ def load_previous_report():
     return None
 
 
-def build_prompt(date_str, time_str, previous_summary):
+def fetch_google_news_headlines():
+    """Fetch current headlines from Google News RSS feeds."""
+    headlines = []
+    for feed_url in GOOGLE_NEWS_FEEDS:
+        try:
+            req = urllib.request.Request(feed_url, headers={"User-Agent": "TE-Media-Agent/1.0"})
+            with urllib.request.urlopen(req, timeout=10) as resp:
+                xml_data = resp.read()
+            root = ET.fromstring(xml_data)
+            for item in root.findall(".//item")[:8]:  # Max 8 per feed
+                title = item.findtext("title", "")
+                source = item.findtext("source", "")
+                pub_date = item.findtext("pubDate", "")
+                link = item.findtext("link", "")
+                if title:
+                    headlines.append(f"- {title} ({source}, {pub_date[:16]})")
+        except Exception as e:
+            print(f"  RSS feed error: {e}")
+            continue
+    # Deduplicate
+    seen = set()
+    unique = []
+    for h in headlines:
+        key = h[:80].lower()
+        if key not in seen:
+            seen.add(key)
+            unique.append(h)
+    return unique[:60]  # Max 60 headlines to keep prompt short
+
+
+def build_prompt(date_str, time_str, previous_summary, rss_headlines):
     """Build the full briefing prompt."""
     
     diff_instruction = ""
     if previous_summary:
         diff_instruction = f"""
-
-VERGLEICH MIT VORTAG:
-Der gestrige Report hatte folgende Hauptthemen:
-{previous_summary}
-
-Bitte kennzeichne am Anfang jedes Themenblocks klar, ob das Thema:
-- [NEU] heute erstmals auftaucht
-- [ESKALATION] sich gegenüber gestern verschärft hat
-- [ENTSPANNUNG] sich gegenüber gestern beruhigt hat
-- [FORTLAUFEND] weitgehend unverändert weiterläuft
+VERGLEICH MIT VORTAG — kennzeichne jedes Thema mit:
+[NEU] / [ESKALATION] / [ENTSPANNUNG] / [FORTLAUFEND]
+Gestern: {previous_summary[:800]}
 """
 
-    return f"""Du bist ein strategischer Finanzkommunikationsberater. Du arbeitest für eine PR-Beratung und suchst Medien-Positionierungsmöglichkeiten (Gastbeiträge, Interviews, Kommentare) für diese Kunden:
+    headlines_block = "\n".join(rss_headlines[:40]) if rss_headlines else "Keine RSS-Headlines verfuegbar."
+
+    return f"""Du bist ein strategischer Finanzkommunikationsberater bei einer PR-Beratung. Du suchst Medien-Positionierungsmoeglichkeiten (Gastbeitraege, Interviews, Kommentare) fuer diese Kunden:
 - PGIM: Institutional, Multi-Asset, Real Estate, Fixed Income
 - T. Rowe Price: Active Equity, Multi-Asset, ETF-Strategie
 - MK Global Kapital: Impact/Microfinance, EM, Tokenisierung
-- Franklin Templeton: Multi-Asset, EM, ETF, Martin Lück als Sprecher
+- Franklin Templeton: Multi-Asset, EM, ETF, Martin Lueck als Sprecher
 - PIMCO: Fixed Income, Alternatives, Commodities
 - Eurizon: Euro Fixed Income, EM Debt, ESG
 
-Stand: {date_str}, {time_str} CET. {QUELLEN_HINWEIS}
+Stand: {date_str}, {time_str} CET. Durchsuche Handelsblatt, FAZ, Boersen-Zeitung, finanzen.net, Reuters, FT, Bloomberg, Fonds Professionell, Citywire, DAS INVESTMENT, NZZ, CNBC u.v.m.
+
+AKTUELLE GOOGLE NEWS SCHLAGZEILEN (als Kontext fuer deine Recherche):
+{headlines_block}
 
 Themenfelder: {', '.join(THEMENFELDER)}
 {diff_instruction}
 AUSGABE in 5 Schritten:
 
-## Schritt 1 — Recherche-Überblick
-Was heute geprüft wurde, Gesamtcharakter der Nachrichtenlage.
+## Schritt 1 — Recherche-Ueberblick
+Was heute geprueft wurde, Gesamtcharakter der Nachrichtenlage, uebergreifendes Narrativ.
 
 ## Schritt 2 — Themen die das Markt-Narrativ treiben
-Nummerierte Blöcke: Was in den Headlines steht (Fakten, Zahlen) + warum es für Märkte relevant ist.
+Nummerierte Bloecke, nach Relevanz sortiert. Pro Block:
+- Was dominiert die Headlines heute (Fakten, Zahlen, Quellen)
+- Narrativ und Einordnung: Was ist die groessere Story dahinter? Gibt es einen Trendwechsel? Ist das eine Eskalation, eine Wende, eine Fortsetzung? Welches uebergeordnete Thema (z.B. Stagflation, Energiesicherheit, Liquiditaetskrise) wird hier sichtbar?
+- Veraenderung: Hat sich gegenueber den Vortagen etwas Wesentliches verschoben?
 
 ## Schritt 3 — Positionierungs-Mapping auf die Kunden
-Für jedes Haus: Worüber ist es heute kommunikativ anschlussfähig? Pitch-Ideen, Gastbeitrag-Themen, Interview-Aufhänger. KEINE Portfolio-Empfehlungen. Denke wie ein PR-Berater.
+Fuer jedes Haus: Ueber welche Achsen ist es HEUTE kommunikativ anschlussfaehig? Konkrete Pitch-Ideen, Gastbeitrag-Themen, Interview-Aufhaenger. KEINE Portfolio-Empfehlungen, KEINE Trading-Sprache. Denke wie ein PR-Berater: Mit welchem Thema kann ich diesen Kunden in FAZ, Handelsblatt, Fonds Professionell oder FT platzieren?
 
-## Schritt 4 — Termine nächste 7 Tage
-Datum, Uhrzeit, Land, Termin.
+## Schritt 4 — Termine naechste 7 Tage
+Datum, Uhrzeit, Land, Termin, Relevanz.
 
 ## Schritt 5 — Konkrete Pitch-Ableitungen
 3-5 umsetzbare Ideen: Thema, Format (Kommentar/Gastbeitrag/Interview), welcher Kunde, welches Medium.
 
-Regeln: Nicht halluzinieren. Quellenbasiert. Deutsch. Keine Trading-Sprache.
+## Gesamtfazit
+2-3 Saetze: Was ist das uebergeordnete Narrativ heute? Welche groesseren Trends oder Verschiebungen werden sichtbar?
+
+Regeln: Nicht halluzinieren. Quellenbasiert. Deutsch. Keine Trading-Sprache. Stattdessen: "Anschlussfaehig ueber...", "Pitch-Idee:", "Gastbeitrag-Thema:".
 """
 
 
@@ -119,7 +172,7 @@ def api_call_with_retry(func, max_retries=5, initial_wait=30):
 
 
 def run_briefing():
-    """Run the full briefing via Anthropic API with web search."""
+    """Run the full briefing via Anthropic API with web search + Google News RSS."""
     
     client = anthropic.Anthropic()  # Uses ANTHROPIC_API_KEY env var
     
@@ -127,7 +180,13 @@ def run_briefing():
     previous = load_previous_report()
     previous_summary = previous.get("summary", "") if previous else None
     
-    prompt = build_prompt(date_str, time_str, previous_summary)
+    # Step 1: Fetch Google News RSS headlines
+    print(f"[{time_str} CET] Fetching Google News RSS feeds ({len(GOOGLE_NEWS_FEEDS)} feeds)...")
+    rss_headlines = fetch_google_news_headlines()
+    print(f"[{time_str} CET] Collected {len(rss_headlines)} unique headlines from Google News")
+    
+    # Step 2: Build prompt with RSS context
+    prompt = build_prompt(date_str, time_str, previous_summary, rss_headlines)
     
     print(f"[{time_str} CET] Starting Daily Media Intelligence Briefing for {date_str}")
     print(f"[{time_str} CET] Searching across {len(THEMENFELDER)} topic areas...")
