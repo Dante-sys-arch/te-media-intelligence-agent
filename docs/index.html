@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TE Media Intelligence — Dashboard</title>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Source Serif 4', Georgia, serif; max-width: 820px; margin: 0 auto; padding: 32px 20px; background: #fafafa; color: #1f2937; }
+  .header { text-align: center; border-bottom: 3px solid #002a3e; padding-bottom: 24px; margin-bottom: 28px; background: #fff; padding: 28px 24px; border-radius: 8px 8px 0 0; box-shadow: 0 1px 3px rgba(0,0,0,0.06); }
+  .header .label { font-size: 10.5px; letter-spacing: 0.3em; text-transform: uppercase; color: #002a3e; font-weight: 700; margin-bottom: 10px; }
+  .header h1 { font-size: 24px; color: #002a3e; margin: 0 0 4px; }
+  .header .date { font-size: 13px; color: #6b7280; }
+  .badges { display: flex; flex-wrap: wrap; gap: 5px; justify-content: center; margin-top: 14px; }
+  .badge { background: #002a3e; color: #fff; font-size: 9.5px; font-weight: 700; padding: 3px 10px; border-radius: 3px; letter-spacing: 0.05em; text-transform: uppercase; }
+  .status { background: #fff; border: 1px solid #e5e7eb; border-radius: 6px; padding: 20px 24px; margin-bottom: 16px; }
+  .status h2 { font-size: 16px; color: #002a3e; margin-bottom: 12px; }
+  .status .info { font-size: 14px; line-height: 1.7; color: #4b5563; }
+  .report-link { display: block; background: #002a3e; color: #fff; text-align: center; padding: 16px 24px; border-radius: 6px; text-decoration: none; font-size: 16px; font-weight: 700; margin: 20px 0; }
+  .report-link:hover { background: #003d5c; }
+  .archive { background: #fff; border: 1px solid #e5e7eb; border-radius: 6px; padding: 20px 24px; margin-top: 16px; }
+  .archive h2 { font-size: 16px; color: #002a3e; margin-bottom: 12px; }
+  #report-list { list-style: none; }
+  #report-list li { padding: 8px 0; border-bottom: 1px solid #f3f4f6; }
+  #report-list li a { color: #002a3e; text-decoration: none; font-size: 14px; }
+  #report-list li a:hover { text-decoration: underline; }
+  .loading { text-align: center; padding: 20px; color: #9ca3af; font-style: italic; }
+  .footer { margin-top: 32px; padding-top: 16px; border-top: 1px solid #e5e7eb; font-size: 11px; color: #9ca3af; text-align: center; }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="label">TE Communications — Daily Media Intelligence Agent</div>
+  <h1>Dashboard</h1>
+  <div class="date">Automatisches Finanzmarkt-Morning-Briefing — 07:00 CET</div>
+  <div class="badges">
+    <span class="badge">PGIM</span>
+    <span class="badge">T. Rowe Price</span>
+    <span class="badge">MK Global Kapital</span>
+    <span class="badge">Franklin Templeton</span>
+    <span class="badge">PIMCO</span>
+    <span class="badge">Eurizon</span>
+    <span class="badge">Temasek</span>
+    <span class="badge">Bitcoin Suisse</span>
+  </div>
+</div>
+
+<div id="latest-section">
+  <div class="loading">Lade aktuellen Report...</div>
+</div>
+
+<div class="archive">
+  <h2>Archiv</h2>
+  <ul id="report-list">
+    <li class="loading">Lade Reports...</li>
+  </ul>
+</div>
+
+<div class="footer">
+  <strong>TE Communications GmbH</strong> | Frankfurt &middot; Z&uuml;rich &middot; St. Gallen &middot; Lausanne<br>
+  Automatisierte Recherche via Anthropic Claude API + Web Search + Google News RSS
+</div>
+
+<script>
+const REPO = "Dante-sys-arch/te-media-intelligence-agent";
+const API = `https://api.github.com/repos/${REPO}/contents/output`;
+
+async function loadReports() {
+  try {
+    const resp = await fetch(API);
+    if (!resp.ok) throw new Error("API error");
+    const files = await resp.json();
+    
+    // Filter HTML reports, sort newest first
+    const reports = files
+      .filter(f => f.name.endsWith("_TE_Media_Intelligence.html"))
+      .sort((a, b) => b.name.localeCompare(a.name));
+    
+    if (reports.length === 0) {
+      document.getElementById("latest-section").innerHTML = `
+        <div class="status">
+          <h2>Noch kein Report vorhanden</h2>
+          <p class="info">Der erste automatische Report wird morgen um 07:00 CET generiert.</p>
+        </div>`;
+      document.getElementById("report-list").innerHTML = "<li>Noch keine Reports.</li>";
+      return;
+    }
+    
+    // Latest report
+    const latest = reports[0];
+    const dateMatch = latest.name.match(/^(\d{4})(\d{2})(\d{2})/);
+    const dateStr = dateMatch ? `${dateMatch[3]}.${dateMatch[2]}.${dateMatch[1]}` : latest.name;
+    const rawUrl = `https://raw.githubusercontent.com/${REPO}/main/output/${latest.name}`;
+    
+    document.getElementById("latest-section").innerHTML = `
+      <div class="status">
+        <h2>Aktueller Report: ${dateStr}</h2>
+        <p class="info">Generiert via Claude Sonnet + Web Search + Google News RSS.<br>
+        8 Kunden | 8+ Themenfelder | PR-Berater-Perspektive | Vortagesvergleich</p>
+      </div>
+      <a class="report-link" href="${rawUrl}" target="_blank">&#9658; Aktuellen Report &ouml;ffnen</a>`;
+    
+    // Archive list
+    const listHtml = reports.map(r => {
+      const m = r.name.match(/^(\d{4})(\d{2})(\d{2})/);
+      const d = m ? `${m[3]}.${m[2]}.${m[1]}` : r.name;
+      const url = `https://raw.githubusercontent.com/${REPO}/main/output/${r.name}`;
+      return `<li><a href="${url}" target="_blank">${d} — Daily Media Intelligence</a></li>`;
+    }).join("");
+    document.getElementById("report-list").innerHTML = listHtml;
+    
+  } catch (err) {
+    document.getElementById("latest-section").innerHTML = `
+      <div class="status">
+        <h2>Dashboard</h2>
+        <p class="info">Reports werden t&auml;glich um 07:00 CET generiert und hier angezeigt.<br>
+        <a href="https://github.com/${REPO}/tree/main/output">Direkt zum Output-Ordner auf GitHub</a></p>
+      </div>`;
+    document.getElementById("report-list").innerHTML = 
+      `<li><a href="https://github.com/${REPO}/tree/main/output">Reports auf GitHub ansehen</a></li>`;
+  }
+}
+
+loadReports();
+</script>
+</body>
+</html>
