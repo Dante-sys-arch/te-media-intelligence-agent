@@ -131,7 +131,7 @@ AKTUELLE GOOGLE NEWS SCHLAGZEILEN (als Kontext fuer deine Recherche):
 
 Themenfelder: {', '.join(THEMENFELDER)}
 {diff_instruction}
-AUSGABE in 5 Schritten:
+AUSGABE in 5 Schritten (beginne DIREKT mit Schritt 1, keine Einleitungs-Ueberschrift davor):
 
 ## Schritt 1 — Recherche-Ueberblick
 Was heute geprueft wurde, Gesamtcharakter der Nachrichtenlage, uebergreifendes Narrativ.
@@ -309,7 +309,12 @@ def generate_html(report_text, date_str, time_str, previous_summary):
         # Handle headers - make them collapsible
         if line.startswith("# "):
             if in_section:
-                body_html += '</div></details>'
+                # Check if previous section was empty, remove it
+                if body_html.endswith('<div class="section-body">'):
+                    body_html = body_html[:body_html.rfind('<details')]
+                    section_count -= 1
+                else:
+                    body_html += '</div></details>'
                 in_section = False
             section_count += 1
             title = line[2:]
@@ -326,7 +331,11 @@ def generate_html(report_text, date_str, time_str, previous_summary):
             title = line[3:]
             title = re.sub(r'\*\*(.+?)\*\*', r'\1', title)
             if in_section:
-                body_html += '</div></details>'
+                if body_html.endswith('<div class="section-body">'):
+                    body_html = body_html[:body_html.rfind('<details')]
+                    section_count -= 1
+                else:
+                    body_html += '</div></details>'
             section_count += 1
             body_html += f'''<details class="section">
                 <summary class="section-header">
