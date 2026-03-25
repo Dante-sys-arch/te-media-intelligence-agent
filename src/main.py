@@ -43,6 +43,7 @@ MEDIA_RSS_FEEDS = [
     "https://citywire.de/rss",
     "https://www.institutional-money.com/rss/news.xml",
     "https://www.private-banking-magazin.de/feed/",
+    "https://www.altii.de/feed/",
     # --- SCHWEIZER MEDIEN ---
     "https://www.nzz.ch/finanzen.rss",
     "https://www.fuw.ch/feed",
@@ -65,6 +66,7 @@ GOOGLE_NEWS_FEEDS = [
     "https://news.google.com/rss/search?q=%C3%96lpreis+Energie+Nahost+Iran&hl=de&gl=DE&ceid=DE:de",
     "https://news.google.com/rss/search?q=Asset+Management+Fonds+ETF&hl=de&gl=DE&ceid=DE:de",
     "https://news.google.com/rss/search?q=Private+Credit+Private+Debt&hl=de&gl=DE&ceid=DE:de",
+    "https://news.google.com/rss/search?q=Private+Equity+Private+Markets+Buyout&hl=de&gl=DE&ceid=DE:de",
     "https://news.google.com/rss/search?q=Immobilien+Gewerbeimmobilien+REIT&hl=de&gl=DE&ceid=DE:de",
     "https://news.google.com/rss/search?q=Bitcoin+Krypto+Tokenisierung+MiCA&hl=de&gl=DE&ceid=DE:de",
     "https://news.google.com/rss/search?q=%22Bitcoin+Suisse%22+Krypto+Deutschland&hl=de&gl=DE&ceid=DE:de",
@@ -77,6 +79,7 @@ GOOGLE_NEWS_FEEDS = [
     "https://news.google.com/rss/search?q=oil+price+Iran+energy+markets+today&hl=en&gl=US&ceid=US:en",
     "https://news.google.com/rss/search?q=gold+price+bonds+yields+fed+ecb&hl=en&gl=US&ceid=US:en",
     "https://news.google.com/rss/search?q=private+credit+BCRED+BlackRock+withdrawal&hl=en&gl=US&ceid=US:en",
+    "https://news.google.com/rss/search?q=%22private+equity%22+%22private+markets%22+fundraising+buyout&hl=en&gl=US&ceid=US:en",
     "https://news.google.com/rss/search?q=%22Bitcoin+Suisse%22+OR+%22crypto+regulation%22+MiCA&hl=en&gl=US&ceid=US:en",
     "https://news.google.com/rss/search?q=Temasek+investments+Asia&hl=en&gl=US&ceid=US:en",
 ]
@@ -87,7 +90,7 @@ THEMENFELDER = [
     "Energie/Rohstoffe (Öl, Gas, Gold, Kupfer)",
     "Zentralbanken (EZB, Fed, BoE, Zinsen, Inflation)",
     "Aktien-/Anleihemärkte (DAX, S&P, Renditen, Spreads)",
-    "FX/Devisen, Private Credit, Emerging Markets",
+    "FX/Devisen, Private Credit, Private Equity/Private Markets, Emerging Markets",
     "Krypto/Tokenisierung, Immobilien, ESG/Regulierung",
     "M&A/Deals/IPOs im Asset Management",
 ]
