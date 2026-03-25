@@ -129,6 +129,22 @@ REGELN:
 """
 
 
+def api_call_with_retry(func, max_retries=5, initial_wait=30):
+    """Call an API function with exponential backoff retry."""
+    for attempt in range(max_retries):
+        try:
+            return func()
+        except Exception as e:
+            error_str = str(e)
+            if "overloaded" in error_str.lower() or "rate_limit" in error_str.lower() or "529" in error_str or "429" in error_str:
+                wait_time = initial_wait * (2 ** attempt)
+                print(f"  API busy (attempt {attempt+1}/{max_retries}). Waiting {wait_time}s...")
+                time.sleep(wait_time)
+            else:
+                raise  # Re-raise if it's not a retryable error
+    raise Exception(f"API call failed after {max_retries} retries")
+
+
 def run_briefing():
     """Run the full briefing via Anthropic API with web search."""
     
@@ -143,8 +159,8 @@ def run_briefing():
     print(f"[{time_str} CET] Starting Daily Media Intelligence Briefing for {date_str}")
     print(f"[{time_str} CET] Searching across {len(THEMENFELDER)} topic areas...")
     
-    # Call Anthropic API with web search
-    response = client.messages.create(
+    # Call Anthropic API with web search (with retry)
+    response = api_call_with_retry(lambda: client.messages.create(
         model=MODEL,
         max_tokens=MAX_TOKENS,
         tools=[
@@ -156,7 +172,7 @@ def run_briefing():
         messages=[
             {"role": "user", "content": prompt}
         ]
-    )
+    ))
     
     # Extract text from response
     report_text = ""
@@ -173,13 +189,13 @@ def run_briefing():
     
     summary_text = ""
     try:
-        summary_response = client.messages.create(
+        summary_response = api_call_with_retry(lambda: client.messages.create(
             model=MODEL,
             max_tokens=1000,
             messages=[
                 {"role": "user", "content": f"Fasse die folgenden Hauptthemen des heutigen Finanzmarkt-Briefings in maximal 10 Stichpunkten zusammen (je 1 Zeile, nur die Kernaussage):\n\n{report_text[:8000]}"}
             ]
-        )
+        ))
         for block in summary_response.content:
             if hasattr(block, "text"):
                 summary_text += block.text
