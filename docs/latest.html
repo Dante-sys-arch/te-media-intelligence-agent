@@ -3,17 +3,235 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>TE Media Intelligence — Wird geladen...</title>
+<title>TE Media Intelligence — Mittwoch, 25. März 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
-  body { font-family: Georgia, serif; max-width: 600px; margin: 80px auto; text-align: center; color: #4b5563; }
-  h1 { color: #002a3e; font-size: 22px; margin-bottom: 16px; }
-  p { font-size: 15px; line-height: 1.7; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { 
+    font-family: 'Source Serif 4', Georgia, serif; 
+    max-width: 820px; margin: 0 auto; padding: 32px 20px; 
+    color: #1f2937; line-height: 1.75; background: #fafafa; 
+  }
+  
+  /* HEADER */
+  .header { 
+    text-align: center; border-bottom: 3px solid #002a3e; 
+    padding-bottom: 24px; margin-bottom: 28px; background: #fff;
+    padding: 28px 24px; border-radius: 8px 8px 0 0;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+  }
+  .header .label { 
+    font-size: 10.5px; letter-spacing: 0.3em; text-transform: uppercase; 
+    color: #002a3e; font-weight: 700; margin-bottom: 10px;
+  }
+  .header h1 { 
+    font-size: 24px; color: #002a3e; margin: 0 0 4px; 
+    border: none; padding: 0;
+  }
+  .header .date { font-size: 13px; color: #6b7280; }
+  .badges { 
+    display: flex; flex-wrap: wrap; gap: 5px; 
+    justify-content: center; margin-top: 14px; 
+  }
+  .badge { 
+    background: #002a3e; color: #fff; font-size: 9.5px; font-weight: 700; 
+    padding: 3px 10px; border-radius: 3px; letter-spacing: 0.05em; 
+    text-transform: uppercase; 
+  }
+  
+  /* ALERT */
+  .alert { 
+    background: linear-gradient(135deg, #991b1b, #7f1d1d); color: #fff; 
+    border-radius: 6px; padding: 16px 20px; margin-bottom: 20px; 
+    font-size: 13px; font-weight: 600; line-height: 1.6;
+    box-shadow: 0 2px 8px rgba(153,27,27,0.2);
+  }
+  
+  /* DIFF BANNER */
+  .diff-banner {
+    background: #fef3c7; border: 1px solid #f59e0b; border-radius: 6px;
+    padding: 12px 18px; margin-bottom: 20px; font-size: 12.5px; line-height: 1.6;
+  }
+  
+  /* TOGGLE ALL */
+  .controls { 
+    display: flex; justify-content: flex-end; margin-bottom: 12px; gap: 8px;
+  }
+  .controls button {
+    background: none; border: 1px solid #002a3e; color: #002a3e;
+    font-size: 11.5px; padding: 5px 14px; border-radius: 4px;
+    cursor: pointer; font-weight: 600; font-family: inherit;
+  }
+  .controls button:hover { background: #002a3e; color: #fff; }
+  
+  /* COLLAPSIBLE SECTIONS */
+  .section {
+    background: #fff; border: 1px solid #e5e7eb; border-radius: 6px;
+    margin-bottom: 10px; overflow: hidden;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.04);
+    transition: all 0.2s;
+  }
+  .section[open] { border-color: rgba(0,42,62,0.15); }
+  .section-header {
+    padding: 16px 20px; cursor: pointer; display: flex;
+    align-items: flex-start; gap: 12px; list-style: none;
+    user-select: none;
+  }
+  .section-header::-webkit-details-marker { display: none; }
+  .section-header:hover { background: rgba(0,42,62,0.03); }
+  .section-num { 
+    font-weight: 700; color: #002a3e; min-width: 24px; 
+    font-size: 15px; 
+  }
+  .section-title { 
+    font-weight: 700; color: #002a3e; flex: 1; 
+    font-size: 14.5px; line-height: 1.4; 
+  }
+  .chevron { 
+    font-size: 11px; color: #002a3e; flex-shrink: 0; 
+    margin-top: 3px; transition: transform 0.2s;
+  }
+  details[open] .chevron { transform: rotate(180deg); }
+  .section-body { 
+    padding: 0 20px 20px; font-size: 14.2px; line-height: 1.78; 
+  }
+  
+  /* CONTENT */
+  h1 { font-size: 18px; color: #002a3e; margin: 24px 0 12px; border-bottom: 1px solid #e5e7eb; padding-bottom: 6px; }
+  h2 { font-size: 16px; color: #002a3e; margin: 20px 0 10px; }
+  .subsection { 
+    font-size: 14px; color: #002a3e; margin: 18px 0 8px; 
+    padding-top: 12px; border-top: 1px solid rgba(0,42,62,0.06);
+  }
+  p { margin: 0 0 12px; font-size: 14.2px; }
+  strong { color: #111827; }
+  .list-item {
+    font-size: 13.5px; line-height: 1.6; padding-left: 16px;
+    position: relative; margin-bottom: 5px;
+  }
+  .bullet { 
+    position: absolute; left: 0; color: #002a3e; 
+    font-size: 7px; top: 7px;
+  }
+  
+  /* TAGS */
+  .tag { 
+    padding: 2px 7px; border-radius: 3px; font-size: 10.5px; 
+    font-weight: 700; display: inline-block; margin-right: 4px;
+  }
+  .tag-new { background: #dcfce7; color: #166534; }
+  .tag-esc { background: #fee2e2; color: #991b1b; }
+  .tag-deesc { background: #dbeafe; color: #1e40af; }
+  .tag-cont { background: #f3f4f6; color: #4b5563; }
+  
+  /* FAZIT */
+  .fazit {
+    background: #002a3e; color: #fff; border-radius: 6px;
+    padding: 20px 24px; margin-top: 24px;
+  }
+  .fazit .label { 
+    font-size: 11px; font-weight: 700; letter-spacing: 0.15em; 
+    text-transform: uppercase; margin-bottom: 8px; opacity: 0.7; 
+  }
+  .fazit p { color: #fff; font-size: 14px; line-height: 1.7; margin: 0; }
+  
+  /* FOOTER */
+  .footer { 
+    margin-top: 32px; padding-top: 20px; 
+    border-top: 1px solid #e5e7eb; font-size: 11px; color: #9ca3af;
+    line-height: 1.6;
+  }
+  
+  @media (max-width: 600px) {
+    body { padding: 16px 12px; }
+    .header { padding: 20px 16px; }
+    .header h1 { font-size: 20px; }
+    .section-header { padding: 14px 16px; }
+    .section-body { padding: 0 16px 16px; }
+  }
 </style>
 </head>
 <body>
-<h1>TE Media Intelligence</h1>
-<p>Der erste automatische Report wird beim naechsten Workflow-Lauf hier angezeigt.<br><br>
-Zeitplan: Taeglich um 07:00 CET.<br>
-Oder manuell ausloesen: <a href="https://github.com/Dante-sys-arch/te-media-intelligence-agent/actions">Actions &rarr; Run workflow</a></p>
+
+<div class="header">
+  <div class="label">TE Communications — Daily Media Intelligence Agent</div>
+  <h1>Tagesauswertung Medienbeobachtung &amp; Einordnung</h1>
+  <div class="date">Mittwoch, 25. März 2026 — 20:45 CET</div>
+  <div class="badges">
+    <span class="badge">PGIM</span>
+    <span class="badge">T. Rowe Price</span>
+    <span class="badge">MK Global Kapital</span>
+    <span class="badge">Franklin Templeton</span>
+    <span class="badge">PIMCO</span>
+    <span class="badge">Eurizon</span>
+  </div>
+</div>
+
+
+        <div class="diff-banner">
+            &#9888; <strong>Vergleich mit Vortag aktiviert.</strong> Themenblocks sind mit 
+            <span class="tag tag-new">NEU</span> 
+            <span class="tag tag-esc">ESKALATION</span> 
+            <span class="tag tag-deesc">ENTSPANNUNG</span> 
+            <span class="tag tag-cont">FORTLAUFEND</span> gekennzeichnet.
+        </div>
+
+<div class="controls">
+  <button onclick="document.querySelectorAll('details.section').forEach(d=>d.open=true)">Alle offnen</button>
+  <button onclick="document.querySelectorAll('details.section').forEach(d=>d.open=false)">Alle schliessen</button>
+</div>
+
+<p>Ich führe jetzt eine umfassende Recherche zu den aktuellen Finanzmarktthemen durch, um Ihnen strategische Positionierungsmöglichkeiten für Ihre Kunden zu identifizieren.Basierend auf meiner umfassenden Recherche kann ich Ihnen nun das strategische Finanzmarkt-Briefing für Mittwoch, 25. März 2026, präsentieren:</p><details class="section" open>
+                <summary class="section-header">
+                    <span class="section-num">1.</span>
+                    <span class="section-title">FINANZMARKT-BRIEFING 25. MÄRZ 2026 – HAUPTTHEMEN</span>
+                    <span class="chevron">&#9660;</span>
+                </summary>
+                <div class="section-body"><br></div></details><details class="section">
+                <summary class="section-header">
+                    <span class="section-num">2.</span>
+                    <span class="section-title">Schritt 1 — Recherche-Überblick</span>
+                    <span class="chevron">&#9660;</span>
+                </summary>
+                <div class="section-body"><br><p>Heute wurde eine breite Palette an Finanzmarkt-Themen geprüft, von Zentralbankpolitik über Private Credit bis hin zu Kryptowährungen und Energie-Geopolitik. Der Gesamtcharakter der Nachrichtenlage ist geprägt von <strong><span class="tag tag-esc">ESKALATION</span></strong> auf mehreren kritischen Achsen: Die EZB-Inflationsprognose verschärft sich, Private Credit erlebt eine systemische Liquiditätskrise, und der Iran-Krieg treibt Energiepreise. Das übergreifende Narrativ: <strong>Ende der monetären Entspannung bei gleichzeitiger struktureller Neubewertung illiquider Anlageklassen</strong>.</p><br></div></details><details class="section">
+                <summary class="section-header">
+                    <span class="section-num">3.</span>
+                    <span class="section-title">Schritt 2 — Themen die das Markt-Narrativ treiben</span>
+                    <span class="chevron">&#9660;</span>
+                </summary>
+                <div class="section-body"><br><h3 class="subsection">1. [ESKALATION] EZB-Wende: Von Zinssenkung zu Zinserhöhungs-Risiko</h3><br><p>Die EZB erwartet für 2026 aktuell eine Inflation von rund 2,6 %, die damit über dem Zielwert von 2 % liegt. Im Basisszenario geht die EZB für 2026 jetzt von einer Jahresinflation von 2,6 Prozent aus – 2027 aber bereits wieder von 2,0 Prozent. Am 19. März 2026 hat die EZB die Leitzinsen unverändert gelassen. Der Einlagenzins liegt bei 2,00 %, der Hauptrefinanzierungssatz bei 2,15 %.</p><br><p><strong>Narrativ:</strong> Dies markiert einen fundamentalen geldpolitischen Wendepunkt. Die neue Inflationsprognose von 2,6 Prozent, die schwächeren Wachstumsaussichten und die geopolitischen Risiken machen deutlich, dass die Phase scheinbarer geldpolitischer Entspannung vorbei ist. Einige Marktteilnehmer halten ein bis zwei Zinserhöhungen im weiteren Jahresverlauf für möglich, falls der Energiepreisdruck anhält und sich die Inflation breiter festsetzt.</p><br><p><strong>Veränderung:</strong> Die EZB-Kommunikation hat sich von der Diskussion weiterer Zinssenkungen zu Warnungen vor Zinserhöhungen gedreht – eine 180-Grad-Wende binnen Wochen.</p><br><h3 class="subsection">2. [NEU] Private Credit-Kollaps: 1,8-Billionen-Markt in Liquiditätskrise</h3><br><p>Der Vermögensverwalter Ares Management sah sich gezwungen, Anlegerrücknahmen aus seinem 10,7 Milliarden Dollar schweren Kreditfonds auf fünf Prozent zu deckeln – nachdem die Rücknahmeanträge auf satte 11,6 Prozent hochgeschnellt waren. Der Markt für private Kredite mit einem Volumen von 1,8 Bill. Dollar erlebt einen Exodus von Investoren.</p><br><p><strong>Narrativ:</strong> Die "Semi-Liquiditäts-Illusion" bricht zusammen. Das eigentliche Thema lässt sich mit einem Wort beschreiben: Semi-Liquidität. Um aber Privatanleger zu gewinnen, schuf die Branche Fonds, die im Quartalstakt begrenzte Rückgaben zulassen. Die Analysten von Morgan Stanley haben kürzlich eine Warnung ausgesprochen, die es in sich hat: Die Ausfallraten im Bereich der direkten Kreditvergabe könnten auf acht Prozent ansteigen – weit über dem historischen Durchschnitt von zwei bis zweieinhalb Prozent. Gleichwohl stufen die Morgan-Stanley-Strategen um Joyce Jiang einen solchen Anstieg als „signifikant, aber nicht systemisch" ein.</p><br><p><strong>Veränderung:</strong> Dies ist die erste systemische Liquiditätskrise in diesem Marktsegment seit dessen Entstehung. Blackrock, Apollo, Blue Owl – alle großen Namen sind betroffen.</p><br><h3 class="subsection">3. [FORTLAUFEND] Iran-Krieg: Energiepreisschock trifft Weltwirtschaft</h3><br><p>Die Eskalation des Konflikts treibt ihn unter anderem deshalb, weil der Iran den Schiffsverkehr durch die Straße von Hormus eingeschränkt hat. Die Meerenge zwischen dem Iran und der Arabischen Halbinsel ist ein Nadelöhr für den weltweiten Energiehandel: Rund ein Fünftel der globalen Öltransporte passiert sie täglich, ebenso Flüssiggastransporte.</p><br><p>Der Ölpreis ist am Montag extremen Schwankungen unterworfen. Am frühen Morgen kletterte er in Richtung 120 US-Dollar je Barrel, dann sank er auf 100 US-Dollar pro Barrel. So teuer war Brent zuletzt im Juli 2022, als der russische Angriffskrieg gegen die Ukraine Versorgungsengpässe auslöste.</p><br><p><strong>Narrativ:</strong> Dies ist die zweite große geopolitische Energiekrise binnen vier Jahren. Der Preis für 100 Liter Heizöl stieg binnen 24 Stunden von durchschnittlich 111,30 Euro auf 124 Euro – ein Plus von 11,5 Prozent. Die Parallelen zu 2022 sind unübersehbar, doch diesmal ist die Ausgangslage fragiler.</p><br><h3 class="subsection">4. [ENTSPANNUNG] Krypto-ETFs: Institutionelle Rückkehr trotz Geopolitik</h3><br><p>Laut Balchunas geht es um mehr als 1,2 Milliarden Dollar in zwei Tagen. The spot bitcoin ETFs are coming into 2026 like a lion, +$1.2 in flows in first two days of year w/ everyone eating. Das gesamte verwaltete Vermögen aller US-Spot-Bitcoin-ETFs erreichte bis Mitte März 2026 rund 95 Milliarden US-Dollar.</p><br><p><strong>Narrativ:</strong> Während traditionelle Märkte leiden, zeigen Bitcoin-ETFs bemerkenswerte Resilienz. Ein zentraler Treiber der aktuellen Entwicklung sind die anhaltend starken Zuflüsse in Spot Bitcoin ETFs. Allein im laufenden Monat wurden rund 2,5 Milliarden US-Dollar investiert.</p><br><h3 class="subsection">5. [ESKALATION] DAX unter Druck: Deutschland als Verlierer der Geopolitik</h3><br><p>März 2026 verzeichnete bereits zur Eröffnung einen Abschlag von 1,94 Prozent auf 21.946,95 Zähler. Im weiteren Vormittagshandel setzte sich die Talfahrt fort, wobei der Index zeitweise bei einem Tagestief von 21.869 Punkten notierte. Der Xetra-DAX beendete den Freitag, den 20. März 2026 mit einem Kursverlust von 2,01 Prozent und 22.380,19 Punkten.</p><br><p><strong>Narrativ:</strong> Deutschland als energieintensive Volkswirtschaft wird besonders hart getroffen. Die Verliererliste wurde von konjunktursensiblen und energieintensiven Werten angeführt. Zu den größten Verlierern zählten unter anderem Vonovia, Siemens Energy und Rheinmetall.</p><br></div></details><details class="section">
+                <summary class="section-header">
+                    <span class="section-num">4.</span>
+                    <span class="section-title">Schritt 3 — Positionierungs-Mapping auf die Kunden</span>
+                    <span class="chevron">&#9660;</span>
+                </summary>
+                <div class="section-body"><br><p><strong>PGIM</strong>: Anschlussfähig über Multi-Asset-Allokation in Krisenzeiten. Pitch-Idee: "Warum traditionelle 60/40-Portfolios in der Stagflations-Falle versagen" (Handelsblatt Gastbeitrag)</p><br><p><strong>T. Rowe Price</strong>: Anschlussfähig über Active Equity vs. passive Strategien bei Marktturbulenzen. Interview-Aufhänger: "Stockpicking in der Iran-Krise: Welche deutschen Aktien profitieren?" (FAZ)</p><br><p><strong>MK Global Kapital</strong>: Anschlussfähig über Impact Investing vs. Private Credit Kollaps. Gastbeitrag-Thema: "Nach dem Private Credit-Crash: Alternative Finanzierung für den Mittelstand" (Börsen-Zeitung)</p><br><p><strong>Franklin Templeton</strong> (Martin Lueck): Anschlussfähig über EM-Expertise bei Nahost-Krise. Pitch-Idee: Interview zu "Emerging Markets als Profiteure der Energiekrise?" (Fonds Professionell)</p><br><p><strong>PIMCO</strong>: Anschlussfähig über Fixed Income bei steigenden Zinsen. Gastbeitrag: "Anleihe-Strategien für das Ende der Zinssenkungen" (DAS INVESTMENT)</p><br><p><strong>Eurizon</strong>: Anschlussfähig über Euro Fixed Income bei EZB-Wende. Kommentar: "Europäische Anleihen vor der Zinswende" (Citywire)</p><br><p><strong>Temasek</strong>: Anschlussfähig über Infrastruktur-Investments bei Energiewende. Interview-Thema: "Warum Singapur in deutsche Energieinfrastruktur investiert" (Handelsblatt)</p><br><p><strong>Bitcoin Suisse</strong>: Anschlussfähig über Krypto-Regulierung und institutionelle Adoption. Gastbeitrag: "MiCA-konforme Krypto-Services für deutsche Institutionelle" (NZZ)</p><br></div></details><details class="section">
+                <summary class="section-header">
+                    <span class="section-num">5.</span>
+                    <span class="section-title">Schritt 4 — Termine nächste 7 Tage</span>
+                    <span class="chevron">&#9660;</span>
+                </summary>
+                <div class="section-body"><br><p><strong>26.03.2026, verschiedene Uhrzeiten, Global:</strong> US-Handelsdaten, wichtig für Zoll-Diskussionen</p><p><strong>27.03.2026, 14:00 Uhr, USA:</strong> Verbrauchervertrauen, relevant für Fed-Erwartungen</p><p><strong>29.03.2026, 9:00 Uhr, Deutschland:</strong> ifo-Geschäftsklima, kritisch für DAX-Sentiment</p><p><strong>30.04.2026, 14:15 Uhr, EU:</strong> <strong>Nächste EZB-Sitzung</strong> - erste Chance auf Zinserhöhung</p><p><strong>31.03.2026, verschiedene Zeiten, Global:</strong> Quartalsende - Portfolioumschichtungen erwartet</p><br></div></details><details class="section">
+                <summary class="section-header">
+                    <span class="section-num">6.</span>
+                    <span class="section-title">Schritt 5 — Konkrete Pitch-Ableitungen</span>
+                    <span class="chevron">&#9660;</span>
+                </summary>
+                <div class="section-body"><br><p>1. <strong>"Nach der Private-Credit-Krise: Comeback der Banken?"</strong> - Interview mit PGIM für Handelsblatt über Reintermediation</p><p>2. <strong>"Stagflation 2026: Lehren aus den 70ern"</strong> - Gastbeitrag von T. Rowe Price für FAZ über Aktienstrategien</p><p>3. <strong>"Bitcoin vs. Bonds: Flucht in alternative Wertaufbewahrung"</strong> - Kommentar Bitcoin Suisse für Fonds Professionell</p><p>4. <strong>"Energie-Autarkie als Investment-Thema"</strong> - Interview Temasek für NZZ über Infrastruktur-Investments</p><p>5. <strong>"Fixed Income nach der EZB-Wende"</strong> - Analyse PIMCO für DAS INVESTMENT über Anleihe-Positionierung</p><br></div></details><details class="section">
+                <summary class="section-header">
+                    <span class="section-num">7.</span>
+                    <span class="section-title">Gesamtfazit</span>
+                    <span class="chevron">&#9660;</span>
+                </summary>
+                <div class="section-body"><br><p>Das übergeordnete Narrativ heute: <strong>Der strukturelle Wandel von der "Great Moderation" zur "Great Fragmentation" beschleunigt sich.</strong> Drei Jahrzehnte sinkender Inflation und stabiler Geopolitik enden abrupt. Private Credit als Symbol billiger Liquidität kollabiert, während die EZB von Zinssenkungen zu Zinserhöhungs-Risiken schwenkt. Gleichzeitig zeigt Bitcoin-ETF-Nachfrage: Institutionelle suchen neue Anker jenseits traditioneller Diversifikation.</p></div></details>
+
+<div class="footer">
+  <strong>Methodik:</strong> Automatisierte Recherche via Anthropic Claude Sonnet API mit Web Search + Google News RSS-Feeds uber alle relevanten deutsch- und englischsprachigen Finanz-, Wirtschafts- und Branchenmedien. 
+  Systematische Abdeckung von 8+ Themenfeldern. Vergleich mit Vortagesreport fur Delta-Kennzeichnung.<br><br>
+  <strong>Qualitaetshinweis:</strong> Dieser Report wird automatisiert erstellt. Die Fakten basieren auf Web-Recherche und Google News zum Erstellungszeitpunkt. Trotz Anti-Halluzinations-Massnahmen koennen einzelne Angaben unvollstaendig oder veraltet sein. Kurse und Zahlen sollten vor der Verwendung in Kundenkommunikation gegen eine zweite Quelle geprueft werden. Der Report ersetzt keine eigene Recherche, sondern dient als strukturierte Ausgangsbasis fuer den Arbeitstag.<br><br>
+  <strong>Quellen:</strong> Reuters, Handelsblatt, FAZ, FT, Bloomberg, IEA, ZDF, Borsen-Zeitung, SZ, WiWo, Spiegel, MM, FoPro, Citywire, DAS INVESTMENT, finanzen.net, IPE, NZZ, FuW, CoinDesk, CBRE, Cushman &amp; Wakefield, Morningstar, dpa-AFX u.v.m.<br><br>
+  <strong>TE Communications GmbH</strong> | Frankfurt &middot; Zurich &middot; St. Gallen &middot; Lausanne
+</div>
+
 </body>
 </html>

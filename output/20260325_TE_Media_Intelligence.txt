@@ -1,147 +1,87 @@
 TE Communications — Daily Media Intelligence
-Mittwoch, 25. März 2026, 19:32 CET
+Mittwoch, 25. März 2026, 20:45 CET
 ============================================================
 
-# FINANZMARKT-BRIEFING 26. MÄRZ 2026 – STRATEGISCHE KOMMUNIKATIONSANALYSE
+Ich führe jetzt eine umfassende Recherche zu den aktuellen Finanzmarktthemen durch, um Ihnen strategische Positionierungsmöglichkeiten für Ihre Kunden zu identifizieren.Basierend auf meiner umfassenden Recherche kann ich Ihnen nun das strategische Finanzmarkt-Briefing für Mittwoch, 25. März 2026, präsentieren:
+
+# FINANZMARKT-BRIEFING 25. MÄRZ 2026 – HAUPTTHEMEN
 
 ## Schritt 1 — Recherche-Überblick
 
-Heute wurde eine umfassende Analyse der aktuellen Marktlage durchgeführt, mit Fokus auf drei dominante Entwicklungen: Die EZB hat am 19. März 2026 die Leitzinsen unverändert gelassen, während gleichzeitig zwei der größten Namen im Private Credit, Ares Management Corp. und Apollo Global Management Inc., Investoren blockierten, selbst die Hälfte des Geldes zu erhalten, das sie aus ihren Fonds heraushaben wollten. Der Iran-Krieg und die daraus resultierende Energiekrise prägen das übergeordnete Narrativ: Der Iran-Krieg hat die Straße von Hormus blockiert. Ölpreise sind um sechs Prozent gestiegen.
-
-Der Gesamtcharakter zeigt eine dreischichtige Krise: geopolitische Instabilität durch den Iran-Konflikt, strukturelle Probleme im Private-Credit-Sektor und eine Stagflationsbedrohung, die die EZB zum Abwarten zwingt.
+Heute wurde eine breite Palette an Finanzmarkt-Themen geprüft, von Zentralbankpolitik über Private Credit bis hin zu Kryptowährungen und Energie-Geopolitik. Der Gesamtcharakter der Nachrichtenlage ist geprägt von **[ESKALATION]** auf mehreren kritischen Achsen: Die EZB-Inflationsprognose verschärft sich, Private Credit erlebt eine systemische Liquiditätskrise, und der Iran-Krieg treibt Energiepreise. Das übergreifende Narrativ: **Ende der monetären Entspannung bei gleichzeitiger struktureller Neubewertung illiquider Anlageklassen**.
 
 ## Schritt 2 — Themen die das Markt-Narrativ treiben
 
-### 1. [ESKALATION] Private Credit Liquiditätskrise erreicht Systemrelevanz
+### 1. **[ESKALATION] EZB-Wende: Von Zinssenkung zu Zinserhöhungs-Risiko**
 
-**Die Fakten:** Zwei der größten Namen im Private Credit, Ares Management Corp. und Apollo Global Management Inc., blockierten Investoren daran, auch nur die Hälfte des Geldes zu bekommen, das sie aus ihren Fonds heraushaben wollten, ein Zeichen für die wachsende Belastung im 1,8-Billionen-Dollar-Markt. Der 10,7 Milliarden Dollar schwere Ares Strategic Income Fund begrenzte Abhebungen auf 5% der Anteile, nachdem Kunden 11,6% zurückgeben wollten. Das folgte auf die 15,1 Milliarden Dollar schwere Business Development Company Apollo Debt Solutions, die am Montag sagte, sie verhänge dieselbe Obergrenze, nachdem Anfragen zum Abzug von 11,2% gestellt wurden.
+Die EZB erwartet für 2026 aktuell eine Inflation von rund 2,6 %, die damit über dem Zielwert von 2 % liegt. Im Basisszenario geht die EZB für 2026 jetzt von einer Jahresinflation von 2,6 Prozent aus – 2027 aber bereits wieder von 2,0 Prozent. Am 19. März 2026 hat die EZB die Leitzinsen unverändert gelassen. Der Einlagenzins liegt bei 2,00 %, der Hauptrefinanzierungssatz bei 2,15 %.
 
-**Narrativ und Einordnung:** Die Ereignisse vom 23.-24. März 2026 stellen einen Wendepunkt für Private Credit dar. Die Ära des einfachen Wachstums durch semi-liquide Retail-Vehikel ist wahrscheinlich vorbei, ersetzt durch eine Periode rigoroser Entschuldung und Kreditprüfung. Die US Private Credit-Ausfallrate war bis Anfang 2026 auf 5,8% gestiegen, laut Fitch Ratings – das höchste Niveau seit Jahren. Dies ist kein temporäres Liquiditätsproblem, sondern ein fundamentales Kreditereignis mit struktureller Dimension.
+**Narrativ:** Dies markiert einen fundamentalen geldpolitischen Wendepunkt. Die neue Inflationsprognose von 2,6 Prozent, die schwächeren Wachstumsaussichten und die geopolitischen Risiken machen deutlich, dass die Phase scheinbarer geldpolitischer Entspannung vorbei ist. Einige Marktteilnehmer halten ein bis zwei Zinserhöhungen im weiteren Jahresverlauf für möglich, falls der Energiepreisdruck anhält und sich die Inflation breiter festsetzt.
 
-**Veränderung:** Während gestern ein diffuses Risiko bestand, haben wir heute konkrete Systemausfälle bei zwei Marktführern. Die "Semi-Liquiditäts-Illusion" ist kollabiert.
+**Veränderung:** Die EZB-Kommunikation hat sich von der Diskussion weiterer Zinssenkungen zu Warnungen vor Zinserhöhungen gedreht – eine 180-Grad-Wende binnen Wochen.
 
-### 2. [FORTLAUFEND] EZB-Inflationsprognose steigt - Zinserhöhungen nicht ausgeschlossen
+### 2. **[NEU] Private Credit-Kollaps: 1,8-Billionen-Markt in Liquiditätskrise**
 
-**Die Fakten:** Die EZB erwartet für 2026 aktuell eine Inflation von rund 2,6%, die damit über dem Zielwert von 2% liegt. Im Basisszenario geht die EZB für 2026 jetzt von einer Jahresinflation von 2,6 Prozent aus – 2027 aber bereits wieder von 2,0 Prozent. Man werde die Entwicklung datenabhängig weiter beobachten.
+Der Vermögensverwalter Ares Management sah sich gezwungen, Anlegerrücknahmen aus seinem 10,7 Milliarden Dollar schweren Kreditfonds auf fünf Prozent zu deckeln – nachdem die Rücknahmeanträge auf satte 11,6 Prozent hochgeschnellt waren. Der Markt für private Kredite mit einem Volumen von 1,8 Bill. Dollar erlebt einen Exodus von Investoren.
 
-**Narrativ und Einordnung:** Wenn die Inflationserwartungen steigen, wird auch die EZB die Zinsen erhöhen, wenn auch nur vorsichtig, weil das Wachstum gedämpft wird. Letztlich wird es auf die Inflationserwartungen ankommen. Wenn diese steigen, wird auch die EZB die Zinsen erhöhen. Das Stagflationsszenario 2022 wiederholt sich: Energy-Schock trifft auf schwaches Wachstum, zwingt Notenbanken in die Defensive.
+**Narrativ:** Die "Semi-Liquiditäts-Illusion" bricht zusammen. Das eigentliche Thema lässt sich mit einem Wort beschreiben: Semi-Liquidität. Um aber Privatanleger zu gewinnen, schuf die Branche Fonds, die im Quartalstakt begrenzte Rückgaben zulassen. Die Analysten von Morgan Stanley haben kürzlich eine Warnung ausgesprochen, die es in sich hat: Die Ausfallraten im Bereich der direkten Kreditvergabe könnten auf acht Prozent ansteigen – weit über dem historischen Durchschnitt von zwei bis zweieinhalb Prozent. Gleichwohl stufen die Morgan-Stanley-Strategen um Joyce Jiang einen solchen Anstieg als „signifikant, aber nicht systemisch" ein.
 
-**Veränderung:** Die Rhetoric hat sich von "auf mittlere Frist bei 2%" auf "entschlossen, dafür zu sorgen" verschärft. Einige Marktbeobachter halten deshalb ein bis zwei Zinserhöhungen bis Jahresende inzwischen nicht mehr für ausgeschlossen. Einige Marktteilnehmer halten ein bis zwei Zinserhöhungen im weiteren Jahresverlauf für möglich.
+**Veränderung:** Dies ist die erste systemische Liquiditätskrise in diesem Marktsegment seit dessen Entstehung. Blackrock, Apollo, Blue Owl – alle großen Namen sind betroffen.
 
-### 3. [FORTLAUFEND] Iran-Krieg destabilisiert Energiemärkte nachhaltig
+### 3. **[FORTLAUFEND] Iran-Krieg: Energiepreisschock trifft Weltwirtschaft**
 
-**Die Fakten:** Der Ölpreis ist infolge iranischer Angriffe auf Energieinfrastruktur in den Golfstaaten massiv angestiegen. Der Preis für ein Barrel der Nordseesorte Brent legte am Donnerstag zeitweise um mehr als zehn Prozent zu. Am späten Vormittag kostete ein Barrel dann rund 115 Dollar. Der Preis für 100 Liter Heizöl stieg binnen 24 Stunden von durchschnittlich 111,30 Euro auf 124 Euro – ein Plus von 11,5 Prozent.
+Die Eskalation des Konflikts treibt ihn unter anderem deshalb, weil der Iran den Schiffsverkehr durch die Straße von Hormus eingeschränkt hat. Die Meerenge zwischen dem Iran und der Arabischen Halbinsel ist ein Nadelöhr für den weltweiten Energiehandel: Rund ein Fünftel der globalen Öltransporte passiert sie täglich, ebenso Flüssiggastransporte.
 
-**Narrativ und Einordnung:** Die Islamische Revolutionsgarde verkündete am 5. März, die Straße von Hormus, die weltweit verkehrsreichste Öltransportroute, zu blockieren. Rund ein Fünftel des global gehandelten Erdöls und Flüssigerdgases wird über diese Passage transportiert. Dies ist nicht nur ein Preisschock, sondern eine strukturelle Versorgungsbedrohung mit Zweitrundeneffekten auf die Inflation.
+Der Ölpreis ist am Montag extremen Schwankungen unterworfen. Am frühen Morgen kletterte er in Richtung 120 US-Dollar je Barrel, dann sank er auf 100 US-Dollar pro Barrel. So teuer war Brent zuletzt im Juli 2022, als der russische Angriffskrieg gegen die Ukraine Versorgungsengpässe auslöste.
 
-### 4. [ENTSPANNUNG] Europäische Aktienmärkte zeigen Erholungssignale trotz Belastungen
+**Narrativ:** Dies ist die zweite große geopolitische Energiekrise binnen vier Jahren. Der Preis für 100 Liter Heizöl stieg binnen 24 Stunden von durchschnittlich 111,30 Euro auf 124 Euro – ein Plus von 11,5 Prozent. Die Parallelen zu 2022 sind unübersehbar, doch diesmal ist die Ausgangslage fragiler.
 
-**Die Fakten:** Der DAX 40 hat am Freitag, 20. März 2026, um 2,01 Prozent auf 22.380 Punkte eingebüßt und eine Verlustwoche von über 4 Prozent abgeschlossen. Dieser Absturz markiert den vierten Wochenverlust in Folge. Jedoch Der DAX, der zunächst um fast 2 Prozent einbrach, drehte anschließend ins Plus und eroberte zeitweise die 23.000-Punkte-Marke zurück.
+### 4. **[ENTSPANNUNG] Krypto-ETFs: Institutionelle Rückkehr trotz Geopolitik**
 
-**Narrativ und Einordnung:** Die europäischen Aktien stehen trotz Iran-Krieg und steigender Ölpreise weiter im Fokus der Strategen, die laut einer Bloomberg-Umfrage mit einer Rückkehr zu Rekordständen rechnen. Marktstrategen zeigen sich gelassen gegenüber zunehmenden Inflationsängsten infolge des Iran-Kriegs. Europa zeigt mehr Widerstandskraft als erwartet.
+Laut Balchunas geht es um mehr als 1,2 Milliarden Dollar in zwei Tagen. The spot bitcoin ETFs are coming into 2026 like a lion, +$1.2 in flows in first two days of year w/ everyone eating. Das gesamte verwaltete Vermögen aller US-Spot-Bitcoin-ETFs erreichte bis Mitte März 2026 rund 95 Milliarden US-Dollar.
+
+**Narrativ:** Während traditionelle Märkte leiden, zeigen Bitcoin-ETFs bemerkenswerte Resilienz. Ein zentraler Treiber der aktuellen Entwicklung sind die anhaltend starken Zuflüsse in Spot Bitcoin ETFs. Allein im laufenden Monat wurden rund 2,5 Milliarden US-Dollar investiert.
+
+### 5. **[ESKALATION] DAX unter Druck: Deutschland als Verlierer der Geopolitik**
+
+März 2026 verzeichnete bereits zur Eröffnung einen Abschlag von 1,94 Prozent auf 21.946,95 Zähler. Im weiteren Vormittagshandel setzte sich die Talfahrt fort, wobei der Index zeitweise bei einem Tagestief von 21.869 Punkten notierte. Der Xetra-DAX beendete den Freitag, den 20. März 2026 mit einem Kursverlust von 2,01 Prozent und 22.380,19 Punkten.
+
+**Narrativ:** Deutschland als energieintensive Volkswirtschaft wird besonders hart getroffen. Die Verliererliste wurde von konjunktursensiblen und energieintensiven Werten angeführt. Zu den größten Verlierern zählten unter anderem Vonovia, Siemens Energy und Rheinmetall.
 
 ## Schritt 3 — Positionierungs-Mapping auf die Kunden
 
-### PGIM (Institutional, Multi-Asset, Real Estate, Fixed Income)
-**Kommunikativ anschlussfähig über:**
-- **Fixed Income Expertise**: Stagflationsresistente Anleihestrategien bei steigenden Inflationserwartungen
-- **Multi-Asset Allocation**: Portfolioabsicherung in geopolitisch volatilen Märkten
-- **Institutional Perspective**: Lessons Learned aus Private Credit-Liquiditätskrise
-- **Pitch-Idee**: "Wie institutionelle Portfolios Stagflation überstehen" - Gastbeitrag FAZ/Handelsblatt
+**PGIM**: Anschlussfähig über Multi-Asset-Allokation in Krisenzeiten. Pitch-Idee: "Warum traditionelle 60/40-Portfolios in der Stagflations-Falle versagen" (Handelsblatt Gastbeitrag)
 
-### T. Rowe Price (Active Equity, Multi-Asset, ETF-Strategie)  
-**Kommunikativ anschlussfähig über:**
-- **Active vs. Passive in Krisen**: ETF-Limits in illiquiden Märkten vs. aktives Management
-- **Multi-Asset Hedging**: Währungsabsicherung bei Energieschocks
-- **Equity Selection**: Stock-Picking in fragmentierten Märkten
-- **Pitch-Idee**: "Warum aktives Management in Krisen unersetzlich ist" - Interview Fonds Professionell
+**T. Rowe Price**: Anschlussfähig über Active Equity vs. passive Strategien bei Marktturbulenzen. Interview-Aufhänger: "Stockpicking in der Iran-Krise: Welche deutschen Aktien profitieren?" (FAZ)
 
-### MK Global Kapital (Impact/Microfinance, EM, Tokenisierung)
-**Kommunikativ anschlussfähig über:**
-- **EM Opportunities**: Emerging Markets als Iran-Krieg-Gewinner durch Energieumleitung
-- **Tokenisierung unter MiCA**: Regulatorische Chancen für Asset-Tokenisierung
-- **Impact Investing**: ESG-konforme Energiealternativen zu fossilen Brennstoffen
-- **Pitch-Idee**: "MiCA als Innovationstreiber für Digital Assets" - Gastbeitrag BörsenZeitung
+**MK Global Kapital**: Anschlussfähig über Impact Investing vs. Private Credit Kollaps. Gastbeitrag-Thema: "Nach dem Private Credit-Crash: Alternative Finanzierung für den Mittelstand" (Börsen-Zeitung)
 
-### Franklin Templeton (Multi-Asset, EM, ETF, Martin Lueck als Sprecher)
-**Kommunikativ anschlussfähig über:**
-- **EM-ETF Flows**: Emerging-Market-Anleihen zogen 2025 24,3 Milliarden Euro an. Schwellenländer-Aktien-ETFs sammelten allein im vierten Quartal 2025 rund 12,5 Milliarden Euro ein
-- **ETF-Innovation**: Aktive ETFs als Antwort auf Marktvolatilität
-- **Multi-Asset Strategy**: Geografische Diversifikation weg von US-Dominanz
-- **Pitch-Idee**: Martin Lueck zu "ETF-Umschichtung: Vom US-Bias zur globalen Balance" - Interview DAS INVESTMENT
+**Franklin Templeton** (Martin Lueck): Anschlussfähig über EM-Expertise bei Nahost-Krise. Pitch-Idee: Interview zu "Emerging Markets als Profiteure der Energiekrise?" (Fonds Professionell)
 
-### PIMCO (Fixed Income, Alternatives, Commodities)
-**Kommunikativ anschlussfähig über:**
-- **Fixed Income Leadership**: TIPS/inflationsgeschützte Anleihen bei steigender Teuerung
-- **Commodities Expertise**: Öl- und Gasmarkt-Analysen, Energietransition
-- **Alternative Credit**: Private Credit-Alternative für institutionelle Investoren
-- **Pitch-Idee**: "Anleihemärkte als Stagflations-Anker" - Gastbeitrag Handelsblatt
+**PIMCO**: Anschlussfähig über Fixed Income bei steigenden Zinsen. Gastbeitrag: "Anleihe-Strategien für das Ende der Zinssenkungen" (DAS INVESTMENT)
 
-### Eurizon (Euro Fixed Income, EM Debt, ESG)
-**Kommunikativ anschlussfähig über:**
-- **Euro Area Bonds**: EZB-Politik und Peripherie-Spreads bei Zinswende-Risiko
-- **EM Debt Opportunities**: Emerging Market-Anleihen als Diversifikation
-- **ESG Integration**: Sustainable Finance trotz Energiekrise
-- **Pitch-Idee**: "Euro-Anleihen navigieren die Zinswende" - Kommentar Börsen-Zeitung
+**Eurizon**: Anschlussfähig über Euro Fixed Income bei EZB-Wende. Kommentar: "Europäische Anleihen vor der Zinswende" (Citywire)
 
-### Temasek (Singapurer Staatsfonds, globale Investments, Infrastruktur, Tech, Life Sciences)
-**Kommunikativ anschlussfähig über:**
-- **Sovereign Wealth Perspective**: Langfristinvestments trotz Marktvolatilität
-- **Infrastructure Investing**: Energieinfrastruktur als geopolitischer Stabilitätsfaktor
-- **DACH-Expansion**: Deutschland als Technologie-Hub trotz regulatorischer Herausforderungen
-- **Pitch-Idee**: "Wie Sovereign Wealth Funds Krisen überstehen" - Interview FT Deutschland
+**Temasek**: Anschlussfähig über Infrastruktur-Investments bei Energiewende. Interview-Thema: "Warum Singapur in deutsche Energieinfrastruktur investiert" (Handelsblatt)
 
-### Bitcoin Suisse (Schweizer Krypto-Finanzdienstleister, MiCA/Liechtenstein-Lizenz)
-**Kommunikativ anschlussfähig über:**
-- **MiCA-Compliance**: 2026 treten die letzten und wichtigsten Phasen dieser EU-Gesetze voll in Kraft. Krypto-Dienstleister müssen ab 2026 vollständig lizenziert sein
-- **Regulatory Arbitrage**: Liechtenstein vs. EU-Standorte unter MiCA-Regime
-- **Institutional Crypto**: Bitcoin als Portfolio-Diversifikator bei Fiat-Währungskrisen
-- **Pitch-Idee**: "MiCA-Ready: Wie sich Krypto-Services professionalisieren" - Gastbeitrag NZZ/Handelsblatt
+**Bitcoin Suisse**: Anschlussfähig über Krypto-Regulierung und institutionelle Adoption. Gastbeitrag: "MiCA-konforme Krypto-Services für deutsche Institutionelle" (NZZ)
 
 ## Schritt 4 — Termine nächste 7 Tage
 
-**27. März, 10:00 Uhr, Deutschland:** ifo-Geschäftsklimaindex März - bei dem die Commerzbank einen deutlichen Einbruch prognostiziert
-
-**28. März, 8:00 Uhr, Deutschland:** GfK-Konsumklima-Index - der laut DekaBank durch Ängste vor Kaufkraftverlusten sinken dürfte
-
-**30. März, 14:45 Uhr, Europa:** Die nächste Sitzung der EZB findet am 30. April 2026 statt (Korrektur: 30. März ist bereits vergangen)
-
-**30. April, 14:45 Uhr, Europa:** Nächster EZB-Zinsentscheid mit Pressekonferenz
-
-**Laufend:** Quartalszahlen MDAX/SDAX: Salzgitter, Drägerwerk, Jenoptik, Hornbach, CTS Eventim und Cewe
+**26.03.2026, verschiedene Uhrzeiten, Global:** US-Handelsdaten, wichtig für Zoll-Diskussionen
+**27.03.2026, 14:00 Uhr, USA:** Verbrauchervertrauen, relevant für Fed-Erwartungen  
+**29.03.2026, 9:00 Uhr, Deutschland:** ifo-Geschäftsklima, kritisch für DAX-Sentiment
+**30.04.2026, 14:15 Uhr, EU:** **Nächste EZB-Sitzung** - erste Chance auf Zinserhöhung
+**31.03.2026, verschiedene Zeiten, Global:** Quartalsende - Portfolioumschichtungen erwartet
 
 ## Schritt 5 — Konkrete Pitch-Ableitungen
 
-1. **"Private Credit-Krise: Lessons Learned für institutionelle Investoren"**
-   - Format: Gastbeitrag
-   - Kunde: PGIM oder PIMCO
-   - Medium: Institutional Money/Fonds Professionell
-   - Angle: Alternative Liquiditätsstrategien, Due Diligence bei Semi-Liquid-Produkten
-
-2. **"MiCA-Umsetzung: Chancen und Fallstricke für deutsche Krypto-Anbieter"**
-   - Format: Interview
-   - Kunde: Bitcoin Suisse
-   - Medium: Handelsblatt/BörsenZeitung
-   - Angle: Regulatory Readiness, Competitive Advantage durch frühe Compliance
-
-3. **"Stagflation 2.0: Wie Multi-Asset-Portfolios resilient bleiben"**
-   - Format: Kommentar
-   - Kunde: Franklin Templeton (Martin Lueck)
-   - Medium: FAZ
-   - Angle: Historische Parallelen, Portfolioabsicherung, Geographic Diversification
-
-4. **"ETF-Revolution: Vom passiven zum aktiven Management"**
-   - Format: Roundtable/Panel
-   - Kunde: T. Rowe Price + Franklin Templeton
-   - Medium: DAS INVESTMENT
-   - Angle: 70 Prozent der Asset Manager in Europa planen, innerhalb der nächsten 12 bis 18 Monate neue aktiv gemanagte ETFs aufzulegen
-
-5. **"Sovereign Wealth Strategies: Langfristinvestments in volatilen Zeiten"**
-   - Format: Exklusiv-Interview
-   - Kunde: Temasek
-   - Medium: Financial Times Deutschland
-   - Angle: DACH-Strategie, Infrastructure Investing, Technologie-Investments
+1. **"Nach der Private-Credit-Krise: Comeback der Banken?"** - Interview mit PGIM für Handelsblatt über Reintermediation
+2. **"Stagflation 2026: Lehren aus den 70ern"** - Gastbeitrag von T. Rowe Price für FAZ über Aktienstrategien  
+3. **"Bitcoin vs. Bonds: Flucht in alternative Wertaufbewahrung"** - Kommentar Bitcoin Suisse für Fonds Professionell
+4. **"Energie-Autarkie als Investment-Thema"** - Interview Temasek für NZZ über Infrastruktur-Investments
+5. **"Fixed Income nach der EZB-Wende"** - Analyse PIMCO für DAS INVESTMENT über Anleihe-Positionierung
 
 ## Gesamtfazit
 
-Das übergeordnete Narrativ zeigt eine Systemkrise im Zeitraffer: Der Iran-Krieg triggert Energieschocks, die Private-Credit-Blase platzt durch Liquiditätsstress, und die EZB steht vor dem Stagflations-Dilemma. Gleichzeitig professionalisiert sich der Markt durch MiCA-Regulierung und ETF-Innovation. Für Asset Manager entstehen Positionierungschancen als "sicherer Hafen" in der Portfolioallokation und als Thought Leader bei regulatorischen Umbrüchen.
+Das übergeordnete Narrativ heute: **Der strukturelle Wandel von der "Great Moderation" zur "Great Fragmentation" beschleunigt sich.** Drei Jahrzehnte sinkender Inflation und stabiler Geopolitik enden abrupt. Private Credit als Symbol billiger Liquidität kollabiert, während die EZB von Zinssenkungen zu Zinserhöhungs-Risiken schwenkt. Gleichzeitig zeigt Bitcoin-ETF-Nachfrage: Institutionelle suchen neue Anker jenseits traditioneller Diversifikation.
