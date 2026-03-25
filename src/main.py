@@ -8,6 +8,7 @@ import anthropic
 import json
 import os
 import hashlib
+import time
 from datetime import datetime, timedelta
 from pathlib import Path
 
@@ -166,17 +167,27 @@ def run_briefing():
     print(f"[{time_str} CET] Report generated: {len(report_text)} characters")
     
     # --- Generate summary for tomorrow's diff ---
-    summary_response = client.messages.create(
-        model=MODEL,
-        max_tokens=1000,
-        messages=[
-            {"role": "user", "content": f"Fasse die folgenden Hauptthemen des heutigen Finanzmarkt-Briefings in maximal 10 Stichpunkten zusammen (je 1 Zeile, nur die Kernaussage):\n\n{report_text[:8000]}"}
-        ]
-    )
+    # Wait 60 seconds to avoid rate limiting on second API call
+    print(f"[{time_str} CET] Waiting 60s before summary generation (rate limit protection)...")
+    time.sleep(60)
+    
     summary_text = ""
-    for block in summary_response.content:
-        if hasattr(block, "text"):
-            summary_text += block.text
+    try:
+        summary_response = client.messages.create(
+            model=MODEL,
+            max_tokens=1000,
+            messages=[
+                {"role": "user", "content": f"Fasse die folgenden Hauptthemen des heutigen Finanzmarkt-Briefings in maximal 10 Stichpunkten zusammen (je 1 Zeile, nur die Kernaussage):\n\n{report_text[:8000]}"}
+            ]
+        )
+        for block in summary_response.content:
+            if hasattr(block, "text"):
+                summary_text += block.text
+        print(f"[{time_str} CET] Summary generated for tomorrow's diff.")
+    except Exception as e:
+        print(f"[{time_str} CET] Summary generation skipped (rate limit or error): {e}")
+        # Fallback: use first 500 chars of report as summary
+        summary_text = report_text[:500]
     
     # --- Save outputs ---
     OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
