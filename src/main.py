@@ -20,24 +20,65 @@ MAX_TOKENS = 12000
 OUTPUT_DIR = Path("output")
 HISTORY_DIR = Path("output/history")
 
-# Google News RSS feeds for pre-research
+# === RSS FEED ARCHITECTURE ===
+# Layer 1: Direct RSS feeds from specific media outlets (most reliable, real-time)
+# Layer 2: Google News thematic searches (broader, cross-source)
+
+MEDIA_RSS_FEEDS = [
+    # --- DEUTSCHE LEITMEDIEN ---
+    "https://www.handelsblatt.com/contentexport/feed/finanzen",
+    "https://www.handelsblatt.com/contentexport/feed/top-themen",
+    "https://www.faz.net/rss/aktuell/finanzen/",
+    "https://www.faz.net/rss/aktuell/wirtschaft/",
+    "https://www.sueddeutsche.de/wirtschaft?output=rss",
+    "https://www.wiwo.de/rss/feed.finanzen.rss",
+    "https://www.wiwo.de/rss/feed.geldanlage.rss",
+    "https://www.spiegel.de/wirtschaft/index.rss",
+    "https://www.manager-magazin.de/finanzen/index.rss",
+    "https://www.finanzen.net/rss/news",
+    "https://www.tagesschau.de/wirtschaft/boerse/index~rss2.xml",
+    # --- DEUTSCHE FACHMEDIEN ---
+    "https://www.fondsprofessionell.de/rss/news.xml",
+    "https://www.dasinvestment.com/feed/",
+    "https://citywire.de/rss",
+    "https://www.institutional-money.com/rss/news.xml",
+    "https://www.private-banking-magazin.de/feed/",
+    # --- SCHWEIZER MEDIEN ---
+    "https://www.nzz.ch/finanzen.rss",
+    "https://www.fuw.ch/feed",
+    "https://www.cash.ch/rss/news",
+    # --- INTERNATIONALE MEDIEN ---
+    "https://feeds.reuters.com/reuters/businessNews",
+    "https://www.ft.com/rss/home/uk",
+    "https://feeds.bbci.co.uk/news/business/rss.xml",
+    "https://www.cnbc.com/id/100003114/device/rss/rss.html",
+    "https://www.ipe.com/rss",
+    # --- KRYPTO ---
+    "https://www.coindesk.com/arc/outboundfeeds/rss/",
+]
+
 GOOGLE_NEWS_FEEDS = [
-    "https://news.google.com/rss/search?q=Finanzmärkte+Kapitalmärkte+aktuell&hl=de&gl=DE&ceid=DE:de",
-    "https://news.google.com/rss/search?q=DAX+Börse+heute&hl=de&gl=DE&ceid=DE:de",
-    "https://news.google.com/rss/search?q=EZB+Fed+Zinsen+Inflation+2026&hl=de&gl=DE&ceid=DE:de",
-    "https://news.google.com/rss/search?q=Ölpreis+Energie+Nahost+Iran+2026&hl=de&gl=DE&ceid=DE:de",
-    "https://news.google.com/rss/search?q=Asset+Management+Fonds+ETF+2026&hl=de&gl=DE&ceid=DE:de",
-    "https://news.google.com/rss/search?q=Private+Credit+Private+Debt+2026&hl=de&gl=DE&ceid=DE:de",
-    "https://news.google.com/rss/search?q=Immobilien+REIT+Gewerbeimmobilien+2026&hl=de&gl=DE&ceid=DE:de",
-    "https://news.google.com/rss/search?q=Bitcoin+Krypto+Tokenisierung+2026&hl=de&gl=DE&ceid=DE:de",
-    "https://news.google.com/rss/search?q=%22Bitcoin+Suisse%22+OR+MiCA+Krypto+Deutschland&hl=de&gl=DE&ceid=DE:de",
-    "https://news.google.com/rss/search?q=ESG+Sustainable+Finance+Regulierung+2026&hl=de&gl=DE&ceid=DE:de",
-    "https://news.google.com/rss/search?q=Emerging+Markets+Schwellenländer+Rupie+2026&hl=de&gl=DE&ceid=DE:de",
-    # English feeds
+    # --- THEMATISCHE SUCHEN DEUTSCH ---
+    "https://news.google.com/rss/search?q=Finanzm%C3%A4rkte+Kapitalm%C3%A4rkte+aktuell&hl=de&gl=DE&ceid=DE:de",
+    "https://news.google.com/rss/search?q=DAX+B%C3%B6rse+heute&hl=de&gl=DE&ceid=DE:de",
+    "https://news.google.com/rss/search?q=EZB+Fed+Zinsen+Inflation&hl=de&gl=DE&ceid=DE:de",
+    "https://news.google.com/rss/search?q=%C3%96lpreis+Energie+Nahost+Iran&hl=de&gl=DE&ceid=DE:de",
+    "https://news.google.com/rss/search?q=Asset+Management+Fonds+ETF&hl=de&gl=DE&ceid=DE:de",
+    "https://news.google.com/rss/search?q=Private+Credit+Private+Debt&hl=de&gl=DE&ceid=DE:de",
+    "https://news.google.com/rss/search?q=Immobilien+Gewerbeimmobilien+REIT&hl=de&gl=DE&ceid=DE:de",
+    "https://news.google.com/rss/search?q=Bitcoin+Krypto+Tokenisierung+MiCA&hl=de&gl=DE&ceid=DE:de",
+    "https://news.google.com/rss/search?q=%22Bitcoin+Suisse%22+Krypto+Deutschland&hl=de&gl=DE&ceid=DE:de",
+    "https://news.google.com/rss/search?q=ESG+Sustainable+Finance+Regulierung&hl=de&gl=DE&ceid=DE:de",
+    "https://news.google.com/rss/search?q=Emerging+Markets+Schwellenl%C3%A4nder&hl=de&gl=DE&ceid=DE:de",
+    "https://news.google.com/rss/search?q=Geopolitik+Handelspolitik+Z%C3%B6lle+Sanktionen&hl=de&gl=DE&ceid=DE:de",
+    "https://news.google.com/rss/search?q=Anleihen+Staatsanleihen+Rendite+Spread&hl=de&gl=DE&ceid=DE:de",
+    # --- THEMATISCHE SUCHEN ENGLISCH ---
     "https://news.google.com/rss/search?q=PIMCO+OR+PGIM+OR+%22Franklin+Templeton%22+OR+%22T+Rowe+Price%22+OR+Eurizon+OR+Temasek&hl=en&gl=US&ceid=US:en",
-    "https://news.google.com/rss/search?q=oil+price+Iran+war+markets+today&hl=en&gl=US&ceid=US:en",
-    "https://news.google.com/rss/search?q=gold+price+crash+liquidity+2026&hl=en&gl=US&ceid=US:en",
-    "https://news.google.com/rss/search?q=private+credit+BCRED+BlackRock+withdrawal+2026&hl=en&gl=US&ceid=US:en",
+    "https://news.google.com/rss/search?q=oil+price+Iran+energy+markets+today&hl=en&gl=US&ceid=US:en",
+    "https://news.google.com/rss/search?q=gold+price+bonds+yields+fed+ecb&hl=en&gl=US&ceid=US:en",
+    "https://news.google.com/rss/search?q=private+credit+BCRED+BlackRock+withdrawal&hl=en&gl=US&ceid=US:en",
+    "https://news.google.com/rss/search?q=%22Bitcoin+Suisse%22+OR+%22crypto+regulation%22+MiCA&hl=en&gl=US&ceid=US:en",
+    "https://news.google.com/rss/search?q=Temasek+investments+Asia&hl=en&gl=US&ceid=US:en",
 ]
 
 THEMENFELDER = [
@@ -72,33 +113,53 @@ def load_previous_report():
 
 
 def fetch_google_news_headlines():
-    """Fetch current headlines from Google News RSS feeds."""
+    """Fetch current headlines from direct media RSS feeds + Google News RSS."""
     headlines = []
-    for feed_url in GOOGLE_NEWS_FEEDS:
+    all_feeds = MEDIA_RSS_FEEDS + GOOGLE_NEWS_FEEDS
+    successful_feeds = 0
+    failed_feeds = 0
+    
+    for feed_url in all_feeds:
         try:
-            req = urllib.request.Request(feed_url, headers={"User-Agent": "TE-Media-Agent/1.0"})
-            with urllib.request.urlopen(req, timeout=10) as resp:
+            req = urllib.request.Request(feed_url, headers={
+                "User-Agent": "TE-Media-Intelligence-Agent/2.0 (Financial PR Research)",
+                "Accept": "application/rss+xml, application/xml, text/xml"
+            })
+            with urllib.request.urlopen(req, timeout=8) as resp:
                 xml_data = resp.read()
             root = ET.fromstring(xml_data)
-            for item in root.findall(".//item")[:8]:  # Max 8 per feed
+            feed_items = 0
+            for item in root.findall(".//item")[:6]:  # Max 6 per feed
                 title = item.findtext("title", "")
                 source = item.findtext("source", "")
                 pub_date = item.findtext("pubDate", "")
                 link = item.findtext("link", "")
-                if title:
-                    headlines.append(f"- {title} ({source}, {pub_date[:16]})")
+                if not source:
+                    # Extract source from feed URL
+                    try:
+                        source = feed_url.split("//")[1].split("/")[0].replace("www.", "").split(".")[0].capitalize()
+                    except:
+                        source = "Unknown"
+                if title and len(title) > 10:
+                    headlines.append(f"- [{source}] {title} ({pub_date[:22] if pub_date else 'kein Datum'})")
+                    feed_items += 1
+            if feed_items > 0:
+                successful_feeds += 1
         except Exception as e:
-            print(f"  RSS feed error: {e}")
+            failed_feeds += 1
             continue
-    # Deduplicate
+    
+    print(f"  RSS results: {successful_feeds} feeds OK, {failed_feeds} failed, {len(headlines)} total headlines")
+    
+    # Deduplicate by title similarity
     seen = set()
     unique = []
     for h in headlines:
-        key = h[:80].lower()
+        key = h[h.find("]")+2:h.find("]")+50].lower() if "]" in h else h[:50].lower()
         if key not in seen:
             seen.add(key)
             unique.append(h)
-    return unique[:60]  # Max 60 headlines to keep prompt short
+    return unique[:80]  # Max 80 headlines for broader coverage
 
 
 def build_prompt(date_str, time_str, previous_summary, rss_headlines):
@@ -128,7 +189,7 @@ Stand: {date_str}, {time_str} CET. Durchsuche Handelsblatt, FAZ, Boersen-Zeitung
 
 WICHTIG ZUR AKTUALITAET: Es ist jetzt {time_str} Uhr CET am {date_str}. Du musst die Berichterstattung der LETZTEN 24 STUNDEN erfassen — also von gestern {time_str} Uhr bis jetzt. Aeltere Berichte nur erwaehnen, wenn sie fuer den heutigen Kontext wichtig sind. Bei jedem Fakt, jeder Zahl, jedem Kurs: nenne die Quelle und wann die Information veroeffentlicht wurde (Datum, moeglichst Uhrzeit). Wenn du nur aeltere Daten findest, sage das offen.
 
-AKTUELLE GOOGLE NEWS SCHLAGZEILEN (als Kontext fuer deine Recherche):
+AKTUELLE SCHLAGZEILEN aus direkten Medien-RSS-Feeds (Handelsblatt, FAZ, SZ, WiWo, Spiegel, MM, finanzen.net, NZZ, FuW, Reuters, FT, BBC, CNBC, FoPro, DAS INVESTMENT, Citywire, Institutional Money, CoinDesk) und Google News Themensuchen — abgerufen um {time_str} CET:
 {headlines_block}
 
 Themenfelder: {', '.join(THEMENFELDER)}
@@ -199,11 +260,11 @@ def run_briefing():
     previous = load_previous_report()
     previous_summary = previous.get("summary", "") if previous else None
     
-    # Step 1: Fetch Google News RSS headlines
+    # Step 1: Fetch RSS feeds from direct media outlets + Google News
     rss_fetch_time = (datetime.utcnow() + timedelta(hours=1)).strftime("%H:%M")
-    print(f"[{rss_fetch_time} CET] Fetching Google News RSS feeds ({len(GOOGLE_NEWS_FEEDS)} feeds)...")
+    print(f"[{rss_fetch_time} CET] Fetching RSS feeds: {len(MEDIA_RSS_FEEDS)} direct media + {len(GOOGLE_NEWS_FEEDS)} Google News = {len(MEDIA_RSS_FEEDS)+len(GOOGLE_NEWS_FEEDS)} total feeds...")
     rss_headlines = fetch_google_news_headlines()
-    print(f"[{rss_fetch_time} CET] Collected {len(rss_headlines)} unique headlines from Google News")
+    print(f"[{rss_fetch_time} CET] Collected {len(rss_headlines)} unique headlines")
     
     # Step 2: Build prompt with RSS context
     prompt = build_prompt(date_str, time_str, previous_summary, rss_headlines)
@@ -552,7 +613,7 @@ def generate_html(report_text, date_str, time_str, previous_summary):
   <div class="label">TE Communications — Daily Media Intelligence Agent</div>
   <h1>Tagesauswertung Medienbeobachtung &amp; Einordnung</h1>
   <div class="date">{date_str} — {time_str} CET</div>
-  <div style="font-size:11px;color:#9ca3af;margin-top:4px;">Datenstand: Google News RSS abgerufen um {time_str} CET | Web-Recherche abgeschlossen um {time_str} CET | Letzte 24h erfasst</div>
+  <div style="font-size:11px;color:#9ca3af;margin-top:4px;">Datenstand: {len(MEDIA_RSS_FEEDS)} Medien-RSS + {len(GOOGLE_NEWS_FEEDS)} Google News Feeds abgerufen um {time_str} CET | Web-Recherche via Claude Sonnet | Letzte 24h erfasst</div>
   <div class="badges">
     <span class="badge">PGIM</span>
     <span class="badge">T. Rowe Price</span>
