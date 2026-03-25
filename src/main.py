@@ -14,43 +14,22 @@ from pathlib import Path
 
 # --- Configuration ---
 MODEL = "claude-haiku-4-5-20251001"
-MAX_TOKENS = 12000
+MAX_TOKENS = 8000
 OUTPUT_DIR = Path("output")
 HISTORY_DIR = Path("output/history")
 
 THEMENFELDER = [
-    "Makroökonomie, Konjunktur, BIP, PMI, ifo, ZEW",
-    "Geopolitik, Nahost, Iran, Ukraine, Sanktionen, Zölle, Handelskrieg",
-    "Energie, Ölpreis Brent WTI, Gas TTF LNG, OPEC, Straße von Hormus",
-    "Zentralbanken, EZB, Fed, BoE, BoJ, Zinsen, Inflation, CPI, PPI",
-    "Aktienmärkte, DAX, S&P 500, Nasdaq, Nikkei, EuroStoxx, Bewertungen",
-    "Anleihen, Fixed Income, Renditen, Bund, Treasury, Spreads, Credit, Duration",
-    "FX Devisen, EUR/USD, Dollar, Rupie, Yen, Franken, DXY",
-    "Private Credit, Private Markets, BCRED, BDC, Direct Lending, CLO, Alternatives",
-    "Emerging Markets, Schwellenländer, Indien, China, Kapitalabflüsse",
-    "Krypto, Bitcoin, Ethereum, Tokenisierung, RWA, Stablecoin, MiCA, SEC CFTC, Digital Assets",
-    "Immobilien, CRE, REIT, Logistik, Büro, Wohnimmobilien, Datenzentren",
-    "ESG, Sustainable Finance, SFDR, Taxonomie, Green Bond, Regulierung, ELTIF",
-    "M&A, Übernahmen, IPOs, Personalwechsel, Mandate im Asset Management",
+    "Makro/Konjunktur (BIP, PMI, ifo, ZEW)",
+    "Geopolitik (Nahost/Iran, Ukraine, Zölle, Handelskrieg)",
+    "Energie/Rohstoffe (Öl, Gas, Gold, Kupfer)",
+    "Zentralbanken (EZB, Fed, BoE, Zinsen, Inflation)",
+    "Aktien-/Anleihemärkte (DAX, S&P, Renditen, Spreads)",
+    "FX/Devisen, Private Credit, Emerging Markets",
+    "Krypto/Tokenisierung, Immobilien, ESG/Regulierung",
+    "M&A/Deals/IPOs im Asset Management",
 ]
 
-HAEUSER = [
-    "PGIM (Prudential Financial, Fixed Income, Real Estate, Multi-Asset, CLO)",
-    "T. Rowe Price (Equities, Fixed Income, Growth)",
-    "MK Global Kapital (Private Credit, Impact, Microfinance, EM, Tokenisierung, Luxemburg)",
-    "Franklin Templeton (Fixed Income, EM, Multi-Asset, Alternatives, Tokenisierung)",
-    "PIMCO (Fixed Income, Multi-Asset, Alternatives, Commodities, Credit)",
-    "Eurizon / Intesa Sanpaolo (Euro Fixed Income, EM Debt, Quantitative, ESG)",
-]
-
-QUELLEN_HINWEIS = """Durchsuche systematisch und gründlich die folgenden Quellen und weitere relevante seriöse Finanz- und Wirtschaftsmedien:
-DEUTSCH: Handelsblatt, FAZ, Börsen-Zeitung, Süddeutsche Zeitung, WirtschaftsWoche, Der Spiegel, Manager Magazin, finanzen.net, boerse.de, dpa-AFX, Fonds Professionell, Citywire, DAS INVESTMENT, Institutional Money, e-fundresearch, PLATOW
-SCHWEIZ: Finanz und Wirtschaft, NZZ, Cash, Moneycab, payoff
-INTERNATIONAL: Reuters, Financial Times, Bloomberg, WSJ, CNBC, Fortune, Axios, NPR
-BRANCHE: IPE, Morningstar, Seeking Alpha, The TRADE, CoinDesk, FinTech Weekly
-IMMOBILIEN: CBRE, Cushman & Wakefield, JLL, Immobilien Zeitung
-INSTITUTIONEN: IEA, EZB, Fed, Bundesbank, OECD
-"""
+QUELLEN_HINWEIS = """Durchsuche systematisch die wichtigsten Finanz-/Wirtschaftsmedien: Handelsblatt, FAZ, Börsen-Zeitung, finanzen.net, Reuters, FT, Bloomberg, Fonds Professionell, Citywire, DAS INVESTMENT, NZZ, CNBC und weitere."""
 
 
 def get_today_str():
@@ -75,9 +54,6 @@ def load_previous_report():
 def build_prompt(date_str, time_str, previous_summary):
     """Build the full briefing prompt."""
     
-    themen_block = "\n".join(f"  {i+1}. {t}" for i, t in enumerate(THEMENFELDER))
-    haeuser_block = "\n".join(f"  - {h}" for h in HAEUSER)
-    
     diff_instruction = ""
     if previous_summary:
         diff_instruction = f"""
@@ -93,57 +69,36 @@ Bitte kennzeichne am Anfang jedes Themenblocks klar, ob das Thema:
 - [FORTLAUFEND] weitgehend unverändert weiterläuft
 """
 
-    return f"""Du bist der weltweit führende Medienanalyst und strategische Kommunikationsberater für Finanz- und Kapitalmärkte.
+    return f"""Du bist ein strategischer Finanzkommunikationsberater. Du arbeitest für eine PR-Beratung und suchst Medien-Positionierungsmöglichkeiten (Gastbeiträge, Interviews, Kommentare) für diese Kunden:
+- PGIM: Institutional, Multi-Asset, Real Estate, Fixed Income
+- T. Rowe Price: Active Equity, Multi-Asset, ETF-Strategie
+- MK Global Kapital: Impact/Microfinance, EM, Tokenisierung
+- Franklin Templeton: Multi-Asset, EM, ETF, Martin Lück als Sprecher
+- PIMCO: Fixed Income, Alternatives, Commodities
+- Eurizon: Euro Fixed Income, EM Debt, ESG
 
-KONTEXT: Du arbeitest für TE Communications GmbH, eine inhabergeführte strategische Finanzkommunikationsberatung mit Büros in Frankfurt, Zürich, St. Gallen und Lausanne. Der Empfänger dieses Briefings ist ein Senior Director, der für folgende Kunden nach MEDIEN-POSITIONIERUNGSMÖGLICHKEITEN sucht — also nach Themen, mit denen er seine Kunden über Gastbeiträge, Interviews, Kommentare und Presseverteiler-Versand in den führenden Wirtschafts- und Finanzmedien platzieren kann.
+Stand: {date_str}, {time_str} CET. {QUELLEN_HINWEIS}
 
-Die Kunden und ihre kommunikative Positionierung:
-  - PGIM ($1,5 Bio. AuM): Institutional, Multi-Asset, Real Estate, Fixed Income, CLO — spricht als großer globaler Vermögensverwalter zu Rates, Inflation, Real Assets, Macro-Hedging
-  - T. Rowe Price: Global Active Equity/Multi-Asset, ETF-Strategie Europa — spricht zu Aktienmärkten, Style-Rotation, aktiven ETF-Wrappern
-  - MK Global Kapital (Luxemburg): Impact/Microfinance, SME-Kredite Schwellenländer, Tokenisierung — spricht zu Private Credit/Impact, EM-Finanzierungsbedingungen, Seidenstraße, nachhaltige Investments
-  - Franklin Templeton ($1,74 Bio. AuM): Multi-Asset, EM, Fixed Income, ETF-Plattform, Tokenisierung — Martin Lück als prominenter deutscher Kapitalmarktstratege
-  - PIMCO: Fixed Income, Multi-Asset, Alternatives, Commodities — spricht zu Anleihen, Zinspolitik, Inflation, Gold, Kreditrisiken
-  - Eurizon (Intesa Sanpaolo): Euro Fixed Income, EM Debt, Quantitative, ESG — spricht zu europäischen Zinsen, ESG/Regulierung, Eurozone-Makro
-
-Stand: {date_str}, ca. {time_str} Uhr CET.
-
-AUFGABE: Führe eine extrem sorgfältige, vollumfängliche Websuche der heutigen Berichterstattung durch. Erfasse ALLE finanzmarktrelevanten Themen bis zur aktuellen Uhrzeit.
-
-{QUELLEN_HINWEIS}
-
-THEMENFELDER (alle systematisch abdecken):
-{themen_block}
+Themenfelder: {', '.join(THEMENFELDER)}
 {diff_instruction}
+AUSGABE in 5 Schritten:
 
-STRUKTUR DER AUSGABE (5 Schritte):
+## Schritt 1 — Recherche-Überblick
+Was heute geprüft wurde, Gesamtcharakter der Nachrichtenlage.
 
-## Schritt 1 — Was ich für {date_str} geprüft habe
-Kurze Meta-Notiz: Welche Quellen durchsucht, Gesamtcharakter der heutigen Nachrichtenlage, welche Themencluster dominieren.
+## Schritt 2 — Themen die das Markt-Narrativ treiben
+Nummerierte Blöcke: Was in den Headlines steht (Fakten, Zahlen) + warum es für Märkte relevant ist.
 
-## Schritt 2 — Die Themen, die heute das Markt-Narrativ treiben
-Nummerierte analytische Themenblöcke, nach heutiger Relevanz sortiert. Jeder Block enthält:
-- "Was dominiert die Headlines heute": Konkrete Fakten, Zahlen, Quellen
-- "Warum das für die Märkte relevant ist": Kausalkette erklären (z.B. Energiepreis -> Inflation -> Bond-Selloff -> Bewertungsdruck)
-- Konkrete Zahlen und Daten wo verfügbar
+## Schritt 3 — Positionierungs-Mapping auf die Kunden
+Für jedes Haus: Worüber ist es heute kommunikativ anschlussfähig? Pitch-Ideen, Gastbeitrag-Themen, Interview-Aufhänger. KEINE Portfolio-Empfehlungen. Denke wie ein PR-Berater.
 
-## Schritt 3 — Relevanz-Mapping auf die Kunden: Positionierungsmöglichkeiten
-Für JEDES der 6 Häuser: Über welche konkreten Achsen ist das Haus HEUTE kommunikativ anschlussfähig? Was könnte man den Medien pitchen? Welches Thema eignet sich für einen Gastbeitrag, ein Interview, einen Kommentar? Denke wie ein PR-Berater, nicht wie ein Portfolio-Manager. Die Frage ist nicht "was sollte der Asset Manager kaufen/verkaufen", sondern "mit welchem Thema kann ich diesen Kunden in der FAZ, im Handelsblatt, bei Fonds Professionell oder in der FT platzieren?"
+## Schritt 4 — Termine nächste 7 Tage
+Datum, Uhrzeit, Land, Termin.
 
-## Schritt 4 — Finanz- und Kapitalmarkttermine (nächste 7 Tage)
-Granular: Datum, Uhrzeit, Land, Termin, Relevanz. Unterteilt in Makro/Notenbanken und Corporate.
+## Schritt 5 — Konkrete Pitch-Ableitungen
+3-5 umsetzbare Ideen: Thema, Format (Kommentar/Gastbeitrag/Interview), welcher Kunde, welches Medium.
 
-## Schritt 5 — Was du daraus für Pitches/Briefings heute ableiten kannst
-3-5 konkrete, umsetzbare Ableitungen: Welche Pitch-Ideen lassen sich aus der heutigen Berichterstattung für die Kunden ableiten? Format-Ideen (CIO-Kommentar, Gastbeitrag, Interview-Angebot, Hintergrundgespräch). Welche Medien wären dafür die richtigen Adressen?
-
-REGELN:
-- Nicht halluzinieren. Nicht phantasieren. Nur quellenbasierte Fakten.
-- Englischsprachige Berichte gründlich ins Deutsche übertragen.
-- Einfache, klare Sprache. Keine Telegrammstil-Sprache.
-- Die Perspektive ist IMMER die eines PR-Beraters, der Positionierungsmöglichkeiten für seine Kunden sucht.
-- KEINE Portfolio-/Trading-Empfehlungen. Keine "Overweight/Underweight"-Sprache.
-- Stattdessen: "Anschlussfähig über...", "Pitch-Idee:", "Gastbeitrag-Thema:", "Interview-Aufhänger:"
-- Präzise, detailliert und ausführlich.
-- Die Berichterstattung von HEUTE bis zur aktuellen Uhrzeit muss vollständig erfasst werden.
+Regeln: Nicht halluzinieren. Quellenbasiert. Deutsch. Keine Trading-Sprache.
 """
 
 
