@@ -33,7 +33,7 @@ GOOGLE_NEWS_FEEDS = [
     "https://news.google.com/rss/search?q=ESG+Sustainable+Finance+Regulierung+2026&hl=de&gl=DE&ceid=DE:de",
     "https://news.google.com/rss/search?q=Emerging+Markets+Schwellenländer+Rupie+2026&hl=de&gl=DE&ceid=DE:de",
     # English feeds
-    "https://news.google.com/rss/search?q=PIMCO+OR+PGIM+OR+%22Franklin+Templeton%22+OR+%22T+Rowe+Price%22+OR+Eurizon&hl=en&gl=US&ceid=US:en",
+    "https://news.google.com/rss/search?q=PIMCO+OR+PGIM+OR+%22Franklin+Templeton%22+OR+%22T+Rowe+Price%22+OR+Eurizon+OR+Temasek&hl=en&gl=US&ceid=US:en",
     "https://news.google.com/rss/search?q=oil+price+Iran+war+markets+today&hl=en&gl=US&ceid=US:en",
     "https://news.google.com/rss/search?q=gold+price+crash+liquidity+2026&hl=en&gl=US&ceid=US:en",
     "https://news.google.com/rss/search?q=private+credit+BCRED+BlackRock+withdrawal+2026&hl=en&gl=US&ceid=US:en",
@@ -120,6 +120,7 @@ Gestern: {previous_summary[:800]}
 - Franklin Templeton: Multi-Asset, EM, ETF, Martin Lueck als Sprecher
 - PIMCO: Fixed Income, Alternatives, Commodities
 - Eurizon: Euro Fixed Income, EM Debt, ESG
+- Temasek: Singapurer Staatsfonds, globale Investments, Infrastruktur, Tech, Life Sciences, DACH-Praesenz
 
 Stand: {date_str}, {time_str} CET. Durchsuche Handelsblatt, FAZ, Boersen-Zeitung, finanzen.net, Reuters, FT, Bloomberg, Fonds Professionell, Citywire, DAS INVESTMENT, NZZ, CNBC u.v.m.
 
