@@ -25,37 +25,104 @@ HISTORY_DIR = Path("output/history")
 # Layer 2: Google News thematic searches (broader, cross-source)
 
 MEDIA_RSS_FEEDS = [
-    # --- DEUTSCHE LEITMEDIEN ---
+    # === DEUTSCHE LEITMEDIEN ===
     "https://www.handelsblatt.com/contentexport/feed/finanzen",
     "https://www.handelsblatt.com/contentexport/feed/top-themen",
+    "https://www.handelsblatt.com/contentexport/feed/unternehmen",
     "https://www.faz.net/rss/aktuell/finanzen/",
     "https://www.faz.net/rss/aktuell/wirtschaft/",
+    "https://www.faz.net/rss/aktuell/finanzen/finanzmarkt/",
     "https://www.sueddeutsche.de/wirtschaft?output=rss",
+    "https://www.sueddeutsche.de/geld?output=rss",
     "https://www.wiwo.de/rss/feed.finanzen.rss",
     "https://www.wiwo.de/rss/feed.geldanlage.rss",
+    "https://www.wiwo.de/rss/feed.unternehmen.rss",
     "https://www.spiegel.de/wirtschaft/index.rss",
     "https://www.manager-magazin.de/finanzen/index.rss",
-    "https://www.finanzen.net/rss/news",
+    "https://www.manager-magazin.de/unternehmen/index.rss",
     "https://www.tagesschau.de/wirtschaft/boerse/index~rss2.xml",
-    # --- DEUTSCHE FACHMEDIEN ---
+    "https://www.tagesschau.de/wirtschaft/index~rss2.xml",
+    "https://www.finanzen.net/rss/news",
+    "https://www.n-tv.de/wirtschaft/rss",
+    "https://www.welt.de/feeds/section/finanzen.rss",
+    "https://www.welt.de/feeds/section/wirtschaft.rss",
+    "https://www.tagesspiegel.de/wirtschaft/rss",
+    "https://www.zeit.de/wirtschaft/index",
+    "https://www.stern.de/wirtschaft/feed.rss",
+    # === DEUTSCHE FACHMEDIEN (Finanzen/AM) ===
     "https://www.fondsprofessionell.de/rss/news.xml",
     "https://www.dasinvestment.com/feed/",
     "https://citywire.de/rss",
     "https://www.institutional-money.com/rss/news.xml",
     "https://www.private-banking-magazin.de/feed/",
     "https://www.altii.de/feed/",
-    # --- SCHWEIZER MEDIEN ---
+    "https://www.portfolio-institutionell.de/feed/",
+    "https://www.fundresearch.de/rss/news.xml",
+    "https://www.boerse-online.de/rss/news",
+    "https://www.4investors.de/rss/rss_alle_news.php",
+    "https://www.anleihencheck.de/rss/",
+    "https://www.bondguide.de/feed/",
+    "https://www.exxecnews.de/feed/",
+    "https://www.dpn-online.com/feed/",
+    # === DEUTSCHE IMMOBILIEN ===
+    "https://www.iz.de/rss/news.xml",
+    "https://www.thomas-daily.de/feed/",
+    # === SCHWEIZER MEDIEN ===
     "https://www.nzz.ch/finanzen.rss",
+    "https://www.nzz.ch/wirtschaft.rss",
     "https://www.fuw.ch/feed",
     "https://www.cash.ch/rss/news",
-    # --- INTERNATIONALE MEDIEN ---
+    "https://www.handelszeitung.ch/rss.xml",
+    "https://www.finews.ch/rss",
+    "https://www.moneycab.com/feed/",
+    "https://www.investrends.ch/feed/",
+    # === OESTERREICHISCHE MEDIEN ===
+    "https://www.diepresse.com/rss/wirtschaft",
+    "https://www.derstandard.at/rss/wirtschaft",
+    "https://www.boersen-kurier.at/feed/",
+    # === INTERNATIONALE LEITMEDIEN ===
     "https://feeds.reuters.com/reuters/businessNews",
+    "https://feeds.reuters.com/reuters/companyNews",
     "https://www.ft.com/rss/home/uk",
     "https://feeds.bbci.co.uk/news/business/rss.xml",
     "https://www.cnbc.com/id/100003114/device/rss/rss.html",
+    "https://www.cnbc.com/id/10000664/device/rss/rss.html",
+    "https://feeds.bloomberg.com/markets/news.rss",
+    "https://www.wsj.com/xml/rss/3_7085.xml",
+    "https://www.wsj.com/xml/rss/3_7014.xml",
+    "https://www.economist.com/finance-and-economics/rss.xml",
+    "https://www.theguardian.com/business/rss",
+    "https://fortune.com/feed/",
+    # === INTERNATIONALE FACHMEDIEN (AM/PE/Institutionell) ===
     "https://www.ipe.com/rss",
-    # --- KRYPTO ---
+    "https://www.pionline.com/rss",
+    "https://www.institutionalinvestor.com/rss",
+    "https://www.privateequitywire.co.uk/rss.xml",
+    "https://www.privatedebtinvestor.com/feed/",
+    "https://www.infrastructureinvestor.com/feed/",
+    "https://www.realdeals.eu.com/feed/",
+    "https://www.buyoutsnews.com/feed/",
+    "https://www.preqin.com/feed",
+    "https://www.hedgeweek.com/rss.xml",
+    "https://www.fundssociety.com/en/rss",
+    "https://www.etfstream.com/feed/",
+    "https://www.ignites.com/rss",
+    "https://citywire.com/rss",
+    # === KRYPTO / DIGITAL ASSETS ===
     "https://www.coindesk.com/arc/outboundfeeds/rss/",
+    "https://cointelegraph.com/rss",
+    "https://www.theblock.co/rss.xml",
+    "https://decrypt.co/feed",
+    "https://bitcoinmagazine.com/.rss/full/",
+    # === ROHSTOFFE / ENERGIE ===
+    "https://oilprice.com/rss/main",
+    "https://www.spglobal.com/commodityinsights/en/rss-feed/oil",
+    # === ESG / NACHHALTIGKEIT ===
+    "https://www.responsible-investor.com/feed/",
+    "https://www.esgtoday.com/feed/",
+    # === NOTENBANKEN / INSTITUTIONEN ===
+    "https://www.ecb.europa.eu/rss/press.html",
+    "https://www.bis.org/doclist/bis_fsi_publs.rss",
 ]
 
 GOOGLE_NEWS_FEEDS = [
@@ -74,6 +141,11 @@ GOOGLE_NEWS_FEEDS = [
     "https://news.google.com/rss/search?q=Emerging+Markets+Schwellenl%C3%A4nder&hl=de&gl=DE&ceid=DE:de",
     "https://news.google.com/rss/search?q=Geopolitik+Handelspolitik+Z%C3%B6lle+Sanktionen&hl=de&gl=DE&ceid=DE:de",
     "https://news.google.com/rss/search?q=Anleihen+Staatsanleihen+Rendite+Spread&hl=de&gl=DE&ceid=DE:de",
+    "https://news.google.com/rss/search?q=Gold+Rohstoffe+Kupfer+Silber&hl=de&gl=DE&ceid=DE:de",
+    "https://news.google.com/rss/search?q=Infrastruktur+Investitionen+Deutschland&hl=de&gl=DE&ceid=DE:de",
+    "https://news.google.com/rss/search?q=Versicherung+Pensionsfonds+institutionelle+Anleger&hl=de&gl=DE&ceid=DE:de",
+    "https://news.google.com/rss/search?q=Mikrofinanz+Impact+Investing+Nachhaltigkeit&hl=de&gl=DE&ceid=DE:de",
+    "https://news.google.com/rss/search?q=IPO+B%C3%B6rsengang+%C3%9Cbernahme+M%26A&hl=de&gl=DE&ceid=DE:de",
     # --- THEMATISCHE SUCHEN ENGLISCH ---
     "https://news.google.com/rss/search?q=PIMCO+OR+PGIM+OR+%22Franklin+Templeton%22+OR+%22T+Rowe+Price%22+OR+Eurizon+OR+Temasek&hl=en&gl=US&ceid=US:en",
     "https://news.google.com/rss/search?q=oil+price+Iran+energy+markets+today&hl=en&gl=US&ceid=US:en",
@@ -83,6 +155,11 @@ GOOGLE_NEWS_FEEDS = [
     "https://news.google.com/rss/search?q=%22Bitcoin+Suisse%22+OR+%22crypto+regulation%22+MiCA&hl=en&gl=US&ceid=US:en",
     "https://news.google.com/rss/search?q=Temasek+investments+Asia&hl=en&gl=US&ceid=US:en",
     "https://news.google.com/rss/search?q=KKR+private+equity+infrastructure+credit&hl=en&gl=US&ceid=US:en",
+    "https://news.google.com/rss/search?q=emerging+markets+India+rupee+China&hl=en&gl=US&ceid=US:en",
+    "https://news.google.com/rss/search?q=real+estate+REIT+commercial+property&hl=en&gl=US&ceid=US:en",
+    "https://news.google.com/rss/search?q=ESG+sustainable+finance+green+bonds&hl=en&gl=US&ceid=US:en",
+    "https://news.google.com/rss/search?q=stagflation+recession+central+banks&hl=en&gl=US&ceid=US:en",
+    "https://news.google.com/rss/search?q=ETF+flows+active+management+asset+management&hl=en&gl=US&ceid=US:en",
 ]
 
 THEMENFELDER = [
