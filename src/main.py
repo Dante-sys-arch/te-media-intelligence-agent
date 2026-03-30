@@ -64,6 +64,11 @@ MEDIA_RSS_FEEDS = [
     "https://www.bondguide.de/feed/",
     "https://www.exxecnews.de/feed/",
     "https://www.dpn-online.com/feed/",
+    "https://www.e-fundresearch.com/feed/",
+    "https://www.morningstar.de/de/news/rss.aspx",
+    "https://www.capital.de/feed/",
+    "https://www.focus.de/finanzen/rss/",
+    "https://www.bild.de/rss/vw/bild-de/geld.xml",
     # === DEUTSCHE IMMOBILIEN ===
     "https://www.iz.de/rss/news.xml",
     "https://www.thomas-daily.de/feed/",
@@ -80,6 +85,8 @@ MEDIA_RSS_FEEDS = [
     "https://www.diepresse.com/rss/wirtschaft",
     "https://www.derstandard.at/rss/wirtschaft",
     "https://www.boersen-kurier.at/feed/",
+    "https://www.boerse-express.com/feed/",
+    "https://www.fondsexklusiv.at/feed/",
     # === INTERNATIONALE LEITMEDIEN ===
     "https://feeds.reuters.com/reuters/businessNews",
     "https://feeds.reuters.com/reuters/companyNews",
@@ -108,6 +115,10 @@ MEDIA_RSS_FEEDS = [
     "https://www.etfstream.com/feed/",
     "https://www.ignites.com/rss",
     "https://citywire.com/rss",
+    "https://seekingalpha.com/feed.xml",
+    "https://www.thetradenews.com/feed/",
+    "https://www.risk.net/rss",
+    "https://www.globalcapital.com/rss",
     # === KRYPTO / DIGITAL ASSETS ===
     "https://www.coindesk.com/arc/outboundfeeds/rss/",
     "https://cointelegraph.com/rss",
@@ -160,6 +171,14 @@ GOOGLE_NEWS_FEEDS = [
     "https://news.google.com/rss/search?q=ESG+sustainable+finance+green+bonds&hl=en&gl=US&ceid=US:en",
     "https://news.google.com/rss/search?q=stagflation+recession+central+banks&hl=en&gl=US&ceid=US:en",
     "https://news.google.com/rss/search?q=ETF+flows+active+management+asset+management&hl=en&gl=US&ceid=US:en",
+    # --- SITE-SPEZIFISCHE FALLBACKS (fuer Outlets ohne RSS / hinter Paywall) ---
+    "https://news.google.com/rss/search?q=site%3Aborsen-zeitung.de&hl=de&gl=DE&ceid=DE:de",
+    "https://news.google.com/rss/search?q=site%3Aplatow.de&hl=de&gl=DE&ceid=DE:de",
+    "https://news.google.com/rss/search?q=site%3Apayoff.ch&hl=de&gl=DE&ceid=DE:de",
+    "https://news.google.com/rss/search?q=site%3Abloomberg.com+markets&hl=en&gl=US&ceid=US:en",
+    "https://news.google.com/rss/search?q=site%3Aft.com+markets+funds&hl=en&gl=US&ceid=US:en",
+    "https://news.google.com/rss/search?q=site%3Awsj.com+markets&hl=en&gl=US&ceid=US:en",
+    "https://news.google.com/rss/search?q=site%3Athemarketswiss.ch+OR+site%3Athemarket.ch&hl=de&gl=CH&ceid=CH:de",
 ]
 
 THEMENFELDER = [
