@@ -1,7 +1,7 @@
 """
 TE Communications — Daily Media Intelligence Agent v3.0
 =======================================================
-Two-pass architecture: Sonnet (research) + Haiku (positioning)
+Two-pass architecture: Opus 4.7 (research) + Sonnet 4.6 (positioning)
 137 RSS feeds + Claude Web Search + 24h time filtering
 Runs daily at 07:00 CET via GitHub Actions
 """
@@ -19,11 +19,15 @@ from pathlib import Path
 from concurrent.futures import ThreadPoolExecutor, as_completed
 
 # --- Configuration ---
-MODEL_RESEARCH = "claude-sonnet-4-20250514"
-MODEL_POSITIONING = "claude-haiku-4-5-20251001"
+# Models — using best available as of April 2026
+# Opus 4.7 = most capable model publicly available (Mythos is restricted)
+# Sonnet 4.6 = preferred over previous Opus 4.5 by 59% of users, 1/5 the cost of Opus
+# Haiku 4.5 = fastest fallback, retains good quality
+MODEL_RESEARCH = "claude-opus-4-7"
+MODEL_POSITIONING = "claude-sonnet-4-6"
 MODEL_FALLBACK = "claude-haiku-4-5-20251001"
-MAX_TOKENS_RESEARCH = 10000
-MAX_TOKENS_POSITIONING = 6000
+MAX_TOKENS_RESEARCH = 16000  # Opus 4.7 supports up to 128k output
+MAX_TOKENS_POSITIONING = 10000  # Sonnet 4.6 supports up to 64k output
 OUTPUT_DIR = Path("output")
 HISTORY_DIR = Path("output/history")
 
@@ -354,7 +358,7 @@ def load_recent_summaries(days=5):
 
 
 def run_briefing():
-    """Two-pass briefing: Sonnet researches, Haiku positions."""
+    """Two-pass briefing: Opus 4.7 researches, Sonnet 4.6 positions."""
     client = anthropic.Anthropic()
     date_str, date_file, time_str, is_weekend = get_today_str()
     prev = load_previous_report()
@@ -446,7 +450,7 @@ QUALITAETSREGELN:
 - Englischsprachige Artikel gruendlich ins Deutsche uebertragen.
 - Wichtige Zusammenhaenge erklaeren."""
 
-    print(f"[{time_str}] PASS 1: Sonnet + Web Search...")
+    print(f"[{time_str}] PASS 1: Opus 4.7 + Web Search (most capable model)...")
     t1s = time.time()
     r1, m1 = api_call(client, MODEL_RESEARCH, MAX_TOKENS_RESEARCH,
                        [{"role":"user","content":p1}],
@@ -489,7 +493,7 @@ Wenn nichts passt, offen sagen.
 
 REGELN: PR-Berater-Perspektive, KEINE Trading-Sprache (kein Overweight/Underweight). Deutsch."""
 
-    print(f"[{time_str}] PASS 2: Haiku positioning...")
+    print(f"[{time_str}] PASS 2: Sonnet 4.6 positioning...")
     t2s = time.time()
     r2, m2 = api_call(client, MODEL_POSITIONING, MAX_TOKENS_POSITIONING,
                        [{"role":"user","content":p2}])
@@ -678,7 +682,7 @@ strong{{color:#111827}}
 </div>
 {body}
 <div class="ft">
-<b>Methodik:</b> Zwei-Pass-Architektur — Pass 1 (Sonnet + Web Search) Marktrecherche, Pass 2 (Haiku) PR-Positionierung. {meta['rss_ok']} RSS-Feeds aus {meta['rss_sources']} Medienquellen. 24h-Zeitfilter. 14 Themenfelder. Vortagesvergleich.<br><br>
+<b>Methodik:</b> Zwei-Pass-Architektur — Pass 1 (Opus 4.7 + Web Search) tiefe Marktrecherche, Pass 2 (Sonnet 4.6) PR-Positionierung. Opus 4.7 ist das aktuell leistungsstaerkste oeffentlich verfuegbare Anthropic-Modell. {meta['rss_ok']} RSS-Feeds aus {meta['rss_sources']} Medienquellen. 24h-Zeitfilter. 14 Themenfelder. Vortagesvergleich.<br><br>
 <b>Qualitaetshinweis:</b> Automatisiert erstellt. Kurse und Zahlen vor Verwendung in Kundenkommunikation gegen zweite Quelle pruefen.<br><br>
 <b>TE Communications GmbH</b> | Frankfurt &middot; Zuerich &middot; St. Gallen &middot; Lausanne
 </div>
