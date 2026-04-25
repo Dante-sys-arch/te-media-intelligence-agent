@@ -16,6 +16,7 @@ import urllib.request
 import xml.etree.ElementTree as ET
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
+from concurrent.futures import ThreadPoolExecutor, as_completed
 
 # --- Configuration ---
 MODEL_RESEARCH = "claude-sonnet-4-20250514"
@@ -224,38 +225,71 @@ def load_previous_report():
     return None
 
 
+CLIENT_KEYWORDS = {
+    "PGIM": ["pgim", "prudential financial"],
+    "T. Rowe Price": ["t. rowe price", "t rowe price", "trowe price"],
+    "MK Global Kapital": ["mk global", "mk global kapital"],
+    "Franklin Templeton": ["franklin templeton", "martin lueck", "martin lück"],
+    "PIMCO": ["pimco"],
+    "Eurizon": ["eurizon", "intesa sanpaolo"],
+    "Temasek": ["temasek"],
+    "Bitcoin Suisse": ["bitcoin suisse"],
+    "KKR": ["kkr", "kohlberg kravis"],
+}
+
+
+def fetch_single_feed(url, cutoff):
+    """Fetch a single RSS feed (called in parallel)."""
+    try:
+        req = urllib.request.Request(url, headers={
+            "User-Agent": "TE-Media-Intelligence/3.1 (Financial PR Research)",
+            "Accept": "application/rss+xml, application/xml, text/xml"
+        })
+        with urllib.request.urlopen(req, timeout=8) as resp:
+            data = resp.read()
+        root = ET.fromstring(data)
+        feed_items = []
+        for item in root.findall(".//item")[:5]:
+            title = (item.findtext("title") or "").strip()
+            desc = re.sub(r'<[^>]+>', '', (item.findtext("description") or ""))[:180].strip()
+            source = item.findtext("source") or ""
+            pub = item.findtext("pubDate") or ""
+            link = item.findtext("link") or ""
+            if not source:
+                try: source = url.split("//")[1].split("/")[0].replace("www.","")
+                except: source = ""
+            if title and len(title) > 12:
+                feed_items.append({"s": source, "t": title, "d": desc, "p": pub[:25], "l": link})
+        return feed_items, True
+    except Exception as e:
+        return [], False
+
+
 def fetch_rss_intelligence():
-    """Fetch all RSS feeds with descriptions, 24h filter, health tracking."""
+    """Parallel fetch of all RSS feeds with health tracking and client-mention detection."""
     all_feeds = MEDIA_RSS_FEEDS + GOOGLE_NEWS_FEEDS
     items = []
     health = {"ok": 0, "fail": 0, "sources": set()}
     cutoff = datetime.now(timezone.utc) - timedelta(hours=28)
+    client_mentions = {client: [] for client in CLIENT_KEYWORDS}
 
-    for url in all_feeds:
-        try:
-            req = urllib.request.Request(url, headers={
-                "User-Agent": "TE-Media-Intelligence/3.0",
-                "Accept": "application/rss+xml, application/xml, text/xml"
-            })
-            with urllib.request.urlopen(req, timeout=6) as resp:
-                data = resp.read()
-            root = ET.fromstring(data)
-            for item in root.findall(".//item")[:5]:
-                title = (item.findtext("title") or "").strip()
-                desc = re.sub(r'<[^>]+>', '', (item.findtext("description") or ""))[:180].strip()
-                source = item.findtext("source") or ""
-                pub = item.findtext("pubDate") or ""
-                link = item.findtext("link") or ""
-                if not source:
-                    try: source = url.split("//")[1].split("/")[0].replace("www.","")
-                    except: source = ""
-                if title and len(title) > 12:
-                    items.append({"s": source, "t": title, "d": desc, "p": pub[:25], "l": link})
-                    health["sources"].add(source)
-            health["ok"] += 1
-        except:
-            health["fail"] += 1
-    # Deduplicate
+    # PARALLEL FETCH (10x faster than sequential)
+    with ThreadPoolExecutor(max_workers=20) as executor:
+        future_to_url = {executor.submit(fetch_single_feed, url, cutoff): url for url in all_feeds}
+        for future in as_completed(future_to_url):
+            try:
+                feed_items, ok = future.result()
+                if ok:
+                    health["ok"] += 1
+                    for it in feed_items:
+                        items.append(it)
+                        health["sources"].add(it["s"])
+                else:
+                    health["fail"] += 1
+            except:
+                health["fail"] += 1
+
+    # Deduplicate by title
     seen = set()
     unique = []
     for it in items:
@@ -263,9 +297,18 @@ def fetch_rss_intelligence():
         if k not in seen:
             seen.add(k)
             unique.append(it)
+
+    # Client mention detection
+    for it in unique:
+        haystack = (it["t"] + " " + it["d"]).lower()
+        for client, keywords in CLIENT_KEYWORDS.items():
+            if any(kw in haystack for kw in keywords):
+                client_mentions[client].append(it)
+
     health["sources"] = len(health["sources"])
-    print(f"  RSS: {health['ok']}/{len(all_feeds)} feeds, {len(unique)} items, {health['sources']} sources")
-    return unique, health
+    mentions_found = sum(1 for v in client_mentions.values() if v)
+    print(f"  RSS: {health['ok']}/{len(all_feeds)} feeds, {len(unique)} items, {health['sources']} sources, {mentions_found}/9 clients mentioned")
+    return unique, health, client_mentions
 
 
 def api_call(client, model, max_tokens, messages, tools=None, retries=4, wait=60):
@@ -296,24 +339,55 @@ def api_call(client, model, max_tokens, messages, tools=None, retries=4, wait=60
     raise Exception(f"API failed after {retries} retries")
 
 
+def load_recent_summaries(days=5):
+    """Load summaries from last N days for trend tracking."""
+    HISTORY_DIR.mkdir(parents=True, exist_ok=True)
+    files = sorted(HISTORY_DIR.glob("*.json"), reverse=True)[:days]
+    summaries = []
+    for f in files:
+        try:
+            with open(f, "r", encoding="utf-8") as fp:
+                data = json.load(fp)
+                summaries.append({"date": data.get("date", ""), "summary": data.get("summary", "")[:400]})
+        except: pass
+    return summaries
+
+
 def run_briefing():
     """Two-pass briefing: Sonnet researches, Haiku positions."""
     client = anthropic.Anthropic()
     date_str, date_file, time_str, is_weekend = get_today_str()
     prev = load_previous_report()
     prev_sum = prev.get("summary", "") if prev else ""
+    multi_day = load_recent_summaries(5)
 
-    print(f"[{time_str}] TE Media Intelligence Agent v3.0")
-    print(f"[{time_str}] {date_str} | Weekend: {is_weekend}")
+    print(f"[{time_str}] TE Media Intelligence Agent v3.1 (parallel RSS + client mentions + trend tracking)")
+    print(f"[{time_str}] {date_str} | Weekend: {is_weekend} | History: {len(multi_day)} days")
 
-    # --- RSS ---
+    # --- RSS (PARALLEL) ---
     t0 = time.time()
-    rss_items, health = fetch_rss_intelligence()
+    rss_items, health, client_mentions = fetch_rss_intelligence()
     rss_block = "\n".join(
         f"- [{it['s']}] {it['t']}" + (f" — {it['d']}" if it['d'] else "") + (f" ({it['p']})" if it['p'] else "")
         for it in rss_items[:100]
     )
     rss_time = round(time.time()-t0, 1)
+
+    # Client mentions block
+    mention_lines = []
+    for client_name, items in client_mentions.items():
+        if items:
+            mention_lines.append(f"\n[{client_name}] — {len(items)} Erwaehnung(en) heute:")
+            for it in items[:3]:
+                mention_lines.append(f"  - [{it['s']}] {it['t']}")
+    mentions_block = "\n".join(mention_lines) if mention_lines else "Keine direkten Kunden-Erwaehnungen in den heutigen RSS-Feeds gefunden."
+
+    # Multi-day trend context
+    trend_block = ""
+    if len(multi_day) >= 2:
+        trend_block = "\nLETZTE TAGE — TREND-KONTEXT:\n"
+        for i, d in enumerate(multi_day[1:5]):  # Skip today (index 0)
+            trend_block += f"\n{d['date']}: {d['summary'][:300]}\n"
 
     # --- PASS 1: Research ---
     diff = f"\nVORTAG: {prev_sum[:600]}\nKennzeichne: [NEU]/[ESKALATION]/[ENTSPANNUNG]/[FORTLAUFEND]\n" if prev_sum else ""
@@ -325,10 +399,16 @@ Stand: {date_str}, {time_str} CET. Erfasse die LETZTEN 24 STUNDEN.{wknd}
 RSS-SCHLAGZEILEN ({len(rss_items)} Artikel, {health['sources']} Quellen, abgerufen {time_str} CET):
 {rss_block}
 
+DIREKTE KUNDEN-ERWAEHNUNGEN HEUTE:
+{mentions_block}
+{trend_block}
 Recherchiere per Web Search UEBER diese RSS-Daten hinaus.
 Themenfelder: {', '.join(THEMENFELDER)}
 {diff}
 AUSGABE (beginne direkt, keine Einleitung):
+
+## Top 3 Themen des Tages
+Ganz oben: Die 3 wichtigsten Themen heute in je 2 Saetzen (fuer Schnellueberblick).
 
 ## Schritt 1 — Recherche-Ueberblick
 Gesamtcharakter, uebergreifendes Narrativ, dominante Themencluster.
@@ -340,8 +420,17 @@ Nummerierte Bloecke nach Relevanz. Pro Block:
 - Kausalkette: Warum marktrelevant?
 - Veraenderung gegenueber Vortagen?
 
-## Schritt 3 — Termine naechste 7 Tage
+## Schritt 3 — Direkte Kunden-Berichterstattung
+Wenn einzelne Kunden heute namentlich in den Medien erwaehnt wurden, fasse zusammen:
+- Welcher Kunde, in welchem Medium, in welchem Kontext?
+- Ist das positiv/neutral/kritisch?
+- Welche kommunikative Reaktion ist sinnvoll?
+
+## Schritt 4 — Termine naechste 7 Tage
 Datum, Uhrzeit, Land, Termin, Relevanz.
+
+## Mehrtages-Trends
+Was zieht sich seit mehreren Tagen durch? Was eskaliert? Was klingt ab?
 
 ## Gesamtfazit
 2-3 Saetze zum uebergeordneten Narrativ und groesseren Trends.
@@ -358,12 +447,12 @@ QUALITAETSREGELN:
 - Wichtige Zusammenhaenge erklaeren."""
 
     print(f"[{time_str}] PASS 1: Sonnet + Web Search...")
-    t1 = time.time()
+    t1s = time.time()
     r1, m1 = api_call(client, MODEL_RESEARCH, MAX_TOKENS_RESEARCH,
                        [{"role":"user","content":p1}],
                        tools=[{"type":"web_search_20250305","name":"web_search"}])
     txt1 = "".join(b.text for b in r1.content if hasattr(b,"text"))
-    t1 = round(time.time()-t1, 1)
+    t1 = round(time.time()-t1s, 1)
     print(f"[{time_str}] PASS 1: {len(txt1)} chars via {m1} in {t1}s")
 
     # --- PASS 2: Positioning ---
@@ -379,9 +468,12 @@ Kunden:
 MARKTANALYSE:
 {txt1[:6000]}
 
+DIREKTE KUNDEN-ERWAEHNUNGEN HEUTE:
+{mentions_block}
+
 AUFGABE:
 
-## Schritt 4 — Positionierungs-Mapping auf die Kunden
+## Schritt 5 — Positionierungs-Mapping auf die Kunden
 Fuer JEDEN der 9 Kunden:
 ### [Kundenname]
 - Anschlussfaehig ueber: [Themenachsen]
@@ -389,10 +481,11 @@ Fuer JEDEN der 9 Kunden:
 - Gastbeitrag-Thema: [moegliches Thema]
 - Interview-Aufhaenger: [aktueller Anlass]
 - Zielmedien: [konkrete Medien]
+Wenn der Kunde heute direkt in den Medien erwaehnt wurde: Reaktionsempfehlung.
 Wenn nichts passt, offen sagen.
 
-## Schritt 5 — Konkrete Pitch-Ableitungen
-5-7 umsetzbare Ideen: Thema, Format (Kommentar/Gastbeitrag/Interview/Hintergrundgespraech), Kunde, Medium.
+## Schritt 6 — Konkrete Pitch-Ableitungen
+5-7 umsetzbare Ideen: Thema, Format (Kommentar/Gastbeitrag/Interview/Hintergrundgespraech), Kunde, Medium, Dringlichkeit (heute/diese Woche/naechste Woche).
 
 REGELN: PR-Berater-Perspektive, KEINE Trading-Sprache (kein Overweight/Underweight). Deutsch."""
 
@@ -422,6 +515,8 @@ REGELN: PR-Berater-Perspektive, KEINE Trading-Sprache (kein Overweight/Underweig
         "rss_ok": health["ok"], "rss_fail": health["fail"],
         "rss_sources": health["sources"], "rss_items": len(rss_items),
         "rss_time": rss_time,
+        "client_mentions": {k: len(v) for k, v in client_mentions.items()},
+        "history_days": len(multi_day),
         "m1": m1, "c1": len(txt1), "t1": t1,
         "m2": m2, "c2": len(txt2), "t2": t2,
         "total": len(full),
@@ -436,7 +531,7 @@ REGELN: PR-Berater-Perspektive, KEINE Trading-Sprache (kein Overweight/Underweig
 
     tp = OUTPUT_DIR / f"{date_file}_TE_Media_Intelligence.txt"
     with open(tp,"w",encoding="utf-8") as f:
-        f.write(f"TE Communications — Daily Media Intelligence v3.0\n{date_str}, {time_str} CET\n")
+        f.write(f"TE Communications — Daily Media Intelligence v3.1\n{date_str}, {time_str} CET\n")
         f.write(f"RSS: {health['ok']}/{meta['rss_total']} feeds, {len(rss_items)} items | P1: {m1} ({t1}s) | P2: {m2} ({t2}s)\n{'='*70}\n\n{full}")
 
     with open(HISTORY_DIR / f"{date_file}.json","w",encoding="utf-8") as f:
