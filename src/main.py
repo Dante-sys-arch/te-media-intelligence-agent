@@ -587,6 +587,16 @@ def generate_html(text, date_str, time_str, has_diff, meta):
     if in_sec: body += '</div></details>'
 
     diff_b = '<div class="db">&#9888; <b>Vortagesvergleich aktiv.</b> <span class="tn">NEU</span> <span class="te">ESKALATION</span> <span class="td">ENTSPANNUNG</span> <span class="tc">FORTLAUFEND</span></div>' if has_diff else ""
+    
+    # Client mentions box
+    cm = meta.get('client_mentions', {})
+    cm_active = {k: v for k, v in cm.items() if v > 0}
+    if cm_active:
+        cm_items = " ".join(f'<span class="cm-pill"><b>{k}</b>: {v}</span>' for k, v in cm_active.items())
+        cm_box = f'<div class="cm-box"><div class="cm-title">&#128276; Direkte Kunden-Erwaehnungen heute ({sum(cm_active.values())} Treffer)</div>{cm_items}</div>'
+    else:
+        cm_box = '<div class="cm-box cm-empty">Keine direkten Kunden-Erwaehnungen in den heutigen RSS-Feeds gefunden. (Web Search-Recherche im Hauptreport koennte trotzdem Erwaehnungen aufdecken.)</div>'
+    
     tt = round(meta['rss_time']+meta['t1']+meta['t2'])
 
     return f'''<!DOCTYPE html>
@@ -633,16 +643,22 @@ strong{{color:#111827}}
 .bu{{position:absolute;left:0;color:#002a3e;font-size:7px;top:7px}}
 .tn,.te,.td,.tc{{padding:2px 7px;border-radius:3px;font-size:10.5px;font-weight:700;display:inline-block;margin-right:4px}}
 .tn{{background:#dcfce7;color:#166534}}.te{{background:#fee2e2;color:#991b1b}}.td{{background:#dbeafe;color:#1e40af}}.tc{{background:#f3f4f6;color:#4b5563}}
+.cm-box{{background:#fffbeb;border:1px solid #fbbf24;border-radius:6px;padding:14px 18px;margin-bottom:16px;font-size:12.5px}}
+.cm-empty{{background:#f9fafb;border-color:#e5e7eb;color:#6b7280;font-style:italic}}
+.cm-title{{font-weight:700;color:#92400e;margin-bottom:8px;font-size:12px;text-transform:uppercase;letter-spacing:.05em}}
+.cm-empty .cm-title{{color:#6b7280}}
+.cm-pill{{display:inline-block;background:#fff;border:1px solid #fbbf24;border-radius:14px;padding:4px 10px;margin:3px 4px 0 0;font-size:11.5px;color:#78350f}}
+.cm-pill b{{color:#1f2937}}
 .ft{{margin-top:32px;padding-top:20px;border-top:1px solid #e5e7eb;font-size:11px;color:#9ca3af;line-height:1.6}}
 @media(max-width:600px){{body{{padding:16px 12px}}.hd{{padding:20px 16px}}.hd h1{{font-size:20px}}.sh{{padding:14px 16px}}.sb{{padding:0 16px 16px}}.kp{{grid-template-columns:repeat(2,1fr)}}}}
 </style>
 </head>
 <body>
 <div class="hd">
-<div class="lb">TE Communications — Daily Media Intelligence Agent v3.0</div>
+<div class="lb">TE Communications — Daily Media Intelligence Agent v3.1</div>
 <h1>Tagesauswertung &amp; Positionierungs-Briefing</h1>
 <div class="dt">{date_str} — {time_str} CET</div>
-<div class="ml">Pass 1: {meta['m1']} + Web Search ({meta['t1']}s) | Pass 2: {meta['m2']} ({meta['t2']}s) | {meta['rss_ok']}/{meta['rss_total']} RSS-Feeds</div>
+<div class="ml">Pass 1: {meta['m1']} + Web Search ({meta['t1']}s) | Pass 2: {meta['m2']} ({meta['t2']}s) | {meta['rss_ok']}/{meta['rss_total']} RSS-Feeds parallel | {meta.get('history_days',0)} Tage Trendkontext</div>
 <div class="bg">
 <span>PGIM</span><span>T. Rowe Price</span><span>MK Global Kapital</span><span>Franklin Templeton</span><span>PIMCO</span><span>Eurizon</span><span>Temasek</span><span>Bitcoin Suisse</span><span>KKR</span>
 </div>
@@ -650,9 +666,11 @@ strong{{color:#111827}}
 <div class="kp">
 <div><div class="v">{meta['rss_items']}</div><div class="l">RSS Artikel</div></div>
 <div><div class="v">{meta['rss_sources']}</div><div class="l">Quellen</div></div>
+<div><div class="v">{sum(meta.get('client_mentions',{}).values())}</div><div class="l">Kunden-Mentions</div></div>
 <div><div class="v">{meta['total']:,}</div><div class="l">Zeichen</div></div>
 <div><div class="v">{tt}s</div><div class="l">Laufzeit</div></div>
 </div>
+{cm_box}
 {diff_b}
 <div class="ct">
 <button onclick="document.querySelectorAll('details.sec').forEach(d=>d.open=true)">Alle oeffnen</button>

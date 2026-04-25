@@ -1,88 +1,36 @@
-# TE Communications — Daily Media Intelligence Agent
+# TE Communications — Daily Media Intelligence Agent v3.1
 
-Vollautomatisches tägliches Finanzmarkt-Morning-Briefing.  
-Läuft jeden Morgen um **07:00 CET** via GitHub Actions.
+Vollautomatischer Medienanalyse-Agent. Liefert jeden Morgen um 07:00 CET ein strategisches Finanzmarkt-Briefing mit Positionierungs-Mapping für 9 Kunden.
 
-## Funktionsweise
+**Live Dashboard:** https://dante-sys-arch.github.io/te-media-intelligence-agent/
 
-1. **06:00 UTC / 07:00 CET**: GitHub Actions startet den Agent
-2. Der Agent ruft die **Anthropic Claude API mit Web Search** auf
-3. Claude durchsucht systematisch **60+ seriöse Finanz- und Wirtschaftsmedien** weltweit
-4. Alle **13 Themenfelder** werden abgedeckt
-5. **Vergleich mit dem Vortag**: Jedes Thema wird als [NEU], [ESKALATION], [ENTSPANNUNG] oder [FORTLAUFEND] gekennzeichnet
-6. Output: **HTML-Report** und **Textdatei** unter `output/`
-7. Reports werden automatisch ins Repo committed
+## Architektur (v3.1)
 
-## 13 Themenfelder
+### Zwei-Pass-System
+1. **Pass 1 — Marktrecherche** (Claude Sonnet + Web Search)
+2. **Pass 2 — PR-Positionierung** (Claude Haiku)
+3. Automatischer Modell-Fallback bei Überlastung
 
-| # | Themenfeld |
-|---|---|
-| 1 | Makroökonomie & Konjunktur |
-| 2 | Geopolitik & Sicherheitspolitik |
-| 3 | Energie & Rohstoffe |
-| 4 | Zentralbanken & Geldpolitik |
-| 5 | Aktienmärkte |
-| 6 | Anleihemärkte & Fixed Income |
-| 7 | FX / Devisen |
-| 8 | Private Credit / Private Markets |
-| 9 | Emerging Markets |
-| 10 | Krypto / Digital Assets / Tokenisierung |
-| 11 | Immobilienmärkte |
-| 12 | ESG / Sustainable Finance / Regulierung |
-| 13 | M&A / Deals / IPOs im Asset Management |
+### 137 RSS-Feeds in 3 Schichten
+- Layer 1: 98 direkte Medien-Feeds (DE/CH/AT/INT)
+- Layer 2: 39 Google News Themensuchen
+- Layer 3: Claude Live Web Search
 
-## Einordnung für
+### Performance-Features
+- Paralleles RSS-Fetching (20 Threads, 5-10x schneller)
+- Kunden-Mention-Detection für alle 9 Kunden
+- 5-Tage-Trend-Tracking
+- 24h-Zeitfilter
 
-- **PGIM** — Fixed Income, Real Estate, Multi-Asset, CLO
-- **T. Rowe Price** — Equities, Fixed Income, Growth
-- **MK Global Kapital** — Private Credit, Impact, Microfinance, EM, Tokenisierung
-- **Franklin Templeton** — Fixed Income, EM, Multi-Asset, Alternatives
-- **PIMCO** — Fixed Income, Multi-Asset, Alternatives, Commodities
-- **Eurizon** — Euro Fixed Income, EM Debt, Quantitative, ESG
+## 9 Kunden
+PGIM, T. Rowe Price, MK Global Kapital, Franklin Templeton, PIMCO, Eurizon, Temasek, Bitcoin Suisse, KKR
 
-## Quellenspektrum (60+)
+## 14 Themenfelder
+Makro, Geopolitik, Energie, Zentralbanken, Aktien, Anleihen, FX, Private Credit, Private Equity, EM, Krypto, Immobilien, ESG, M&A
 
-**Deutsch:** Handelsblatt, FAZ, Börsen-Zeitung, SZ, WiWo, Spiegel, Manager Magazin, finanzen.net, boerse.de, dpa-AFX, Fonds Professionell, Citywire, DAS INVESTMENT, Institutional Money  
-**Schweiz:** Finanz und Wirtschaft, NZZ, Cash, Moneycab, payoff  
-**International:** Reuters, FT, Bloomberg, WSJ, CNBC, Fortune, Axios  
-**Branche:** IPE, Morningstar, Seeking Alpha, The TRADE, CoinDesk  
-**Immobilien:** CBRE, Cushman & Wakefield, JLL  
-**Institutionen:** IEA, EZB, Fed, Bundesbank, OECD
+## Tägliche Ausführung
+- GitHub Actions Cron: 06:00 UTC = 07:00 CET
+- Manuell: Actions → Run workflow
 
-## Setup
-
-### 1. Anthropic API Key als Secret anlegen
-
-1. Geh zu **console.anthropic.com** → API Keys → Create Key
-2. Im GitHub Repo: **Settings** → **Secrets and variables** → **Actions**
-3. **New repository secret**: Name = `ANTHROPIC_API_KEY`, Value = dein `sk-ant-...` Key
-
-### 2. Workflow-Permissions prüfen
-
-1. Repo **Settings** → **Actions** → **General**
-2. Unter "Workflow permissions": **Read and write permissions** auswählen
-3. **Save**
-
-### 3. Erster Testlauf
-
-1. **Actions** Tab → **TE Daily Media Intelligence** → **Run workflow**
-2. Nach ca. 2-3 Minuten liegt der Report unter `output/`
-
-## Output-Struktur
-
-```
-output/
-├── 20260324_TE_Media_Intelligence.html    ← Formatierter Report
-├── 20260324_TE_Media_Intelligence.txt     ← Plaintext
-└── history/
-    ├── 20260324.json                       ← Summary für Vortagesvergleich
-    └── 20260323.json
-```
-
-## Kosten
-
-Ca. **$0.50–1.50 pro Tag** (1-2 API-Calls mit Web Search, Claude Sonnet).
-
----
-
-**TE Communications GmbH** | Frankfurt · Zürich · St. Gallen · Lausanne
+## Kontakt
+TE Communications GmbH | Frankfurt · Zürich · St. Gallen · Lausanne
