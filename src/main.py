@@ -190,6 +190,22 @@ GOOGLE_NEWS_FEEDS = [
     "https://news.google.com/rss/search?q=site%3Athemarketswiss.ch+OR+site%3Athemarket.ch&hl=de&gl=CH&ceid=CH:de",
 ]
 
+CLIENTS_DIR = Path("clients")
+
+def load_client_profiles():
+    """Load detailed client profile briefings from /clients directory."""
+    profiles = {}
+    if not CLIENTS_DIR.exists():
+        return profiles
+    for md_file in sorted(CLIENTS_DIR.glob("*.md")):
+        client_name = md_file.stem.replace("_", " ")
+        try:
+            with open(md_file, "r", encoding="utf-8") as f:
+                profiles[client_name] = f.read()
+        except: pass
+    return profiles
+
+
 CLIENTS = """- PGIM ($1,5 Bio. AuM): Institutional, Multi-Asset, Real Estate, Fixed Income, CLO
 - T. Rowe Price: Active Equity, Multi-Asset, ETF-Strategie Europa
 - MK Global Kapital (Luxemburg): Impact/Microfinance, EM, Tokenisierung, SME-Kredite
@@ -463,13 +479,21 @@ QUALITAETSREGELN:
     print(f"[{time_str}] Waiting 30s...")
     time.sleep(30)
 
+    # Load detailed client profiles
+    profiles = load_client_profiles()
+    profiles_block = "\n\n".join([f"=== KUNDENPROFIL: {name} ===\n{content}" for name, content in profiles.items()])
+    print(f"[{time_str}] Loaded {len(profiles)} detailed client profiles")
+
     p2 = f"""Du bist strategischer Finanzkommunikationsberater bei TE Communications (PR-Beratung, Frankfurt/Zuerich).
 Basierend auf dieser Marktanalyse von {date_str}, erstelle ein Positionierungs-Mapping.
 
-Kunden:
+Kurzuebersicht Kunden:
 {CLIENTS}
 
-MARKTANALYSE:
+DETAILLIERTE KUNDENPROFILE (Sprecher, Zielmedien, Themen-Schwerpunkte, Tonfall, Tabu-Themen):
+{profiles_block}
+
+MARKTANALYSE VOM HEUTIGEN TAG:
 {txt1[:6000]}
 
 DIREKTE KUNDEN-ERWAEHNUNGEN HEUTE:
@@ -478,20 +502,31 @@ DIREKTE KUNDEN-ERWAEHNUNGEN HEUTE:
 AUFGABE:
 
 ## Schritt 5 — Positionierungs-Mapping auf die Kunden
-Fuer JEDEN der 9 Kunden:
+Fuer JEDEN der 9 Kunden — nutze die DETAILLIERTEN KUNDENPROFILE oben (Sprecher, Zielmedien, Themen-Schwerpunkte, Tonfall, Tabu-Themen). Schreibe NUR realistische Pitches, die zum Profil des jeweiligen Hauses passen:
+
 ### [Kundenname]
-- Anschlussfaehig ueber: [Themenachsen]
-- Pitch-Idee: [konkretes Thema]
-- Gastbeitrag-Thema: [moegliches Thema]
-- Interview-Aufhaenger: [aktueller Anlass]
-- Zielmedien: [konkrete Medien]
+- Anschlussfaehig ueber: [Themenachsen aus heutiger Marktlage, die zum Profil passen]
+- Empfohlener Sprecher: [konkrete Person aus dem Profil — Name, Rolle]
+- Pitch-Idee: [konkretes Thema, das zum Tonfall des Hauses passt]
+- Gastbeitrag-Thema: [moegliches Thema im Stil des Hauses]
+- Interview-Aufhaenger: [aktueller Anlass aus heutiger Berichterstattung]
+- Zielmedien: [konkrete Medien aus dem Profil — Primaer/Sekundaer]
+- Format-Empfehlung: [Kommentar/Gastbeitrag/Hintergrundgespraech/TV-Schalte/Interview]
+
 Wenn der Kunde heute direkt in den Medien erwaehnt wurde: Reaktionsempfehlung.
-Wenn nichts passt, offen sagen.
+Wenn ein Tabu-Thema gestreift wird: explizit warnen.
+Wenn nichts passt, offen sagen ("Heute kein passender Anker fuer [Kunde]").
 
 ## Schritt 6 — Konkrete Pitch-Ableitungen
-5-7 umsetzbare Ideen: Thema, Format (Kommentar/Gastbeitrag/Interview/Hintergrundgespraech), Kunde, Medium, Dringlichkeit (heute/diese Woche/naechste Woche).
+5-7 umsetzbare Ideen, sortiert nach Dringlichkeit:
+- Thema
+- Format (Kommentar/Gastbeitrag/Interview/Hintergrundgespraech)
+- Kunde + empfohlener Sprecher
+- Zielmedium
+- Dringlichkeit (heute/diese Woche/naechste Woche)
+- Begruendung warum genau dieser Kunde + dieses Thema + dieses Medium
 
-REGELN: PR-Berater-Perspektive, KEINE Trading-Sprache (kein Overweight/Underweight). Deutsch."""
+REGELN: PR-Berater-Perspektive, KEINE Trading-Sprache. Nutze die Profil-Informationen. Wenn ein Profil "Bitte ergaenzen" hinweist, weise im Text dezent darauf hin. Deutsch."""
 
     print(f"[{time_str}] PASS 2: Sonnet 4.6 positioning...")
     t2s = time.time()
