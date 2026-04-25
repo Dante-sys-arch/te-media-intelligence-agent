@@ -190,31 +190,48 @@ GOOGLE_NEWS_FEEDS = [
     "https://news.google.com/rss/search?q=site%3Athemarketswiss.ch+OR+site%3Athemarket.ch&hl=de&gl=CH&ceid=CH:de",
 ]
 
-CLIENTS_DIR = Path("clients")
-
-def load_client_profiles():
-    """Load detailed client profile briefings from /clients directory."""
-    profiles = {}
-    if not CLIENTS_DIR.exists():
-        return profiles
-    for md_file in sorted(CLIENTS_DIR.glob("*.md")):
-        client_name = md_file.stem.replace("_", " ")
-        try:
-            with open(md_file, "r", encoding="utf-8") as f:
-                profiles[client_name] = f.read()
-        except: pass
-    return profiles
-
+# === LAYER 3: PER-CLIENT MONITORING (each client's website + name searches) ===
+# These feeds find: press releases, insights, commentaries, news mentions per client
+CLIENT_FEEDS = [
+    # PGIM
+    "https://news.google.com/rss/search?q=site%3Apgim.com&hl=en&gl=US&ceid=US:en",
+    "https://news.google.com/rss/search?q=PGIM+Deutschland+OR+%22PGIM+Real+Estate%22&hl=de&gl=DE&ceid=DE:de",
+    # T. Rowe Price
+    "https://news.google.com/rss/search?q=site%3Atroweprice.com&hl=en&gl=US&ceid=US:en",
+    "https://news.google.com/rss/search?q=%22T.+Rowe+Price%22+Deutschland+OR+Lustig+OR+Wieladek&hl=de&gl=DE&ceid=DE:de",
+    # MK Global Kapital
+    "https://news.google.com/rss/search?q=%22MK+Global+Kapital%22+OR+%22Mikrofinanz%22+Luxemburg&hl=de&gl=DE&ceid=DE:de",
+    # Franklin Templeton
+    "https://news.google.com/rss/search?q=site%3Afranklintempleton.com&hl=en&gl=US&ceid=US:en",
+    "https://news.google.com/rss/search?q=site%3Afranklintempleton.de+OR+%22Franklin+Templeton%22+Deutschland&hl=de&gl=DE&ceid=DE:de",
+    "https://news.google.com/rss/search?q=%22Martin+Lück%22+OR+%22Martin+Lueck%22+Franklin&hl=de&gl=DE&ceid=DE:de",
+    # PIMCO
+    "https://news.google.com/rss/search?q=site%3Apimco.com&hl=en&gl=US&ceid=US:en",
+    "https://news.google.com/rss/search?q=%22Frank+Witt%22+OR+%22Konstantin+Veit%22+PIMCO&hl=de&gl=DE&ceid=DE:de",
+    "https://news.google.com/rss/search?q=PIMCO+Deutschland+OR+M%C3%BCnchen+OR+Allianz&hl=de&gl=DE&ceid=DE:de",
+    # Eurizon
+    "https://news.google.com/rss/search?q=site%3Aeurizoncapital.com&hl=en&gl=US&ceid=US:en",
+    "https://news.google.com/rss/search?q=Eurizon+Deutschland+OR+Frankfurt+%22Intesa+Sanpaolo%22&hl=de&gl=DE&ceid=DE:de",
+    # Temasek
+    "https://news.google.com/rss/search?q=site%3Atemasek.com.sg&hl=en&gl=US&ceid=US:en",
+    "https://news.google.com/rss/search?q=Temasek+Deutschland+OR+Europa+Investment&hl=de&gl=DE&ceid=DE:de",
+    # Bitcoin Suisse
+    "https://news.google.com/rss/search?q=site%3Abitcoinsuisse.com&hl=en&gl=US&ceid=US:en",
+    "https://news.google.com/rss/search?q=%22Bitcoin+Suisse%22+OR+%22Dirk+Klee%22&hl=de&gl=DE&ceid=DE:de",
+    # KKR
+    "https://news.google.com/rss/search?q=site%3Akkr.com&hl=en&gl=US&ceid=US:en",
+    "https://news.google.com/rss/search?q=KKR+Deutschland+OR+Frankfurt+%22Philipp+Freise%22&hl=de&gl=DE&ceid=DE:de",
+]
 
 CLIENTS = """- PGIM ($1,5 Bio. AuM): Institutional, Multi-Asset, Real Estate, Fixed Income, CLO
 - T. Rowe Price: Active Equity, Multi-Asset, ETF-Strategie Europa
 - MK Global Kapital (Luxemburg): Impact/Microfinance, EM, Tokenisierung, SME-Kredite
-- Franklin Templeton ($1,74 Bio. AuM): Multi-Asset, EM, ETF, Martin Lueck als Sprecher
-- PIMCO: Fixed Income, Alternatives, Commodities, Credit
+- Franklin Templeton ($1,74 Bio. AuM): Multi-Asset, EM, ETF, Tokenisierung
+- PIMCO: Fixed Income, Alternatives, Commodities, Credit (Allianz-Tochter)
 - Eurizon (Intesa Sanpaolo): Euro Fixed Income, EM Debt, ESG, Quantitative
-- Temasek: Singapurer Staatsfonds, Infrastruktur, Tech, Life Sciences, DACH
-- Bitcoin Suisse: Krypto-Finanzdienstleister, MiCA, Markteintritt DE, Custody, Staking
-- KKR: Private Equity, Infrastruktur, Real Estate, Credit, DACH-Expansion"""
+- Temasek: Singapurer Staatsfonds, Infrastruktur, Tech, Life Sciences
+- Bitcoin Suisse: Krypto-Finanzdienstleister, MiCA, Custody, Staking
+- KKR: Private Equity, Infrastruktur, Real Estate, Credit"""
 
 THEMENFELDER = [
     "Makro/Konjunktur", "Geopolitik/Sicherheit", "Energie/Rohstoffe",
@@ -287,16 +304,19 @@ def fetch_single_feed(url, cutoff):
 
 def fetch_rss_intelligence():
     """Parallel fetch of all RSS feeds with health tracking and client-mention detection."""
-    all_feeds = MEDIA_RSS_FEEDS + GOOGLE_NEWS_FEEDS
+    all_feeds = MEDIA_RSS_FEEDS + GOOGLE_NEWS_FEEDS + CLIENT_FEEDS
     items = []
+    client_specific = []  # Items from CLIENT_FEEDS (per-client monitoring)
     health = {"ok": 0, "fail": 0, "sources": set()}
     cutoff = datetime.now(timezone.utc) - timedelta(hours=28)
     client_mentions = {client: [] for client in CLIENT_KEYWORDS}
+    client_feed_set = set(CLIENT_FEEDS)
 
     # PARALLEL FETCH (10x faster than sequential)
     with ThreadPoolExecutor(max_workers=20) as executor:
         future_to_url = {executor.submit(fetch_single_feed, url, cutoff): url for url in all_feeds}
         for future in as_completed(future_to_url):
+            url = future_to_url[future]
             try:
                 feed_items, ok = future.result()
                 if ok:
@@ -304,6 +324,9 @@ def fetch_rss_intelligence():
                     for it in feed_items:
                         items.append(it)
                         health["sources"].add(it["s"])
+                        # Tag items from CLIENT_FEEDS as client-specific
+                        if url in client_feed_set:
+                            client_specific.append(it)
                 else:
                     health["fail"] += 1
             except:
@@ -318,17 +341,26 @@ def fetch_rss_intelligence():
             seen.add(k)
             unique.append(it)
 
-    # Client mention detection
+    # Deduplicate client_specific too
+    seen_cs = set()
+    unique_cs = []
+    for it in client_specific:
+        k = it["t"][:55].lower()
+        if k not in seen_cs:
+            seen_cs.add(k)
+            unique_cs.append(it)
+
+    # Client mention detection (across all feeds)
     for it in unique:
         haystack = (it["t"] + " " + it["d"]).lower()
-        for client, keywords in CLIENT_KEYWORDS.items():
+        for client_name, keywords in CLIENT_KEYWORDS.items():
             if any(kw in haystack for kw in keywords):
-                client_mentions[client].append(it)
+                client_mentions[client_name].append(it)
 
     health["sources"] = len(health["sources"])
     mentions_found = sum(1 for v in client_mentions.values() if v)
-    print(f"  RSS: {health['ok']}/{len(all_feeds)} feeds, {len(unique)} items, {health['sources']} sources, {mentions_found}/9 clients mentioned")
-    return unique, health, client_mentions
+    print(f"  RSS: {health['ok']}/{len(all_feeds)} feeds, {len(unique)} items total, {len(unique_cs)} client-specific, {health['sources']} sources, {mentions_found}/9 clients mentioned")
+    return unique, health, client_mentions, unique_cs
 
 
 def api_call(client, model, max_tokens, messages, tools=None, retries=4, wait=60):
@@ -386,21 +418,27 @@ def run_briefing():
 
     # --- RSS (PARALLEL) ---
     t0 = time.time()
-    rss_items, health, client_mentions = fetch_rss_intelligence()
+    rss_items, health, client_mentions, client_specific = fetch_rss_intelligence()
     rss_block = "\n".join(
         f"- [{it['s']}] {it['t']}" + (f" — {it['d']}" if it['d'] else "") + (f" ({it['p']})" if it['p'] else "")
-        for it in rss_items[:100]
+        for it in rss_items[:80]
     )
     rss_time = round(time.time()-t0, 1)
 
-    # Client mentions block
+    # Client-specific items block (from CLIENT_FEEDS — direct news on each client)
+    client_specific_block = "\n".join(
+        f"- [{it['s']}] {it['t']}" + (f" — {it['d']}" if it['d'] else "") + (f" ({it['p']})" if it['p'] else "")
+        for it in client_specific[:40]
+    ) if client_specific else "Keine kunden-spezifischen Treffer aus den dedizierten Kunden-Feeds."
+
+    # Client mentions block (clients mentioned across general feeds)
     mention_lines = []
     for client_name, items in client_mentions.items():
         if items:
-            mention_lines.append(f"\n[{client_name}] — {len(items)} Erwaehnung(en) heute:")
+            mention_lines.append(f"\n[{client_name}] — {len(items)} Erwaehnung(en) in allg. Medien:")
             for it in items[:3]:
                 mention_lines.append(f"  - [{it['s']}] {it['t']}")
-    mentions_block = "\n".join(mention_lines) if mention_lines else "Keine direkten Kunden-Erwaehnungen in den heutigen RSS-Feeds gefunden."
+    mentions_block = "\n".join(mention_lines) if mention_lines else "Keine direkten Kunden-Erwaehnungen in allgemeinen Medien."
 
     # Multi-day trend context
     trend_block = ""
@@ -413,38 +451,54 @@ def run_briefing():
     diff = f"\nVORTAG: {prev_sum[:600]}\nKennzeichne: [NEU]/[ESKALATION]/[ENTSPANNUNG]/[FORTLAUFEND]\n" if prev_sum else ""
     wknd = "\nWochenende: Fokus auf Analysen, Ausblicke, Hintergrund.\n" if is_weekend else ""
 
-    p1 = f"""Fuehre eine gruendliche Web-Recherche der Finanzmarkt-Berichterstattung durch.
-Stand: {date_str}, {time_str} CET. Erfasse die LETZTEN 24 STUNDEN.{wknd}
+    p1 = f"""Fuehre eine gruendliche Web-Recherche durch.
+Stand: {date_str}, {time_str} CET. Erfasse die LETZTEN 24 STUNDEN bis 7 TAGE.{wknd}
 
-RSS-SCHLAGZEILEN ({len(rss_items)} Artikel, {health['sources']} Quellen, abgerufen {time_str} CET):
+ALLGEMEINE RSS-SCHLAGZEILEN ({len(rss_items)} Artikel, {health['sources']} Quellen, abgerufen {time_str} CET):
 {rss_block}
 
-DIREKTE KUNDEN-ERWAEHNUNGEN HEUTE:
+KUNDEN-SPEZIFISCHE TREFFER aus dedizierten Kunden-Feeds (Webseiten + Namenssuchen, {len(client_specific)} Treffer):
+{client_specific_block}
+
+KUNDEN-ERWAEHNUNGEN IN ALLG. MEDIEN:
 {mentions_block}
 {trend_block}
 Recherchiere per Web Search UEBER diese RSS-Daten hinaus.
 Themenfelder: {', '.join(THEMENFELDER)}
+
+KUNDEN (alle 9 muessen recherchiert werden):
+{CLIENTS}
 {diff}
 AUSGABE (beginne direkt, keine Einleitung):
 
 ## Top 3 Themen des Tages
-Ganz oben: Die 3 wichtigsten Themen heute in je 2 Saetzen (fuer Schnellueberblick).
+Die 3 wichtigsten Markt-Themen heute in je 2 Saetzen (Schnellueberblick).
 
-## Schritt 1 — Recherche-Ueberblick
+## Schritt 1 — Marktrecherche-Ueberblick
 Gesamtcharakter, uebergreifendes Narrativ, dominante Themencluster.
 
 ## Schritt 2 — Themen die das Markt-Narrativ treiben
 Nummerierte Bloecke nach Relevanz. Pro Block:
 - Was dominiert die Headlines (Fakten, Zahlen, Quellen mit Datum)
-- Narrativ: Groessere Story? Trendwechsel? Eskalation/Wende/Fortsetzung?
-- Kausalkette: Warum marktrelevant?
-- Veraenderung gegenueber Vortagen?
+- Narrativ und Kausalkette
+- Veraenderung gegenueber Vortagen
 
-## Schritt 3 — Direkte Kunden-Berichterstattung
-Wenn einzelne Kunden heute namentlich in den Medien erwaehnt wurden, fasse zusammen:
-- Welcher Kunde, in welchem Medium, in welchem Kontext?
-- Ist das positiv/neutral/kritisch?
-- Welche kommunikative Reaktion ist sinnvoll?
+## Schritt 3 — KUNDEN-LIVE-RECHERCHE (kritisch!)
+Fuer JEDEN der 9 Kunden FUEHRE WEB-SEARCH DURCH und finde heraus:
+
+### [Kundenname]
+- **Aktuelle DACH-Sprecher** (Stand 2026, NICHT aus deinem Trainings-Wissen!):
+  Wer ist heute der/die DACH-Sprecher dieses Hauses? Suche auf der Unternehmensseite, LinkedIn, jüngsten Pressemeldungen. Gib Namen + Rolle + Jahr der letzten Erwaehnung an.
+  WICHTIG: Wenn du eine Person nennst, muss sie 2025/2026 nachweislich aktiv sein.
+- **Aktuelle Kommentare/Insights** (letzte 7 Tage):
+  Welche Marktkommentare, Whitepapers, Outlooks, Pressemitteilungen hat das Haus zuletzt veroeffentlicht? Suche site:[firmenwebseite.com], LinkedIn-Posts, Pressemeldungen.
+  Liste konkrete Titel + Datum + URL.
+- **Aktuelle Themen-Schwerpunkte**:
+  Worueber kommuniziert das Haus aktuell aktiv? Was ist die Eigen-Botschaft?
+- **Heutige direkte Erwaehnungen**:
+  Wenn der Kunde heute in den allgemeinen Medien zitiert/erwaehnt wurde: in welchem Kontext, mit welchem Sprecher?
+
+KRITISCH: Wenn du eine Information NICHT verifizieren kannst, schreibe "nicht aktuell verifizierbar" — erfinde NICHTS. Veraltete Sprecher (z.B. nicht mehr im Unternehmen) sind ein schwerer Fehler.
 
 ## Schritt 4 — Termine naechste 7 Tage
 Datum, Uhrzeit, Land, Termin, Relevanz.
@@ -453,18 +507,19 @@ Datum, Uhrzeit, Land, Termin, Relevanz.
 Was zieht sich seit mehreren Tagen durch? Was eskaliert? Was klingt ab?
 
 ## Gesamtfazit
-2-3 Saetze zum uebergeordneten Narrativ und groesseren Trends.
+2-3 Saetze zum uebergeordneten Narrativ.
 
 ## Quellenverzeichnis
 ALLE verwendeten Quellen: Medium — Titel (Datum) — URL. Keine erfundenen URLs.
 
-QUALITAETSREGELN:
-- NUR verifizierte Fakten der letzten 24h. Aelteres explizit kennzeichnen.
-- Bei JEDER Zahl: Quelle + Datum. Lieber lueckenhaft als falsch.
-- Nicht halluzinieren. Keine erfundenen URLs/Zitate/Kurse.
-- Einfache Sprache, keine Telegrammstil-Sprache.
+QUALITAETSREGELN — ABSOLUT KRITISCH:
+- NUR verifizierte Fakten. Bei Sprechern: nur, wer 2025/2026 nachweislich noch im Haus arbeitet.
+- Bei JEDER Zahl: Quelle + Datum.
+- Bei JEDEM Sprecher: Quellennachweis (Unternehmensseite, LinkedIn-Profil, juengste Pressemeldung).
+- Nicht halluzinieren. Keine erfundenen URLs/Zitate/Kurse/Personen.
+- Wenn eine Info nicht verifiziert werden kann: explizit "nicht aktuell verifizierbar".
 - Englischsprachige Artikel gruendlich ins Deutsche uebertragen.
-- Wichtige Zusammenhaenge erklaeren."""
+- Einfache, klare Sprache, keine Telegrammstil-Sprache."""
 
     print(f"[{time_str}] PASS 1: Opus 4.7 + Web Search (most capable model)...")
     t1s = time.time()
@@ -479,56 +534,59 @@ QUALITAETSREGELN:
     print(f"[{time_str}] Waiting 30s...")
     time.sleep(30)
 
-    # Load detailed client profiles
-    profiles = load_client_profiles()
-    profiles_block = "\n\n".join([f"=== KUNDENPROFIL: {name} ===\n{content}" for name, content in profiles.items()])
-    print(f"[{time_str}] Loaded {len(profiles)} detailed client profiles")
-
     p2 = f"""Du bist strategischer Finanzkommunikationsberater bei TE Communications (PR-Beratung, Frankfurt/Zuerich).
-Basierend auf dieser Marktanalyse von {date_str}, erstelle ein Positionierungs-Mapping.
+Basierend auf der heutigen LIVE-RECHERCHE (siehe unten), erstelle ein Positionierungs-Mapping.
 
-Kurzuebersicht Kunden:
+Kunden:
 {CLIENTS}
 
-DETAILLIERTE KUNDENPROFILE (Sprecher, Zielmedien, Themen-Schwerpunkte, Tonfall, Tabu-Themen):
-{profiles_block}
+LIVE-MARKTANALYSE UND KUNDEN-RECHERCHE VON HEUTE ({date_str}):
+Diese Analyse wurde JUST EBEN per Web Search erstellt. Sprecher, aktuelle Kommentare und Insights wurden live recherchiert. Verlasse dich AUSSCHLIESSLICH auf diese Recherche — verwende KEIN Trainings-Wissen ueber Personen oder Sprecher.
 
-MARKTANALYSE VOM HEUTIGEN TAG:
-{txt1[:6000]}
+{txt1[:9000]}
 
-DIREKTE KUNDEN-ERWAEHNUNGEN HEUTE:
+KUNDEN-SPEZIFISCHE RSS-TREFFER (heute aus Kunden-Feeds):
+{client_specific_block[:2500]}
+
+DIREKTE KUNDEN-ERWAEHNUNGEN IN ALLG. MEDIEN:
 {mentions_block}
 
 AUFGABE:
 
 ## Schritt 5 — Positionierungs-Mapping auf die Kunden
-Fuer JEDEN der 9 Kunden — nutze die DETAILLIERTEN KUNDENPROFILE oben (Sprecher, Zielmedien, Themen-Schwerpunkte, Tonfall, Tabu-Themen). Schreibe NUR realistische Pitches, die zum Profil des jeweiligen Hauses passen:
+Fuer JEDEN der 9 Kunden — nutze AUSSCHLIESSLICH die Informationen aus der Live-Recherche oben. Wenn dort keine aktuellen Sprecher genannt wurden, nenne keine Sprecher (das vermeidet veraltete Angaben).
 
 ### [Kundenname]
-- Anschlussfaehig ueber: [Themenachsen aus heutiger Marktlage, die zum Profil passen]
-- Empfohlener Sprecher: [konkrete Person aus dem Profil — Name, Rolle]
-- Pitch-Idee: [konkretes Thema, das zum Tonfall des Hauses passt]
-- Gastbeitrag-Thema: [moegliches Thema im Stil des Hauses]
-- Interview-Aufhaenger: [aktueller Anlass aus heutiger Berichterstattung]
-- Zielmedien: [konkrete Medien aus dem Profil — Primaer/Sekundaer]
-- Format-Empfehlung: [Kommentar/Gastbeitrag/Hintergrundgespraech/TV-Schalte/Interview]
+- **Aktueller Eigen-Anker (aus heutiger Recherche):** [Welchen aktuellen Kommentar, Outlook, Whitepaper hat das Haus selbst veroeffentlicht? Aus der Live-Recherche!]
+- **Anschlussfaehig ueber:** [Themenachsen aus heutiger Marktlage]
+- **Empfohlener Sprecher:** [NUR Personen, die in der Live-Recherche oben als aktuell aktiv bestaetigt wurden. Bei "nicht aktuell verifizierbar": "Sprecher muss intern abgestimmt werden"]
+- **Pitch-Idee:** [konkretes Thema, das den Eigen-Anker mit aktueller Marktlage verbindet]
+- **Gastbeitrag-Thema:** [moegliches Thema]
+- **Interview-Aufhaenger:** [aktueller Anlass aus heutiger Berichterstattung]
+- **Zielmedien:** [konkrete Medien — basierend auf Markt und Thema]
+- **Format-Empfehlung:** [Kommentar/Gastbeitrag/Hintergrundgespraech/TV-Schalte/Interview/Pressemitteilung-Versand]
+- **Aufgreifbare Eigen-Inhalte:** [konkrete URL/Titel eines aktuellen Hauses-Kommentars, der breit verteilt werden koennte — aus der Live-Recherche!]
 
 Wenn der Kunde heute direkt in den Medien erwaehnt wurde: Reaktionsempfehlung.
-Wenn ein Tabu-Thema gestreift wird: explizit warnen.
-Wenn nichts passt, offen sagen ("Heute kein passender Anker fuer [Kunde]").
+Wenn nichts passt, offen sagen.
 
 ## Schritt 6 — Konkrete Pitch-Ableitungen
 5-7 umsetzbare Ideen, sortiert nach Dringlichkeit:
 - Thema
-- Format (Kommentar/Gastbeitrag/Interview/Hintergrundgespraech)
-- Kunde + empfohlener Sprecher
+- Format
+- Kunde + empfohlener Sprecher (NUR live verifiziert!)
 - Zielmedium
 - Dringlichkeit (heute/diese Woche/naechste Woche)
-- Begruendung warum genau dieser Kunde + dieses Thema + dieses Medium
+- Begruendung
+- Vorhandener Eigen-Inhalt (Whitepaper/Kommentar) zum Andocken — falls in Live-Recherche gefunden
 
-REGELN: PR-Berater-Perspektive, KEINE Trading-Sprache. Nutze die Profil-Informationen. Wenn ein Profil "Bitte ergaenzen" hinweist, weise im Text dezent darauf hin. Deutsch."""
+REGELN:
+- KEINE Sprecher nennen, die nicht in der Live-Recherche oben verifiziert wurden.
+- KEINE Trading-Sprache (kein Overweight/Underweight).
+- Nutze ausschliesslich heutige Erkenntnisse, KEIN Trainings-Wissen.
+- Deutsch."""
 
-    print(f"[{time_str}] PASS 2: Sonnet 4.6 positioning...")
+    print(f"[{time_str}] PASS 2: Sonnet 4.6 positioning (using live research)...")
     t2s = time.time()
     r2, m2 = api_call(client, MODEL_POSITIONING, MAX_TOKENS_POSITIONING,
                        [{"role":"user","content":p2}])
