@@ -27,7 +27,7 @@ MODEL_RESEARCH = "claude-opus-4-7"
 MODEL_POSITIONING = "claude-sonnet-4-6"
 MODEL_FALLBACK = "claude-haiku-4-5-20251001"
 MAX_TOKENS_RESEARCH = 16000  # Opus 4.7 supports up to 128k output
-MAX_TOKENS_POSITIONING = 10000  # Sonnet 4.6 supports up to 64k output
+MAX_TOKENS_POSITIONING = 16000  # Sonnet 4.6 — detailed journalist-grade pitches
 OUTPUT_DIR = Path("output")
 HISTORY_DIR = Path("output/history")
 
@@ -808,54 +808,134 @@ QUALITAETSREGELN — ABSOLUT KRITISCH:
     # Build profile + insights summary for Pass 2 (compact)
     insights_summary = "\n".join([f"\n[{c}] {len(items)} Eigen-Inhalte gefunden:\n" + "\n".join(f"  - {i['title']} → {i['url']}" for i in items[:4]) for c, items in client_insights.items()])
     
-    p2 = f"""Du bist DER beste Finanzkommunikationsberater bei TE Communications (PR-Beratung, Frankfurt/Zuerich).
-Du arbeitest auf Meltwater-Niveau, aber mit besserer strategischer Intelligenz.
+    p2 = f"""Du bist seit 20 Jahren Wirtschafts- und Finanzjournalist in DACH. Du hast bei Handelsblatt, FAZ, Boersen-Zeitung, Reuters und Bloomberg gearbeitet. Du weisst genau, was Journalisten tatsaechlich brauchen, um ein Pitch zu nehmen, und was sofort im Papierkorb landet.
 
-Basierend auf der heutigen Marktanalyse + Live-Recherche, erstelle ein Positionierungs-Mapping.
+Du wechselst jetzt die Rolle: Du arbeitest als Senior Director bei TE Communications und sollst aus Journalistensicht Pitches fuer 9 Kunden formulieren.
 
-KUNDEN-PROFILE (Tonfall, Zielmedien, Tabus — stabile Fakten):
+WAS JOURNALISTEN BRAUCHEN (du kennst das aus 20 Jahren Praxis):
+1. NEWS-AUFHAENGER: Klare aktuelle Begruendung "warum heute". Ohne Aufhaenger keine Story.
+2. THESE: Eine pointierte Aussage, kein "Sowohl-als-auch". Journalisten lieben Reibung, nicht Diplomatie.
+3. ZWEI BIS DREI BELEGE: konkrete Zahlen, Daten, Zitate, Quellen — nichts Vages.
+4. SPRECHER MIT EXPERTISE: Konkrete Person, ihre Rolle, warum SIE genau das beurteilen kann.
+5. WAS DAS UEBER DEN TAG HINAUSGEHT: Trend, Umbruch, Konflikt.
+6. EXKLUSIVITAET ODER SUBSTANZ: Was bekommt der Journalist hier, was er nirgends sonst bekommt?
+7. PASSGENAUIGKEIT ZUM MEDIUM: Boersen-Zeitung will Tiefe, Handelsblatt will News+Analyse, FAZ will Einordnung, n-tv will klare Zuspitzung.
+8. KOPF-ZUERST-PRINZIP: Erste 2 Saetze entscheiden ueber Annahme oder Ablehnung.
+
+Was Journalisten SOFORT NERVT (du weisst das auch):
+- "Markteinschaetzung von..." als Betreff (zu generisch)
+- Buzzwords ohne Substanz ("disruptiv", "robust positioniert", "ganzheitlich")
+- Lange Marketing-Vorbemerkungen
+- Pitches ohne klaren Aufhaenger ("Wir haben da was Interessantes...")
+- Wenn der Sprecher zum Thema nicht passt
+- Wenn Konkurrenz schon dasselbe gepitcht hat
+- Wenn die These weichgespuelt ist
+
+KUNDEN-PROFILE:
 {profile_block}
 
 LIVE-MARKTANALYSE VON HEUTE ({date_str}):
 {txt1[:8000]}
 
-DIREKT GECRAWLTE EIGEN-INHALTE DER KUNDEN (gerade von Webseiten geholt — IDEAL fuer Presseversand!):
+DIREKT GECRAWLTE EIGEN-INHALTE DER KUNDEN (frische Eigen-Materialien fuer Presseversand):
 {insights_summary}
 
 KUNDEN-MENTIONS HEUTE:
 {mentions_block}
 
-AUFGABE — Du erstellst zwei Abschnitte mit absolut praktischer Brauchbarkeit:
+AUFGABE: Erstelle zwei Abschnitte. Beide muessen so brauchbar sein, dass ein TE-Berater sie sofort 1:1 verwenden kann, ohne nochmal nachzubessern.
 
 ## Schritt 7 — Positionierungs-Mapping pro Kunde
-Fuer JEDEN der 9 Kunden:
+
+Fuer JEDEN der 9 Kunden, in dieser klaren Struktur:
 
 ### [Kundenname]
-- **Anschlussfaehig ueber:** [Themenachsen aus heutiger Marktlage, die zum Tonfall+Tabus des Kunden passen]
-- **Empfohlener Sprecher:** [NUR aus der Live-Recherche oben — wenn nicht verifiziert: "intern abstimmen"]
-- **Pitch-Idee 1 (kurzfristig, heute):** [konkretes Thema mit Aufhaenger]
-- **Pitch-Idee 2 (diese Woche):** [zweites Thema]
-- **Gastbeitrag-Thema:** [moegliches Thema im Stil des Hauses]
-- **Interview-Aufhaenger:** [aktueller Anlass aus Berichterstattung]
-- **Zielmedien (aus Profil):** [3-5 Medien aus dem Tonfall-Profil oben]
-- **Format-Empfehlung:** [Kommentar/Gastbeitrag/Hintergrundgespraech/TV-Schalte/Interview]
-- **Aufgreifbare Eigen-Inhalte:** [aus den gecrawlten Webseiten oben — konkrete Titel + URL — fuer Presseverteiler-Versand]
-- **Konkurrenz-Konter:** [Wenn ein Wettbewerber heute prominent in Medien war: wo koennte unser Kunde anders/besser positionieren?]
-- **Tabu-Warnung:** [Wenn ein Pitch-Vorschlag das Tabu des Kunden streift: explizit warnen]
 
-## Schritt 8 — Top-7 Pitch-Empfehlungen fuer HEUTE
-Die 7 besten Pitch-Ideen sortiert nach Erfolgswahrscheinlichkeit:
-1. **[Thema]** — Format: [Kommentar/Gastbeitrag/Interview] | Kunde: [X] | Sprecher: [Name oder "intern"] | Zielmedium: [Y] | Dringlichkeit: [heute/diese Woche] | Eigen-Material: [URL falls vorhanden] | Begruendung: [Warum dieser Mix gewinnt]
+**Heute anschlussfaehig ueber:**
+- [Themen-Achse 1 mit konkretem Bezug zur heutigen Marktlage]
+- [Themen-Achse 2]
+- [optional Themen-Achse 3]
 
-REGELN:
-- Sprecher nur, wenn live verifiziert in der Recherche oben.
-- KEINE Trading-Sprache (kein Overweight/Underweight).
-- Eigen-Inhalte mit URL angeben (sind das Wertvollste fuer Presseverteiler).
-- Tonfall des Hauses respektieren.
-- Tabus respektieren.
-- Deutsch."""
+**Empfohlener Sprecher:**
+- [Name, Rolle] — [warum genau diese Person zu diesem Thema passt — z.B. juengste Aussage, Spezialgebiet, mediale Erfahrung]
+- WENN nicht live verifiziert: "Sprecher intern abstimmen — Profil legt [Frank Witt / Konstantin Veit / etc.] nahe"
 
-    print(f"[{time_str}] PASS 2: Sonnet 4.6 positioning (using live research + insights)...")
+---
+
+**PITCH 1 — [pointierte These als Titel, journalistentauglich]**
+Format: [Gastbeitrag / Hintergrundgespraech / Interview-Angebot / Kommentar fuer Presseverteiler / TV-Schalte]
+Dringlichkeit: [heute / diese Woche / naechste Woche]
+Zielmedium primaer: [konkretes Medium aus Profil]
+Zielmedium sekundaer: [2-3 weitere Medien]
+
+E-Mail-Betreff (vorgeschlagen): "[konkreter Betreff, max 70 Zeichen, mit Aufhaenger]"
+
+Pitch-Aufhaenger (warum heute):
+- [konkrete Marktbewegung/Schlagzeile/Datenpunkt von heute, mit Datum + Quelle]
+
+These des Pitches:
+- [pointierte Kernaussage in 1 Satz, die der Sprecher vertreten wuerde]
+
+3 Belege/Argumente fuer Journalisten:
+- [Beleg 1: konkrete Zahl/Studie/Marktbewegung]
+- [Beleg 2]
+- [Beleg 3]
+
+Was der Journalist konkret bekommt:
+- Sprecher-Verfuegbarkeit: [z.B. "heute ab 14 Uhr per Telefon", "binnen 24h schriftliches Statement"]
+- Eigen-Material zum Andocken: [konkrete URL aus den oben gecrawlten Inhalten]
+- Optional: [exklusive Daten / Whitepaper / Studie]
+
+Story-Winkel fuer das jeweilige Medium:
+- [Wie genau dieser Pitch in [Zielmedium] passt — was ist der Hook fuer DESSEN Leserschaft]
+
+Vorschlag fuer Pitch-Mail (1 Absatz, max 6 Saetze, im Stil eines erfahrenen Pressesprechers):
+"[Sehr geehrter Herr/Frau [...], aktuell zeigen sich [konkrete Marktbewegung] und [konkrete Folge]. [Sprecher-Name], [Rolle bei Kunde], hat dazu eine pointierte Lesart: [These in 1 Satz]. Die Kernpunkte: [3 stichpunktartige Belege]. Material zum Andocken: [URL]. [Sprecher] ist [Verfuegbarkeit] verfuegbar. Sollen wir Ihnen ein Statement / einen Gastbeitrag / ein Hintergrundgespraech anbieten?]"
+
+---
+
+**PITCH 2 — [zweite, andere These als Titel]**
+[gleiche Struktur wie Pitch 1]
+
+---
+
+**Aufgreifbare Eigen-Inhalte des Kunden (Presseverteiler-Versand HEUTE):**
+- [Titel] → [URL] — [in 1 Satz: warum jetzt versenden, an welche Liste]
+
+**Konkurrenz-Konter (falls heute relevant):**
+- [Wettbewerber X] hat heute [Y] kommuniziert. Unser Kunde kann mit [Konter-Argument] in [Medium] kontern.
+
+**Tabu-Warnung (wenn vorhanden):**
+- [Was darf in keinem Pitch erwaehnt werden, basierend auf Profil-Tabus]
+
+WICHTIG: Wenn fuer einen Kunden heute KEIN guter Pitch sinnvoll ist, schreibe das offen: "Heute kein passender Aufhaenger fuer [Kunde] — Profil-Themen heute nicht in den Schlagzeilen. Empfehlung: stattdessen [Alternative wie 'Vortagsanalyse fuer Wochenausblick verwenden']."
+
+---
+
+## Schritt 8 — Top-7 Pitch-Empfehlungen fuer HEUTE (sortiert nach Erfolgswahrscheinlichkeit)
+
+Die besten 7 Pitches aus Schritt 7, neu sortiert. Pro Pitch:
+
+**[Rang]. ★[1-5 Sterne] [Pitch-Titel — pointierte These]**
+- Warum top heute: [in 1-2 Saetzen — News-Lage + Sprecher-Passung + Medium-Bedarf]
+- Format: [...] | Kunde: [...] | Sprecher: [...] (verifiziert/intern)
+- Zielmedium: [primaer] | Backup: [sekundaer]
+- Naechster Schritt fuer TE-Berater: [konkrete Aktion — z.B. "Sprecher heute 09:30 anrufen, Pitch-Mail bis 11 Uhr an Redakteur X bei Boersen-Zeitung"]
+- Eigen-Material: [URL falls vorhanden]
+- Erfolgs-Wahrscheinlichkeit: [hoch/mittel/niedrig] mit kurzer Begruendung
+
+REGELN ABSOLUT:
+- Sprecher NUR, wenn live verifiziert in Schritt 5. Sonst "intern abstimmen".
+- KEINE Buzzwords ("ganzheitlich", "robust", "disruptiv", "innovative Loesung").
+- KEINE Trading-Sprache ("Overweight", "Underweight").
+- These muss POINTIERT sein — Reibung, nicht Diplomatie.
+- Aufhaenger muss eine konkrete Schlagzeile/Datenpunkt von heute sein, mit Quelle.
+- Pitch-Mail-Vorschlag muss so sein, dass ein TE-Berater ihn nur noch personalisieren muss.
+- Wenn ein Pitch das Profil-Tabu streift: NICHT vorschlagen, sondern Alternative bieten.
+- Deutsche Sprache, klar, nicht ueberladen.
+- KEIN Telegrammstil, aber auch keine PR-Floskeln. Schreibstil wie ein erfahrener Wirtschaftsjournalist."""
+
+    print(f"[{time_str}] PASS 2: Sonnet 4.6 journalist-grade pitch crafting...")
     t2s = time.time()
     r2, m2 = api_call(client, MODEL_POSITIONING, MAX_TOKENS_POSITIONING,
                        [{"role":"user","content":p2}])
