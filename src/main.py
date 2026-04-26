@@ -223,6 +223,153 @@ CLIENT_FEEDS = [
     "https://news.google.com/rss/search?q=KKR+Deutschland+OR+Frankfurt+%22Philipp+Freise%22&hl=de&gl=DE&ceid=DE:de",
 ]
 
+# === LAYER 4: DIRECT WEBSITE CRAWLING — Insights/Press pages of each client ===
+# These URLs are scraped directly to find publishable content, whitepapers, commentaries
+CLIENT_INSIGHTS_URLS = {
+    "PGIM": [
+        "https://www.pgim.com/insights",
+        "https://www.pgim.com/news",
+    ],
+    "T. Rowe Price": [
+        "https://www.troweprice.com/personal-investing/resources/insights.html",
+        "https://www.troweprice.com/corporate/en/press.html",
+    ],
+    "MK Global Kapital": [
+        "https://www.mk-global.com/news/",
+        "https://www.mk-global.com/insights/",
+    ],
+    "Franklin Templeton": [
+        "https://www.franklintempleton.de/articles",
+        "https://www.franklintempleton.com/articles",
+        "https://www.franklintempleton.com/press-releases",
+    ],
+    "PIMCO": [
+        "https://www.pimco.com/de/de/insights",
+        "https://www.pimco.com/en-us/insights",
+        "https://www.pimco.com/en-us/about-us/newsroom",
+    ],
+    "Eurizon": [
+        "https://www.eurizoncapital.com/en/strategy/market-views",
+        "https://www.eurizoncapital.com/en/news-events",
+    ],
+    "Temasek": [
+        "https://www.temasek.com.sg/en/news-and-views",
+        "https://www.temasek.com.sg/en/news-and-resources/news-room",
+    ],
+    "Bitcoin Suisse": [
+        "https://www.bitcoinsuisse.com/research",
+        "https://www.bitcoinsuisse.com/news",
+    ],
+    "KKR": [
+        "https://www.kkr.com/insights",
+        "https://www.kkr.com/news",
+    ],
+}
+
+# === CLIENT PROFILES (FACTS ONLY, no speakers — those are researched live) ===
+# These are stable facts that don't change: company structure, asset classes, history
+CLIENT_PROFILES = {
+    "PGIM": {
+        "type": "Globaler Vermoegensverwalter, Tochter von Prudential Financial",
+        "aum": "ca. $1,5 Bio.",
+        "hq": "Newark, NJ",
+        "dach": "Frankfurt, Muenchen, Zuerich",
+        "boutiques": "PGIM Fixed Income, PGIM Real Estate, PGIM Private Capital, Jennison Associates, QMA, PGIM Quantitative Solutions",
+        "core_competencies": "Fixed Income (IG/HY/EMD/CLO/Structured), Real Estate (Equity+Debt), Private Capital, Public Equities (Jennison/QMA), Multi-Asset/OCIO",
+        "target_media_dach": "Handelsblatt, Boersen-Zeitung, FAZ, Fonds Professionell, Institutional Money, portfolio institutionell, dpn, Citywire, DAS INVESTMENT, IPE",
+        "tone": "institutionell, analytisch, datenbasiert, eher nuechtern als zugespitzt, globale Perspektive mit DACH-Uebersetzung",
+        "taboo": "keine politischen Statements, keine spekulativen Kursprognosen, keine Konkurrenzvergleiche",
+    },
+    "T. Rowe Price": {
+        "type": "Globaler aktiver Asset Manager, gegruendet 1937",
+        "aum": "ca. $1,5 Bio.",
+        "hq": "Baltimore, MD",
+        "dach": "Frankfurt, Zuerich",
+        "boutiques": "Active Equity, Multi-Asset, Fixed Income, ETF-Strategie Europa (relativ neu)",
+        "core_competencies": "Active Equity (US/Global/EM/Growth-Schwerpunkt), Multi-Asset/Target Date Funds, Fixed Income, Aktive ETFs (neu in Europa)",
+        "target_media_dach": "Handelsblatt, Fonds Professionell, DAS INVESTMENT, Citywire, Boersen-Zeitung, FAZ, ETF Stream, justETF",
+        "tone": "investment-orientiert, meinungsstark, Storytelling ueber Einzeltitel, laengere Hintergrundinterviews willkommen",
+        "taboo": "keine konkreten Kauf-/Verkaufsempfehlungen, keine politischen Stellungnahmen",
+    },
+    "MK Global Kapital": {
+        "type": "Spezialist fuer Impact Investing und Mikrofinanz",
+        "aum": "Spezialist (kleinere Plattform)",
+        "hq": "Luxemburg",
+        "dach": "Luxemburg, DACH-Vertrieb",
+        "boutiques": "Mikrofinanz, SME-Kredite EM, Impact, Tokenisierung, ESG/SDG-Alignment",
+        "core_competencies": "Mikrofinanz (Kreditvergabe an MFIs), SME-Kredite Schwellenlaender, Impact Investing, Tokenisierung von Privatmarkt-Investments, ESG/SDG-Alignment",
+        "target_media_dach": "Fonds Professionell, DAS INVESTMENT, private banking magazin, altii, Institutional Money, Responsible Investor, ESG Today, finews, NZZ, FuW",
+        "tone": "werteorientiert ohne moralisierend, verbindet Impact-Narrativ mit klarer finanzieller Logik, Storytelling ueber Wirkungsbeispiele",
+        "taboo": "keine Greenwashing-Vorwuerfe gegen andere Haeuser, keine politischen Statements zu Konfliktregionen",
+    },
+    "Franklin Templeton": {
+        "type": "Globaler Vermoegensverwalter, gegruendet 1947",
+        "aum": "ca. $1,74 Bio.",
+        "hq": "San Mateo, CA",
+        "dach": "Frankfurt, Zuerich, Wien",
+        "boutiques": "Templeton (Value/Global), Franklin Equity, ClearBridge, Brandywine, Western Asset, Royce, Martin Currie, Lexington Partners (Secondaries), Benefit Street Partners (Private Credit), Clarion Partners (Real Estate)",
+        "core_competencies": "Multi-Asset, Emerging Markets, Fixed Income (Western Asset, Brandywine), ETF-Plattform, Private Markets (Lexington), Tokenisierung (BENJI Money Market Fund auf Blockchain)",
+        "target_media_dach": "Handelsblatt, FAZ, Boersen-Zeitung, Fonds Professionell, DAS INVESTMENT, Citywire, Institutional Money, ETF Stream, BTC-Echo (Tokenisierung), FuW, NZZ",
+        "tone": "globale Perspektive, klare Botschaften; Tokenisierung-Vorreiterrolle; geeignet fuer TV/Online-Video und Print",
+        "taboo": "keine US-parteipolitischen Statements, vorsichtig bei China-Themen, Lexington-Themen separat von Liquid-Markets-Kommunikation",
+    },
+    "PIMCO": {
+        "type": "Globaler Fixed-Income-Spezialist, gegruendet 1971, Allianz-Tochter seit 2000",
+        "aum": "ca. $2 Bio.",
+        "hq": "Newport Beach, CA",
+        "dach": "Muenchen (Allianz-Zentrale), Frankfurt, Zuerich",
+        "boutiques": "Fixed Income (Kernkompetenz), Multi-Asset/Alternatives, Private Credit/Direct Lending, Real Estate (CRE Debt+Equity), Commodities, Sustainable Investing",
+        "core_competencies": "Fixed Income (Government/Credit/HY/EMD/Securitized), Multi-Asset, Private Credit (wachsendes Segment), CRE, Commodities (eigene Plattform), ESG-Integration in Bonds",
+        "target_media_dach": "Handelsblatt, FAZ, Boersen-Zeitung, Fonds Professionell, Institutional Money, Anleihencheck, BondGuide, Risk.net, Reuters, Bloomberg, FT (Bond-Marktfuehrer), NZZ, FuW, n-tv Teleboerse",
+        "tone": "akademisch, bond-mathematisch fundiert, globale Top-Tier-Glaubwuerdigkeit, eher zurueckhaltend, Standardformat: Cyclical Outlook (quartalsweise), Secular Outlook (jaehrlich), Asset Allocation Outlook",
+        "taboo": "keine politischen Statements zu Wahlen, Allianz-Konzernthemen separat halten, keine konkreten Trades oeffentlich kommentieren",
+    },
+    "Eurizon": {
+        "type": "Asset-Management-Tochter der Intesa Sanpaolo Gruppe (Italiens groesste Bank)",
+        "aum": "ca. EUR 440 Mrd.",
+        "hq": "Mailand",
+        "dach": "Frankfurt, Wien, Zuerich",
+        "boutiques": "Euro Fixed Income (Schwerpunkt), Emerging Markets Debt, Multi-Asset/Income, Quantitative Strategien, ESG/Sustainable, Real Assets",
+        "core_competencies": "Euro Fixed Income (Staaten/Corporates/Credit), Emerging Markets Debt (Hartwaehrung+Lokal), Multi-Asset, Quant/Smart Beta/Factor, ESG (italienische ESG-Tradition)",
+        "target_media_dach": "Fonds Professionell, DAS INVESTMENT, Citywire, Institutional Money, Handelsblatt, Boersen-Zeitung, FAZ (Italien-Bezug), Responsible Investor, FuW",
+        "tone": "europaeisch-institutionell, akademisch fundiert ohne uebertriebene Zuspitzung, gute Bruecken zur italienischen Marktperspektive",
+        "taboo": "Italien-politische Themen vorsichtig, Bankensektor-Themen sehr vorsichtig (Konzernbezug), US-Themen sind nicht Eurizons Staerke",
+    },
+    "Temasek": {
+        "type": "Singapurer Staatsfonds, gegruendet 1974",
+        "aum": "ca. SGD 430 Mrd.",
+        "hq": "Singapur",
+        "dach": "London-Hub deckt Europa ab, vereinzelte direkte Investments in DACH",
+        "boutiques": "Eigentuemer-Investor (nicht Asset Manager), direkte Beteiligungen",
+        "core_competencies": "Long-Term Investment (20-Jahres-Renditen), direkte Beteiligungen (Banken/Telecom/Tech/Konsumgueter/Infrastruktur), Sektoren: FSI/TMT/Transportation/Consumer-RE/Life Sciences-Agri, Asia-Fokus (~60%) aber global, Sustainability (Net-Zero 2050)",
+        "target_media_dach": "Handelsblatt, FAZ, Boersen-Zeitung (selten, bei konkreten Investments), FT, Reuters, Bloomberg, Nikkei Asia (haeufiger), branchenspezifische Wirtschaftsmedien bei DACH-Investments",
+        "tone": "sehr zurueckhaltend, staatsmaennisch, selten direkte Marktkommentare, bevorzugt Whitepaper/Annual Reports/ausgewaehlte Top-Tier-Interviews",
+        "taboo": "politische Themen (Singapur-Regierung-Bezug), konkrete Spekulation ueber Einzelinvestments, China-USA-Spannungen sehr vorsichtig, keine Konkurrenz-Kommentierung",
+    },
+    "Bitcoin Suisse": {
+        "type": "Schweizer Krypto-Finanzdienstleister, gegruendet 2013 (einer der aeltesten)",
+        "aum": "Spezialist (Custody/Trading/Staking)",
+        "hq": "Zug (Crypto Valley)",
+        "dach": "Zug, Liechtenstein, Markteintritt Deutschland (BaFin-Prozess)",
+        "boutiques": "Custody, Trading/Brokerage (OTC), Staking (institutionell), Lending/Borrowing, Krypto-Bonds/strukturierte Produkte, Tokenisierung",
+        "core_competencies": "institutionelle Krypto-Verwahrung, OTC-Handel grosse Tickets, institutionelles Staking (Ethereum/Cosmos), Lending gegen Krypto-Sicherheiten, Tokenisierung Real World Assets",
+        "target_media_dach": "finews, NZZ, FuW, Cash, Handelszeitung, BTC-Echo, CoinDesk DE, finews crypto, Kryptokompass, Handelsblatt (Tech/Krypto), FAZ Wirtschaft, Manager Magazin, Boersen-Zeitung (MiCA/Regulierung), Risk.net",
+        "tone": "institutionell, ruhig, kompetent (TradFi-Bruecke), bewusste Abgrenzung von Krypto-Hype und Bitcoin-Maximalismus, TradFi-Sprache statt Krypto-Jargon",
+        "taboo": "keine Kursprognosen einzelner Coins, keine Empfehlungen einzelner Tokens, vorsichtig bei Stablecoin-Risiken, Konkurrenz nicht kommentieren, Krypto-Kriminalitaet nur sehr nuanciert",
+    },
+    "KKR": {
+        "type": "Globaler Investmentmanager (Alternatives), gegruendet 1976, Co-CEOs Joseph Bae und Scott Nuttall, NYSE-notiert",
+        "aum": "ca. $640 Mrd.",
+        "hq": "New York",
+        "dach": "Frankfurt, Muenchen, Zuerich",
+        "boutiques": "Private Equity (Buyouts/Growth/Core), Infrastructure, Real Estate (Equity+Credit), Credit/Private Credit (Direct Lending/Junior Capital/Special Situations), Capital Markets, Insurance Solutions (Global Atlantic)",
+        "core_competencies": "Private Equity (Buyouts/Growth), Infrastructure (Energy Transition), Real Estate (Wohnen/Logistik/Datenzentren), Private Credit, Insurance Asset Management",
+        "target_media_dach": "Handelsblatt, FAZ, Boersen-Zeitung, Manager Magazin, WiWo, FINANCE Magazin, Going Public, Private Equity Magazin, Reuters, FT, Bloomberg, WSJ, PEI, Buyouts, FuW, NZZ",
+        "tone": "selbstbewusst, marktfuehrend, pitch-orientiert (KKR investiert massiv in Markenbildung), ungezwungener als Asset-Manager-Haeuser (Eigeninvestor)",
+        "taboo": "konkrete Deal-Spekulationen vor Abschluss vermeiden, Carry-/Verguetungsdebatten heikel, Heuschrecken-Narrativ vorsichtig adressieren, politische Statements vermeiden, Konkurrenz nicht direkt kommentieren",
+    },
+}
+
 CLIENTS = """- PGIM ($1,5 Bio. AuM): Institutional, Multi-Asset, Real Estate, Fixed Income, CLO
 - T. Rowe Price: Active Equity, Multi-Asset, ETF-Strategie Europa
 - MK Global Kapital (Luxemburg): Impact/Microfinance, EM, Tokenisierung, SME-Kredite
@@ -300,6 +447,94 @@ def fetch_single_feed(url, cutoff):
         return feed_items, True
     except Exception as e:
         return [], False
+
+
+def fetch_client_website(client_name, urls):
+    """Fetch client insights/news pages directly from their website."""
+    results = []
+    for url in urls:
+        try:
+            req = urllib.request.Request(url, headers={
+                "User-Agent": "Mozilla/5.0 (compatible; TE-Media-Intelligence/3.2; +https://te-communications.com)",
+                "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+                "Accept-Language": "en-US,en;q=0.9,de;q=0.8",
+            })
+            with urllib.request.urlopen(req, timeout=10) as resp:
+                html = resp.read().decode("utf-8", errors="ignore")[:50000]  # First 50k chars
+            
+            # Extract titles, links, dates from HTML
+            # Look for common article/insight patterns
+            articles = []
+            
+            # Pattern 1: <h2>/<h3> with link inside
+            h_pattern = re.findall(r'<h[2-4][^>]*>\s*<a[^>]+href=["\']([^"\']+)["\'][^>]*>([^<]{15,150})</a>', html, re.IGNORECASE)
+            for href, title in h_pattern[:10]:
+                if any(skip in title.lower() for skip in ["cookie", "privacy", "terms", "menu", "navigation", "search"]):
+                    continue
+                # Make URL absolute
+                if href.startswith("/"):
+                    base = "/".join(url.split("/")[:3])
+                    href = base + href
+                articles.append({
+                    "client": client_name,
+                    "title": re.sub(r'\s+', ' ', title).strip(),
+                    "url": href,
+                    "source_page": url,
+                })
+            
+            # Pattern 2: <article> tags with linked headlines
+            if not articles:
+                a_pattern = re.findall(r'<a[^>]+href=["\']([^"\']+(?:insights?|articles?|news|press|research|outlook)[^"\']*)["\'][^>]*>([^<]{20,150})</a>', html, re.IGNORECASE)
+                for href, title in a_pattern[:8]:
+                    if any(skip in title.lower() for skip in ["cookie", "privacy", "terms", "menu", "subscribe"]):
+                        continue
+                    if href.startswith("/"):
+                        base = "/".join(url.split("/")[:3])
+                        href = base + href
+                    articles.append({
+                        "client": client_name,
+                        "title": re.sub(r'\s+', ' ', title).strip(),
+                        "url": href,
+                        "source_page": url,
+                    })
+            
+            results.extend(articles[:5])  # Max 5 per URL
+        except Exception as e:
+            continue
+    
+    # Deduplicate by URL
+    seen = set()
+    unique = []
+    for r in results:
+        if r["url"] not in seen:
+            seen.add(r["url"])
+            unique.append(r)
+    return unique[:10]  # Max 10 per client
+
+
+def fetch_all_client_insights():
+    """Crawl all 9 client websites in parallel for current insights/news."""
+    print(f"  Crawling {len(CLIENT_INSIGHTS_URLS)} client websites for insights...")
+    insights_by_client = {}
+    
+    with ThreadPoolExecutor(max_workers=9) as executor:
+        future_to_client = {
+            executor.submit(fetch_client_website, client, urls): client
+            for client, urls in CLIENT_INSIGHTS_URLS.items()
+        }
+        for future in as_completed(future_to_client):
+            client = future_to_client[future]
+            try:
+                items = future.result()
+                if items:
+                    insights_by_client[client] = items
+            except:
+                pass
+    
+    total = sum(len(v) for v in insights_by_client.values())
+    success_count = len(insights_by_client)
+    print(f"  Client insights: {success_count}/9 websites scraped, {total} articles found")
+    return insights_by_client
 
 
 def fetch_rss_intelligence():
@@ -424,6 +659,18 @@ def run_briefing():
         for it in rss_items[:80]
     )
     rss_time = round(time.time()-t0, 1)
+    
+    # --- DIRECT WEBSITE CRAWLING of client insights pages ---
+    tw0 = time.time()
+    client_insights = fetch_all_client_insights()
+    insights_blocks = []
+    for client, items in client_insights.items():
+        block = f"\n=== {client} — Aktuelle Eigen-Inhalte (Webseite gerade gecrawlt) ===\n"
+        for it in items[:6]:
+            block += f"- {it['title']}\n  URL: {it['url']}\n"
+        insights_blocks.append(block)
+    insights_total_block = "\n".join(insights_blocks) if insights_blocks else "Keine Webseiten-Crawls erfolgreich."
+    web_time = round(time.time()-tw0, 1)
 
     # Client-specific items block (from CLIENT_FEEDS — direct news on each client)
     client_specific_block = "\n".join(
@@ -451,28 +698,50 @@ def run_briefing():
     diff = f"\nVORTAG: {prev_sum[:600]}\nKennzeichne: [NEU]/[ESKALATION]/[ENTSPANNUNG]/[FORTLAUFEND]\n" if prev_sum else ""
     wknd = "\nWochenende: Fokus auf Analysen, Ausblicke, Hintergrund.\n" if is_weekend else ""
 
-    p1 = f"""Fuehre eine gruendliche Web-Recherche durch.
+    # Build client profile context block (stable facts only)
+    profile_block = ""
+    for client, p in CLIENT_PROFILES.items():
+        profile_block += f"\n[{client}]\n"
+        profile_block += f"  Typ: {p['type']} | AuM: {p['aum']} | HQ: {p['hq']} | DACH: {p['dach']}\n"
+        profile_block += f"  Kernkompetenzen: {p['core_competencies']}\n"
+        profile_block += f"  Zielmedien DACH: {p['target_media_dach']}\n"
+        profile_block += f"  Tonfall: {p['tone']}\n"
+        profile_block += f"  Tabu: {p['taboo']}\n"
+    
+    p1 = f"""Du bist der weltweit beste Medienanalyst und Finanzkommunikationsberater. 
 Stand: {date_str}, {time_str} CET. Erfasse die LETZTEN 24 STUNDEN bis 7 TAGE.{wknd}
+
+=== TEIL A: MARKT-RECHERCHE ===
 
 ALLGEMEINE RSS-SCHLAGZEILEN ({len(rss_items)} Artikel, {health['sources']} Quellen, abgerufen {time_str} CET):
 {rss_block}
 
-KUNDEN-SPEZIFISCHE TREFFER aus dedizierten Kunden-Feeds (Webseiten + Namenssuchen, {len(client_specific)} Treffer):
+KUNDEN-SPEZIFISCHE TREFFER aus dedizierten Kunden-Feeds ({len(client_specific)} Treffer):
 {client_specific_block}
 
 KUNDEN-ERWAEHNUNGEN IN ALLG. MEDIEN:
 {mentions_block}
 {trend_block}
-Recherchiere per Web Search UEBER diese RSS-Daten hinaus.
-Themenfelder: {', '.join(THEMENFELDER)}
 
-KUNDEN (alle 9 muessen recherchiert werden):
-{CLIENTS}
+=== TEIL B: KUNDEN-EIGEN-INHALTE (DIREKT VON DEN WEBSEITEN GECRAWLT) ===
+
+WICHTIG: Diese Inhalte wurden JUST EBEN von den Kunden-Webseiten gescraped. Das sind die aktuellsten Eigen-Publikationen der Kunden. Sie sind Goldwert fuer Presseverteiler-Versand und Journalisten-Pitches:
+{insights_total_block}
+
+=== TEIL C: STABILE KUNDEN-PROFILE (Unternehmenswissen) ===
+
+Diese Fakten sind stabil und seit Jahren gueltig (Geschaeftsmodell, Kernkompetenzen, Zielmedien, Tonfall, Tabus). Sprecher sind hier NICHT genannt, weil die wechseln — Sprecher musst du LIVE recherchieren.
+{profile_block}
+
+=== AUFGABE ===
+
+Themenfelder: {', '.join(THEMENFELDER)}
 {diff}
+
 AUSGABE (beginne direkt, keine Einleitung):
 
 ## Top 3 Themen des Tages
-Die 3 wichtigsten Markt-Themen heute in je 2 Saetzen (Schnellueberblick).
+Die 3 wichtigsten Markt-Themen heute in je 2 Saetzen.
 
 ## Schritt 1 — Marktrecherche-Ueberblick
 Gesamtcharakter, uebergreifendes Narrativ, dominante Themencluster.
@@ -482,29 +751,32 @@ Nummerierte Bloecke nach Relevanz. Pro Block:
 - Was dominiert die Headlines (Fakten, Zahlen, Quellen mit Datum)
 - Narrativ und Kausalkette
 - Veraenderung gegenueber Vortagen
+- Sentiment (positiv/neutral/kritisch fuer wen?)
 
-## Schritt 3 — KUNDEN-LIVE-RECHERCHE (kritisch!)
-Fuer JEDEN der 9 Kunden FUEHRE WEB-SEARCH DURCH und finde heraus:
+## Schritt 3 — Unterdiskutierte Themen / White Spaces
+Welche relevanten Themen sind heute KAUM in den Medien, koennten aber gepitcht werden? Wo gibt es ein Erzaehl-Vakuum, das ein Kunde fuellen koennte?
+
+## Schritt 4 — Konkurrenz-Beobachtung
+Welche grossen Wettbewerber unserer Kunden (BlackRock, Vanguard, Fidelity, Goldman Sachs AM, JPMorgan AM, Amundi, DWS, Allianz GI, AXA IM, Schroders, Invesco, State Street, Northern Trust, Apollo, Blackstone, Carlyle, TPG, Brookfield, EQT, Permira, Advent, CVC, Coinbase, Kraken, Gemini) sind heute in den Medien? Was kommunizieren sie? Wo koennten unsere Kunden kontern?
+
+## Schritt 5 — KUNDEN-LIVE-RECHERCHE
+Fuer JEDEN der 9 Kunden FUEHRE WEB-SEARCH DURCH:
 
 ### [Kundenname]
-- **Aktuelle DACH-Sprecher** (Stand 2026, NICHT aus deinem Trainings-Wissen!):
-  Wer ist heute der/die DACH-Sprecher dieses Hauses? Suche auf der Unternehmensseite, LinkedIn, jüngsten Pressemeldungen. Gib Namen + Rolle + Jahr der letzten Erwaehnung an.
-  WICHTIG: Wenn du eine Person nennst, muss sie 2025/2026 nachweislich aktiv sein.
-- **Aktuelle Kommentare/Insights** (letzte 7 Tage):
-  Welche Marktkommentare, Whitepapers, Outlooks, Pressemitteilungen hat das Haus zuletzt veroeffentlicht? Suche site:[firmenwebseite.com], LinkedIn-Posts, Pressemeldungen.
-  Liste konkrete Titel + Datum + URL.
-- **Aktuelle Themen-Schwerpunkte**:
-  Worueber kommuniziert das Haus aktuell aktiv? Was ist die Eigen-Botschaft?
+- **Aktuelle DACH-Sprecher** (Stand 2026, NUR live verifiziert!):
+  Suche per Web Search auf der Unternehmensseite, LinkedIn, juengsten Pressemeldungen. Wer ist heute aktueller DACH-Sprecher? Name, Rolle, Quellennachweis (Link), Jahr der letzten Erwaehnung. WICHTIG: NUR Personen, die 2025/2026 nachweislich aktiv sind. Bei Unsicherheit: "nicht aktuell verifizierbar — bitte intern abstimmen".
 - **Heutige direkte Erwaehnungen**:
-  Wenn der Kunde heute in den allgemeinen Medien zitiert/erwaehnt wurde: in welchem Kontext, mit welchem Sprecher?
+  Wenn der Kunde in den allgemeinen Medien zitiert/erwaehnt wurde: in welchem Kontext, mit welchem Sprecher, Sentiment?
+- **Themen-Schwerpunkte des Hauses aktuell**:
+  Aus den oben gecrawlten Eigen-Inhalten + Live-Recherche: Worueber kommuniziert das Haus aktuell aktiv?
 
-KRITISCH: Wenn du eine Information NICHT verifizieren kannst, schreibe "nicht aktuell verifizierbar" — erfinde NICHTS. Veraltete Sprecher (z.B. nicht mehr im Unternehmen) sind ein schwerer Fehler.
+KRITISCH: Bei Sprechern und aktuellen Statements NICHTS halluzinieren. Lieber "nicht verifizierbar" als falschen Namen.
 
-## Schritt 4 — Termine naechste 7 Tage
+## Schritt 6 — Termine naechste 7 Tage
 Datum, Uhrzeit, Land, Termin, Relevanz.
 
 ## Mehrtages-Trends
-Was zieht sich seit mehreren Tagen durch? Was eskaliert? Was klingt ab?
+Was zieht sich seit Tagen durch? Was eskaliert/klingt ab?
 
 ## Gesamtfazit
 2-3 Saetze zum uebergeordneten Narrativ.
@@ -513,13 +785,12 @@ Was zieht sich seit mehreren Tagen durch? Was eskaliert? Was klingt ab?
 ALLE verwendeten Quellen: Medium — Titel (Datum) — URL. Keine erfundenen URLs.
 
 QUALITAETSREGELN — ABSOLUT KRITISCH:
-- NUR verifizierte Fakten. Bei Sprechern: nur, wer 2025/2026 nachweislich noch im Haus arbeitet.
+- Sprecher nur, wenn 2025/2026 nachweislich noch im Haus aktiv (sonst "nicht verifizierbar").
 - Bei JEDER Zahl: Quelle + Datum.
-- Bei JEDEM Sprecher: Quellennachweis (Unternehmensseite, LinkedIn-Profil, juengste Pressemeldung).
-- Nicht halluzinieren. Keine erfundenen URLs/Zitate/Kurse/Personen.
-- Wenn eine Info nicht verifiziert werden kann: explizit "nicht aktuell verifizierbar".
+- Nicht halluzinieren. Keine erfundenen URLs/Zitate/Personen.
 - Englischsprachige Artikel gruendlich ins Deutsche uebertragen.
-- Einfache, klare Sprache, keine Telegrammstil-Sprache."""
+- Einfache, klare Sprache, keine Telegrammstil-Sprache.
+- Kausalketten und Zusammenhaenge erklaeren."""
 
     print(f"[{time_str}] PASS 1: Opus 4.7 + Web Search (most capable model)...")
     t1s = time.time()
@@ -534,59 +805,57 @@ QUALITAETSREGELN — ABSOLUT KRITISCH:
     print(f"[{time_str}] Waiting 30s...")
     time.sleep(30)
 
-    p2 = f"""Du bist strategischer Finanzkommunikationsberater bei TE Communications (PR-Beratung, Frankfurt/Zuerich).
-Basierend auf der heutigen LIVE-RECHERCHE (siehe unten), erstelle ein Positionierungs-Mapping.
+    # Build profile + insights summary for Pass 2 (compact)
+    insights_summary = "\n".join([f"\n[{c}] {len(items)} Eigen-Inhalte gefunden:\n" + "\n".join(f"  - {i['title']} → {i['url']}" for i in items[:4]) for c, items in client_insights.items()])
+    
+    p2 = f"""Du bist DER beste Finanzkommunikationsberater bei TE Communications (PR-Beratung, Frankfurt/Zuerich).
+Du arbeitest auf Meltwater-Niveau, aber mit besserer strategischer Intelligenz.
 
-Kunden:
-{CLIENTS}
+Basierend auf der heutigen Marktanalyse + Live-Recherche, erstelle ein Positionierungs-Mapping.
 
-LIVE-MARKTANALYSE UND KUNDEN-RECHERCHE VON HEUTE ({date_str}):
-Diese Analyse wurde JUST EBEN per Web Search erstellt. Sprecher, aktuelle Kommentare und Insights wurden live recherchiert. Verlasse dich AUSSCHLIESSLICH auf diese Recherche — verwende KEIN Trainings-Wissen ueber Personen oder Sprecher.
+KUNDEN-PROFILE (Tonfall, Zielmedien, Tabus — stabile Fakten):
+{profile_block}
 
-{txt1[:9000]}
+LIVE-MARKTANALYSE VON HEUTE ({date_str}):
+{txt1[:8000]}
 
-KUNDEN-SPEZIFISCHE RSS-TREFFER (heute aus Kunden-Feeds):
-{client_specific_block[:2500]}
+DIREKT GECRAWLTE EIGEN-INHALTE DER KUNDEN (gerade von Webseiten geholt — IDEAL fuer Presseversand!):
+{insights_summary}
 
-DIREKTE KUNDEN-ERWAEHNUNGEN IN ALLG. MEDIEN:
+KUNDEN-MENTIONS HEUTE:
 {mentions_block}
 
-AUFGABE:
+AUFGABE — Du erstellst zwei Abschnitte mit absolut praktischer Brauchbarkeit:
 
-## Schritt 5 — Positionierungs-Mapping auf die Kunden
-Fuer JEDEN der 9 Kunden — nutze AUSSCHLIESSLICH die Informationen aus der Live-Recherche oben. Wenn dort keine aktuellen Sprecher genannt wurden, nenne keine Sprecher (das vermeidet veraltete Angaben).
+## Schritt 7 — Positionierungs-Mapping pro Kunde
+Fuer JEDEN der 9 Kunden:
 
 ### [Kundenname]
-- **Aktueller Eigen-Anker (aus heutiger Recherche):** [Welchen aktuellen Kommentar, Outlook, Whitepaper hat das Haus selbst veroeffentlicht? Aus der Live-Recherche!]
-- **Anschlussfaehig ueber:** [Themenachsen aus heutiger Marktlage]
-- **Empfohlener Sprecher:** [NUR Personen, die in der Live-Recherche oben als aktuell aktiv bestaetigt wurden. Bei "nicht aktuell verifizierbar": "Sprecher muss intern abgestimmt werden"]
-- **Pitch-Idee:** [konkretes Thema, das den Eigen-Anker mit aktueller Marktlage verbindet]
-- **Gastbeitrag-Thema:** [moegliches Thema]
-- **Interview-Aufhaenger:** [aktueller Anlass aus heutiger Berichterstattung]
-- **Zielmedien:** [konkrete Medien — basierend auf Markt und Thema]
-- **Format-Empfehlung:** [Kommentar/Gastbeitrag/Hintergrundgespraech/TV-Schalte/Interview/Pressemitteilung-Versand]
-- **Aufgreifbare Eigen-Inhalte:** [konkrete URL/Titel eines aktuellen Hauses-Kommentars, der breit verteilt werden koennte — aus der Live-Recherche!]
+- **Anschlussfaehig ueber:** [Themenachsen aus heutiger Marktlage, die zum Tonfall+Tabus des Kunden passen]
+- **Empfohlener Sprecher:** [NUR aus der Live-Recherche oben — wenn nicht verifiziert: "intern abstimmen"]
+- **Pitch-Idee 1 (kurzfristig, heute):** [konkretes Thema mit Aufhaenger]
+- **Pitch-Idee 2 (diese Woche):** [zweites Thema]
+- **Gastbeitrag-Thema:** [moegliches Thema im Stil des Hauses]
+- **Interview-Aufhaenger:** [aktueller Anlass aus Berichterstattung]
+- **Zielmedien (aus Profil):** [3-5 Medien aus dem Tonfall-Profil oben]
+- **Format-Empfehlung:** [Kommentar/Gastbeitrag/Hintergrundgespraech/TV-Schalte/Interview]
+- **Aufgreifbare Eigen-Inhalte:** [aus den gecrawlten Webseiten oben — konkrete Titel + URL — fuer Presseverteiler-Versand]
+- **Konkurrenz-Konter:** [Wenn ein Wettbewerber heute prominent in Medien war: wo koennte unser Kunde anders/besser positionieren?]
+- **Tabu-Warnung:** [Wenn ein Pitch-Vorschlag das Tabu des Kunden streift: explizit warnen]
 
-Wenn der Kunde heute direkt in den Medien erwaehnt wurde: Reaktionsempfehlung.
-Wenn nichts passt, offen sagen.
-
-## Schritt 6 — Konkrete Pitch-Ableitungen
-5-7 umsetzbare Ideen, sortiert nach Dringlichkeit:
-- Thema
-- Format
-- Kunde + empfohlener Sprecher (NUR live verifiziert!)
-- Zielmedium
-- Dringlichkeit (heute/diese Woche/naechste Woche)
-- Begruendung
-- Vorhandener Eigen-Inhalt (Whitepaper/Kommentar) zum Andocken — falls in Live-Recherche gefunden
+## Schritt 8 — Top-7 Pitch-Empfehlungen fuer HEUTE
+Die 7 besten Pitch-Ideen sortiert nach Erfolgswahrscheinlichkeit:
+1. **[Thema]** — Format: [Kommentar/Gastbeitrag/Interview] | Kunde: [X] | Sprecher: [Name oder "intern"] | Zielmedium: [Y] | Dringlichkeit: [heute/diese Woche] | Eigen-Material: [URL falls vorhanden] | Begruendung: [Warum dieser Mix gewinnt]
 
 REGELN:
-- KEINE Sprecher nennen, die nicht in der Live-Recherche oben verifiziert wurden.
+- Sprecher nur, wenn live verifiziert in der Recherche oben.
 - KEINE Trading-Sprache (kein Overweight/Underweight).
-- Nutze ausschliesslich heutige Erkenntnisse, KEIN Trainings-Wissen.
+- Eigen-Inhalte mit URL angeben (sind das Wertvollste fuer Presseverteiler).
+- Tonfall des Hauses respektieren.
+- Tabus respektieren.
 - Deutsch."""
 
-    print(f"[{time_str}] PASS 2: Sonnet 4.6 positioning (using live research)...")
+    print(f"[{time_str}] PASS 2: Sonnet 4.6 positioning (using live research + insights)...")
     t2s = time.time()
     r2, m2 = api_call(client, MODEL_POSITIONING, MAX_TOKENS_POSITIONING,
                        [{"role":"user","content":p2}])
