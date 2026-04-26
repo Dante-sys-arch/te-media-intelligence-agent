@@ -743,8 +743,8 @@ AUSGABE (beginne direkt, keine Einleitung):
 ## Schritt 0 — Quellen- und Zugriffslage
 In 3-4 Saetzen: Welche Quellen waren heute gut auswertbar? Welche eingeschraenkt (Paywalls, Snippets)? Was ist die Gesamt-Belastbarkeit der heutigen Recherche? Macht Luecken transparent statt sie zu verstecken.
 
-## Top 3 Themen des Tages
-Die 3 wichtigsten Markt-Themen heute in je 2 Saetzen.
+## Top 5 Themen des Tages
+Die 5 wichtigsten Markt-Themen heute in je 2 Saetzen.
 
 ## Schritt 1 — Marktrecherche-Ueberblick
 Gesamtcharakter, uebergreifendes Narrativ, dominante Themencluster.
