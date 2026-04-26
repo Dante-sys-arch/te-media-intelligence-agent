@@ -740,6 +740,9 @@ Themenfelder: {', '.join(THEMENFELDER)}
 
 AUSGABE (beginne direkt, keine Einleitung):
 
+## Schritt 0 — Quellen- und Zugriffslage
+In 3-4 Saetzen: Welche Quellen waren heute gut auswertbar? Welche eingeschraenkt (Paywalls, Snippets)? Was ist die Gesamt-Belastbarkeit der heutigen Recherche? Macht Luecken transparent statt sie zu verstecken.
+
 ## Top 3 Themen des Tages
 Die 3 wichtigsten Markt-Themen heute in je 2 Saetzen.
 
@@ -749,9 +752,11 @@ Gesamtcharakter, uebergreifendes Narrativ, dominante Themencluster.
 ## Schritt 2 — Themen die das Markt-Narrativ treiben
 Nummerierte Bloecke nach Relevanz. Pro Block:
 - Was dominiert die Headlines (Fakten, Zahlen, Quellen mit Datum)
+- ZWEITRUNDENEFFEKTE / Zweite Ebene: Nicht das offensichtliche Thema, sondern was es konkret fuer Kreditqualitaet, Margen, Refinanzierung, Spreads, Waehrungen, EM-Uebertragung bedeutet. Genau hier liegt der differenzierende Pitch-Wert!
 - Narrativ und Kausalkette
 - Veraenderung gegenueber Vortagen
 - Sentiment (positiv/neutral/kritisch fuer wen?)
+- Belastbarkeit der Quellenlage: hoch / mittel / niedrig
 
 ## Schritt 3 — Unterdiskutierte Themen / White Spaces
 Welche relevanten Themen sind heute KAUM in den Medien, koennten aber gepitcht werden? Wo gibt es ein Erzaehl-Vakuum, das ein Kunde fuellen koennte?
@@ -775,11 +780,22 @@ KRITISCH: Bei Sprechern und aktuellen Statements NICHTS halluzinieren. Lieber "n
 ## Schritt 6 — Termine naechste 7 Tage
 Datum, Uhrzeit, Land, Termin, Relevanz.
 
+## Schritt 6a — Priorisierte Themen-Tabelle (Schnellueberblick)
+Erstelle eine kompakte Tabelle der heutigen Top-Themen mit Zuordnung:
+
+| Prio | Thema | Beste Kunden | Dringlichkeit | Medienarbeits-Eignung |
+|------|-------|--------------|---------------|------------------------|
+| 1 | [Top-Thema] | [1-3 Kunden] | hoch/mittel/niedrig | hoch/mittel/niedrig |
+| 2 | ... | ... | ... | ... |
+| ... bis Prio 7-8 | | | | |
+
+Wichtig: Wenn fuer ein Themenfeld heute KEIN Stichtagsanlass besteht (z.B. Tokenisierung), liste es trotzdem mit "niedrig / niedrig" und der Begruendung "kein klarer Stichtagsanlass". Lieber ehrlich als zwanghaft Pitches generieren.
+
 ## Mehrtages-Trends
 Was zieht sich seit Tagen durch? Was eskaliert/klingt ab?
 
 ## Gesamtfazit
-2-3 Saetze zum uebergeordneten Narrativ.
+2-3 Saetze zum uebergeordneten Narrativ. Plus: Welcher Pitch-Winkel ist der differenzierendste fuer heute (zweite Ebene, nicht das offensichtliche Thema)?
 
 ## Quellenverzeichnis
 ALLE verwendeten Quellen: Medium — Titel (Datum) — URL. Keine erfundenen URLs.
@@ -790,7 +806,9 @@ QUALITAETSREGELN — ABSOLUT KRITISCH:
 - Nicht halluzinieren. Keine erfundenen URLs/Zitate/Personen.
 - Englischsprachige Artikel gruendlich ins Deutsche uebertragen.
 - Einfache, klare Sprache, keine Telegrammstil-Sprache.
-- Kausalketten und Zusammenhaenge erklaeren."""
+- Kausalketten und Zusammenhaenge erklaeren.
+- ZWEITE EBENE statt Offensichtliches: Differenzierung kommt aus den Zweitrundeneffekten, nicht aus generischen Marktkommentaren.
+- Wenn fuer ein Thema/Kunden heute kein Stichtagsanlass existiert: ehrlich sagen statt zwanghaft pitchen."""
 
     print(f"[{time_str}] PASS 1: Opus 4.7 + Web Search (most capable model)...")
     t1s = time.time()
