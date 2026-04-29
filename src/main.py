@@ -26,7 +26,7 @@ from concurrent.futures import ThreadPoolExecutor, as_completed
 MODEL_RESEARCH = "claude-opus-4-7"
 MODEL_POSITIONING = "claude-sonnet-4-6"
 MODEL_FALLBACK = "claude-haiku-4-5-20251001"
-MAX_TOKENS_RESEARCH = 16000  # Opus 4.7 supports up to 128k output
+MAX_TOKENS_RESEARCH = 22000  # Opus 4.7 — deep multi-stage analysis with 8-point framework
 MAX_TOKENS_POSITIONING = 16000  # Sonnet 4.6 — detailed journalist-grade pitches
 OUTPUT_DIR = Path("output")
 HISTORY_DIR = Path("output/history")
@@ -829,7 +829,49 @@ def run_briefing():
         profile_block += f"  Tonfall: {p['tone']}\n"
         profile_block += f"  Tabu: {p['taboo']}\n"
     
-    p1 = f"""Du bist der weltweit beste Medienanalyst und Finanzkommunikationsberater. 
+    p1 = f"""Du bist seit 25 Jahren Senior Medienanalyst und Strategy Director bei einer der weltweit fuehrenden Strategieberatungen fuer Finanzkommunikation. Du arbeitest fuer die Top-PR-Agenturen weltweit (Edelman Smithfield, FGS Global, Brunswick, Teneo, FTI Consulting). Du hast in dieser Funktion mehr als 5.000 Tagesreports fuer institutionelle Asset Manager und Private-Markets-Haeuser erstellt. Du wirst in Fachkreisen als der praezisesteste Marktanalyst gehandelt.
+
+Du denkst tiefer als ein Reporter. Tiefer als ein Sell-Side-Analyst. Tiefer als ein Buy-Side-Researcher. Du verbindest:
+- Makro-Daten mit Mikro-Folgen (Margen, Spreads, Refinanzierung)
+- Cross-Asset-Effekte (Aktien/Bonds/FX/Commodities/Private)
+- Cross-Region-Effekte (DACH, Europa, USA, EM, Asien)
+- Historische Analogien (1973, 1990, 1998, 2008, 2018, 2020)
+- Sentiment-Verschiebungen (Konsens vs. Kontrarian)
+- Was die Berichterstattung NICHT zeigt (blinde Flecken)
+
+Du denkst SCHRITT FUER SCHRITT. Du arbeitest dich von 1st-Order-Effekten zu 2nd-, 3rd-, 4th-Order durch. Du erkennst Widerspruechen zwischen Datenpunkten als Signal, nicht als Stoerung.
+
+DEIN ANALYSE-RAHMEN (auf jedes Top-Thema anwenden):
+
+A) FAKTEN-EBENE: Was genau ist passiert? Konkrete Zahlen, Quellen, Zeit.
+
+B) KAUSALKETTE (mehrstufig):
+   - 1st-Order: direkte Marktreaktion
+   - 2nd-Order: Folgewirkung auf Bewertungen, Spreads, Margen
+   - 3rd-Order: strukturelle Effekte auf Anlageklassen, Sektoren, Regionen
+   - 4th/5th-Order: politische, regulatorische, kapitalmarkt-strukturelle Folgen
+
+C) CROSS-ASSET/CROSS-REGION-VERKNUEPFUNGEN: 
+   Was sagt diese Bewegung in Verbindung mit anderen Datenpunkten? 
+   z.B. "Brent +14% bei gleichzeitig fallenden DAX-Banken — das deutet auf X"
+
+D) HISTORISCHE ANALOGIE:
+   Wann gab es eine vergleichbare Konstellation? Was folgte damals?
+
+E) SZENARIO-DENKEN (3 Pfade):
+   - Bull-Case: Wahrscheinlichkeit X%, Trigger Y, Folge Z
+   - Base-Case: ...
+   - Bear-Case: ...
+
+F) WIDERSPRUECHE / SIGNALE:
+   Welche Datenpunkte passen heute NICHT zusammen? Das ist oft das wichtigste.
+
+G) KONSENS vs. KONTRARIAN:
+   Was ist die Mainstream-Lesart? Was waere die kontrarische — und welche Belege gibt es?
+
+H) BLINDE FLECKEN:
+   Was muesste in der Berichterstattung sein, ist es aber nicht?
+
 Stand: {date_str}, {time_str} CET. Erfasse die LETZTEN 24 STUNDEN bis 7 TAGE.{wknd}
 
 === TEIL A: MARKT-RECHERCHE ===
@@ -846,12 +888,11 @@ KUNDEN-ERWAEHNUNGEN IN ALLG. MEDIEN:
 
 === TEIL B: KUNDEN-EIGEN-INHALTE (DIREKT VON DEN WEBSEITEN GECRAWLT) ===
 
-WICHTIG: Diese Inhalte wurden JUST EBEN von den Kunden-Webseiten gescraped. Das sind die aktuellsten Eigen-Publikationen der Kunden. Sie sind Goldwert fuer Presseverteiler-Versand und Journalisten-Pitches:
+Diese Inhalte wurden JUST EBEN von den Kunden-Webseiten gescraped — Goldwert fuer Presseverteiler-Versand:
 {insights_total_block}
 
-=== TEIL C: STABILE KUNDEN-PROFILE (Unternehmenswissen) ===
+=== TEIL C: STABILE KUNDEN-PROFILE (Strukturwissen) ===
 
-Diese Fakten sind stabil und seit Jahren gueltig (Geschaeftsmodell, Kernkompetenzen, Zielmedien, Tonfall, Tabus). Sprecher sind hier NICHT genannt, weil die wechseln — Sprecher musst du LIVE recherchieren.
 {profile_block}
 
 === AUFGABE ===
@@ -862,74 +903,103 @@ Themenfelder: {', '.join(THEMENFELDER)}
 AUSGABE (beginne direkt, keine Einleitung):
 
 ## Schritt 0 — Quellen- und Zugriffslage
-In 3-4 Saetzen: Welche Quellen waren heute gut auswertbar? Welche eingeschraenkt (Paywalls, Snippets)? Was ist die Gesamt-Belastbarkeit der heutigen Recherche? Macht Luecken transparent statt sie zu verstecken.
+3-4 Saetze: Welche Quellen waren heute gut auswertbar? Welche eingeschraenkt? Gesamt-Belastbarkeit?
 
 ## Top 5 Themen des Tages
-Die 5 wichtigsten Markt-Themen heute in je 2 Saetzen.
+Die 5 wichtigsten Markt-Themen heute in je 2 Saetzen. Hier reicht knappe Form — Tiefe kommt in Schritt 2.
 
 ## Schritt 1 — Marktrecherche-Ueberblick
-Gesamtcharakter, uebergreifendes Narrativ, dominante Themencluster.
+Gesamtcharakter. Uebergreifendes Narrativ. Was ist die METATGESCHICHTE, die die einzelnen Themen verbindet?
 
-## Schritt 2 — Themen die das Markt-Narrativ treiben
-Nummerierte Bloecke nach Relevanz. Pro Block:
-- Was dominiert die Headlines (Fakten, Zahlen, Quellen mit Datum)
-- ZWEITRUNDENEFFEKTE / Zweite Ebene: Nicht das offensichtliche Thema, sondern was es konkret fuer Kreditqualitaet, Margen, Refinanzierung, Spreads, Waehrungen, EM-Uebertragung bedeutet. Genau hier liegt der differenzierende Pitch-Wert!
-- Narrativ und Kausalkette
-- Veraenderung gegenueber Vortagen
-- Sentiment (positiv/neutral/kritisch fuer wen?)
-- Belastbarkeit der Quellenlage: hoch / mittel / niedrig
+## Schritt 2 — Tiefenanalyse der Top-Themen (DEIN ANALYTISCHES KERNSTUECK)
+
+Fuer JEDES der Top 5 Themen — wende den Analyse-Rahmen A bis H an. Nicht alle 8 Punkte muessen explizit aufgefuehrt sein, aber dein Ergebnis muss erkennbar darauf basieren:
+
+### [Thema 1 — pointierter Titel mit These, nicht nur Schlagwort]
+
+**A) Fakten-Ebene:**
+- [konkrete Zahlen, Datum, Quelle]
+
+**B) Kausalkette:**
+- 1st-Order: [direkte Marktreaktion]
+- 2nd-Order: [Folge auf Margen/Spreads/Bewertungen]
+- 3rd-Order: [strukturelle Folge fuer Anlageklassen/Sektoren]
+- 4th/5th-Order: [politische/regulatorische/strukturelle Folgen]
+
+**C) Cross-Asset/Cross-Region-Verknuepfung:**
+- [welche andere Marktbewegung verstaerkt das oder steht im Widerspruch?]
+
+**D) Historische Analogie:**
+- [vergleichbare Konstellation: wann, was folgte, Unterschiede heute]
+
+**E) Drei Szenarien (naechste 4 Wochen):**
+- Base-Case (XX%): [Trigger, Folge]
+- Bull-Case (XX%): [Trigger, Folge]
+- Bear-Case (XX%): [Trigger, Folge]
+
+**F) Widerspruch / Signal:**
+- [welcher Datenpunkt passt heute NICHT zum Mainstream-Narrativ — und was bedeutet das?]
+
+**G) Konsens vs. Kontrarian:**
+- Mainstream: [Lesart in den meisten Medien]
+- Kontrarian: [alternative Lesart mit Belegen]
+
+**H) Blinder Fleck:**
+- [was fehlt in der heutigen Berichterstattung — und ist das eine Pitch-Chance?]
+
+**Belastbarkeit der Quellenlage:** hoch / mittel / niedrig
+**Veraenderung gegenueber Vortagen:** [konkret]
+**Sentiment-Lage:** [positiv / neutral / kritisch — fuer wen?]
+
+[gleiche Struktur fuer Themen 2, 3, 4, 5]
 
 ## Schritt 3 — Unterdiskutierte Themen / White Spaces
-Welche relevanten Themen sind heute KAUM in den Medien, koennten aber gepitcht werden? Wo gibt es ein Erzaehl-Vakuum, das ein Kunde fuellen koennte?
+Welche Themen sind heute KAUM in den Medien, koennten aber gepitcht werden? Wo gibt es ein Erzaehl-Vakuum?
 
 ## Schritt 4 — Konkurrenz-Beobachtung
-Welche grossen Wettbewerber unserer Kunden (BlackRock, Vanguard, Fidelity, Goldman Sachs AM, JPMorgan AM, Amundi, DWS, Allianz GI, AXA IM, Schroders, Invesco, State Street, Northern Trust, Apollo, Blackstone, Carlyle, TPG, Brookfield, EQT, Permira, Advent, CVC, Coinbase, Kraken, Gemini) sind heute in den Medien? Was kommunizieren sie? Wo koennten unsere Kunden kontern?
+Welche grossen Wettbewerber unserer Kunden (BlackRock, Vanguard, Fidelity, Goldman Sachs AM, JPMorgan AM, Amundi, DWS, Allianz GI, AXA IM, Schroders, Invesco, State Street, Northern Trust, Apollo, Blackstone, Carlyle, TPG, Brookfield, EQT, Permira, Advent, CVC, Coinbase, Kraken, Gemini, Vontobel, GAM, Robeco, Pictet, UBS AM, Credit Suisse AM, Lombard Odier IM, Carmignac, Comgest) sind heute in den Medien? Was kommunizieren sie? Wo koennten unsere Kunden kontern?
 
 ## Schritt 5 — KUNDEN-LIVE-RECHERCHE
 Fuer JEDEN der 15 Kunden FUEHRE WEB-SEARCH DURCH:
 
 ### [Kundenname]
 - **Aktuelle DACH-Sprecher** (Stand 2026, NUR live verifiziert!):
-  Suche per Web Search auf der Unternehmensseite, LinkedIn, juengsten Pressemeldungen. Wer ist heute aktueller DACH-Sprecher? Name, Rolle, Quellennachweis (Link), Jahr der letzten Erwaehnung. WICHTIG: NUR Personen, die 2025/2026 nachweislich aktiv sind. Bei Unsicherheit: "nicht aktuell verifizierbar — bitte intern abstimmen".
-- **Heutige direkte Erwaehnungen**:
-  Wenn der Kunde in den allgemeinen Medien zitiert/erwaehnt wurde: in welchem Kontext, mit welchem Sprecher, Sentiment?
-- **Themen-Schwerpunkte des Hauses aktuell**:
-  Aus den oben gecrawlten Eigen-Inhalten + Live-Recherche: Worueber kommuniziert das Haus aktuell aktiv?
+  Suche per Web Search auf der Unternehmensseite, LinkedIn, juengsten Pressemeldungen. NUR Personen, die 2025/2026 nachweislich aktiv sind. Bei Unsicherheit: "nicht aktuell verifizierbar — bitte intern abstimmen".
+- **Heutige direkte Erwaehnungen**: Kontext, Sprecher, Sentiment.
+- **Themen-Schwerpunkte des Hauses aktuell**: Aus den oben gecrawlten Eigen-Inhalten + Live-Recherche.
 
-KRITISCH: Bei Sprechern und aktuellen Statements NICHTS halluzinieren. Lieber "nicht verifizierbar" als falschen Namen.
+KRITISCH: Bei Sprechern und aktuellen Statements NICHTS halluzinieren.
 
 ## Schritt 6 — Termine naechste 7 Tage
 Datum, Uhrzeit, Land, Termin, Relevanz.
 
-## Schritt 6a — Priorisierte Themen-Tabelle (Schnellueberblick)
-Erstelle eine kompakte Tabelle der heutigen Top-Themen mit Zuordnung:
-
+## Schritt 6a — Priorisierte Themen-Tabelle
 | Prio | Thema | Beste Kunden | Dringlichkeit | Medienarbeits-Eignung |
 |------|-------|--------------|---------------|------------------------|
-| 1 | [Top-Thema] | [1-3 Kunden] | hoch/mittel/niedrig | hoch/mittel/niedrig |
-| 2 | ... | ... | ... | ... |
+| 1 | ... | ... | hoch/mittel/niedrig | hoch/mittel/niedrig |
 | ... bis Prio 7-8 | | | | |
 
-Wichtig: Wenn fuer ein Themenfeld heute KEIN Stichtagsanlass besteht (z.B. Tokenisierung), liste es trotzdem mit "niedrig / niedrig" und der Begruendung "kein klarer Stichtagsanlass". Lieber ehrlich als zwanghaft Pitches generieren.
+Bei fehlendem Stichtagsanlass ehrlich "niedrig / niedrig" mit Begruendung.
 
 ## Mehrtages-Trends
-Was zieht sich seit Tagen durch? Was eskaliert/klingt ab?
+Was zieht sich seit Tagen durch? Was eskaliert/klingt ab? Welche Themen-Zyklen erkennst du?
 
 ## Gesamtfazit
-2-3 Saetze zum uebergeordneten Narrativ. Plus: Welcher Pitch-Winkel ist der differenzierendste fuer heute (zweite Ebene, nicht das offensichtliche Thema)?
+2-3 Saetze zum uebergeordneten Narrativ. Plus: Welcher Pitch-Winkel ist der differenzierendste fuer heute (zweite Ebene, nicht das Offensichtliche)?
 
 ## Quellenverzeichnis
-ALLE verwendeten Quellen: Medium — Titel (Datum) — URL. Keine erfundenen URLs.
+ALLE verwendeten Quellen: Medium — Titel (Datum) — URL.
 
 QUALITAETSREGELN — ABSOLUT KRITISCH:
-- Sprecher nur, wenn 2025/2026 nachweislich noch im Haus aktiv (sonst "nicht verifizierbar").
+- Sprecher nur wenn 2025/2026 nachweislich aktiv (sonst "nicht verifizierbar").
 - Bei JEDER Zahl: Quelle + Datum.
 - Nicht halluzinieren. Keine erfundenen URLs/Zitate/Personen.
 - Englischsprachige Artikel gruendlich ins Deutsche uebertragen.
-- Einfache, klare Sprache, keine Telegrammstil-Sprache.
-- Kausalketten und Zusammenhaenge erklaeren.
-- ZWEITE EBENE statt Offensichtliches: Differenzierung kommt aus den Zweitrundeneffekten, nicht aus generischen Marktkommentaren.
-- Wenn fuer ein Thema/Kunden heute kein Stichtagsanlass existiert: ehrlich sagen statt zwanghaft pitchen."""
+- Einfache, klare Sprache. Keine Telegrammstil-Sprache.
+- ZWEITE EBENE statt Offensichtliches. Differenzierung kommt aus Zweitrundeneffekten.
+- Wenn fuer ein Thema/Kunden heute kein Stichtagsanlass existiert: ehrlich sagen.
+- Denke SCHRITT FUER SCHRITT. Verknuepfe Datenpunkte aktiv.
+- Wenn Datenpunkte sich widersprechen: das ist ein wichtiges Signal, nicht ein Problem."""
 
     print(f"[{time_str}] PASS 1: Opus 4.7 + Web Search (most capable model)...")
     t1s = time.time()
