@@ -86,10 +86,15 @@ MEDIA_RSS_FEEDS = [
     "https://www.dpa-afx.de/rss",
     "https://www.dpa.com/de/produkte/themendienste/wirtschaft/rss",
     "https://www.euro-magazin.de/rss",
+    # NEU: weitere deutsche Online-Portale + Brieffachdienste
+    "https://www.onvista.de/news/feed/all.rss",
+    "https://www.t-online.de/wirtschaft/rss.xml",
+    "https://www.focus.de/finanzen/boerse/rss.xml",
+    "https://www.dfpa.info/rss/",
     # DE IMMOBILIEN (2)
     "https://www.iz.de/rss/news.xml",
     "https://www.thomas-daily.de/feed/",
-    # SCHWEIZ (8)
+    # SCHWEIZ — verstaerkter Fokus
     "https://www.nzz.ch/finanzen.rss",
     "https://www.nzz.ch/wirtschaft.rss",
     "https://www.fuw.ch/feed",
@@ -98,42 +103,30 @@ MEDIA_RSS_FEEDS = [
     "https://www.finews.ch/rss",
     "https://www.moneycab.com/feed/",
     "https://www.investrends.ch/feed/",
-    # OESTERREICH (5)
+    "https://www.bilanz.ch/rss",
+    "https://themarket.ch/rss",
+    # OESTERREICH — verstaerkter Fokus
     "https://www.diepresse.com/rss/wirtschaft",
     "https://www.derstandard.at/rss/wirtschaft",
     "https://www.boersen-kurier.at/feed/",
     "https://www.boerse-express.com/feed/",
     "https://www.fondsexklusiv.at/feed/",
-    # INT LEITMEDIEN (12)
+    "https://www.gewinn.com/rss/",
+    "https://www.derboersianer.com/feed/",
+    "https://www.geld-magazin.at/rss",
+    "https://www.trend.at/rss",
+    # INT NACHRICHTEN-AGENTUREN (Reuters, Bloomberg, Dow Jones — gewuenscht)
     "https://feeds.reuters.com/reuters/businessNews",
     "https://feeds.reuters.com/reuters/companyNews",
-    "https://www.ft.com/rss/home/uk",
-    "https://feeds.bbci.co.uk/news/business/rss.xml",
-    "https://www.cnbc.com/id/100003114/device/rss/rss.html",
-    "https://www.cnbc.com/id/10000664/device/rss/rss.html",
     "https://feeds.bloomberg.com/markets/news.rss",
-    "https://www.wsj.com/xml/rss/3_7085.xml",
-    "https://www.wsj.com/xml/rss/3_7014.xml",
-    "https://www.economist.com/finance-and-economics/rss.xml",
-    "https://www.theguardian.com/business/rss",
-    "https://fortune.com/feed/",
-    # INT FACHMEDIEN (18)
+    # Dow Jones direkt nicht oeffentlich verfuegbar — Site-Fallback weiter unten in GOOGLE_NEWS_FEEDS
+    # INT FACHMEDIEN — institutionell, fuer Fonds/AM/PE
     "https://www.ipe.com/rss",
-    "https://www.pionline.com/rss",
-    "https://www.institutionalinvestor.com/rss",
-    "https://www.privateequitywire.co.uk/rss.xml",
     "https://www.privatedebtinvestor.com/feed/",
     "https://www.infrastructureinvestor.com/feed/",
-    "https://www.realdeals.eu.com/feed/",
-    "https://www.buyoutsnews.com/feed/",
     "https://www.preqin.com/feed",
-    "https://www.hedgeweek.com/rss.xml",
-    "https://www.fundssociety.com/en/rss",
     "https://www.etfstream.com/feed/",
-    "https://www.ignites.com/rss",
     "https://citywire.com/rss",
-    "https://seekingalpha.com/feed.xml",
-    "https://www.thetradenews.com/feed/",
     "https://www.risk.net/rss",
     "https://www.globalcapital.com/rss",
     # KRYPTO (5)
@@ -175,29 +168,36 @@ GOOGLE_NEWS_FEEDS = [
     "https://news.google.com/rss/search?q=Versicherung+Pensionsfonds+institutionelle+Anleger&hl=de&gl=DE&ceid=DE:de",
     "https://news.google.com/rss/search?q=Mikrofinanz+Impact+Investing+Nachhaltigkeit&hl=de&gl=DE&ceid=DE:de",
     "https://news.google.com/rss/search?q=IPO+B%C3%B6rsengang+%C3%9Cbernahme+M%26A&hl=de&gl=DE&ceid=DE:de",
-    # EN thematisch (13)
+    # EN thematisch — filtert vor allem Treffer aus Reuters/Bloomberg/Dow Jones
+    # die in deutscher Berichterstattung oft nur verzoegert auftauchen
     "https://news.google.com/rss/search?q=PIMCO+OR+PGIM+OR+%22Franklin+Templeton%22+OR+%22T+Rowe+Price%22+OR+Eurizon+OR+Temasek&hl=en&gl=US&ceid=US:en",
-    "https://news.google.com/rss/search?q=oil+price+Iran+energy+markets+today&hl=en&gl=US&ceid=US:en",
-    "https://news.google.com/rss/search?q=gold+price+bonds+yields+fed+ecb&hl=en&gl=US&ceid=US:en",
-    "https://news.google.com/rss/search?q=private+credit+BCRED+BlackRock+withdrawal&hl=en&gl=US&ceid=US:en",
-    "https://news.google.com/rss/search?q=%22private+equity%22+%22private+markets%22+fundraising+buyout&hl=en&gl=US&ceid=US:en",
     "https://news.google.com/rss/search?q=%22Bitcoin+Suisse%22+OR+%22crypto+regulation%22+MiCA&hl=en&gl=US&ceid=US:en",
-    "https://news.google.com/rss/search?q=Temasek+investments+Asia&hl=en&gl=US&ceid=US:en",
-    "https://news.google.com/rss/search?q=KKR+private+equity+infrastructure+credit&hl=en&gl=US&ceid=US:en",
-    "https://news.google.com/rss/search?q=emerging+markets+India+rupee+China&hl=en&gl=US&ceid=US:en",
-    "https://news.google.com/rss/search?q=real+estate+REIT+commercial+property&hl=en&gl=US&ceid=US:en",
-    "https://news.google.com/rss/search?q=ESG+sustainable+finance+green+bonds&hl=en&gl=US&ceid=US:en",
-    "https://news.google.com/rss/search?q=stagflation+recession+central+banks&hl=en&gl=US&ceid=US:en",
-    "https://news.google.com/rss/search?q=ETF+flows+active+management+asset+management&hl=en&gl=US&ceid=US:en",
-    # Site-Fallbacks fuer Outlets ohne RSS (15)
+    "https://news.google.com/rss/search?q=Temasek+OR+KKR+investment&hl=en&gl=US&ceid=US:en",
+    "https://news.google.com/rss/search?q=Aegon+OR+%22DNB+Asset%22+OR+%22Insight+Investment%22+OR+JOHCM&hl=en&gl=US&ceid=US:en",
+    # Site-Fallbacks fuer Outlets ohne oeffentlichen RSS
+    # DACH-Fokus — angelsaechsische Medien (FT, WSJ, BBC, CNBC, Economist, Guardian, Fortune) wurden entfernt
     "https://news.google.com/rss/search?q=site%3Aborsen-zeitung.de&hl=de&gl=DE&ceid=DE:de",
+    # Platow Brief — Premium-Wirtschaftsbrief, kein oeffentlicher RSS
     "https://news.google.com/rss/search?q=site%3Aplatow.de&hl=de&gl=DE&ceid=DE:de",
-    "https://news.google.com/rss/search?q=site%3Apayoff.ch&hl=de&gl=DE&ceid=DE:de",
+    "https://news.google.com/rss/search?q=%22Platow+Brief%22&hl=de&gl=DE&ceid=DE:de",
+    # Czerwensky intern — Premium-Brief Banken/Versicherungen, kein oeffentlicher RSS
+    "https://news.google.com/rss/search?q=%22Czerwensky+intern%22&hl=de&gl=DE&ceid=DE:de",
+    # onvista — falls direkter RSS scheitert
+    "https://news.google.com/rss/search?q=site%3Aonvista.de&hl=de&gl=DE&ceid=DE:de",
+    # t-online Wirtschaft — Verbrauchermedium, falls direkter RSS scheitert
+    "https://news.google.com/rss/search?q=site%3At-online.de+wirtschaft&hl=de&gl=DE&ceid=DE:de",
+    # Bloomberg-Themensuche
     "https://news.google.com/rss/search?q=site%3Abloomberg.com+markets&hl=en&gl=US&ceid=US:en",
-    "https://news.google.com/rss/search?q=site%3Aft.com+markets+funds&hl=en&gl=US&ceid=US:en",
-    "https://news.google.com/rss/search?q=site%3Awsj.com+markets&hl=en&gl=US&ceid=US:en",
-    "https://news.google.com/rss/search?q=site%3Athemarketswiss.ch+OR+site%3Athemarket.ch&hl=de&gl=CH&ceid=CH:de",
-    # NEU: weitere Site-Fallbacks
+    # The Market (NZZ-Premium-Schweiz)
+    "https://news.google.com/rss/search?q=site%3Athemarket.ch+OR+site%3Athemarketswiss.ch&hl=de&gl=CH&ceid=CH:de",
+    # Bilanz — Schweiz
+    "https://news.google.com/rss/search?q=site%3Abilanz.ch&hl=de&gl=CH&ceid=CH:de",
+    # Oesterreich-Premiummedien
+    "https://news.google.com/rss/search?q=site%3Atrend.at&hl=de&gl=AT&ceid=AT:de",
+    "https://news.google.com/rss/search?q=site%3Agewinn.com&hl=de&gl=AT&ceid=AT:de",
+    "https://news.google.com/rss/search?q=site%3Aderboersianer.com&hl=de&gl=AT&ceid=AT:de",
+    "https://news.google.com/rss/search?q=site%3Ageld-magazin.at&hl=de&gl=AT&ceid=AT:de",
+    # DACH-Fachmedien Backup
     "https://news.google.com/rss/search?q=site%3Adpa-afx.de&hl=de&gl=DE&ceid=DE:de",
     "https://news.google.com/rss/search?q=%22dpa-AFX%22&hl=de&gl=DE&ceid=DE:de",
     "https://news.google.com/rss/search?q=%22Dow+Jones+Newswires%22+OR+%22Dow+Jones%22+Markt&hl=de&gl=DE&ceid=DE:de",
@@ -205,7 +205,9 @@ GOOGLE_NEWS_FEEDS = [
     "https://news.google.com/rss/search?q=site%3Aversicherungswirtschaft-heute.de&hl=de&gl=DE&ceid=DE:de",
     "https://news.google.com/rss/search?q=site%3Afinanzwelt.de&hl=de&gl=DE&ceid=DE:de",
     "https://news.google.com/rss/search?q=site%3Aintelligent-investors.de&hl=de&gl=DE&ceid=DE:de",
+    "https://news.google.com/rss/search?q=site%3Adfpa.info&hl=de&gl=DE&ceid=DE:de",
     "https://news.google.com/rss/search?q=%22Euro+am+Sonntag%22+OR+%22Euro+Magazin%22&hl=de&gl=DE&ceid=DE:de",
+    "https://news.google.com/rss/search?q=%22Focus+Money%22&hl=de&gl=DE&ceid=DE:de",
 ]
 
 # === LAYER 3: PER-CLIENT MONITORING (each client's website + name searches) ===
