@@ -27,7 +27,7 @@ MODEL_RESEARCH = "claude-opus-4-7"
 MODEL_POSITIONING = "claude-sonnet-4-6"
 MODEL_FALLBACK = "claude-haiku-4-5-20251001"
 MAX_TOKENS_RESEARCH = 22000  # Opus 4.7 — deep multi-stage analysis with 8-point framework
-MAX_TOKENS_POSITIONING = 16000  # Sonnet 4.6 — detailed journalist-grade pitches
+MAX_TOKENS_POSITIONING = 32000  # Sonnet 4.6 — 15 clients × 2 pitches each needs ~25-30k tokens
 OUTPUT_DIR = Path("output")
 HISTORY_DIR = Path("output/history")
 
@@ -1003,7 +1003,21 @@ Was zieht sich seit Tagen durch? Was eskaliert/klingt ab? Welche Themen-Zyklen e
 2-3 Saetze zum uebergeordneten Narrativ. Plus: Welcher Pitch-Winkel ist der differenzierendste fuer heute (zweite Ebene, nicht das Offensichtliche)?
 
 ## Quellenverzeichnis
-ALLE verwendeten Quellen: Medium — Titel (Datum) — URL.
+Hier muessen ALLE Quellen aufgefuehrt werden, nicht nur die Top-Treffer. Ziel: Transparenz ueber die Recherche-Breite.
+
+Format pro Eintrag:
+- Medium — "Artikeltitel" (Datum, Uhrzeit falls bekannt) — URL falls verfuegbar
+
+Strukturiere nach Kategorien:
+**Deutsche Leitmedien** (Handelsblatt, FAZ, SZ, WiWo, Spiegel, manager-magazin, Welt, Tagesschau, n-tv, Stern, ZEIT, Tagesspiegel, Bild, Capital, Focus, finanzen.net)
+**Deutsche Fachmedien** (Boersen-Zeitung, Fonds Professionell, DAS INVESTMENT, Citywire, Institutional Money, Private Banking Magazin, altii, BondGuide, Anleihencheck, exxecnews, fundresearch, Boerse Online, dpn, e-fundresearch, Morningstar)
+**Schweiz/Oesterreich** (NZZ, FuW, Cash, finews, Handelszeitung, moneycab, investrends, Die Presse, Der Standard, Boersen-Kurier)
+**International** (Reuters, FT, Bloomberg, BBC, CNBC, WSJ, Economist, Guardian, Fortune, IPE, Pensions & Investments, Institutional Investor, Risk.net, GlobalCapital, ETF Stream)
+**Krypto/Spezial** (CoinDesk, CoinTelegraph, The Block, Decrypt, Bitcoin Magazine, OilPrice, S&P Commodities, Responsible Investor, ESG Today)
+**Institutionen/Primaerquellen** (EZB, BIS, Fed, Destatis, Bundesbank, IEA, OECD)
+**Kunden-Eigeninhalte** (Webseiten der Kunden, gerade gecrawlt)
+
+Wenn aus einer Kategorie keine Quellen ausgewertet wurden: "keine relevanten Treffer heute" schreiben. Niemals Kategorie weglassen.
 
 QUALITAETSREGELN — ABSOLUT KRITISCH:
 - Sprecher nur wenn 2025/2026 nachweislich aktiv (sonst "nicht verifizierbar").
@@ -1071,6 +1085,15 @@ KUNDEN-MENTIONS HEUTE:
 AUFGABE: Erstelle zwei Abschnitte. Beide muessen so brauchbar sein, dass ein TE-Berater sie sofort 1:1 verwenden kann, ohne nochmal nachzubessern.
 
 ## Schritt 7 — Positionierungs-Mapping pro Kunde
+
+WICHTIG — KRITISCHE ANWEISUNG: Du MUSST fuer ALLE 15 Kunden ein Mapping erstellen. KEIN Kunde darf ausgelassen werden. Die Reihenfolge ist verbindlich:
+1. PGIM, 2. T. Rowe Price, 3. MK Global Kapital, 4. Franklin Templeton, 5. PIMCO, 
+6. Eurizon, 7. Temasek, 8. Bitcoin Suisse, 9. KKR, 10. Aegon AM, 11. Bendura Bank, 
+12. DNB AM, 13. Insight Investment, 14. JOHCM, 15. Maverix
+
+Wenn fuer einen Kunden HEUTE wenig anschlussfaehig ist (typisch: Bendura, Maverix, MK Global Kapital, JOHCM, DNB an ruhigen Tagen): trotzdem strukturiert behandeln, nur kompakter — mindestens "Heute anschlussfaehig ueber" + 1 Pitch + Eigen-Inhalt + Tabu-Warnung. Nicht ueberspringen!
+
+Lieber 1 starker Pitch als 2 schwache. Wenn wirklich KEIN Pitch heute trägt, dann offen sagen "Heute kein Pitch sinnvoll — Empfehlung: nicht aktiv pitchen, stattdessen Marktbeobachtung fortsetzen, naechster moeglicher Anlass: [konkret]".
 
 Fuer JEDEN der 15 Kunden, in dieser klaren Struktur:
 
@@ -1160,10 +1183,11 @@ REGELN ABSOLUT:
 - Deutsche Sprache, klar, nicht ueberladen.
 - KEIN Telegrammstil, aber auch keine PR-Floskeln. Schreibstil wie ein erfahrener Wirtschaftsjournalist."""
 
-    print(f"[{time_str}] PASS 2: Sonnet 4.6 journalist-grade pitch crafting...")
+    print(f"[{time_str}] PASS 2: Sonnet 4.6 journalist-grade pitch crafting (streaming)...")
     t2s = time.time()
     r2, m2 = api_call(client, MODEL_POSITIONING, MAX_TOKENS_POSITIONING,
-                       [{"role":"user","content":p2}])
+                       [{"role":"user","content":p2}],
+                       use_streaming=True)
     txt2 = "".join(b.text for b in r2.content if hasattr(b,"text"))
     t2 = round(time.time()-t2s, 1)
     print(f"[{time_str}] PASS 2: {len(txt2)} chars via {m2} in {t2}s")
