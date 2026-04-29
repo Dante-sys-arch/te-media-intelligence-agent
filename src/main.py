@@ -1212,6 +1212,50 @@ REGELN ABSOLUT:
 
     # --- Combine + Save ---
     full = txt1 + "\n\n" + txt2
+    
+    # === AUTOMATISCH GENERIERTES VOLLSTAENDIGES QUELLENVERZEICHNIS ===
+    # Aus den tatsaechlich erfolgreich abgerufenen RSS-Items
+    sources_by_category = {}
+    for item in rss_items:
+        src = item.get("s", "unknown").lower()
+        # Kategorisierung
+        if any(d in src for d in ["handelsblatt", "faz", "sueddeutsche", "wiwo", "spiegel", "manager-magazin", "tagesschau", "n-tv", "welt", "tagesspiegel", "zeit", "stern", "finanzen.net", "bild", "capital", "focus"]):
+            cat = "Deutsche Leitmedien"
+        elif any(d in src for d in ["fondsprofessionell", "dasinvestment", "citywire.de", "institutional-money", "private-banking", "altii", "portfolio-institutionell", "fundresearch", "boerse-online", "anleihencheck", "bondguide", "exxecnews", "dpn", "e-fundresearch", "morningstar", "asscompact", "versicherungswirtschaft", "finanzwelt", "intelligent-investors", "boersen-zeitung", "dpa", "euro-magazin", "iz.de", "thomas-daily", "4investors"]):
+            cat = "Deutsche Fachmedien"
+        elif any(d in src for d in ["nzz", "fuw", "cash.ch", "handelszeitung", "finews", "moneycab", "investrends", "diepresse", "derstandard", "boersen-kurier", "boerse-express", "fondsexklusiv"]):
+            cat = "Schweiz / Oesterreich"
+        elif any(d in src for d in ["reuters", "ft.com", "bloomberg", "bbc", "cnbc", "wsj", "economist", "guardian", "fortune", "ipe", "pionline", "institutionalinvestor", "risk.net", "globalcapital", "etfstream", "ignites", "citywire.com", "hedgeweek", "preqin", "fundssociety", "seekingalpha", "thetradenews", "privateequitywire", "privatedebtinvestor", "infrastructureinvestor", "realdeals", "buyoutsnews"]):
+            cat = "International"
+        elif any(d in src for d in ["coindesk", "cointelegraph", "theblock", "decrypt", "bitcoinmagazine", "oilprice", "spglobal", "responsible-investor", "esgtoday"]):
+            cat = "Krypto / Spezial"
+        elif any(d in src for d in ["ecb.europa", "bis.org", "google.com"]):
+            cat = "Institutionen / Aggregatoren"
+        else:
+            cat = "Weitere Quellen"
+        sources_by_category.setdefault(cat, set()).add(src)
+    
+    auto_sources = "\n\n## Vollstaendiges Quellenverzeichnis (automatisch erstellt)\n\n"
+    auto_sources += f"**Gesamt: {len(rss_items)} Artikel aus {health['sources']} Quellen ueber {health['ok']} erfolgreich abgerufene RSS-Feeds.**\n\n"
+    auto_sources += f"_Hinweis: Dies ist die VOLLSTAENDIGE Liste aller heute ausgewerteten Quellen. Die KI-generierte Quellenliste oben fokussiert auf zitierte Top-Storys; diese Liste hier zeigt die volle Recherche-Breite._\n\n"
+    
+    category_order = ["Deutsche Leitmedien", "Deutsche Fachmedien", "Schweiz / Oesterreich", "International", "Krypto / Spezial", "Institutionen / Aggregatoren", "Weitere Quellen"]
+    for cat in category_order:
+        if cat in sources_by_category:
+            sources_list = sorted(sources_by_category[cat])
+            auto_sources += f"**{cat}** ({len(sources_list)} Quellen):\n"
+            auto_sources += ", ".join(sources_list) + "\n\n"
+    
+    # Add scraped client websites
+    if client_insights:
+        auto_sources += f"**Direkt gecrawlte Kunden-Webseiten** ({len(client_insights)}/{len(CLIENT_INSIGHTS_URLS)}):\n"
+        for cname in client_insights.keys():
+            auto_sources += f"- {cname} ({len(client_insights[cname])} Eigen-Inhalte gefunden)\n"
+        auto_sources += "\n"
+    
+    auto_sources += f"**Konfigurierte Feeds gesamt:** {len(MEDIA_RSS_FEEDS)} direkte Medien + {len(GOOGLE_NEWS_FEEDS)} Google News + {len(CLIENT_FEEDS)} Kunden-Feeds = {len(MEDIA_RSS_FEEDS)+len(GOOGLE_NEWS_FEEDS)+len(CLIENT_FEEDS)} Feeds insgesamt. Plus Claude Opus 4.7 Live Web Search.\n"
+    
+    full = full + auto_sources
 
     # Summary for tomorrow
     summary = full[:500]
