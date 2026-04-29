@@ -719,22 +719,37 @@ def fetch_rss_intelligence():
     return unique, health, client_mentions, unique_cs
 
 
-def api_call(client, model, max_tokens, messages, tools=None, retries=4, wait=60):
-    """API call with retry + automatic model fallback."""
+def api_call(client, model, max_tokens, messages, tools=None, retries=4, wait=60, use_streaming=False):
+    """API call with retry + automatic model fallback. Streams if needed for long operations."""
     current_model = model
     for i in range(retries):
         try:
             kw = {"model": current_model, "max_tokens": max_tokens, "messages": messages}
             if tools: kw["tools"] = tools
-            return client.messages.create(**kw), current_model
+            
+            if use_streaming:
+                # Stream the response (required for long-running operations >10 min)
+                full_text = ""
+                content_blocks = []
+                with client.messages.stream(**kw) as stream:
+                    for text in stream.text_stream:
+                        full_text += text
+                    final_message = stream.get_final_message()
+                # Return a response-like object with the same interface as non-streaming
+                return final_message, current_model
+            else:
+                return client.messages.create(**kw), current_model
         except Exception as e:
             err = str(e).lower()
+            # Auto-enable streaming if API requires it
+            if "streaming is required" in err and not use_streaming:
+                print(f"  API requires streaming for this size — enabling streaming mode...")
+                use_streaming = True
+                continue
             if any(x in err for x in ["overloaded","rate_limit","529","429"]):
                 if i == 1 and current_model != MODEL_FALLBACK:
                     print(f"  {current_model} unavailable -> fallback to {MODEL_FALLBACK}")
                     current_model = MODEL_FALLBACK
-                    if tools:
-                        kw["tools"] = tools  # keep web search for fallback
                     continue
                 w = wait * (2 ** i)
                 print(f"  Retry {i+1}/{retries}, waiting {w}s...")
@@ -1001,11 +1016,12 @@ QUALITAETSREGELN — ABSOLUT KRITISCH:
 - Denke SCHRITT FUER SCHRITT. Verknuepfe Datenpunkte aktiv.
 - Wenn Datenpunkte sich widersprechen: das ist ein wichtiges Signal, nicht ein Problem."""
 
-    print(f"[{time_str}] PASS 1: Opus 4.7 + Web Search (most capable model)...")
+    print(f"[{time_str}] PASS 1: Opus 4.7 + Web Search (most capable model, streaming)...")
     t1s = time.time()
     r1, m1 = api_call(client, MODEL_RESEARCH, MAX_TOKENS_RESEARCH,
                        [{"role":"user","content":p1}],
-                       tools=[{"type":"web_search_20250305","name":"web_search"}])
+                       tools=[{"type":"web_search_20250305","name":"web_search"}],
+                       use_streaming=True)
     txt1 = "".join(b.text for b in r1.content if hasattr(b,"text"))
     t1 = round(time.time()-t1s, 1)
     print(f"[{time_str}] PASS 1: {len(txt1)} chars via {m1} in {t1}s")
