@@ -24,8 +24,8 @@ from concurrent.futures import ThreadPoolExecutor, as_completed
 # Sonnet 4.6 = preferred over previous Opus 4.5 by 59% of users, 1/5 the cost of Opus
 # Haiku 4.5 = fastest fallback, retains good quality
 MODEL_RESEARCH = "claude-opus-4-7"
-MODEL_POSITIONING = "claude-sonnet-4-6"
-MODEL_FALLBACK = "claude-haiku-4-5-20251001"
+MODEL_POSITIONING = "claude-opus-4-7"
+MODEL_FALLBACK = "claude-sonnet-4-6"
 MAX_TOKENS_RESEARCH = 22000  # Opus 4.7 — deep multi-stage analysis with 8-point framework
 MAX_TOKENS_POSITIONING = 32000  # Sonnet 4.6 — 15 clients × 2 pitches each needs ~25-30k tokens
 OUTPUT_DIR = Path("output")
@@ -57,7 +57,7 @@ MEDIA_RSS_FEEDS = [
     "https://www.tagesspiegel.de/wirtschaft/rss",
     "https://www.zeit.de/wirtschaft/index",
     "https://www.stern.de/wirtschaft/feed.rss",
-    # DE FACHMEDIEN (19)
+    # DE FACHMEDIEN (27)
     "https://www.fondsprofessionell.de/rss/news.xml",
     "https://www.dasinvestment.com/feed/",
     "https://citywire.de/rss",
@@ -77,6 +77,15 @@ MEDIA_RSS_FEEDS = [
     "https://www.capital.de/feed/",
     "https://www.focus.de/finanzen/rss/",
     "https://www.bild.de/rss/vw/bild-de/geld.xml",
+    # NEU: weitere DE Fachmedien (8)
+    "https://www.asscompact.de/rss.xml",
+    "https://versicherungswirtschaft-heute.de/feed/",
+    "https://www.finanzwelt.de/feed/",
+    "https://www.intelligent-investors.de/feed/",
+    "https://www.boersen-zeitung.de/rss",
+    "https://www.dpa-afx.de/rss",
+    "https://www.dpa.com/de/produkte/themendienste/wirtschaft/rss",
+    "https://www.euro-magazin.de/rss",
     # DE IMMOBILIEN (2)
     "https://www.iz.de/rss/news.xml",
     "https://www.thomas-daily.de/feed/",
@@ -180,7 +189,7 @@ GOOGLE_NEWS_FEEDS = [
     "https://news.google.com/rss/search?q=ESG+sustainable+finance+green+bonds&hl=en&gl=US&ceid=US:en",
     "https://news.google.com/rss/search?q=stagflation+recession+central+banks&hl=en&gl=US&ceid=US:en",
     "https://news.google.com/rss/search?q=ETF+flows+active+management+asset+management&hl=en&gl=US&ceid=US:en",
-    # Site-Fallbacks fuer Outlets ohne RSS (7)
+    # Site-Fallbacks fuer Outlets ohne RSS (15)
     "https://news.google.com/rss/search?q=site%3Aborsen-zeitung.de&hl=de&gl=DE&ceid=DE:de",
     "https://news.google.com/rss/search?q=site%3Aplatow.de&hl=de&gl=DE&ceid=DE:de",
     "https://news.google.com/rss/search?q=site%3Apayoff.ch&hl=de&gl=DE&ceid=DE:de",
@@ -188,6 +197,15 @@ GOOGLE_NEWS_FEEDS = [
     "https://news.google.com/rss/search?q=site%3Aft.com+markets+funds&hl=en&gl=US&ceid=US:en",
     "https://news.google.com/rss/search?q=site%3Awsj.com+markets&hl=en&gl=US&ceid=US:en",
     "https://news.google.com/rss/search?q=site%3Athemarketswiss.ch+OR+site%3Athemarket.ch&hl=de&gl=CH&ceid=CH:de",
+    # NEU: weitere Site-Fallbacks
+    "https://news.google.com/rss/search?q=site%3Adpa-afx.de&hl=de&gl=DE&ceid=DE:de",
+    "https://news.google.com/rss/search?q=%22dpa-AFX%22&hl=de&gl=DE&ceid=DE:de",
+    "https://news.google.com/rss/search?q=%22Dow+Jones+Newswires%22+OR+%22Dow+Jones%22+Markt&hl=de&gl=DE&ceid=DE:de",
+    "https://news.google.com/rss/search?q=site%3Aasscompact.de&hl=de&gl=DE&ceid=DE:de",
+    "https://news.google.com/rss/search?q=site%3Aversicherungswirtschaft-heute.de&hl=de&gl=DE&ceid=DE:de",
+    "https://news.google.com/rss/search?q=site%3Afinanzwelt.de&hl=de&gl=DE&ceid=DE:de",
+    "https://news.google.com/rss/search?q=site%3Aintelligent-investors.de&hl=de&gl=DE&ceid=DE:de",
+    "https://news.google.com/rss/search?q=%22Euro+am+Sonntag%22+OR+%22Euro+Magazin%22&hl=de&gl=DE&ceid=DE:de",
 ]
 
 # === LAYER 3: PER-CLIENT MONITORING (each client's website + name searches) ===
