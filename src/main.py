@@ -785,8 +785,8 @@ def run_briefing():
     tw0 = time.time()
     client_insights = fetch_all_client_insights()
     insights_blocks = []
-    for client, items in client_insights.items():
-        block = f"\n=== {client} — Aktuelle Eigen-Inhalte (Webseite gerade gecrawlt) ===\n"
+    for cname, items in client_insights.items():
+        block = f"\n=== {cname} — Aktuelle Eigen-Inhalte (Webseite gerade gecrawlt) ===\n"
         for it in items[:6]:
             block += f"- {it['title']}\n  URL: {it['url']}\n"
         insights_blocks.append(block)
@@ -821,8 +821,8 @@ def run_briefing():
 
     # Build client profile context block (stable facts only)
     profile_block = ""
-    for client, p in CLIENT_PROFILES.items():
-        profile_block += f"\n[{client}]\n"
+    for cname, p in CLIENT_PROFILES.items():
+        profile_block += f"\n[{cname}]\n"
         profile_block += f"  Typ: {p['type']} | AuM: {p['aum']} | HQ: {p['hq']} | DACH: {p['dach']}\n"
         profile_block += f"  Kernkompetenzen: {p['core_competencies']}\n"
         profile_block += f"  Zielmedien DACH: {p['target_media_dach']}\n"
