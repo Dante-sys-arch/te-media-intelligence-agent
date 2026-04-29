@@ -221,6 +221,24 @@ CLIENT_FEEDS = [
     # KKR
     "https://news.google.com/rss/search?q=site%3Akkr.com&hl=en&gl=US&ceid=US:en",
     "https://news.google.com/rss/search?q=KKR+Deutschland+OR+Frankfurt+%22Philipp+Freise%22&hl=de&gl=DE&ceid=DE:de",
+    # Aegon Asset Management
+    "https://news.google.com/rss/search?q=site%3Aaegonam.com&hl=en&gl=US&ceid=US:en",
+    "https://news.google.com/rss/search?q=%22Aegon+Asset+Management%22+OR+%22Aegon+AM%22&hl=de&gl=DE&ceid=DE:de",
+    # Bendura Bank
+    "https://news.google.com/rss/search?q=site%3Abendura.li&hl=de&gl=DE&ceid=DE:de",
+    "https://news.google.com/rss/search?q=%22Bendura+Bank%22+Liechtenstein&hl=de&gl=DE&ceid=DE:de",
+    # DNB Asset Management
+    "https://news.google.com/rss/search?q=site%3Adnbam.com&hl=en&gl=US&ceid=US:en",
+    "https://news.google.com/rss/search?q=%22DNB+Asset+Management%22+OR+%22DNB+AM%22+Norwegen&hl=de&gl=DE&ceid=DE:de",
+    # Insight Investment
+    "https://news.google.com/rss/search?q=site%3Ainsightinvestment.com&hl=en&gl=US&ceid=US:en",
+    "https://news.google.com/rss/search?q=%22Insight+Investment%22+BNY+OR+LDI&hl=de&gl=DE&ceid=DE:de",
+    # JOHCM (J O Hambro Capital Management)
+    "https://news.google.com/rss/search?q=site%3Ajohcm.com&hl=en&gl=US&ceid=US:en",
+    "https://news.google.com/rss/search?q=JOHCM+OR+%22J.O.+Hambro%22+OR+%22JO+Hambro%22&hl=de&gl=DE&ceid=DE:de",
+    # Maverix Securities
+    "https://news.google.com/rss/search?q=site%3Amavx.com&hl=de&gl=CH&ceid=CH:de",
+    "https://news.google.com/rss/search?q=%22Maverix+Securities%22+OR+%22Maverix+AG%22&hl=de&gl=DE&ceid=DE:de",
 ]
 
 # === LAYER 4: DIRECT WEBSITE CRAWLING — Insights/Press pages of each client ===
@@ -263,6 +281,31 @@ CLIENT_INSIGHTS_URLS = {
     "KKR": [
         "https://www.kkr.com/insights",
         "https://www.kkr.com/news",
+    ],
+    "Aegon AM": [
+        "https://www.aegonam.com/insights/",
+        "https://www.aegonam.com/news/",
+    ],
+    "Bendura Bank": [
+        "https://www.bendura.li/aktuelles/",
+        "https://www.bendura.li/",
+    ],
+    "DNB AM": [
+        "https://dnbam.com/de/insights",
+        "https://dnbam.com/de/news",
+    ],
+    "Insight Investment": [
+        "https://www.insightinvestment.com/deutschland/insights/",
+        "https://www.insightinvestment.com/insights/",
+        "https://www.insightinvestment.com/about-insight/news-and-views/",
+    ],
+    "JOHCM": [
+        "https://www.johcm.com/de-de/insights",
+        "https://www.johcm.com/uk/insights",
+    ],
+    "Maverix": [
+        "https://mavx.com/de/news/",
+        "https://mavx.com/de/insights/",
     ],
 }
 
@@ -368,6 +411,72 @@ CLIENT_PROFILES = {
         "tone": "selbstbewusst, marktfuehrend, pitch-orientiert (KKR investiert massiv in Markenbildung), ungezwungener als Asset-Manager-Haeuser (Eigeninvestor)",
         "taboo": "konkrete Deal-Spekulationen vor Abschluss vermeiden, Carry-/Verguetungsdebatten heikel, Heuschrecken-Narrativ vorsichtig adressieren, politische Statements vermeiden, Konkurrenz nicht direkt kommentieren",
     },
+    "Aegon AM": {
+        "type": "Globaler Asset Manager, Tochter der Aegon NV (Niederlande)",
+        "aum": "ca. EUR 320 Mrd. (Stand: aktuell live verifizieren)",
+        "hq": "Den Haag (Niederlande), Edinburgh (UK)",
+        "dach": "Vertrieb ueber niederlaendische und britische Hubs, deutscher Wholesale-Vertrieb",
+        "boutiques": "Fixed Income (Schwerpunkt), Multi-Asset, Equities, Real Assets, Responsible Investment",
+        "core_competencies": "Fixed Income (Investment Grade, High Yield, EMD, ABS), LDI fuer Pensionsfonds, Multi-Asset, Real Assets (Real Estate, Infrastructure), starker ESG-/Verantwortungsinvestment-Fokus, niederlaendische Pensionssystem-Expertise",
+        "target_media_dach": "Fonds Professionell, DAS INVESTMENT, Citywire, Institutional Money, Handelsblatt, Boersen-Zeitung, IPE, dpn, portfolio institutionell, Responsible Investor",
+        "tone": "europaeisch-institutionell, akademisch, ESG/Stewardship-orientiert, eher zurueckhaltend, niederlaendische Sachlichkeit",
+        "taboo": "keine politischen Positionierungen, ESG-Greenwashing-Vorwuerfe gegen andere vermeiden, US-Wahlen-Themen vermeiden",
+    },
+    "Bendura Bank": {
+        "type": "Liechtensteiner Privatbank, Vermoegensverwaltung",
+        "aum": "Spezialist (Privatbank, kleinere Plattform — aktuell live verifizieren)",
+        "hq": "Gamprin-Bendern, Liechtenstein",
+        "dach": "Liechtenstein als Basis, Vertrieb DACH",
+        "boutiques": "Private Banking, Vermoegensverwaltung, Family Office, Anlageberatung, Treuhand-Dienstleistungen",
+        "core_competencies": "Private Banking fuer vermoegende Privatkunden und Family Offices, diskretionaere Vermoegensverwaltung, Wealth Structuring, Liechtensteinische Stiftungs- und Truststrukturen, Vermoegensnachfolge",
+        "target_media_dach": "finews, NZZ, Finanz und Wirtschaft, Liechtensteiner Vaterland, Cash, Handelszeitung, private banking magazin, Elite Report, Capital, Manager Magazin Wealth, Handelsblatt Vermoegen",
+        "tone": "diskret, vertraulich, Stil traditioneller Privatbank, Storytelling ueber Generationen-Vermoegen, eher zurueckhaltende Medienkommunikation",
+        "taboo": "keine Kunden-Namen, keine Performance-Vergleiche, vorsichtig bei Steuer-/Offshore-Themen (Liechtenstein-Sensibilitaet), keine politischen Positionierungen",
+    },
+    "DNB AM": {
+        "type": "Norwegischer Asset Manager, Tochter der DNB ASA (Norwegens groesste Bankgruppe)",
+        "aum": "ca. EUR 80 Mrd. (Stand: aktuell live verifizieren)",
+        "hq": "Oslo, Norwegen",
+        "dach": "Vertrieb ueber Hubs in Luxemburg/Stockholm, deutscher Wholesale-Vertrieb (Frankfurt)",
+        "boutiques": "Nordische Aktien (Renowned Strength), Globale Aktien, Technologie-Fonds (DNB Fund Technology bekannt), Fixed Income, Nachhaltigkeit (norwegische Praegung)",
+        "core_competencies": "Nordische und globale Aktien (insb. Technologie und Nachhaltigkeit), nordische Anleihen, ESG-Integration mit norwegischer Ausrichtung (Norway-Fund-Vorbild), Stewardship",
+        "target_media_dach": "Fonds Professionell, DAS INVESTMENT, Citywire, Institutional Money, Handelsblatt, Boersen-Zeitung, ETF Stream, Responsible Investor, e-fundresearch (Tech-Fokus)",
+        "tone": "skandinavisch-sachlich, ESG-natuerlich (kein Marketing-Greenwashing), Tech-Expertise, langfristig orientiert",
+        "taboo": "keine politischen Positionierungen (NATO/Russland), Norwegen-Oel-/Gas-Themen sensibel (Heimatmarkt-Bezug), keine Performance-Versprechen",
+    },
+    "Insight Investment": {
+        "type": "Globaler Asset Manager, Tochter von BNY (Bank of New York)",
+        "aum": "ca. $800+ Mrd. (Stand: aktuell live verifizieren)",
+        "hq": "London, UK",
+        "dach": "London als Hub, Vertrieb in Deutschland (Frankfurt), Schweiz, Wien",
+        "boutiques": "Fixed Income (Schwerpunkt), LDI (Liability-Driven Investment, britische Pensionsfonds-Expertise), Currency Risk Management, Absolute Return Bond, ESG-Bonds",
+        "core_competencies": "Fixed Income (alle Segmente), LDI (Marktfuehrer fuer britische Pensionskassen), Risk Management/Currency Overlay, Absolute Return, Klimainvestments und gruene Anleihen, taktische Asset Allocation",
+        "target_media_dach": "Fonds Professionell, DAS INVESTMENT, Institutional Money, dpn, portfolio institutionell, Boersen-Zeitung, IPE, Risk.net, Anleihencheck",
+        "tone": "akademisch-institutionell, datengetrieben, britischer Stil (sachlich, leicht ironisch), Pensionsfonds-Sprache, fuer hochkomplexe institutionelle Themen",
+        "taboo": "BNY-Konzernthemen separat halten, keine politischen Stellungnahmen (Brexit-Sensibilitaet), Pensionskassen-Krisen vorsichtig adressieren",
+    },
+    "JOHCM": {
+        "type": "J O Hambro Capital Management — britischer aktiver Aktien-Spezialist, Teil der Perpetual-Gruppe (Australien)",
+        "aum": "ca. £35-40 Mrd. (Stand: aktuell live verifizieren)",
+        "hq": "London, UK",
+        "dach": "Vertrieb DACH ueber London/Frankfurt-Hub",
+        "boutiques": "High-Conviction Active Equity-Fonds, autonome Fondsmanager-Teams (Boutique-Modell), regionale und globale Aktienstrategien",
+        "core_competencies": "Aktiv gemanagte Aktien-Fonds (UK Equity, Global, Asia, Emerging Markets, US, European Select Values), High-Conviction Stockpicking, autonomes Fondsmanager-Modell (jedes Team eigenstaendig), Co-Investment der Manager",
+        "target_media_dach": "Fonds Professionell, DAS INVESTMENT, Citywire, Boersen-Zeitung, Handelsblatt, IPE, Institutional Money, e-fundresearch",
+        "tone": "klar pointiert (High Conviction), meinungsstark, traditionell britischer Investment-Stil, Storytelling ueber Einzeltitel-Theses",
+        "taboo": "keine pauschalen Marktprognosen (passt nicht zum Stockpicking-Stil), Performance-Versprechen vermeiden, Konkurrenz-Vergleiche vermeiden",
+    },
+    "Maverix": {
+        "type": "Maverix Securities AG — Schweizer Aktien-Boutique",
+        "aum": "Spezialist (Boutique, kleineres Volumen — aktuell live verifizieren)",
+        "hq": "Zuerich, Schweiz",
+        "dach": "Schweiz, DACH-Vertrieb",
+        "boutiques": "Long-Only Aktienfonds, qualitatives Stockpicking",
+        "core_competencies": "Aktive Aktienauswahl mit Fokus auf Qualitaetsunternehmen, langfristige Investmenthorizonte, fundamentale Bottom-up-Analyse, Schweizer/Europa/Global Mandates",
+        "target_media_dach": "finews, Finanz und Wirtschaft, Cash, NZZ, Handelszeitung, Fonds Professionell Schweiz, Citywire Schweiz",
+        "tone": "schweizerisch-praezise, qualitativ-fundamental, langfristig orientiert, eher zurueckhaltend, Boutique-Stil",
+        "taboo": "keine kurzfristigen Marktprognosen, keine spekulativen Themen, Konkurrenz-Boutiquen nicht kommentieren",
+    },
 }
 
 CLIENTS = """- PGIM ($1,5 Bio. AuM): Institutional, Multi-Asset, Real Estate, Fixed Income, CLO
@@ -378,7 +487,13 @@ CLIENTS = """- PGIM ($1,5 Bio. AuM): Institutional, Multi-Asset, Real Estate, Fi
 - Eurizon (Intesa Sanpaolo): Euro Fixed Income, EM Debt, ESG, Quantitative
 - Temasek: Singapurer Staatsfonds, Infrastruktur, Tech, Life Sciences
 - Bitcoin Suisse: Krypto-Finanzdienstleister, MiCA, Custody, Staking
-- KKR: Private Equity, Infrastruktur, Real Estate, Credit"""
+- KKR: Private Equity, Infrastruktur, Real Estate, Credit
+- Aegon Asset Management: Multi-Asset, Fixed Income, Verantwortungsvolles Investieren, niederlaendisch-britischer AM
+- Bendura Bank: Liechtensteiner Privatbank, Vermoegensverwaltung, Family Office
+- DNB Asset Management: Norwegischer AM, Nordische Aktien/Anleihen, Technologie, Nachhaltigkeit
+- Insight Investment: $800+ Mrd. AuM, Fixed Income/LDI/Risk Management, BNY-Tochter
+- JO Hambro Capital Management (JOHCM): Britischer aktiver AM, High-Conviction Equity-Fonds
+- Maverix Securities: Schweizer Aktien-Boutique, Long-Only, qualitatives Stockpicking"""
 
 THEMENFELDER = [
     "Makro/Konjunktur", "Geopolitik/Sicherheit", "Energie/Rohstoffe",
@@ -419,6 +534,12 @@ CLIENT_KEYWORDS = {
     "Temasek": ["temasek"],
     "Bitcoin Suisse": ["bitcoin suisse"],
     "KKR": ["kkr", "kohlberg kravis"],
+    "Aegon AM": ["aegon asset management", "aegon am"],
+    "Bendura Bank": ["bendura bank", "bendura"],
+    "DNB AM": ["dnb asset management", "dnb am", "dnb fund"],
+    "Insight Investment": ["insight investment"],
+    "JOHCM": ["johcm", "j.o. hambro", "jo hambro"],
+    "Maverix": ["maverix securities", "maverix"],
 }
 
 
@@ -765,7 +886,7 @@ Welche relevanten Themen sind heute KAUM in den Medien, koennten aber gepitcht w
 Welche grossen Wettbewerber unserer Kunden (BlackRock, Vanguard, Fidelity, Goldman Sachs AM, JPMorgan AM, Amundi, DWS, Allianz GI, AXA IM, Schroders, Invesco, State Street, Northern Trust, Apollo, Blackstone, Carlyle, TPG, Brookfield, EQT, Permira, Advent, CVC, Coinbase, Kraken, Gemini) sind heute in den Medien? Was kommunizieren sie? Wo koennten unsere Kunden kontern?
 
 ## Schritt 5 — KUNDEN-LIVE-RECHERCHE
-Fuer JEDEN der 9 Kunden FUEHRE WEB-SEARCH DURCH:
+Fuer JEDEN der 15 Kunden FUEHRE WEB-SEARCH DURCH:
 
 ### [Kundenname]
 - **Aktuelle DACH-Sprecher** (Stand 2026, NUR live verifiziert!):
@@ -828,7 +949,7 @@ QUALITAETSREGELN — ABSOLUT KRITISCH:
     
     p2 = f"""Du bist seit 20 Jahren Wirtschafts- und Finanzjournalist in DACH. Du hast bei Handelsblatt, FAZ, Boersen-Zeitung, Reuters und Bloomberg gearbeitet. Du weisst genau, was Journalisten tatsaechlich brauchen, um ein Pitch zu nehmen, und was sofort im Papierkorb landet.
 
-Du wechselst jetzt die Rolle: Du arbeitest als Senior Director bei TE Communications und sollst aus Journalistensicht Pitches fuer 9 Kunden formulieren.
+Du wechselst jetzt die Rolle: Du arbeitest als Senior Director bei TE Communications und sollst aus Journalistensicht Pitches fuer 15 Kunden formulieren.
 
 WAS JOURNALISTEN BRAUCHEN (du kennst das aus 20 Jahren Praxis):
 1. NEWS-AUFHAENGER: Klare aktuelle Begruendung "warum heute". Ohne Aufhaenger keine Story.
@@ -865,7 +986,7 @@ AUFGABE: Erstelle zwei Abschnitte. Beide muessen so brauchbar sein, dass ein TE-
 
 ## Schritt 7 — Positionierungs-Mapping pro Kunde
 
-Fuer JEDEN der 9 Kunden, in dieser klaren Struktur:
+Fuer JEDEN der 15 Kunden, in dieser klaren Struktur:
 
 ### [Kundenname]
 
@@ -1124,7 +1245,7 @@ strong{{color:#111827}}
 <div class="dt">{date_str} — {time_str} CET</div>
 <div class="ml">Pass 1: {meta['m1']} + Web Search ({meta['t1']}s) | Pass 2: {meta['m2']} ({meta['t2']}s) | {meta['rss_ok']}/{meta['rss_total']} RSS-Feeds parallel | {meta.get('history_days',0)} Tage Trendkontext</div>
 <div class="bg">
-<span>PGIM</span><span>T. Rowe Price</span><span>MK Global Kapital</span><span>Franklin Templeton</span><span>PIMCO</span><span>Eurizon</span><span>Temasek</span><span>Bitcoin Suisse</span><span>KKR</span>
+<span>PGIM</span><span>T. Rowe Price</span><span>MK Global Kapital</span><span>Franklin Templeton</span><span>PIMCO</span><span>Eurizon</span><span>Temasek</span><span>Bitcoin Suisse</span><span>KKR</span><span>Aegon AM</span><span>Bendura</span><span>DNB AM</span><span>Insight</span><span>JOHCM</span><span>Maverix</span>
 </div>
 </div>
 <div class="kp">
