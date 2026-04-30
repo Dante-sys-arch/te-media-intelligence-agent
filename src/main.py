@@ -92,7 +92,31 @@ MEDIA_RSS_FEEDS = [
     "https://www.t-online.de/wirtschaft/rss.xml",
     "https://www.focus.de/finanzen/boerse/rss.xml",
     "https://www.dfpa.info/rss/",
-    # DE IMMOBILIEN (2)
+    # NEU: Reichweitenstarke Online-Finanzportale (Layer 1)
+    "https://www.wallstreet-online.de/rss/news",
+    "https://www.boersennews.de/rss",
+    "https://www.finanznachrichten.de/rss-aktien-news.htm",
+    "https://www.ariva.de/news.m?archiv=1&inhalt=ATOM",
+    "https://www.finanzen100.de/rss/",
+    "https://www.finanztreff.de/rss/news.html",
+    # NEU: Banken-/Sparkassen-Fachmedien
+    "https://www.springerprofessional.de/rss/bankmagazin",
+    "https://bankinghub.de/feed",
+    "https://www.bankingclub.de/feed/",
+    # NEU: Versicherungs-Fachmedien (offizielle RSS-Feeds)
+    "https://www.versicherungsjournal.de/rss/VersicherungsJournal.xml",
+    "https://www.procontra-online.de/feed/",
+    "https://www.versicherungsmagazin.de/rss",
+    "https://www.cash-online.de/feed",
+    # NEU: Immobilien-Fachpresse
+    "https://www.immobilienmanager.de/feed",
+    "https://www.haufe.de/immobilien/rss",
+    "https://www.property-magazine.de/rss/news.xml",
+    "https://www.deal-magazin.com/rss",
+    # NEU: Anleger-Magazine
+    "https://www.smartinvestor.de/feed/",
+    "https://www.deraktionaer.de/rss/aktuell.xml",
+    # DE IMMOBILIEN (urspruenglich)
     "https://www.iz.de/rss/news.xml",
     "https://www.thomas-daily.de/feed/",
     # SCHWEIZ — verstaerkter Fokus
@@ -208,6 +232,25 @@ GOOGLE_NEWS_FEEDS = [
     "https://news.google.com/rss/search?q=site%3Aintelligent-investors.de&hl=de&gl=DE&ceid=DE:de",
     "https://news.google.com/rss/search?q=site%3Adfpa.info&hl=de&gl=DE&ceid=DE:de",
     "https://news.google.com/rss/search?q=site%3Afundview.de&hl=de&gl=DE&ceid=DE:de",
+    # NEU: Fallbacks fuer Online-Finanzportale (falls direkter RSS scheitert)
+    "https://news.google.com/rss/search?q=site%3Awallstreet-online.de&hl=de&gl=DE&ceid=DE:de",
+    "https://news.google.com/rss/search?q=site%3Aboersennews.de&hl=de&gl=DE&ceid=DE:de",
+    "https://news.google.com/rss/search?q=site%3Afinanznachrichten.de&hl=de&gl=DE&ceid=DE:de",
+    "https://news.google.com/rss/search?q=site%3Aariva.de&hl=de&gl=DE&ceid=DE:de",
+    "https://news.google.com/rss/search?q=site%3Afinanzen100.de&hl=de&gl=DE&ceid=DE:de",
+    # NEU: Fallbacks fuer Banken-Fachmedien
+    "https://news.google.com/rss/search?q=site%3Abankmagazin.de&hl=de&gl=DE&ceid=DE:de",
+    "https://news.google.com/rss/search?q=site%3Abankinghub.de&hl=de&gl=DE&ceid=DE:de",
+    # NEU: Fallbacks fuer Versicherungsfachmedien
+    "https://news.google.com/rss/search?q=site%3Aversicherungsjournal.de&hl=de&gl=DE&ceid=DE:de",
+    "https://news.google.com/rss/search?q=site%3Aprocontra-online.de&hl=de&gl=DE&ceid=DE:de",
+    # NEU: Fallbacks fuer Immobilien-Fachmedien
+    "https://news.google.com/rss/search?q=site%3Aimmobilienmanager.de&hl=de&gl=DE&ceid=DE:de",
+    "https://news.google.com/rss/search?q=site%3Aproperty-magazine.de&hl=de&gl=DE&ceid=DE:de",
+    "https://news.google.com/rss/search?q=site%3Adeal-magazin.com&hl=de&gl=DE&ceid=DE:de",
+    # NEU: Fallback fuer Anleger-Magazine
+    "https://news.google.com/rss/search?q=site%3Asmartinvestor.de&hl=de&gl=DE&ceid=DE:de",
+    "https://news.google.com/rss/search?q=site%3Aderaktionaer.de&hl=de&gl=DE&ceid=DE:de",
     "https://news.google.com/rss/search?q=%22Euro+am+Sonntag%22+OR+%22Euro+Magazin%22&hl=de&gl=DE&ceid=DE:de",
     "https://news.google.com/rss/search?q=%22Focus+Money%22&hl=de&gl=DE&ceid=DE:de",
 ]
@@ -1183,7 +1226,7 @@ REGELN ABSOLUT:
         # Kategorisierung
         if any(d in src for d in ["handelsblatt", "faz", "sueddeutsche", "wiwo", "spiegel", "manager-magazin", "tagesschau", "n-tv", "welt", "tagesspiegel", "zeit", "stern", "finanzen.net", "bild", "capital", "focus"]):
             cat = "Deutsche Leitmedien"
-        elif any(d in src for d in ["fondsprofessionell", "dasinvestment", "citywire.de", "institutional-money", "private-banking", "altii", "portfolio-institutionell", "fundresearch", "fundview", "boerse-online", "anleihencheck", "bondguide", "exxecnews", "dpn", "e-fundresearch", "morningstar", "asscompact", "versicherungswirtschaft", "finanzwelt", "intelligent-investors", "boersen-zeitung", "dpa", "euro-magazin", "iz.de", "thomas-daily", "4investors", "onvista", "t-online", "dfpa"]):
+        elif any(d in src for d in ["fondsprofessionell", "dasinvestment", "citywire.de", "institutional-money", "private-banking", "altii", "portfolio-institutionell", "fundresearch", "fundview", "boerse-online", "anleihencheck", "bondguide", "exxecnews", "dpn", "e-fundresearch", "morningstar", "asscompact", "versicherungswirtschaft", "finanzwelt", "intelligent-investors", "boersen-zeitung", "dpa", "euro-magazin", "iz.de", "thomas-daily", "4investors", "onvista", "t-online", "dfpa", "wallstreet-online", "boersennews", "finanznachrichten", "ariva", "finanzen100", "finanztreff", "bankmagazin", "bankinghub", "bankingclub", "versicherungsjournal", "procontra", "versicherungsmagazin", "cash-online", "immobilienmanager", "haufe", "property-magazine", "deal-magazin", "smartinvestor", "deraktionaer"]):
             cat = "Deutsche Fachmedien"
         elif any(d in src for d in ["nzz", "fuw", "cash.ch", "handelszeitung", "finews", "moneycab", "investrends", "diepresse", "derstandard", "boersen-kurier", "boerse-express", "fondsexklusiv"]):
             cat = "Schweiz / Oesterreich"
