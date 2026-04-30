@@ -1,0 +1,42 @@
+{
+  "date": "Donnerstag, 30. April 2026",
+  "time": "09:22",
+  "summary": "# 10 Hauptthemen – Stichpunkte\n\n---\n\n1. **Ölpreis-Schock** – Brent über 125 USD (4-Jahres-Hoch); Hormus-Durchfluss auf ~4 % des Normalniveaus; US-Militär präsentiert Trump Iranpläne\n\n2. **EZB-Zinsentscheid (14:15 Uhr)** – Einlagesatz bei 2,00 %; Inflation 2,9 %, Wachstum nur 0,9 %; Markt preist 1–2 Erhöhungen bis Jahresende ein\n\n3. **VW-Gewinneinbruch** – Konzernergebnis –28,4 % auf 1,56 Mrd. €; Umsatz –2,5 % auf 75,7 Mrd. €; operative Marge auf 3,3 % gefallen\n\n4. **Deutsches BIP +0,3 %** – Überraschend positives Q1-Wachstum trotz Iran-Krieg und Lieferkettenbelastungen\n\n5. **Powell vs. Trump** – Fed-Chef-Amtszeit endet Mai; Powell bleibt Gouverneur; öffentliche Verteidigung der Notenbank-Unabhängigkeit\n\n6. **DAX – 8 Verlusttage in Folge** – Vergleichbar zuletzt mit Corona-Crash; ausgeprägte Sentiment-Eintrübung an deutschen Aktienmärkten\n\n7. **Stagflations-Zwickmühle** – Gleichzeitig steigende Inflation und sinkendes Wachstum; Notenbanken ohne klaren Handlungsspielraum\n\n8. **Lieferketten-Störungen** – Iran-Konflikt trifft Industrieproduktion; Sekundäreffekte auf deutsche Exportwirtschaft sichtbar\n\n9. **Goldman-Sachs-Warnung** – Analyse zu Hormus-Exportausfall; Szenarien für anhaltend hohe Energiepreise bei längerer Konfliktdauer\n\n10. **Medien-Synchronisation** – Deutsche Leitmedien (Handelsblatt, FAZ, Welt, Spiegel, Tagesschau) berichten erstmals gemeinsam auf allen Kanälen zu denselben Krisenthemen",
+  "hash": "a97b90c52d536faf4fb135313f509f5b",
+  "meta": {
+    "date": "Donnerstag, 30. April 2026",
+    "time": "09:22",
+    "weekend": false,
+    "rss_total": 143,
+    "rss_ok": 121,
+    "rss_fail": 53,
+    "rss_sources": 174,
+    "rss_items": 568,
+    "rss_time": 7.2,
+    "client_mentions": {
+      "PGIM": 10,
+      "T. Rowe Price": 14,
+      "MK Global Kapital": 0,
+      "Franklin Templeton": 12,
+      "PIMCO": 11,
+      "Eurizon": 10,
+      "Temasek": 7,
+      "Bitcoin Suisse": 11,
+      "KKR": 16,
+      "Aegon AM": 10,
+      "Bendura Bank": 9,
+      "DNB AM": 7,
+      "Insight Investment": 7,
+      "JOHCM": 6,
+      "Maverix": 5
+    },
+    "history_days": 2,
+    "m1": "claude-opus-4-7",
+    "c1": 40356,
+    "t1": 372.0,
+    "m2": "claude-opus-4-7",
+    "c2": 61430,
+    "t2": 454.6,
+    "total": 105515
+  }
+}
