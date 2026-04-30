@@ -154,6 +154,32 @@ MEDIA_RSS_FEEDS = [
     "https://citywire.com/rss",
     "https://www.risk.net/rss",
     "https://www.globalcapital.com/rss",
+    # NEU Stufe-A: Citywire DACH-Plattformen (eigenstaendig)
+    "https://citywire.com/de/rss",
+    "https://citywire.com/ch/rss",
+    "https://citywire.com/selector/rss",
+    # NEU Stufe-A: Hedgeweek (Alternatives mit DACH-Coverage)
+    "https://www.hedgeweek.com/feed/",
+    # NEU Stufe-A: Funds Europe (Optional Stufe-B aber sinnvoll)
+    "https://www.funds-europe.com/feed",
+    # NEU Stufe-A: ESG / Sustainable Finance DACH
+    "https://www.ecoreporter.de/feed/",
+    # NEU Stufe-A: Krypto DACH
+    "https://www.btc-echo.de/feed/",
+    "https://cvj.ch/feed/",
+    "https://bitcoinnews.ch/feed/",  # optional Stufe-B
+    # NEU Stufe-A: Schweizer Spezialmedien (Investigativ + neues Wirtschaftsportal)
+    "https://insideparadeplatz.ch/feed/",
+    "https://www.tippinpoint.ch/feed/",
+    "https://www.finews.com/feed",  # englisches CH-Schwesterportal
+    # NEU Stufe-A: Family Office / Premium-Briefe
+    # Elite Report: kein RSS, ueber Google News abgedeckt
+    # Fuchsbriefe: kein offener RSS, ueber Google News abgedeckt
+    # NEU Stufe-A: Boersenbriefe + Newsletter
+    "https://www.bernecker.info/feed",
+    "https://www.cashkurs.com/rss",
+    "https://financefwd.com/feed",
+    "https://www.thepioneer.de/feed",  # RSS-Versuch fuer Pioneer Briefing
     # KRYPTO (5)
     "https://www.coindesk.com/arc/outboundfeeds/rss/",
     "https://cointelegraph.com/rss",
@@ -253,6 +279,33 @@ GOOGLE_NEWS_FEEDS = [
     "https://news.google.com/rss/search?q=site%3Aderaktionaer.de&hl=de&gl=DE&ceid=DE:de",
     "https://news.google.com/rss/search?q=%22Euro+am+Sonntag%22+OR+%22Euro+Magazin%22&hl=de&gl=DE&ceid=DE:de",
     "https://news.google.com/rss/search?q=%22Focus+Money%22&hl=de&gl=DE&ceid=DE:de",
+    # NEU Stufe-A: Citywire DACH-Fallbacks
+    "https://news.google.com/rss/search?q=site%3Acitywire.com%2Fde&hl=de&gl=DE&ceid=DE:de",
+    "https://news.google.com/rss/search?q=site%3Acitywire.com%2Fch&hl=de&gl=CH&ceid=CH:de",
+    # NEU Stufe-A: Family Office / Premium-Briefe Site-Fallbacks
+    "https://news.google.com/rss/search?q=site%3Aelitereport.de&hl=de&gl=DE&ceid=DE:de",
+    "https://news.google.com/rss/search?q=%22Elite+Report%22+Verm%C3%B6gensverwalter&hl=de&gl=DE&ceid=DE:de",
+    "https://news.google.com/rss/search?q=site%3Afuchsbriefe.de&hl=de&gl=DE&ceid=DE:de",
+    "https://news.google.com/rss/search?q=%22Fuchsbriefe%22+OR+%22FUCHS-Briefe%22+OR+%22Fuchs-Richter%22&hl=de&gl=DE&ceid=DE:de",
+    # NEU Stufe-A: The Pioneer + Table.Media (Premium-Newsletter)
+    "https://news.google.com/rss/search?q=site%3Athepioneer.de&hl=de&gl=DE&ceid=DE:de",
+    "https://news.google.com/rss/search?q=%22Pioneer+Briefing%22+OR+%22Gabor+Steingart%22&hl=de&gl=DE&ceid=DE:de",
+    "https://news.google.com/rss/search?q=site%3Atable.media&hl=de&gl=DE&ceid=DE:de",
+    "https://news.google.com/rss/search?q=%22Table.Briefings%22+OR+%22ESG.Table%22+OR+%22CEO.Table%22&hl=de&gl=DE&ceid=DE:de",
+    # NEU Stufe-A: Schweizer Investigativ + Tippinpoint
+    "https://news.google.com/rss/search?q=site%3Ainsideparadeplatz.ch&hl=de&gl=CH&ceid=CH:de",
+    "https://news.google.com/rss/search?q=site%3Atippinpoint.ch&hl=de&gl=CH&ceid=CH:de",
+    # NEU Stufe-A: Krypto-DACH Backups
+    "https://news.google.com/rss/search?q=site%3Abtc-echo.de&hl=de&gl=DE&ceid=DE:de",
+    "https://news.google.com/rss/search?q=site%3Acvj.ch&hl=de&gl=CH&ceid=CH:de",
+    # NEU Stufe-A: ESG Backup
+    "https://news.google.com/rss/search?q=site%3Aecoreporter.de&hl=de&gl=DE&ceid=DE:de",
+    # NEU Stufe-A: Boersenbriefe Backups
+    "https://news.google.com/rss/search?q=site%3Abernecker.info&hl=de&gl=DE&ceid=DE:de",
+    "https://news.google.com/rss/search?q=%22Hellmeyer+Report%22+OR+%22Folker+Hellmeyer%22&hl=de&gl=DE&ceid=DE:de",
+    # NEU Stufe-A: AWP + Hedgeweek Backups
+    "https://news.google.com/rss/search?q=%22AWP+Finanznachrichten%22&hl=de&gl=CH&ceid=CH:de",
+    "https://news.google.com/rss/search?q=site%3Ahedgeweek.com&hl=en&gl=US&ceid=US:en",
 ]
 
 # === LAYER 3: PER-CLIENT MONITORING (each client's website + name searches) ===
@@ -1226,11 +1279,11 @@ REGELN ABSOLUT:
         # Kategorisierung
         if any(d in src for d in ["handelsblatt", "faz", "sueddeutsche", "wiwo", "spiegel", "manager-magazin", "tagesschau", "n-tv", "welt", "tagesspiegel", "zeit", "stern", "finanzen.net", "bild", "capital", "focus"]):
             cat = "Deutsche Leitmedien"
-        elif any(d in src for d in ["fondsprofessionell", "dasinvestment", "citywire.de", "institutional-money", "private-banking", "altii", "portfolio-institutionell", "fundresearch", "fundview", "boerse-online", "anleihencheck", "bondguide", "exxecnews", "dpn", "e-fundresearch", "morningstar", "asscompact", "versicherungswirtschaft", "finanzwelt", "intelligent-investors", "boersen-zeitung", "dpa", "euro-magazin", "iz.de", "thomas-daily", "4investors", "onvista", "t-online", "dfpa", "wallstreet-online", "boersennews", "finanznachrichten", "ariva", "finanzen100", "finanztreff", "bankmagazin", "bankinghub", "bankingclub", "versicherungsjournal", "procontra", "versicherungsmagazin", "cash-online", "immobilienmanager", "haufe", "property-magazine", "deal-magazin", "smartinvestor", "deraktionaer"]):
+        elif any(d in src for d in ["fondsprofessionell", "dasinvestment", "citywire.de", "institutional-money", "private-banking", "altii", "portfolio-institutionell", "fundresearch", "fundview", "boerse-online", "anleihencheck", "bondguide", "exxecnews", "dpn", "e-fundresearch", "morningstar", "asscompact", "versicherungswirtschaft", "finanzwelt", "intelligent-investors", "boersen-zeitung", "dpa", "euro-magazin", "iz.de", "thomas-daily", "4investors", "onvista", "t-online", "dfpa", "wallstreet-online", "boersennews", "finanznachrichten", "ariva", "finanzen100", "finanztreff", "bankmagazin", "bankinghub", "bankingclub", "versicherungsjournal", "procontra", "versicherungsmagazin", "cash-online", "immobilienmanager", "haufe", "property-magazine", "deal-magazin", "smartinvestor", "deraktionaer", "ecoreporter", "btc-echo", "bernecker", "cashkurs", "financefwd", "thepioneer", "table.media", "fuchsbriefe", "elitereport"]):
             cat = "Deutsche Fachmedien"
-        elif any(d in src for d in ["nzz", "fuw", "cash.ch", "handelszeitung", "finews", "moneycab", "investrends", "diepresse", "derstandard", "boersen-kurier", "boerse-express", "fondsexklusiv"]):
+        elif any(d in src for d in ["nzz", "fuw", "cash.ch", "handelszeitung", "finews.ch", "moneycab", "investrends", "diepresse", "derstandard", "boersen-kurier", "boerse-express", "fondsexklusiv", "bilanz", "themarket", "trend.at", "geld-magazin", "derboersianer", "gewinn", "insideparadeplatz", "tippinpoint", "cvj.ch", "bitcoinnews.ch"]):
             cat = "Schweiz / Oesterreich"
-        elif any(d in src for d in ["reuters", "ft.com", "bloomberg", "bbc", "cnbc", "wsj", "economist", "guardian", "fortune", "ipe", "pionline", "institutionalinvestor", "risk.net", "globalcapital", "etfstream", "ignites", "citywire.com", "hedgeweek", "preqin", "fundssociety", "seekingalpha", "thetradenews", "privateequitywire", "privatedebtinvestor", "infrastructureinvestor", "realdeals", "buyoutsnews"]):
+        elif any(d in src for d in ["reuters", "ft.com", "bloomberg", "bbc", "cnbc", "wsj", "economist", "guardian", "fortune", "ipe", "pionline", "institutionalinvestor", "risk.net", "globalcapital", "etfstream", "ignites", "citywire.com", "hedgeweek", "preqin", "fundssociety", "seekingalpha", "thetradenews", "privateequitywire", "privatedebtinvestor", "infrastructureinvestor", "realdeals", "buyoutsnews", "funds-europe", "finews.com"]):
             cat = "International"
         elif any(d in src for d in ["coindesk", "cointelegraph", "theblock", "decrypt", "bitcoinmagazine", "oilprice", "spglobal", "responsible-investor", "esgtoday"]):
             cat = "Krypto / Spezial"
