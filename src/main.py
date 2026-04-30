@@ -171,9 +171,9 @@ GOOGLE_NEWS_FEEDS = [
     "https://news.google.com/rss/search?q=IPO+B%C3%B6rsengang+%C3%9Cbernahme+M%26A&hl=de&gl=DE&ceid=DE:de",
     # EN thematisch — filtert vor allem Treffer aus Reuters/Bloomberg/Dow Jones
     # die in deutscher Berichterstattung oft nur verzoegert auftauchen
-    "https://news.google.com/rss/search?q=PIMCO+OR+PGIM+OR+%22Franklin+Templeton%22+OR+%22T+Rowe+Price%22+OR+Eurizon+OR+Temasek&hl=en&gl=US&ceid=US:en",
+    "https://news.google.com/rss/search?q=PGIM+OR+%22Franklin+Templeton%22+OR+%22T+Rowe+Price%22+OR+Eurizon&hl=en&gl=US&ceid=US:en",
     "https://news.google.com/rss/search?q=%22Bitcoin+Suisse%22+OR+%22crypto+regulation%22+MiCA&hl=en&gl=US&ceid=US:en",
-    "https://news.google.com/rss/search?q=Temasek+OR+KKR+investment&hl=en&gl=US&ceid=US:en",
+    "https://news.google.com/rss/search?q=KKR+investment&hl=en&gl=US&ceid=US:en",
     "https://news.google.com/rss/search?q=Aegon+OR+%22DNB+Asset%22+OR+%22Insight+Investment%22+OR+JOHCM&hl=en&gl=US&ceid=US:en",
     # Site-Fallbacks fuer Outlets ohne oeffentlichen RSS
     # DACH-Fokus — angelsaechsische Medien (FT, WSJ, BBC, CNBC, Economist, Guardian, Fortune) wurden entfernt
@@ -227,16 +227,9 @@ CLIENT_FEEDS = [
     "https://news.google.com/rss/search?q=site%3Afranklintempleton.com&hl=en&gl=US&ceid=US:en",
     "https://news.google.com/rss/search?q=site%3Afranklintempleton.de+OR+%22Franklin+Templeton%22+Deutschland&hl=de&gl=DE&ceid=DE:de",
     "https://news.google.com/rss/search?q=%22Martin+Lück%22+OR+%22Martin+Lueck%22+Franklin&hl=de&gl=DE&ceid=DE:de",
-    # PIMCO
-    "https://news.google.com/rss/search?q=site%3Apimco.com&hl=en&gl=US&ceid=US:en",
-    "https://news.google.com/rss/search?q=%22Frank+Witt%22+OR+%22Konstantin+Veit%22+PIMCO&hl=de&gl=DE&ceid=DE:de",
-    "https://news.google.com/rss/search?q=PIMCO+Deutschland+OR+M%C3%BCnchen+OR+Allianz&hl=de&gl=DE&ceid=DE:de",
     # Eurizon
     "https://news.google.com/rss/search?q=site%3Aeurizoncapital.com&hl=en&gl=US&ceid=US:en",
     "https://news.google.com/rss/search?q=Eurizon+Deutschland+OR+Frankfurt+%22Intesa+Sanpaolo%22&hl=de&gl=DE&ceid=DE:de",
-    # Temasek
-    "https://news.google.com/rss/search?q=site%3Atemasek.com.sg&hl=en&gl=US&ceid=US:en",
-    "https://news.google.com/rss/search?q=Temasek+Deutschland+OR+Europa+Investment&hl=de&gl=DE&ceid=DE:de",
     # Bitcoin Suisse
     "https://news.google.com/rss/search?q=site%3Abitcoinsuisse.com&hl=en&gl=US&ceid=US:en",
     "https://news.google.com/rss/search?q=%22Bitcoin+Suisse%22+OR+%22Dirk+Klee%22&hl=de&gl=DE&ceid=DE:de",
@@ -283,18 +276,9 @@ CLIENT_INSIGHTS_URLS = {
         "https://www.franklintempleton.com/articles",
         "https://www.franklintempleton.com/press-releases",
     ],
-    "PIMCO": [
-        "https://www.pimco.com/de/de/insights",
-        "https://www.pimco.com/en-us/insights",
-        "https://www.pimco.com/en-us/about-us/newsroom",
-    ],
     "Eurizon": [
         "https://www.eurizoncapital.com/en/strategy/market-views",
         "https://www.eurizoncapital.com/en/news-events",
-    ],
-    "Temasek": [
-        "https://www.temasek.com.sg/en/news-and-views",
-        "https://www.temasek.com.sg/en/news-and-resources/news-room",
     ],
     "Bitcoin Suisse": [
         "https://www.bitcoinsuisse.com/research",
@@ -378,17 +362,6 @@ CLIENT_PROFILES = {
         "tone": "globale Perspektive, klare Botschaften; Tokenisierung-Vorreiterrolle; geeignet fuer TV/Online-Video und Print",
         "taboo": "keine US-parteipolitischen Statements, vorsichtig bei China-Themen, Lexington-Themen separat von Liquid-Markets-Kommunikation",
     },
-    "PIMCO": {
-        "type": "Globaler Fixed-Income-Spezialist, gegruendet 1971, Allianz-Tochter seit 2000",
-        "aum": "ca. $2 Bio.",
-        "hq": "Newport Beach, CA",
-        "dach": "Muenchen (Allianz-Zentrale), Frankfurt, Zuerich",
-        "boutiques": "Fixed Income (Kernkompetenz), Multi-Asset/Alternatives, Private Credit/Direct Lending, Real Estate (CRE Debt+Equity), Commodities, Sustainable Investing",
-        "core_competencies": "Fixed Income (Government/Credit/HY/EMD/Securitized), Multi-Asset, Private Credit (wachsendes Segment), CRE, Commodities (eigene Plattform), ESG-Integration in Bonds",
-        "target_media_dach": "Handelsblatt, FAZ, Boersen-Zeitung, Fonds Professionell, Institutional Money, Anleihencheck, BondGuide, Risk.net, Reuters, Bloomberg, FT (Bond-Marktfuehrer), NZZ, FuW, n-tv Teleboerse",
-        "tone": "akademisch, bond-mathematisch fundiert, globale Top-Tier-Glaubwuerdigkeit, eher zurueckhaltend, Standardformat: Cyclical Outlook (quartalsweise), Secular Outlook (jaehrlich), Asset Allocation Outlook",
-        "taboo": "keine politischen Statements zu Wahlen, Allianz-Konzernthemen separat halten, keine konkreten Trades oeffentlich kommentieren",
-    },
     "Eurizon": {
         "type": "Asset-Management-Tochter der Intesa Sanpaolo Gruppe (Italiens groesste Bank)",
         "aum": "ca. EUR 440 Mrd.",
@@ -399,17 +372,6 @@ CLIENT_PROFILES = {
         "target_media_dach": "Fonds Professionell, DAS INVESTMENT, Citywire, Institutional Money, Handelsblatt, Boersen-Zeitung, FAZ (Italien-Bezug), Responsible Investor, FuW",
         "tone": "europaeisch-institutionell, akademisch fundiert ohne uebertriebene Zuspitzung, gute Bruecken zur italienischen Marktperspektive",
         "taboo": "Italien-politische Themen vorsichtig, Bankensektor-Themen sehr vorsichtig (Konzernbezug), US-Themen sind nicht Eurizons Staerke",
-    },
-    "Temasek": {
-        "type": "Singapurer Staatsfonds, gegruendet 1974",
-        "aum": "ca. SGD 430 Mrd.",
-        "hq": "Singapur",
-        "dach": "London-Hub deckt Europa ab, vereinzelte direkte Investments in DACH",
-        "boutiques": "Eigentuemer-Investor (nicht Asset Manager), direkte Beteiligungen",
-        "core_competencies": "Long-Term Investment (20-Jahres-Renditen), direkte Beteiligungen (Banken/Telecom/Tech/Konsumgueter/Infrastruktur), Sektoren: FSI/TMT/Transportation/Consumer-RE/Life Sciences-Agri, Asia-Fokus (~60%) aber global, Sustainability (Net-Zero 2050)",
-        "target_media_dach": "Handelsblatt, FAZ, Boersen-Zeitung (selten, bei konkreten Investments), FT, Reuters, Bloomberg, Nikkei Asia (haeufiger), branchenspezifische Wirtschaftsmedien bei DACH-Investments",
-        "tone": "sehr zurueckhaltend, staatsmaennisch, selten direkte Marktkommentare, bevorzugt Whitepaper/Annual Reports/ausgewaehlte Top-Tier-Interviews",
-        "taboo": "politische Themen (Singapur-Regierung-Bezug), konkrete Spekulation ueber Einzelinvestments, China-USA-Spannungen sehr vorsichtig, keine Konkurrenz-Kommentierung",
     },
     "Bitcoin Suisse": {
         "type": "Schweizer Krypto-Finanzdienstleister, gegruendet 2013 (einer der aeltesten)",
@@ -505,9 +467,7 @@ CLIENTS = """- PGIM ($1,5 Bio. AuM): Institutional, Multi-Asset, Real Estate, Fi
 - T. Rowe Price: Active Equity, Multi-Asset, ETF-Strategie Europa
 - MK Global Kapital (Luxemburg): Impact/Microfinance, EM, Tokenisierung, SME-Kredite
 - Franklin Templeton ($1,74 Bio. AuM): Multi-Asset, EM, ETF, Tokenisierung
-- PIMCO: Fixed Income, Alternatives, Commodities, Credit (Allianz-Tochter)
 - Eurizon (Intesa Sanpaolo): Euro Fixed Income, EM Debt, ESG, Quantitative
-- Temasek: Singapurer Staatsfonds, Infrastruktur, Tech, Life Sciences
 - Bitcoin Suisse: Krypto-Finanzdienstleister, MiCA, Custody, Staking
 - KKR: Private Equity, Infrastruktur, Real Estate, Credit
 - Aegon Asset Management: Multi-Asset, Fixed Income, Verantwortungsvolles Investieren, niederlaendisch-britischer AM
@@ -551,9 +511,7 @@ CLIENT_KEYWORDS = {
     "T. Rowe Price": ["t. rowe price", "t rowe price", "trowe price"],
     "MK Global Kapital": ["mk global", "mk global kapital"],
     "Franklin Templeton": ["franklin templeton", "martin lueck", "martin lück"],
-    "PIMCO": ["pimco"],
     "Eurizon": ["eurizon", "intesa sanpaolo"],
-    "Temasek": ["temasek"],
     "Bitcoin Suisse": ["bitcoin suisse"],
     "KKR": ["kkr", "kohlberg kravis"],
     "Aegon AM": ["aegon asset management", "aegon am"],
@@ -997,7 +955,7 @@ Welche Themen sind heute KAUM in den Medien, koennten aber gepitcht werden? Wo g
 Welche grossen Wettbewerber unserer Kunden (BlackRock, Vanguard, Fidelity, Goldman Sachs AM, JPMorgan AM, Amundi, DWS, Allianz GI, AXA IM, Schroders, Invesco, State Street, Northern Trust, Apollo, Blackstone, Carlyle, TPG, Brookfield, EQT, Permira, Advent, CVC, Coinbase, Kraken, Gemini, Vontobel, GAM, Robeco, Pictet, UBS AM, Credit Suisse AM, Lombard Odier IM, Carmignac, Comgest) sind heute in den Medien? Was kommunizieren sie? Wo koennten unsere Kunden kontern?
 
 ## Schritt 5 — KUNDEN-LIVE-RECHERCHE
-Fuer JEDEN der 15 Kunden FUEHRE WEB-SEARCH DURCH:
+Fuer JEDEN der 13 Kunden FUEHRE WEB-SEARCH DURCH:
 
 ### [Kundenname]
 - **Aktuelle DACH-Sprecher** (Stand 2026, NUR live verifiziert!):
@@ -1071,7 +1029,7 @@ QUALITAETSREGELN — ABSOLUT KRITISCH:
     
     p2 = f"""Du bist seit 20 Jahren Wirtschafts- und Finanzjournalist in DACH. Du hast bei Handelsblatt, FAZ, Boersen-Zeitung, Reuters und Bloomberg gearbeitet. Du weisst genau, was Journalisten tatsaechlich brauchen, um ein Pitch zu nehmen, und was sofort im Papierkorb landet.
 
-Du wechselst jetzt die Rolle: Du arbeitest als Senior Director bei TE Communications und sollst aus Journalistensicht Pitches fuer 15 Kunden formulieren.
+Du wechselst jetzt die Rolle: Du arbeitest als Senior Director bei TE Communications und sollst aus Journalistensicht Pitches fuer 13 Kunden formulieren.
 
 WAS JOURNALISTEN BRAUCHEN (du kennst das aus 20 Jahren Praxis):
 1. NEWS-AUFHAENGER: Klare aktuelle Begruendung "warum heute". Ohne Aufhaenger keine Story.
@@ -1108,16 +1066,16 @@ AUFGABE: Erstelle zwei Abschnitte. Beide muessen so brauchbar sein, dass ein TE-
 
 ## Schritt 7 — Positionierungs-Mapping pro Kunde
 
-WICHTIG — KRITISCHE ANWEISUNG: Du MUSST fuer ALLE 15 Kunden ein Mapping erstellen. KEIN Kunde darf ausgelassen werden. Die Reihenfolge ist verbindlich:
-1. PGIM, 2. T. Rowe Price, 3. MK Global Kapital, 4. Franklin Templeton, 5. PIMCO, 
-6. Eurizon, 7. Temasek, 8. Bitcoin Suisse, 9. KKR, 10. Aegon AM, 11. Bendura Bank, 
-12. DNB AM, 13. Insight Investment, 14. JOHCM, 15. Maverix
+WICHTIG — KRITISCHE ANWEISUNG: Du MUSST fuer ALLE 13 Kunden ein Mapping erstellen. KEIN Kunde darf ausgelassen werden. Die Reihenfolge ist verbindlich:
+1. PGIM, 2. T. Rowe Price, 3. MK Global Kapital, 4. Franklin Templeton, 
+5. Eurizon, 6. Bitcoin Suisse, 7. KKR, 8. Aegon AM, 9. Bendura Bank, 
+10. DNB AM, 11. Insight Investment, 12. JOHCM, 13. Maverix
 
 Wenn fuer einen Kunden HEUTE wenig anschlussfaehig ist (typisch: Bendura, Maverix, MK Global Kapital, JOHCM, DNB an ruhigen Tagen): trotzdem strukturiert behandeln, nur kompakter — mindestens "Heute anschlussfaehig ueber" + 1 Pitch + Eigen-Inhalt + Tabu-Warnung. Nicht ueberspringen!
 
 Lieber 1 starker Pitch als 2 schwache. Wenn wirklich KEIN Pitch heute trägt, dann offen sagen "Heute kein Pitch sinnvoll — Empfehlung: nicht aktiv pitchen, stattdessen Marktbeobachtung fortsetzen, naechster moeglicher Anlass: [konkret]".
 
-Fuer JEDEN der 15 Kunden, in dieser klaren Struktur:
+Fuer JEDEN der 13 Kunden, in dieser klaren Struktur:
 
 ### [Kundenname]
 
@@ -1421,7 +1379,7 @@ strong{{color:#111827}}
 <div class="dt">{date_str} — {time_str} CET</div>
 <div class="ml">Pass 1: {meta['m1']} + Web Search ({meta['t1']}s) | Pass 2: {meta['m2']} ({meta['t2']}s) | {meta['rss_ok']}/{meta['rss_total']} RSS-Feeds parallel | {meta.get('history_days',0)} Tage Trendkontext</div>
 <div class="bg">
-<span>PGIM</span><span>T. Rowe Price</span><span>MK Global Kapital</span><span>Franklin Templeton</span><span>PIMCO</span><span>Eurizon</span><span>Temasek</span><span>Bitcoin Suisse</span><span>KKR</span><span>Aegon AM</span><span>Bendura</span><span>DNB AM</span><span>Insight</span><span>JOHCM</span><span>Maverix</span>
+<span>PGIM</span><span>T. Rowe Price</span><span>MK Global Kapital</span><span>Franklin Templeton</span><span>Eurizon</span><span>Bitcoin Suisse</span><span>KKR</span><span>Aegon AM</span><span>Bendura</span><span>DNB AM</span><span>Insight</span><span>JOHCM</span><span>Maverix</span>
 </div>
 </div>
 <div class="kp">
