@@ -73,6 +73,7 @@ MEDIA_RSS_FEEDS = [
     "https://www.exxecnews.de/feed/",
     "https://www.dpn-online.com/feed/",
     "https://www.e-fundresearch.com/feed/",
+    "https://www.fundview.de/feed/",
     "https://www.morningstar.de/de/news/rss.aspx",
     "https://www.capital.de/feed/",
     "https://www.focus.de/finanzen/rss/",
@@ -206,6 +207,7 @@ GOOGLE_NEWS_FEEDS = [
     "https://news.google.com/rss/search?q=site%3Afinanzwelt.de&hl=de&gl=DE&ceid=DE:de",
     "https://news.google.com/rss/search?q=site%3Aintelligent-investors.de&hl=de&gl=DE&ceid=DE:de",
     "https://news.google.com/rss/search?q=site%3Adfpa.info&hl=de&gl=DE&ceid=DE:de",
+    "https://news.google.com/rss/search?q=site%3Afundview.de&hl=de&gl=DE&ceid=DE:de",
     "https://news.google.com/rss/search?q=%22Euro+am+Sonntag%22+OR+%22Euro+Magazin%22&hl=de&gl=DE&ceid=DE:de",
     "https://news.google.com/rss/search?q=%22Focus+Money%22&hl=de&gl=DE&ceid=DE:de",
 ]
@@ -1223,7 +1225,7 @@ REGELN ABSOLUT:
         # Kategorisierung
         if any(d in src for d in ["handelsblatt", "faz", "sueddeutsche", "wiwo", "spiegel", "manager-magazin", "tagesschau", "n-tv", "welt", "tagesspiegel", "zeit", "stern", "finanzen.net", "bild", "capital", "focus"]):
             cat = "Deutsche Leitmedien"
-        elif any(d in src for d in ["fondsprofessionell", "dasinvestment", "citywire.de", "institutional-money", "private-banking", "altii", "portfolio-institutionell", "fundresearch", "boerse-online", "anleihencheck", "bondguide", "exxecnews", "dpn", "e-fundresearch", "morningstar", "asscompact", "versicherungswirtschaft", "finanzwelt", "intelligent-investors", "boersen-zeitung", "dpa", "euro-magazin", "iz.de", "thomas-daily", "4investors"]):
+        elif any(d in src for d in ["fondsprofessionell", "dasinvestment", "citywire.de", "institutional-money", "private-banking", "altii", "portfolio-institutionell", "fundresearch", "fundview", "boerse-online", "anleihencheck", "bondguide", "exxecnews", "dpn", "e-fundresearch", "morningstar", "asscompact", "versicherungswirtschaft", "finanzwelt", "intelligent-investors", "boersen-zeitung", "dpa", "euro-magazin", "iz.de", "thomas-daily", "4investors", "onvista", "t-online", "dfpa"]):
             cat = "Deutsche Fachmedien"
         elif any(d in src for d in ["nzz", "fuw", "cash.ch", "handelszeitung", "finews", "moneycab", "investrends", "diepresse", "derstandard", "boersen-kurier", "boerse-express", "fondsexklusiv"]):
             cat = "Schweiz / Oesterreich"
