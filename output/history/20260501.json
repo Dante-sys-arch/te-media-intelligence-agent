@@ -1,0 +1,40 @@
+{
+  "date": "Freitag, 1. Mai 2026",
+  "time": "09:11",
+  "summary": "# 10 Stichpunkte — Hauptthemen Tagesreport 1. Mai 2026\n\n---\n\n**1. EZB hält Leitzins bei 2,00 % / Juni-Erhöhung vorbereitet**\nDritte Pause in Folge; Lagarde hawkisher als erwartet; Inflation 3,0 %, Kerninflation 2,2 %.\n\n---\n\n**2. Brent-Schock: Vier-Jahres-Hoch bei 126,41 USD intraday**\nKurzzeitig über 126 USD; Rückfall auf 115,80 USD; WTI –0,7 % auf 106 USD.\n\n---\n\n**3. Japan interveniert am FX-Markt — erste direkte Aktion seit 2024**\nYen-Stützung; Währung +3 % gegen Dollar; erste offizielle Intervention seit knapp zwei Jahren.\n\n---\n\n**4. Apple: Rekordumsatz — aber Memory-Cost-Warnung als Sektorsignal**\nEPS 2,01 USD (erwartet: 1,95); Umsatz 111,18 Mrd. USD; Bruttomarge 49,3 %; Cook warnt vor signifikant höheren Speicherkosten.\n\n---\n\n**5. EU-Mercosur-Freihandelszone tritt in Kraft — 720 Mio. Verbraucher**\nGrößter Handelsblock-Schritt seit Jahren; strategischer Konter zur China-Abhängigkeit; parallel zur Iran-Krise.\n\n---\n\n**6. Übergreifende Metageschichte: Stagflation by stealth**\nEnergie + hawkische EZB + Tech-Kostendruck + Feiertags-Illiquidität ergeben ein Bild, das Einzelberichte nur fragmentiert zeigen.\n\n---\n\n**7. Viele Börsen feiertagsbedingt geschlossen**\nChina, Korea, Singapur, Taiwan, Hongkong, weite Teile DACH — erhöhte Illiquidität; Pitch-Vorteil für früh platzierte Statements.\n\n---\n\n**8. Quellenlage: hoch bei Makro/Energie/Tech — mittel bei DACH-Kunden**\nOriginalpressemitteilungen für Apple, T. Rowe Price, Franklin Templeton vorhanden; Bendura, Maverix, MK Global Kapital ohne aktuelle Pressetreffer (letzte 7 Tage).\n\n---\n\n**9. Punktuelle Recherchen noch ausstehend: KKR/PE und Eurizon/Franklin Templeton**\nSowie Verifikation aktueller DACH-Sprecher — offene Datenlücken vor Finalreport.\n\n---\n\n**10. DACH-Berichterstattung gedämpft wegen 1. Mai**\nInternationale Primärquellen (Bloomberg, Reuters, CNBC, ECB.europa.eu) heute entscheidend; frühe Statements haben erhöhten Platzierungsvorteil.",
+  "hash": "fde017434d5b05b94b01eba0e8660cf9",
+  "meta": {
+    "date": "Freitag, 1. Mai 2026",
+    "time": "09:11",
+    "weekend": false,
+    "rss_total": 213,
+    "rss_ok": 162,
+    "rss_fail": 77,
+    "rss_sources": 213,
+    "rss_items": 758,
+    "rss_time": 10.4,
+    "client_mentions": {
+      "PGIM": 9,
+      "T. Rowe Price": 15,
+      "MK Global Kapital": 0,
+      "Franklin Templeton": 10,
+      "Eurizon": 10,
+      "Bitcoin Suisse": 10,
+      "KKR": 14,
+      "Aegon AM": 9,
+      "Bendura Bank": 9,
+      "DNB AM": 7,
+      "Insight Investment": 8,
+      "JOHCM": 3,
+      "Maverix": 5
+    },
+    "history_days": 3,
+    "m1": "claude-opus-4-7",
+    "c1": 39741,
+    "t1": 369.2,
+    "m2": "claude-opus-4-7",
+    "c2": 57278,
+    "t2": 408.9,
+    "total": 101410
+  }
+}
