@@ -1,0 +1,40 @@
+{
+  "date": "Samstag, 2. Mai 2026",
+  "time": "08:44",
+  "summary": "# 10 Hauptthemen — Tagesreport 2. Mai 2026\n\n---\n\n**1. Spirit Airlines-Shutdown**\nErster großer US-Airline-Kollaps seit Midway 2001 — 17.000 Jobs weg, Iran-Krise als finaler Auslöser\n\n**2. Trump-EU-Autozölle 25%**\nDritte Eskalation in 12 Monaten — Bruch des Sommer-2025-Rahmens, wirksam ab kommender Woche\n\n**3. Japan-Yen-Intervention (~35 Mrd. USD)**\nErste Devisenintervention seit zwei Jahren — knapp unter dem Juli-2024-Rekord\n\n**4. Apple-Rekordquartal**\n111,2 Mrd. USD Umsatz (+17%), EPS 2,01 USD (+22%) — S&P und Nasdaq auf neuen Hochs\n\n**5. EZB hält bei 2,00% — Juni-Hike konkret**\nLagarde/Nagel signalisieren offen Zinserhöhung im Juni, Inflation Eurozone 3,0%\n\n**6. Ölpreis unter Druck**\nIran-Konflikt + Nachfragesorgen durch Zolleskalation drücken Brent — volatile Lage\n\n**7. Bitcoin Suisse — Krypto-Ausblick 2026**\nInstitutionelle Krypto-Nachfrage steigt, Bitcoin Suisse publiziert strukturierten Marktausblick\n\n**8. Franklin Templeton BENJI — 5-Jahres-Meilenstein**\nTokenisierter Geldmarktfonds feiert Jubiläum, On-Chain-Finance gewinnt institutionell an Reife\n\n**9. KKR / Private Markets**\nDealflow zieht an — Zinsplateau gibt PE-Häusern Planungssicherheit für neue Transaktionen\n\n**10. T. Rowe Price Q1-Ergebnis**\nSolide Quartalszahlen stützen Bild stabiler aktiver Manager trotz ETF-Wettbewerbsdruck",
+  "hash": "8c0f5be343f9e916b4155e085f6be278",
+  "meta": {
+    "date": "Samstag, 2. Mai 2026",
+    "time": "08:44",
+    "weekend": true,
+    "rss_total": 213,
+    "rss_ok": 161,
+    "rss_fail": 78,
+    "rss_sources": 210,
+    "rss_items": 754,
+    "rss_time": 11.6,
+    "client_mentions": {
+      "PGIM": 11,
+      "T. Rowe Price": 12,
+      "MK Global Kapital": 0,
+      "Franklin Templeton": 10,
+      "Eurizon": 10,
+      "Bitcoin Suisse": 9,
+      "KKR": 14,
+      "Aegon AM": 9,
+      "Bendura Bank": 9,
+      "DNB AM": 7,
+      "Insight Investment": 8,
+      "JOHCM": 4,
+      "Maverix": 5
+    },
+    "history_days": 4,
+    "m1": "claude-opus-4-7",
+    "c1": 38877,
+    "t1": 385.5,
+    "m2": "claude-opus-4-7",
+    "c2": 45293,
+    "t2": 338.5,
+    "total": 88502
+  }
+}
