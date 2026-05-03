@@ -150,75 +150,98 @@ def section_block_html(title, teaser_text, link_label="Vollständig im Report ö
 def build_email_html(date_str, sections, meta_info=""):
     """Build the full HTML email with all section teasers."""
 
-    title_quellen, c_quellen = find_section(sections, "Quellen", "Zugriffslage")
-    title_top5, c_top5 = find_section(sections, "Top 5 Themen", "Top 3 Themen")
-    title_ueber, c_ueber = find_section(sections, "Marktrecherche-Ueberblick", "Markt-Recherche", "Marktanalyse")
-    title_tiefe, c_tiefe = find_section(sections, "Tiefenanalyse", "Themen die das")
+    title_quellen, c_quellen = find_section(sections, "Datenlage", "Quellen", "Zugriffslage", "Recherche-Status")
+    title_top5, c_top5 = find_section(sections, "Top-Themen", "Top 5 Themen", "Top 3 Themen")
+    title_ueber, c_ueber = find_section(sections, "Marktbild", "Markt-Recherche", "Marktanalyse")
+    title_tiefe, c_tiefe = find_section(sections, "Tiefenanalyse")
     title_white, c_white = find_section(sections, "White Spaces", "Unterdiskutiert")
     title_konk, c_konk = find_section(sections, "Konkurrenz")
-    title_live, c_live = find_section(sections, "KUNDEN-LIVE", "Live-Recherche", "Kunden-Live")
-    title_termine, c_termine = find_section(sections, "Termine")
-    title_prio, c_prio = find_section(sections, "Priorisierte Themen", "Themen-Tabelle")
-    title_pos, c_pos = find_section(sections, "Positionierungs-Mapping")
-    title_pitches, c_pitches = find_section(sections, "Pitch-Empfehlungen", "Top-7", "Pitch-Empf")
+    title_live, c_live = find_section(sections, "Live-Recherche", "KUNDEN-LIVE")
+    title_termine, c_termine = find_section(sections, "Termin")
+    title_prio, c_prio = find_section(sections, "Themen-Priorisierung", "Priorisierte Themen")
+    title_filter, c_filter = find_section(sections, "Themen-Filter")
+    title_mapping, c_mapping = find_section(sections, "Sprecher-Mapping")
+    title_pitches, c_pitches = find_section(sections, "Pitch-Empfehlungen")
+    title_kunden, c_kunden = find_section(sections, "Kunden-Sicht")
     title_trends, c_trends = find_section(sections, "Mehrtages-Trends")
     title_fazit, c_fazit = find_section(sections, "Gesamtfazit", "Fazit")
 
     blocks = []
 
+    # 1. Datenlage
     if title_quellen:
-        blocks.append(section_block_html(title_quellen, teaser(c_quellen, 350, 4), "Volle Quellenliste"))
+        blocks.append(section_block_html(title_quellen, teaser(c_quellen, 350, 4), "Volle Recherche-Statistik"))
 
+    # 2. Top-Themen
     if title_top5:
         blocks.append(section_block_html(title_top5, teaser(c_top5, 600, 7), "Vollständige Tiefenanalyse"))
 
+    # 3. Marktbild
     if title_ueber:
         blocks.append(section_block_html(title_ueber, teaser(c_ueber, 400, 4), "Vollständige Marktanalyse"))
 
+    # 4. Tiefenanalyse (kompakt — nur Themen-Titel)
     if title_tiefe:
         compact = []
         for line in c_tiefe.split("\n"):
             if line.startswith("### "):
                 compact.append(f"• {line[4:].strip()}")
-                if len(compact) >= 4:
+                if len(compact) >= 5:
                     break
         teaser_t = "\n".join(compact) if compact else teaser(c_tiefe, 400, 5)
         blocks.append(section_block_html(title_tiefe, teaser_t, "Vollständige 8-Punkte-Analyse pro Thema"))
 
+    # 5. Mehrtages-Trends
+    if title_trends:
+        blocks.append(section_block_html(title_trends, teaser(c_trends, 350, 4), "Volle Trend-Analyse"))
+
+    # 6. White Spaces
     if title_white:
         blocks.append(section_block_html(title_white, teaser(c_white, 500, 5), "Volle White-Space-Analyse"))
 
+    # 7. Konkurrenz
     if title_konk:
         blocks.append(section_block_html(title_konk, teaser(c_konk, 500, 6), "Volle Konkurrenz-Beobachtung"))
 
+    # 8. Live-Recherche
     if title_live:
         blocks.append(section_block_html(title_live, teaser(c_live, 500, 7), "Volle Sprecher-Recherche aller 13 Kunden"))
 
-    if title_termine:
-        blocks.append(section_block_html(title_termine, teaser(c_termine, 500, 7), "Vollständiger Termin-Überblick"))
-
+    # 9. Themen-Priorisierung
     if title_prio:
         blocks.append(section_block_html(title_prio, teaser(c_prio, 500, 7), "Volle Prioritäten-Tabelle"))
 
-    if title_pos:
-        blocks.append(section_block_html(title_pos, teaser(c_pos, 600, 8), "Volles Mapping pro Kunde (13)"))
+    # 10. NEU: Themen-Filter (was ist heute pitchbar?)
+    if title_filter:
+        blocks.append(section_block_html(title_filter, teaser(c_filter, 500, 7), "Volle Pitch-Filterung mit Begründung"))
 
+    # 11. NEU: Sprecher-Mapping
+    if title_mapping:
+        blocks.append(section_block_html(title_mapping, teaser(c_mapping, 500, 7), "Volles Sprecher-Mapping pro Thema"))
+
+    # 12. ZENTRAL: Pitch-Empfehlungen
     if title_pitches:
         compact = []
         for line in c_pitches.split("\n"):
             stripped = line.strip()
-            if re.match(r'^\d+\.\s', stripped) or stripped.startswith("**"):
-                clean = re.sub(r'\*\*', '', stripped)
+            if re.match(r'^### PITCH', stripped) or re.match(r'^\d+\.\s', stripped):
+                clean = re.sub(r'\*\*|###\s*', '', stripped)
                 if len(clean) > 10:
                     compact.append("• " + clean[:130])
                     if len(compact) >= 7:
                         break
         teaser_p = "\n".join(compact) if compact else teaser(c_pitches, 600, 7)
-        blocks.append(section_block_html(title_pitches, teaser_p, "Volle Pitches mit fertigen Mail-Vorschlägen"))
+        blocks.append(section_block_html(title_pitches, teaser_p, "Volle Pitch-Briefings (mit Herleitung + Mail-Vorschlag)"))
 
-    if title_trends:
-        blocks.append(section_block_html(title_trends, teaser(c_trends, 350, 4), "Volle Trend-Analyse"))
+    # 13. NEU: Kunden-Sicht
+    if title_kunden:
+        blocks.append(section_block_html(title_kunden, teaser(c_kunden, 500, 7), "Volle Kunden-Sicht (mit/ohne Pitch heute)"))
 
+    # 14. Termine
+    if title_termine:
+        blocks.append(section_block_html(title_termine, teaser(c_termine, 500, 7), "Vollständiger Termin-Überblick"))
+
+    # 15. Gesamtfazit
     if title_fazit:
         blocks.append(section_block_html(title_fazit, teaser(c_fazit, 400, 4), "Volltext"))
 

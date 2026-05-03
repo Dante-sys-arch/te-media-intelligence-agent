@@ -356,58 +356,123 @@ CLIENT_FEEDS = [
 # These URLs are scraped directly to find publishable content, whitepapers, commentaries
 CLIENT_INSIGHTS_URLS = {
     "PGIM": [
+        # Insights & Research
         "https://www.pgim.com/insights",
+        "https://www.pgim.com/insights/quarterly-outlook",
+        "https://www.pgim.com/insights/megatrends",
+        "https://www.pgim.com/fixed-income/insights",
+        "https://www.pgim.com/real-estate/insights",
+        "https://www.pgim.com/private-capital/insights",
+        # News & Press
         "https://www.pgim.com/news",
+        "https://www.pgim.com/press-releases",
+        # Sprecher / About
+        "https://www.pgim.com/about-pgim/leadership",
     ],
     "T. Rowe Price": [
         "https://www.troweprice.com/personal-investing/resources/insights.html",
         "https://www.troweprice.com/corporate/en/press.html",
+        "https://www.troweprice.com/financial-intermediary/de/de/insights.html",
+        "https://www.troweprice.com/corporate/en/insights/markets-economy.html",
+        "https://www.troweprice.com/corporate/en/insights/multi-asset.html",
+        "https://www.troweprice.com/corporate/en/insights/fixed-income.html",
+        "https://www.troweprice.com/corporate/en/insights/equity.html",
+        "https://www.troweprice.com/corporate/en/about/management-and-leadership.html",
     ],
     "MK Global Kapital": [
         "https://www.mk-global.com/news/",
         "https://www.mk-global.com/insights/",
+        "https://www.mk-global.com/about/",
+        "https://www.mk-global.com/strategies/",
+        "https://www.mk-global.com/team/",
     ],
     "Franklin Templeton": [
         "https://www.franklintempleton.de/articles",
+        "https://www.franklintempleton.de/insights",
         "https://www.franklintempleton.com/articles",
+        "https://www.franklintempleton.com/insights",
         "https://www.franklintempleton.com/press-releases",
+        "https://www.franklintempleton.de/news",
+        "https://www.franklintempleton.com/our-thinking",
+        "https://www.franklintempleton.com/about-us/our-people",
+        "https://www.franklintempleton.de/articles/martin-luck",
     ],
     "Eurizon": [
         "https://www.eurizoncapital.com/en/strategy/market-views",
         "https://www.eurizoncapital.com/en/news-events",
+        "https://www.eurizoncapital.com/en/strategy/research-publications",
+        "https://www.eurizoncapital.com/en/about-us/our-people",
+        "https://www.eurizoncapital.com/de/marktanalysen",
+        "https://www.eurizoncapital.com/en/funds/sustainability",
     ],
     "Bitcoin Suisse": [
         "https://www.bitcoinsuisse.com/research",
         "https://www.bitcoinsuisse.com/news",
+        "https://www.bitcoinsuisse.com/research/decrypt",
+        "https://www.bitcoinsuisse.com/research/outlook",
+        "https://www.bitcoinsuisse.com/about/team",
+        "https://www.bitcoinsuisse.com/news/press-releases",
     ],
     "KKR": [
         "https://www.kkr.com/insights",
         "https://www.kkr.com/news",
+        "https://www.kkr.com/insights/global-macro-trends",
+        "https://www.kkr.com/insights/private-credit",
+        "https://www.kkr.com/insights/infrastructure",
+        "https://www.kkr.com/insights/real-estate",
+        "https://www.kkr.com/our-firm/our-leadership",
+        "https://www.kkr.com/news/press-releases",
     ],
     "Aegon AM": [
         "https://www.aegonam.com/insights/",
         "https://www.aegonam.com/news/",
+        "https://www.aegonam.com/insights/multi-asset/",
+        "https://www.aegonam.com/insights/fixed-income/",
+        "https://www.aegonam.com/insights/responsible-investing/",
+        "https://www.aegonam.com/about/our-people/",
+        "https://www.aegonam.com/de/insights/",
     ],
     "Bendura Bank": [
         "https://www.bendura.li/aktuelles/",
         "https://www.bendura.li/",
+        "https://www.bendura.li/ueber-uns/",
+        "https://www.bendura.li/leistungen/vermoegensverwaltung/",
+        "https://www.bendura.li/medien/",
     ],
     "DNB AM": [
         "https://dnbam.com/de/insights",
         "https://dnbam.com/de/news",
+        "https://dnbam.com/de/strategies",
+        "https://dnbam.com/en/insights",
+        "https://dnbam.com/en/news",
+        "https://dnbam.com/de/about/team",
+        "https://dnbam.com/en/insights/sustainability",
     ],
     "Insight Investment": [
         "https://www.insightinvestment.com/deutschland/insights/",
         "https://www.insightinvestment.com/insights/",
         "https://www.insightinvestment.com/about-insight/news-and-views/",
+        "https://www.insightinvestment.com/insights/fixed-income/",
+        "https://www.insightinvestment.com/insights/liability-driven-investment/",
+        "https://www.insightinvestment.com/insights/responsible-investment/",
+        "https://www.insightinvestment.com/about-insight/our-team/",
+        "https://www.insightinvestment.com/deutschland/news/",
     ],
     "JOHCM": [
         "https://www.johcm.com/de-de/insights",
         "https://www.johcm.com/uk/insights",
+        "https://www.johcm.com/us/insights",
+        "https://www.johcm.com/uk/news",
+        "https://www.johcm.com/de-de/news",
+        "https://www.johcm.com/uk/our-team",
+        "https://www.johcm.com/uk/strategies",
     ],
     "Maverix": [
         "https://mavx.com/de/news/",
         "https://mavx.com/de/insights/",
+        "https://mavx.com/de/strategie/",
+        "https://mavx.com/de/team/",
+        "https://mavx.com/de/research/",
     ],
 }
 
@@ -648,7 +713,7 @@ def fetch_single_feed(url, cutoff):
 
 
 def fetch_client_website(client_name, urls):
-    """Fetch client insights/news pages directly from their website."""
+    """Fetch client insights/news pages directly from their website with content extraction."""
     results = []
     for url in urls:
         try:
@@ -658,31 +723,51 @@ def fetch_client_website(client_name, urls):
                 "Accept-Language": "en-US,en;q=0.9,de;q=0.8",
             })
             with urllib.request.urlopen(req, timeout=10) as resp:
-                html = resp.read().decode("utf-8", errors="ignore")[:50000]  # First 50k chars
+                html = resp.read().decode("utf-8", errors="ignore")[:80000]  # First 80k chars
             
-            # Extract titles, links, dates from HTML
-            # Look for common article/insight patterns
+            # Extract main content from the landing page itself
+            # Strip scripts, styles, navigation
+            cleaned = re.sub(r'<script[^>]*>.*?</script>', '', html, flags=re.DOTALL|re.IGNORECASE)
+            cleaned = re.sub(r'<style[^>]*>.*?</style>', '', cleaned, flags=re.DOTALL|re.IGNORECASE)
+            cleaned = re.sub(r'<nav[^>]*>.*?</nav>', '', cleaned, flags=re.DOTALL|re.IGNORECASE)
+            cleaned = re.sub(r'<footer[^>]*>.*?</footer>', '', cleaned, flags=re.DOTALL|re.IGNORECASE)
+            
+            # Extract all text content (paragraphs)
+            paragraphs = re.findall(r'<p[^>]*>([^<]{50,500})</p>', cleaned, re.IGNORECASE)
+            page_text = " ".join(paragraphs[:20])[:3000]  # First 3000 chars of meaningful content
+            
             articles = []
             
             # Pattern 1: <h2>/<h3> with link inside
-            h_pattern = re.findall(r'<h[2-4][^>]*>\s*<a[^>]+href=["\']([^"\']+)["\'][^>]*>([^<]{15,150})</a>', html, re.IGNORECASE)
-            for href, title in h_pattern[:10]:
+            h_pattern = re.findall(r'<h[2-4][^>]*>\s*<a[^>]+href=["\']([^"\']+)["\'][^>]*>([^<]{15,150})</a>', cleaned, re.IGNORECASE)
+            for href, title in h_pattern[:8]:
                 if any(skip in title.lower() for skip in ["cookie", "privacy", "terms", "menu", "navigation", "search"]):
                     continue
-                # Make URL absolute
                 if href.startswith("/"):
                     base = "/".join(url.split("/")[:3])
                     href = base + href
+                
+                # Try to extract surrounding context for this article (excerpt)
+                title_pos = cleaned.find(title)
+                excerpt = ""
+                if title_pos > 0:
+                    # Look for paragraph after this title
+                    after_title = cleaned[title_pos:title_pos+3000]
+                    para_match = re.search(r'<p[^>]*>([^<]{40,400})</p>', after_title)
+                    if para_match:
+                        excerpt = re.sub(r'\s+', ' ', para_match.group(1)).strip()[:400]
+                
                 articles.append({
                     "client": client_name,
                     "title": re.sub(r'\s+', ' ', title).strip(),
                     "url": href,
                     "source_page": url,
+                    "content": excerpt or page_text[:600],  # Excerpt or page-level fallback
                 })
             
-            # Pattern 2: <article> tags with linked headlines
+            # Pattern 2: Fallback for sites without h-pattern
             if not articles:
-                a_pattern = re.findall(r'<a[^>]+href=["\']([^"\']+(?:insights?|articles?|news|press|research|outlook)[^"\']*)["\'][^>]*>([^<]{20,150})</a>', html, re.IGNORECASE)
+                a_pattern = re.findall(r'<a[^>]+href=["\']([^"\']+(?:insights?|articles?|news|press|research|outlook)[^"\']*)["\'][^>]*>([^<]{20,150})</a>', cleaned, re.IGNORECASE)
                 for href, title in a_pattern[:8]:
                     if any(skip in title.lower() for skip in ["cookie", "privacy", "terms", "menu", "subscribe"]):
                         continue
@@ -694,7 +779,18 @@ def fetch_client_website(client_name, urls):
                         "title": re.sub(r'\s+', ' ', title).strip(),
                         "url": href,
                         "source_page": url,
+                        "content": page_text[:600],
                     })
+            
+            # If no articles but we got page content, capture as a generic entry
+            if not articles and page_text and len(page_text) > 200:
+                articles.append({
+                    "client": client_name,
+                    "title": f"Inhalt von {url.split('/')[-2] if url.endswith('/') else url.split('/')[-1] or 'Hauptseite'}",
+                    "url": url,
+                    "source_page": url,
+                    "content": page_text[:800],
+                })
             
             results.extend(articles[:5])  # Max 5 per URL
         except Exception as e:
@@ -707,7 +803,7 @@ def fetch_client_website(client_name, urls):
         if r["url"] not in seen:
             seen.add(r["url"])
             unique.append(r)
-    return unique[:10]  # Max 10 per client
+    return unique[:12]  # Max 12 per client (was 10)
 
 
 def fetch_all_client_insights():
@@ -1011,18 +1107,18 @@ Themenfelder: {', '.join(THEMENFELDER)}
 
 AUSGABE (beginne direkt, keine Einleitung):
 
-## Schritt 0 — Quellen- und Zugriffslage
+## Datenlage und Recherche-Status
 3-4 Saetze: Welche Quellen waren heute gut auswertbar? Welche eingeschraenkt? Gesamt-Belastbarkeit?
 
-## Top 5 Themen des Tages
-Die 5 wichtigsten Markt-Themen heute in je 2 Saetzen. Hier reicht knappe Form — Tiefe kommt in Schritt 2.
+## Top-Themen des Tages
+Die 5 wichtigsten Markt-Themen heute in je 2 Saetzen. Hier reicht knappe Form — Tiefe kommt darunter.
 
-## Schritt 1 — Marktrecherche-Ueberblick
+## Marktbild des Tages
 Gesamtcharakter. Uebergreifendes Narrativ. Was ist die METATGESCHICHTE, die die einzelnen Themen verbindet?
 
-## Schritt 2 — Tiefenanalyse der Top-Themen (DEIN ANALYTISCHES KERNSTUECK)
+## Tiefenanalyse — Top-Themen
 
-Fuer JEDES der Top 5 Themen — wende den Analyse-Rahmen A bis H an. Nicht alle 8 Punkte muessen explizit aufgefuehrt sein, aber dein Ergebnis muss erkennbar darauf basieren:
+Fuer JEDES der Top-Themen — wende den Analyse-Rahmen A bis H an. Nicht alle 8 Punkte muessen explizit aufgefuehrt sein, aber dein Ergebnis muss erkennbar darauf basieren:
 
 ### [Thema 1 — pointierter Titel mit These, nicht nur Schlagwort]
 
@@ -1062,13 +1158,16 @@ Fuer JEDES der Top 5 Themen — wende den Analyse-Rahmen A bis H an. Nicht alle 
 
 [gleiche Struktur fuer Themen 2, 3, 4, 5]
 
-## Schritt 3 — Unterdiskutierte Themen / White Spaces
+## Mehrtages-Trends
+Was zieht sich seit Tagen durch? Was eskaliert/klingt ab? Welche Themen-Zyklen erkennst du?
+
+## Unterdiskutierte Themen — White Spaces
 Welche Themen sind heute KAUM in den Medien, koennten aber gepitcht werden? Wo gibt es ein Erzaehl-Vakuum?
 
-## Schritt 4 — Konkurrenz-Beobachtung
+## Konkurrenz-Beobachtung
 Welche grossen Wettbewerber unserer Kunden (BlackRock, Vanguard, Fidelity, Goldman Sachs AM, JPMorgan AM, Amundi, DWS, Allianz GI, AXA IM, Schroders, Invesco, State Street, Northern Trust, Apollo, Blackstone, Carlyle, TPG, Brookfield, EQT, Permira, Advent, CVC, Coinbase, Kraken, Gemini, Vontobel, GAM, Robeco, Pictet, UBS AM, Credit Suisse AM, Lombard Odier IM, Carmignac, Comgest) sind heute in den Medien? Was kommunizieren sie? Wo koennten unsere Kunden kontern?
 
-## Schritt 5 — KUNDEN-LIVE-RECHERCHE
+## Live-Recherche pro Kunde
 Fuer JEDEN der 13 Kunden FUEHRE WEB-SEARCH DURCH:
 
 ### [Kundenname]
@@ -1079,10 +1178,7 @@ Fuer JEDEN der 13 Kunden FUEHRE WEB-SEARCH DURCH:
 
 KRITISCH: Bei Sprechern und aktuellen Statements NICHTS halluzinieren.
 
-## Schritt 6 — Termine naechste 7 Tage
-Datum, Uhrzeit, Land, Termin, Relevanz.
-
-## Schritt 6a — Priorisierte Themen-Tabelle
+## Themen-Priorisierung
 | Prio | Thema | Beste Kunden | Dringlichkeit | Medienarbeits-Eignung |
 |------|-------|--------------|---------------|------------------------|
 | 1 | ... | ... | hoch/mittel/niedrig | hoch/mittel/niedrig |
@@ -1090,8 +1186,8 @@ Datum, Uhrzeit, Land, Termin, Relevanz.
 
 Bei fehlendem Stichtagsanlass ehrlich "niedrig / niedrig" mit Begruendung.
 
-## Mehrtages-Trends
-Was zieht sich seit Tagen durch? Was eskaliert/klingt ab? Welche Themen-Zyklen erkennst du?
+## Termin-Vorschau 7 Tage
+Datum, Uhrzeit, Land, Termin, Relevanz.
 
 ## Gesamtfazit
 2-3 Saetze zum uebergeordneten Narrativ. Plus: Welcher Pitch-Winkel ist der differenzierendste fuer heute (zweite Ebene, nicht das Offensichtliche)?
@@ -1134,148 +1230,321 @@ QUALITAETSREGELN — ABSOLUT KRITISCH:
     t1 = round(time.time()-t1s, 1)
     print(f"[{time_str}] PASS 1: {len(txt1)} chars via {m1} in {t1}s")
 
+    # --- PASS 1.5: Client Knowledge Profile Generation ---
+    print(f"[{time_str}] Waiting 30s before Pass 1.5...")
+    time.sleep(30)
+
+    print(f"[{time_str}] PASS 1.5: Generating client knowledge profiles (Sonnet 4.6)...")
+    t15s = time.time()
+    
+    client_knowledge_block = ""
+    for cname in CLIENT_PROFILES.keys():
+        # Aggregate crawled content for this client
+        crawled = client_insights.get(cname, [])
+        crawled_text = ""
+        for item in crawled[:8]:  # Up to 8 items per client
+            title = item.get("title", "")
+            url = item.get("url", "")
+            content = item.get("content", "")[:1500]  # First 1500 chars per item
+            crawled_text += f"\n--- {title} ({url}) ---\n{content}\n"
+        
+        # Get mentions of this client today
+        mentions_for_client = client_mentions.get(cname, [])[:5]
+        mentions_text = ""
+        for m in mentions_for_client:
+            mentions_text += f"- {m.get('s','')}: {m.get('t','')}\n"
+        
+        # Build profile knowledge prompt
+        profile = CLIENT_PROFILES.get(cname, {})
+        kp_prompt = f"""Du bist Senior Strategy Director fuer Finanzkommunikation. Du erstellst ein PRAEZISES, AKTUELLES Wissensprofil fuer {cname} — basierend ausschliesslich auf den frisch gecrawlten Eigeninhalten und Live-Mentions.
+
+KUNDEN-STAMMDATEN:
+- Typ: {profile.get('type','')}
+- AuM: {profile.get('aum','')}
+- HQ: {profile.get('hq','')}
+- DACH: {profile.get('dach','')}
+- Kernkompetenzen: {profile.get('core_competencies','')}
+
+FRISCH GECRAWLTE EIGENINHALTE (heute, vom Kunden selbst):
+{crawled_text if crawled_text else "[Keine Eigeninhalte heute gecrawlt — Crawling-Hindernisse oder Cookie-Walls]"}
+
+LIVE-MENTIONS HEUTE (Kunde wurde erwaehnt):
+{mentions_text if mentions_text else "[Keine Live-Mentions heute]"}
+
+ERSTELLE EIN STRUKTURIERTES WISSENSPROFIL (max 600 Worte, deutsch):
+
+### {cname} — Wissensprofil heute
+
+**Aktuelle strategische Botschaften (aus Eigeninhalten der letzten 30 Tage):**
+- [Botschaft 1: konkrete Argumentationslinie + Beleg aus Eigeninhalten]
+- [Botschaft 2]
+- [Botschaft 3 — falls aus Eigeninhalten erkennbar]
+
+**Aktuell live verifizierte Sprecher (aus Eigeninhalten oder Mentions):**
+- [Name, Rolle] — Quelle: [URL/Mention] — Themenfokus: [...]
+- WENN keine live verifizierten Sprecher: "Keine Sprecher heute live verifiziert. Bitte intern abstimmen."
+
+**Aktueller Content-Output (Top 3 Beitraege):**
+- [Titel + Datum + URL — falls aus Crawling vorhanden]
+
+**Positionierungs-Profil (was will das Haus heute kommunizieren):**
+- [In 2-3 Saetzen: Wofuer steht das Haus aktuell? Welche Differenzierung sucht es?]
+
+**Gemiedene Themen (aus Tabu-Profil + aktuellen Botschaften):**
+- [Was wird aktuell vermieden]
+
+**Kommunikative Opportunitaet HEUTE:**
+- [Welcher Anschluss aus der Marktanalyse heute waere fuer das Haus besonders wertvoll? Begruendung in 2 Saetzen]
+
+REGELN:
+- KEINE Halluzinationen. Wenn keine Eigeninhalte gecrawlt wurden: ehrlich sagen "Crawling heute fehlgeschlagen — Profil basiert nur auf Stammdaten, keine aktuelle Verifikation moeglich."
+- KEINE veralteten Sprecher-Angaben aus Modellwissen. Nur was heute belegt ist.
+- Maximal 600 Worte. Knapp, praezise, sachlich.
+"""
+        
+        try:
+            kp_response, _ = api_call(client, MODEL_FALLBACK, 2000,
+                                      [{"role":"user","content":kp_prompt}],
+                                      use_streaming=False)
+            kp_text = "".join(b.text for b in kp_response.content if hasattr(b,"text"))
+            client_knowledge_block += "\n" + kp_text + "\n"
+            print(f"  [Pass 1.5] {cname}: {len(kp_text)} chars knowledge profile generated")
+        except Exception as e:
+            print(f"  [Pass 1.5] {cname}: profile generation failed ({e}) — using stable profile only")
+            client_knowledge_block += f"\n### {cname} — Wissensprofil heute\n[Profil heute nicht generierbar — bitte mit Stammdaten arbeiten]\n"
+    
+    t15 = round(time.time()-t15s, 1)
+    print(f"[{time_str}] PASS 1.5 complete: {len(client_knowledge_block)} chars in {t15}s")
+
     # --- PASS 2: Positioning ---
-    print(f"[{time_str}] Waiting 30s...")
+    print(f"[{time_str}] Waiting 30s before Pass 2...")
     time.sleep(30)
 
     # Build profile + insights summary for Pass 2 (compact)
     insights_summary = "\n".join([f"\n[{c}] {len(items)} Eigen-Inhalte gefunden:\n" + "\n".join(f"  - {i['title']} → {i['url']}" for i in items[:4]) for c, items in client_insights.items()])
     
-    p2 = f"""Du bist seit 20 Jahren Wirtschafts- und Finanzjournalist in DACH. Du hast bei Handelsblatt, FAZ, Boersen-Zeitung, Reuters und Bloomberg gearbeitet. Du weisst genau, was Journalisten tatsaechlich brauchen, um ein Pitch zu nehmen, und was sofort im Papierkorb landet.
+    p2 = f"""Du bist seit 25 Jahren Senior Strategy Director fuer Finanzkommunikation in DACH und arbeitest fuer eine der weltweit fuehrenden Strategieberatungen (Edelman Smithfield, FGS Global, Brunswick, Teneo). Du warst zuvor 15 Jahre Wirtschafts- und Finanzjournalist (Handelsblatt, Boersen-Zeitung, Reuters). Du verbindest beide Perspektiven: Du weisst, was Journalisten wirklich brauchen — und Du weisst, was Asset Manager pitchen sollten, um ihre Reputation und Positionierung zu staerken (nicht zu schwaechen).
 
-Du wechselst jetzt die Rolle: Du arbeitest als Senior Director bei TE Communications und sollst aus Journalistensicht Pitches fuer 13 Kunden formulieren.
+═══════════════════════════════════════════════════════════════
+DEINE AUFGABE HEUTE: SYSTEMATISCHE PITCH-HERLEITUNG
+═══════════════════════════════════════════════════════════════
 
-WAS JOURNALISTEN BRAUCHEN (du kennst das aus 20 Jahren Praxis):
-1. NEWS-AUFHAENGER: Klare aktuelle Begruendung "warum heute". Ohne Aufhaenger keine Story.
-2. THESE: Eine pointierte Aussage, kein "Sowohl-als-auch". Journalisten lieben Reibung, nicht Diplomatie.
-3. ZWEI BIS DREI BELEGE: konkrete Zahlen, Daten, Zitate, Quellen — nichts Vages.
-4. SPRECHER MIT EXPERTISE: Konkrete Person, ihre Rolle, warum SIE genau das beurteilen kann.
-5. WAS DAS UEBER DEN TAG HINAUSGEHT: Trend, Umbruch, Konflikt.
-6. EXKLUSIVITAET ODER SUBSTANZ: Was bekommt der Journalist hier, was er nirgends sonst bekommt?
-7. PASSGENAUIGKEIT ZUM MEDIUM: Boersen-Zeitung will Tiefe, Handelsblatt will News+Analyse, FAZ will Einordnung, n-tv will klare Zuspitzung.
-8. KOPF-ZUERST-PRINZIP: Erste 2 Saetze entscheiden ueber Annahme oder Ablehnung.
+Du bekommst:
+1. LIVE-MARKTANALYSE von heute ({date_str}) — was sind die Top-Themen
+2. TIEFE KUNDEN-WISSENSPROFILE — fuer jeden der 13 Kunden ein aktuelles, taeglich neu generiertes Verstaendnis von Botschaften, Sprechern, Inhalten, Positionierung
+3. DIREKT GECRAWLTE EIGEN-INHALTE der Kunden (frische Materialien)
+4. KUNDEN-MENTIONS heute (wer wurde wo erwaehnt)
 
-Was Journalisten SOFORT NERVT (du weisst das auch):
-- "Markteinschaetzung von..." als Betreff (zu generisch)
-- Buzzwords ohne Substanz ("disruptiv", "robust positioniert", "ganzheitlich")
-- Lange Marketing-Vorbemerkungen
-- Pitches ohne klaren Aufhaenger ("Wir haben da was Interessantes...")
-- Wenn der Sprecher zum Thema nicht passt
-- Wenn Konkurrenz schon dasselbe gepitcht hat
-- Wenn die These weichgespuelt ist
+Du erstellst daraus eine PYRAMIDE in 5 STUFEN. Jede Stufe baut auf der vorherigen auf. Pitches sind das ERGEBNIS, nicht der Anfang.
 
-KUNDEN-PROFILE:
+═══════════════════════════════════════════════════════════════
+DIE 14 PITCH-KRITERIEN (Praxis-Standard fuer DACH-Wirtschaftspresse)
+═══════════════════════════════════════════════════════════════
+
+INHALTLICHE KRITERIEN (was macht den Pitch wertvoll?):
+1. AKTUALITAET — konkreter Hook in den letzten 72h
+2. NEUHEIT / UNTERDISKUTIERTHEIT / BLINDER FLECK — was uebersehen alle anderen?
+3. DIFFERENZIERUNG — eigene These, Kontrarian, 2nd-Order-Effekt
+4. KONFLIKT / SPANNUNG — Reibung, gebrochene Erwartung
+5. BELEGBARKEIT — konkrete Zahl, Trade, Anekdote, Studie
+
+PERSONEN-KRITERIEN (wer pitcht?):
+6. SPRECHER-AUTORITAET — Asset-Klassen-Erfahrung, Track Record
+7. LIVE-VERIFIKATION — Sprecher 2025/2026 in aktueller Quelle bestaetigt — PFLICHT
+8. CHARAKTER — Profil, Wiedererkennbarkeit, Zitierfaehigkeit
+
+HANDWERKLICHE KRITERIEN (wie wird gepitcht?):
+9. MEDIEN-FIT — Story passt zu Ressort, Tonalitaet, Format
+10. TIMING zur REDAKTION — Pitch zur richtigen Zeit fuer Redaktionsschluss
+11. SERVICEGEDANKE — Sprecher-Verfuegbarkeit, Material, Bilder, Zitate
+12. EXKLUSIVITAET — wem geht der Pitch noch parallel?
+
+STRATEGISCHE KRITERIEN:
+13. VERBRENNUNGS-RISIKO — wann letzter Pitch zu Sprecher/Medium?
+14. POSITIONIERUNGS-FIT — staerkt der Pitch die Reputation des Hauses oder verwaessert er sie?
+
+═══════════════════════════════════════════════════════════════
+PITCH-KILLER (sofortiges Verwerfen)
+═══════════════════════════════════════════════════════════════
+- Story stand heute schon in 3+ DACH-Medien
+- Sprecher kann nur Konsens-Meinung wiedergeben
+- Sprecher passt nicht zur Asset-Klasse
+- Sprecher nicht 2025/2026 live verifiziert
+- Pitch widerspricht der aktuellen Positionierung des Hauses
+- Buzzwords ohne Substanz ("disruptiv", "robust", "ganzheitlich")
+- Generische "Markteinschaetzung von..." Pitches
+
+PITCH-AUFNAHME-SCHWELLE: 
+Mindestens 3 von 5 inhaltlichen Kriterien mit Bewertung ★★★★+
+UND Sprecher live verifiziert (Personen-Kriterium 7)
+UND Positionierungs-Fit ≥ ★★★★
+
+═══════════════════════════════════════════════════════════════
+KUNDEN-WISSENSPROFILE (taeglich neu generiert)
+═══════════════════════════════════════════════════════════════
+{client_knowledge_block}
+
+═══════════════════════════════════════════════════════════════
+KUNDEN-PROFILE (stabile Strukturfakten)
+═══════════════════════════════════════════════════════════════
 {profile_block}
 
-LIVE-MARKTANALYSE VON HEUTE ({date_str}):
+═══════════════════════════════════════════════════════════════
+LIVE-MARKTANALYSE VON HEUTE
+═══════════════════════════════════════════════════════════════
 {txt1[:8000]}
 
-DIREKT GECRAWLTE EIGEN-INHALTE DER KUNDEN (frische Eigen-Materialien fuer Presseversand):
+═══════════════════════════════════════════════════════════════
+DIREKT GECRAWLTE EIGEN-INHALTE DER KUNDEN
+═══════════════════════════════════════════════════════════════
 {insights_summary}
 
-KUNDEN-MENTIONS HEUTE:
+═══════════════════════════════════════════════════════════════
+KUNDEN-MENTIONS HEUTE
+═══════════════════════════════════════════════════════════════
 {mentions_block}
 
-AUFGABE: Erstelle zwei Abschnitte. Beide muessen so brauchbar sein, dass ein TE-Berater sie sofort 1:1 verwenden kann, ohne nochmal nachzubessern.
+═══════════════════════════════════════════════════════════════
+═══════════════════════════════════════════════════════════════
 
-## Schritt 7 — Positionierungs-Mapping pro Kunde
+ERSTELLE JETZT DEN BERICHT IN DIESER REIHENFOLGE:
 
-WICHTIG — KRITISCHE ANWEISUNG: Du MUSST fuer ALLE 13 Kunden ein Mapping erstellen. KEIN Kunde darf ausgelassen werden. Die Reihenfolge ist verbindlich:
-1. PGIM, 2. T. Rowe Price, 3. MK Global Kapital, 4. Franklin Templeton, 
-5. Eurizon, 6. Bitcoin Suisse, 7. KKR, 8. Aegon AM, 9. Bendura Bank, 
-10. DNB AM, 11. Insight Investment, 12. JOHCM, 13. Maverix
+═══════════════════════════════════════════════════════════════
+## Themen-Filter — Was ist heute pitchbar?
+═══════════════════════════════════════════════════════════════
 
-Wenn fuer einen Kunden HEUTE wenig anschlussfaehig ist (typisch: Bendura, Maverix, MK Global Kapital, JOHCM, DNB an ruhigen Tagen): trotzdem strukturiert behandeln, nur kompakter — mindestens "Heute anschlussfaehig ueber" + 1 Pitch + Eigen-Inhalt + Tabu-Warnung. Nicht ueberspringen!
+Wende die 5 INHALTLICHEN Kriterien systematisch auf die Top-Themen aus der Marktanalyse an. Pro Thema:
 
-Lieber 1 starker Pitch als 2 schwache. Wenn wirklich KEIN Pitch heute trägt, dann offen sagen "Heute kein Pitch sinnvoll — Empfehlung: nicht aktiv pitchen, stattdessen Marktbeobachtung fortsetzen, naechster moeglicher Anlass: [konkret]".
+### [Thema X — Titel]
 
-Fuer JEDEN der 13 Kunden, in dieser klaren Struktur:
+**Inhaltliche Bewertung:**
+- Aktualitaet:        ★★★★★ — [konkreter Hook + Datum]
+- Neuheit:            ★★★★  — [was uebersehen andere?]
+- Differenzierung:    ★★★   — [eigener Winkel?]
+- Konflikt:           ★★★★  — [welche Reibung?]
+- Belegbarkeit:       ★★★★  — [welche Daten?]
 
-### [Kundenname]
+**Status:** ✓ pitchbar / ✗ verworfen — [knappe Begruendung]
 
-**Heute anschlussfaehig ueber:**
-- [Themen-Achse 1 mit konkretem Bezug zur heutigen Marktlage]
-- [Themen-Achse 2]
-- [optional Themen-Achse 3]
+Bewerte mindestens 6-8 Themen. Verworfene Themen ehrlich begruenden ("stand heute schon in N DACH-Medien" / "kein Differenzierungspotenzial" / "Konsensgemeinplatz").
 
-**Empfohlener Sprecher:**
-- [Name, Rolle] — [warum genau diese Person zu diesem Thema passt — z.B. juengste Aussage, Spezialgebiet, mediale Erfahrung]
-- WENN nicht live verifiziert: "Sprecher intern abstimmen — Profil legt [Frank Witt / Konstantin Veit / etc.] nahe"
+ERGEBNIS: Die pitchbaren Themen werden in Stufe 2 weiterverarbeitet.
 
----
+═══════════════════════════════════════════════════════════════
+## Sprecher-Mapping — Wer von uns kann pitchen?
+═══════════════════════════════════════════════════════════════
 
-**PITCH 1 — [pointierte These als Titel, journalistentauglich]**
-Format: [Gastbeitrag / Hintergrundgespraech / Interview-Angebot / Kommentar fuer Presseverteiler / TV-Schalte]
-Dringlichkeit: [heute / diese Woche / naechste Woche]
-Zielmedium primaer: [konkretes Medium aus Profil]
-Zielmedium sekundaer: [2-3 weitere Medien]
+Fuer JEDES pitchbare Thema aus der Filterung: Welcher unserer 13 Kunden hat den richtigen Sprecher?
 
-E-Mail-Betreff (vorgeschlagen): "[konkreter Betreff, max 70 Zeichen, mit Aufhaenger]"
+### [Pitchbares Thema]
 
-Pitch-Aufhaenger (warum heute):
-- [konkrete Marktbewegung/Schlagzeile/Datenpunkt von heute, mit Datum + Quelle]
+Asset-Klasse: [Fixed Income / Equity / Real Estate / Multi-Asset / Krypto / etc.]
 
-These des Pitches:
-- [pointierte Kernaussage in 1 Satz, die der Sprecher vertreten wuerde]
+Bestpassende Haeuser (mit Live-Verifikations-Status):
+- ★★★★★ [Kunde] ([Sprecher-Name], [Rolle]) ✓ live verifiziert ([Quelle + Datum])
+- ★★★★  [Kunde] ([Sprecher]) ✓ live verifiziert
+- ★★★   [Kunde] — Live-Verifikation ausstehend
+- ★★    [Kunde] — Asset-Klasse passt, aber kein Sprecher live verifiziert
 
-3 Belege/Argumente fuer Journalisten:
-- [Beleg 1: konkrete Zahl/Studie/Marktbewegung]
-- [Beleg 2]
-- [Beleg 3]
+EMPFEHLUNG: [Welcher Kunde + warum — Sprecher-Fit + Track Record + aktuelle Positionierung]
 
-Was der Journalist konkret bekommt:
-- Sprecher-Verfuegbarkeit: [z.B. "heute ab 14 Uhr per Telefon", "binnen 24h schriftliches Statement"]
-- Eigen-Material zum Andocken: [konkrete URL aus den oben gecrawlten Inhalten]
-- Optional: [exklusive Daten / Whitepaper / Studie]
+WENN KEIN PASSENDER SPRECHER: ehrlich sagen "Heute kein Pitch zu diesem Thema moeglich — Begruendung: [...]"
 
-Story-Winkel fuer das jeweilige Medium:
-- [Wie genau dieser Pitch in [Zielmedium] passt — was ist der Hook fuer DESSEN Leserschaft]
+═══════════════════════════════════════════════════════════════
+## Pitch-Empfehlungen (hergeleitet)
+═══════════════════════════════════════════════════════════════
 
-Vorschlag fuer Pitch-Mail (1 Absatz, max 6 Saetze, im Stil eines erfahrenen Pressesprechers):
-"[Sehr geehrter Herr/Frau [...], aktuell zeigen sich [konkrete Marktbewegung] und [konkrete Folge]. [Sprecher-Name], [Rolle bei Kunde], hat dazu eine pointierte Lesart: [These in 1 Satz]. Die Kernpunkte: [3 stichpunktartige Belege]. Material zum Andocken: [URL]. [Sprecher] ist [Verfuegbarkeit] verfuegbar. Sollen wir Ihnen ein Statement / einen Gastbeitrag / ein Hintergrundgespraech anbieten?]"
+NUR fuer die Themen-Kunden-Kombinationen, die durch Stufe 1+2 gekommen sind UND die Pitch-Aufnahme-Schwelle erfuellen.
 
----
+ERWARTUNG: 4-7 Pitches insgesamt (nicht mehr!). Lieber wenige, hergeleitete Pitches als viele oberflaechliche.
 
-**PITCH 2 — [zweite, andere These als Titel]**
-[gleiche Struktur wie Pitch 1]
+Pro Pitch dieser Block:
 
----
+### PITCH [N] von [Total] — [Hook in einem Satz]
 
-**Aufgreifbare Eigen-Inhalte des Kunden (Presseverteiler-Versand HEUTE):**
-- [Titel] → [URL] — [in 1 Satz: warum jetzt versenden, an welche Liste]
+**HERLEITUNG (warum dieser Pitch?)**
+- Markt-Anlass: [Konkrete Story aus Marktanalyse mit Quelle + Datum]
+- Pitch-Luecke: [Was sagen andere Haeuser dazu? Was uebersehen sie?]
+- Anschluss-Kunde: [Welcher unserer 13 Kunden — und warum]
+- Sprecher-Match: [Welcher Sprecher dieses Hauses — und warum genau diese Person]
+- Positionierungs-Fit: [Wie passt der Pitch zur AKTUELLEN Botschaftslinie des Hauses laut Wissensprofil]
 
-**Konkurrenz-Konter (falls heute relevant):**
-- [Wettbewerber X] hat heute [Y] kommuniziert. Unser Kunde kann mit [Konter-Argument] in [Medium] kontern.
+**INHALTLICHE BEWERTUNG (Pflicht: 3 von 5 mit ≥★★★★)**
+- Aktualitaet:       ★★★★★  [konkrete Begruendung]
+- Neuheit:           ★★★★   [was niemand sonst sagt]
+- Differenzierung:   ★★★★★  [konkreter Take]
+- Konflikt:          ★★★    [welche Reibung]
+- Belegbarkeit:      ★★★★   [welche Daten]
+✓ FILTER BESTANDEN
 
-**Tabu-Warnung (wenn vorhanden):**
-- [Was darf in keinem Pitch erwaehnt werden, basierend auf Profil-Tabus]
+**PERSONEN-CHECK (alle Pflicht)**
+- Sprecher: [Name + Rolle]
+- Asset-Klassen-Fit: ✓ [Begruendung]
+- Live-Verifikation: ✓ [Quelle + Datum]
+- Charakter / Track Record: [bisherige Aussagen, Zitierfaehigkeit]
 
-WICHTIG: Wenn fuer einen Kunden heute KEIN guter Pitch sinnvoll ist, schreibe das offen: "Heute kein passender Aufhaenger fuer [Kunde] — Profil-Themen heute nicht in den Schlagzeilen. Empfehlung: stattdessen [Alternative wie 'Vortagsanalyse fuer Wochenausblick verwenden']."
+**HANDWERK**
+- Zielmedium: [konkretes Medium + Ressort]
+- Backup-Medien: [2-3 weitere Optionen]
+- Timing: [bis wann muss Pitch raus?]
+- Service: [Sprecher-Verfuegbarkeit, Material, Bilder, Zitate]
+- Exklusivitaet: [exklusiv / parallel an X Haeuser, mit Frist]
 
----
+**STRATEGIE**
+- Verbrennungs-Check: [letzter Pitch zu diesem Sprecher / Medium — falls bekannt]
+- Positionierungs-Fit: ★★★★★ — [wie staerkt dieser Pitch die Reputation des Hauses?]
+- Konkurrenz-Kontext: [was haben BlackRock/DWS/Apollo/Allianz GI dazu schon gesagt?]
 
-## Schritt 8 — Top-7 Pitch-Empfehlungen fuer HEUTE (sortiert nach Erfolgswahrscheinlichkeit)
+**PITCH-MATERIAL (fertig zum Versenden)**
 
-Die besten 7 Pitches aus Schritt 7, neu sortiert. Pro Pitch:
+E-Mail-Betreff: "[konkreter Betreff, max 70 Zeichen]"
 
-**[Rang]. ★[1-5 Sterne] [Pitch-Titel — pointierte These]**
-- Warum top heute: [in 1-2 Saetzen — News-Lage + Sprecher-Passung + Medium-Bedarf]
-- Format: [...] | Kunde: [...] | Sprecher: [...] (verifiziert/intern)
-- Zielmedium: [primaer] | Backup: [sekundaer]
-- Naechster Schritt fuer TE-Berater: [konkrete Aktion — z.B. "Sprecher heute 09:30 anrufen, Pitch-Mail bis 11 Uhr an Redakteur X bei Boersen-Zeitung"]
-- Eigen-Material: [URL falls vorhanden]
-- Erfolgs-Wahrscheinlichkeit: [hoch/mittel/niedrig] mit kurzer Begruendung
+Hook-Mail an Journalist:
+"[Sehr geehrter Herr/Frau [...], 4-6 Saetze, im Stil eines erfahrenen Pressesprechers]"
 
-REGELN ABSOLUT:
-- Sprecher NUR, wenn live verifiziert in Schritt 5. Sonst "intern abstimmen".
-- KEINE Buzzwords ("ganzheitlich", "robust", "disruptiv", "innovative Loesung").
-- KEINE Trading-Sprache ("Overweight", "Underweight").
-- These muss POINTIERT sein — Reibung, nicht Diplomatie.
-- Aufhaenger muss eine konkrete Schlagzeile/Datenpunkt von heute sein, mit Quelle.
-- Pitch-Mail-Vorschlag muss so sein, dass ein TE-Berater ihn nur noch personalisieren muss.
-- Wenn ein Pitch das Profil-Tabu streift: NICHT vorschlagen, sondern Alternative bieten.
-- Deutsche Sprache, klar, nicht ueberladen.
-- KEIN Telegrammstil, aber auch keine PR-Floskeln. Schreibstil wie ein erfahrener Wirtschaftsjournalist."""
+3 Zitate-Vorschlaege fuer den Sprecher:
+- "[Konkrete, pointierte Aussage — kann Journalist 1:1 zitieren]"
+- "[Zweite These — kontrastierend oder vertiefend]"
+- "[Dritte Aussage — mit konkreter Zahl/Daten]"
+
+Hintergrund-Briefing (Stichpunkte fuer Journalisten-Recherche):
+- [Datenpunkt 1]
+- [Datenpunkt 2]
+- [Hauseigene Studie/Outlook zum Andocken — URL falls vorhanden]
+- [Historische Parallele]
+
+═══════════════════════════════════════════════════════════════
+## Kunden-Sicht — Was bedeutet das pro Kunde?
+═══════════════════════════════════════════════════════════════
+
+KUNDEN MIT PITCH HEUTE:
+[Liste der Kunden + entsprechende Pitch-Nummer + Hook in 1 Zeile]
+
+KUNDEN OHNE PITCH HEUTE:
+[Liste mit ehrlicher Begruendung pro Kunde:]
+- [Kunde] — [Begruendung: kein Themen-Anschluss / Live-Sprecher-Verifikation ausstehend / Themen ausserhalb Kernkompetenzen / kein Pitch-Niveau heute]
+
+EHRLICHE EINORDNUNG:
+[N von 13 Kunden haben heute einen Pitch. Das ist normal — Pitch-Tage sind dispers. Empfehlung: fokussierte Bearbeitung der N Pitches statt Verduennung durch erzwungene Pitches.]
+
+═══════════════════════════════════════════════════════════════
+ABSOLUTE QUALITAETSREGELN
+═══════════════════════════════════════════════════════════════
+
+- Sprecher NUR, wenn live verifiziert in den Wissensprofilen oder in der Live-Marktanalyse
+- Falls nicht verifiziert: "Sprecher intern abstimmen — Profil legt [Name] nahe (zuletzt zitiert [Datum, Quelle])"
+- KEINE Buzzwords ("ganzheitlich", "robust", "disruptiv")
+- KEINE Trading-Sprache ("Overweight", "Underweight")
+- These muss POINTIERT sein — Reibung, nicht Diplomatie
+- Aufhaenger MUSS konkrete Schlagzeile/Datenpunkt aus den letzten 72h sein, mit Quelle
+- Pitch-Mail-Vorschlag muss so sein, dass TE-Berater nur noch personalisiert
+- Wenn Pitch das Profil-Tabu streift: NICHT vorschlagen, Alternative bieten
+- KEIN Telegrammstil, aber auch keine PR-Floskeln
+- Schreibstil wie ein erfahrener Wirtschaftsjournalist, nicht wie eine PR-Agentur
+- LIEBER WENIGER ABER BESSER — keine erzwungenen Pitches
+
+═══════════════════════════════════════════════════════════════
+"""
 
     print(f"[{time_str}] PASS 2: Sonnet 4.6 journalist-grade pitch crafting (streaming)...")
     t2s = time.time()
@@ -1287,7 +1556,19 @@ REGELN ABSOLUT:
     print(f"[{time_str}] PASS 2: {len(txt2)} chars via {m2} in {t2}s")
 
     # --- Combine + Save ---
-    full = txt1 + "\n\n" + txt2
+    # REORDERING: Pass 1 has Termine + Gesamtfazit + Quellenverzeichnis at end.
+    # Pass 2 has Pitches at end. We want order: Pass1-Analytics + Pass2-Pitches + Pass1-Termine/Fazit/Quellen
+    
+    # Try to split Pass 1 at "## Termin-Vorschau" to insert Pass 2 BEFORE Termine
+    split_marker = "## Termin-Vorschau"
+    if split_marker in txt1:
+        idx = txt1.find(split_marker)
+        txt1_main = txt1[:idx].rstrip()
+        txt1_tail = txt1[idx:]  # Termine + Gesamtfazit + Quellenverzeichnis
+        full = txt1_main + "\n\n" + txt2 + "\n\n" + txt1_tail
+    else:
+        # Fallback: just concatenate
+        full = txt1 + "\n\n" + txt2
     
     # === AUTOMATISCH GENERIERTES VOLLSTAENDIGES QUELLENVERZEICHNIS ===
     # Aus den tatsaechlich erfolgreich abgerufenen RSS-Items
