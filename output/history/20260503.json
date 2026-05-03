@@ -1,0 +1,40 @@
+{
+  "date": "Sonntag, 3. Mai 2026",
+  "time": "09:01",
+  "summary": "# 10 Hauptthemen — Tagesreport Finanzmarkt & Medien\n## Sonntag, 3. Mai 2026\n\n---\n\n**1. Berkshire-Generationswechsel**\nGreg Abel präsidiert erstmals ohne Buffett; Cash-Rekord 380 Mrd. USD; Aktie hinkt S&P um 39 Prozentpunkte hinterher — Vertrauenstransfer ungeklärt.\n\n---\n\n**2. Trump-EU-Autozölle 25 %**\nAb kommender Woche wirksam; Porsche/Audi maximal exponiert (kein US-Werk); EU-Gegenmaßnahmen vorbereitet; Ifo warnt vor Rezession 2026.\n\n---\n\n**3. Yen-Intervention / Carry-Trade-Risiko**\nJapan intervenierte mit bis zu 35 Mrd. USD; dovishe BoJ-Pause + Iran-Energieschock als Auslöser; Druck auf US-Treasuries durch Reserveverkäufe steigt.\n\n---\n\n**4. Iran-Krise / Hormuz-Blockade**\nBrent kurzzeitig bei 126 USD (4-Jahres-Hoch), stabilisiert bei 108 USD; Hormuz-Transit eingeschränkt; Energieversorgungssicherheit Europas akut gefährdet.\n\n---\n\n**5. Bund-Renditen auf 2011-Hoch**\n10-jährige Bundesanleihe bei 3,1 %; Märkte preisen drei EZB-Zinserhöhungen 2026 ein; Bauzinsen 3,4–3,8 % — Immobilienmarkt unter Druck.\n\n---\n\n**6. Demontage der globalen Finanzarchitektur**\nDrei simultane Schocks: Handelskrieg, Yen-Kollaps, Berkshire-Transition — altes Sicherheitsnetz wird aktiv abgebaut; systemische Instabilität wächst.\n\n---\n\n**7. Quellen- und Datenlage am Wochenende**\nFrankfurt/NYSE/Tokio geschlossen — keine Live-Kurse seit Freitag; Narrativ-Tiefe hoch (FAZ, HB, NZZ, Bloomberg); Marktbewegungsdaten nur mittel belastbar.\n\n---\n\n**8. EU-Gegenmaßnahmen und Verhandlungssubstanz**\nTransatlantische Handelsordnung bewusst mehrdeutig gehalten; Sommer-2025-Rahmen offiziell nicht tot, praktisch ausgehöhlt; Brüssel bereitet Gegenzölle vor.\n\n---\n\n**9. BMW / Mercedes Teilschutz durch US-Werke**\nIm Gegensatz zu Porsche/Audi profitieren BMW/Mercedes von partieller US-Produktionspräsenz — struktureller Wettbewerbsvorteil innerhalb des deutschen Autosektors.\n\n---\n\n**10. Investmentphilosophische Stabilitätsverluste**\nBerkshire-Ära als letztes",
+  "hash": "a2140e149f7e2e8b43daa1d5a514b477",
+  "meta": {
+    "date": "Sonntag, 3. Mai 2026",
+    "time": "09:01",
+    "weekend": true,
+    "rss_total": 213,
+    "rss_ok": 162,
+    "rss_fail": 77,
+    "rss_sources": 208,
+    "rss_items": 745,
+    "rss_time": 8.2,
+    "client_mentions": {
+      "PGIM": 9,
+      "T. Rowe Price": 12,
+      "MK Global Kapital": 0,
+      "Franklin Templeton": 11,
+      "Eurizon": 10,
+      "Bitcoin Suisse": 9,
+      "KKR": 13,
+      "Aegon AM": 10,
+      "Bendura Bank": 9,
+      "DNB AM": 7,
+      "Insight Investment": 8,
+      "JOHCM": 4,
+      "Maverix": 5
+    },
+    "history_days": 5,
+    "m1": "claude-opus-4-7",
+    "c1": 37714,
+    "t1": 368.2,
+    "m2": "claude-opus-4-7",
+    "c2": 47298,
+    "t2": 378.3,
+    "total": 89262
+  }
+}
