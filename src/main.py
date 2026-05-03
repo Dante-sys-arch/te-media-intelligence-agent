@@ -1665,6 +1665,12 @@ ABSOLUTE QUALITAETSREGELN
 
 
 def generate_html(text, date_str, time_str, has_diff, meta):
+    # Import shared section metadata (single source of truth shared with email)
+    try:
+        from src.section_meta import find_section_meta
+    except ImportError:
+        from section_meta import find_section_meta
+    
     lines = text.split("\n")
     body = ""
     in_sec = False
@@ -1687,7 +1693,24 @@ def generate_html(text, date_str, time_str, has_diff, meta):
             # Generate anchor ID from title for deep-linking from email
             anchor = re.sub(r'[^\w\s-]', '', title.lower())
             anchor = re.sub(r'[\s_]+', '-', anchor).strip('-')[:60]
-            body += f'<details class="sec" id="{anchor}" {op}><summary class="sh"><span class="sn">{sc}.</span><span class="st">{title}</span><span class="ch">&#9660;</span></summary><div class="sb">'
+            
+            # Look up shared metadata: icon + Kurzerlaeuterung
+            meta_section = find_section_meta(title)
+            icon_html = meta_section["icon"] if meta_section else ""
+            short_html = ""
+            if meta_section and meta_section.get("short"):
+                short_html = f'<div class="sec-short">{meta_section["short"]}</div>'
+            
+            body += (
+                f'<details class="sec" id="{anchor}" {op}>'
+                f'<summary class="sh">'
+                f'<span class="sn">{sc}.</span>'
+                f'<span class="ic">{icon_html}</span>'
+                f'<span class="st">{title}</span>'
+                f'<span class="ch">&#9660;</span>'
+                f'</summary>'
+                f'<div class="sb">{short_html}'
+            )
             in_sec = True
         elif line.startswith("### "):
             t = re.sub(r'\*\*(.+?)\*\*', r'\1', line[4:])
@@ -1727,59 +1750,73 @@ def generate_html(text, date_str, time_str, has_diff, meta):
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="TE Media Intelligence">
 <title>TE Media Intelligence — {date_str}</title>
-<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Inter+Tight:wght@600;700;800&display=swap" rel="stylesheet">
 <style>
 *{{margin:0;padding:0;box-sizing:border-box}}
-body{{font-family:'Source Serif 4',Georgia,serif;max-width:820px;margin:0 auto;padding:32px 20px;color:#1f2937;line-height:1.75;background:#fafafa}}
-.hd{{text-align:center;border-bottom:3px solid #002a3e;padding:28px 24px 24px;margin-bottom:20px;background:#fff;border-radius:8px 8px 0 0;box-shadow:0 1px 3px rgba(0,0,0,.06)}}
-.hd .lb{{font-size:10.5px;letter-spacing:.3em;text-transform:uppercase;color:#002a3e;font-weight:700;margin-bottom:10px}}
-.hd h1{{font-size:24px;color:#002a3e;margin:0 0 4px;border:none;padding:0}}
-.hd .dt{{font-size:13px;color:#6b7280}}
-.hd .ml{{font-size:10px;color:#9ca3af;margin-top:6px}}
-.bg{{display:flex;flex-wrap:wrap;gap:5px;justify-content:center;margin-top:14px}}
-.bg span{{background:#002a3e;color:#fff;font-size:9px;font-weight:700;padding:3px 9px;border-radius:3px;letter-spacing:.04em;text-transform:uppercase}}
-.kp{{display:grid;grid-template-columns:repeat(auto-fit,minmax(110px,1fr));gap:8px;margin-bottom:16px}}
-.kp div{{background:#fff;border:1px solid #e5e7eb;border-radius:6px;padding:10px;text-align:center}}
-.kp .v{{font-size:17px;font-weight:700;color:#002a3e}}
-.kp .l{{font-size:9px;color:#6b7280;text-transform:uppercase;letter-spacing:.05em;margin-top:2px}}
-.db{{background:#fef3c7;border:1px solid #f59e0b;border-radius:6px;padding:12px 18px;margin-bottom:16px;font-size:12px;line-height:1.6}}
-.ct{{display:flex;justify-content:flex-end;margin-bottom:12px;gap:8px}}
-.ct button{{background:none;border:1px solid #002a3e;color:#002a3e;font-size:11px;padding:5px 14px;border-radius:4px;cursor:pointer;font-weight:600;font-family:inherit}}
+body{{font-family:'Inter','Helvetica Neue',Helvetica,Arial,sans-serif;font-feature-settings:"ss01","cv01","cv11";max-width:880px;margin:0 auto;padding:32px 20px;color:#1a1a1a;line-height:1.65;background:#f4f4f1;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}}
+.hd{{text-align:center;border-bottom:none;padding:36px 28px 28px;margin-bottom:20px;background:#002a3e;color:#fff;border-radius:10px;box-shadow:0 4px 16px rgba(0,42,62,.12)}}
+.hd .lb{{font-size:10.5px;letter-spacing:.32em;text-transform:uppercase;color:#fbbf24;font-weight:700;margin-bottom:14px}}
+.hd h1{{font-family:'Inter Tight','Inter',sans-serif;font-size:30px;color:#fff;margin:0 0 6px;border:none;padding:0;font-weight:700;letter-spacing:-.02em;line-height:1.15}}
+.hd .dt{{font-size:14px;color:#cbd5e1;font-weight:500}}
+.hd .ml{{font-size:11px;color:#94a3b8;margin-top:8px;font-weight:400}}
+.bg{{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;margin-top:18px}}
+.bg span{{background:rgba(255,255,255,.08);color:#fff;font-size:10px;font-weight:600;padding:4px 10px;border-radius:14px;letter-spacing:.04em;border:1px solid rgba(255,255,255,.15)}}
+.kp{{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:10px;margin-bottom:20px}}
+.kp div{{background:#fff;border:1px solid #e5e7eb;border-radius:8px;padding:14px;text-align:center;transition:border-color .15s}}
+.kp div:hover{{border-color:#002a3e}}
+.kp .v{{font-family:'Inter Tight','Inter',sans-serif;font-size:22px;font-weight:700;color:#002a3e;letter-spacing:-.02em}}
+.kp .l{{font-size:9.5px;color:#6b7280;text-transform:uppercase;letter-spacing:.06em;margin-top:3px;font-weight:600}}
+.db{{background:#fef3c7;border:1px solid #f59e0b;border-radius:8px;padding:14px 18px;margin-bottom:18px;font-size:13px;line-height:1.6}}
+.ct{{display:flex;justify-content:flex-end;margin-bottom:14px;gap:8px}}
+.ct button{{background:#fff;border:1px solid #002a3e;color:#002a3e;font-size:11.5px;padding:7px 16px;border-radius:6px;cursor:pointer;font-weight:600;font-family:inherit;transition:all .15s}}
 .ct button:hover{{background:#002a3e;color:#fff}}
-.sec{{background:#fff;border:1px solid #e5e7eb;border-radius:6px;margin-bottom:10px;overflow:hidden;box-shadow:0 1px 2px rgba(0,0,0,.04)}}
-.sec[open]{{border-color:rgba(0,42,62,.15)}}
-.sh{{padding:16px 20px;cursor:pointer;display:flex;align-items:flex-start;gap:12px;list-style:none;user-select:none}}
+.sec{{background:#fff;border:1px solid #e5e7eb;border-radius:10px;margin-bottom:12px;overflow:hidden;box-shadow:0 1px 3px rgba(0,0,0,.04);transition:box-shadow .15s,border-color .15s}}
+.sec:hover{{box-shadow:0 4px 12px rgba(0,42,62,.06)}}
+.sec[open]{{border-color:rgba(0,42,62,.18);box-shadow:0 4px 16px rgba(0,42,62,.08)}}
+.sh{{padding:18px 22px;cursor:pointer;display:flex;align-items:center;gap:14px;list-style:none;user-select:none;transition:background .12s}}
 .sh::-webkit-details-marker{{display:none}}
-.sh:hover{{background:rgba(0,42,62,.03)}}
-.sn{{font-weight:700;color:#002a3e;min-width:24px;font-size:15px}}
-.st{{font-weight:700;color:#002a3e;flex:1;font-size:14.5px;line-height:1.4}}
-.ch{{font-size:11px;color:#002a3e;flex-shrink:0;margin-top:3px;transition:transform .2s}}
-details[open] .ch{{transform:rotate(180deg)}}
-.sb{{padding:0 20px 20px;font-size:14.2px;line-height:1.78}}
-.ss{{font-size:14px;color:#002a3e;margin:18px 0 8px;padding-top:12px;border-top:1px solid rgba(0,42,62,.06);font-weight:700}}
-p{{margin:0 0 12px;font-size:14.2px}}
-p a,.li a{{color:#002a3e;text-decoration:underline}}
-strong{{color:#111827}}
-.li{{font-size:13.5px;line-height:1.6;padding-left:16px;position:relative;margin-bottom:5px}}
-.bu{{position:absolute;left:0;color:#002a3e;font-size:7px;top:7px}}
+.sh:hover{{background:#fafafa}}
+.sn{{font-family:'Inter Tight','Inter',sans-serif;font-weight:700;color:#94a3b8;min-width:24px;font-size:14px;font-variant-numeric:tabular-nums}}
+.ic{{color:#002a3e;display:flex;align-items:center;justify-content:center;flex-shrink:0;width:24px;height:24px}}
+.ic svg{{width:22px;height:22px}}
+.st{{font-family:'Inter Tight','Inter',sans-serif;font-weight:700;color:#002a3e;flex:1;font-size:16px;line-height:1.35;letter-spacing:-.01em}}
+.ch{{font-size:11px;color:#94a3b8;flex-shrink:0;transition:transform .25s}}
+details[open] .ch{{transform:rotate(180deg);color:#002a3e}}
+.sb{{padding:0 22px 22px;font-size:14.5px;line-height:1.7}}
+.sec-short{{background:#f4f4f1;border-left:3px solid #002a3e;border-radius:0 6px 6px 0;padding:12px 16px;margin:0 0 18px;font-size:13.5px;line-height:1.6;color:#374151;font-style:normal}}
+.sec-short::before{{content:"Worum es geht. ";font-weight:700;color:#002a3e;letter-spacing:.01em}}
+.ss{{font-family:'Inter Tight','Inter',sans-serif;font-size:15px;color:#002a3e;margin:20px 0 10px;padding-top:14px;border-top:1px solid rgba(0,42,62,.08);font-weight:700;letter-spacing:-.005em}}
+p{{margin:0 0 14px;font-size:14.5px;color:#1f2937}}
+p a,.li a{{color:#002a3e;text-decoration:none;border-bottom:1px solid #002a3e;font-weight:500;transition:opacity .15s}}
+p a:hover,.li a:hover{{opacity:.7}}
+strong{{color:#0f172a;font-weight:700}}
+em{{color:#475569;font-style:italic}}
+.li{{font-size:14px;line-height:1.6;padding-left:18px;position:relative;margin-bottom:6px}}
+.bu{{position:absolute;left:0;color:#002a3e;font-size:8px;top:8px}}
+table{{border-collapse:collapse;width:100%;margin:14px 0;font-size:13px}}
+table th,table td{{border:1px solid #e5e7eb;padding:9px 12px;text-align:left}}
+table th{{background:#f4f4f1;font-weight:700;color:#002a3e;letter-spacing:.01em}}
+table tr:hover td{{background:#fafafa}}
 .tn,.te,.td,.tc{{padding:2px 7px;border-radius:3px;font-size:10.5px;font-weight:700;display:inline-block;margin-right:4px}}
 .tn{{background:#dcfce7;color:#166534}}.te{{background:#fee2e2;color:#991b1b}}.td{{background:#dbeafe;color:#1e40af}}.tc{{background:#f3f4f6;color:#4b5563}}
-.cm-box{{background:#fffbeb;border:1px solid #fbbf24;border-radius:6px;padding:14px 18px;margin-bottom:16px;font-size:12.5px}}
+.cm-box{{background:#fffbeb;border:1px solid #fbbf24;border-radius:10px;padding:16px 20px;margin-bottom:18px;font-size:13px}}
 .cm-empty{{background:#f9fafb;border-color:#e5e7eb;color:#6b7280;font-style:italic}}
-.cm-title{{font-weight:700;color:#92400e;margin-bottom:8px;font-size:12px;text-transform:uppercase;letter-spacing:.05em}}
+.cm-title{{font-weight:700;color:#92400e;margin-bottom:10px;font-size:11.5px;text-transform:uppercase;letter-spacing:.08em}}
 .cm-empty .cm-title{{color:#6b7280}}
-.cm-pill{{display:inline-block;background:#fff;border:1px solid #fbbf24;border-radius:14px;padding:4px 10px;margin:3px 4px 0 0;font-size:11.5px;color:#78350f}}
-.cm-pill b{{color:#1f2937}}
-.ft{{margin-top:32px;padding-top:20px;border-top:1px solid #e5e7eb;font-size:11px;color:#9ca3af;line-height:1.6}}
-@media(max-width:600px){{body{{padding:16px 12px}}.hd{{padding:20px 16px}}.hd h1{{font-size:20px}}.sh{{padding:14px 16px}}.sb{{padding:0 16px 16px}}.kp{{grid-template-columns:repeat(2,1fr)}}}}
+.cm-pill{{display:inline-block;background:#fff;border:1px solid #fbbf24;border-radius:14px;padding:4px 11px;margin:3px 4px 0 0;font-size:12px;color:#78350f;font-weight:500}}
+.cm-pill b{{color:#1f2937;font-weight:700}}
+.ft{{margin-top:36px;padding-top:24px;border-top:1px solid #e5e7eb;font-size:11.5px;color:#94a3b8;line-height:1.7}}
+@media(max-width:600px){{body{{padding:18px 12px}}.hd{{padding:24px 18px 22px}}.hd h1{{font-size:22px}}.sh{{padding:14px 16px;gap:10px}}.sb{{padding:0 16px 18px}}.kp{{grid-template-columns:repeat(2,1fr)}}.st{{font-size:14.5px}}.ic svg{{width:20px;height:20px}}}}
 </style>
 </head>
 <body>
 <div class="hd">
-<div class="lb">TE Communications — Daily Media Intelligence Agent v3.1</div>
+<div class="lb">TE Communications · Daily Media Intelligence</div>
 <h1>Tagesauswertung &amp; Positionierungs-Briefing</h1>
-<div class="dt">{date_str} — {time_str} CET</div>
-<div class="ml">Pass 1: {meta['m1']} + Web Search ({meta['t1']}s) | Pass 2: {meta['m2']} ({meta['t2']}s) | {meta['rss_ok']}/{meta['rss_total']} RSS-Feeds parallel | {meta.get('history_days',0)} Tage Trendkontext</div>
+<div class="dt">{date_str} · {time_str} CET</div>
+<div class="ml">Pass 1: {meta['m1']} + Web Search ({meta['t1']}s) | Pass 2: {meta['m2']} ({meta['t2']}s) | {meta['rss_ok']}/{meta['rss_total']} RSS-Feeds | {meta.get('history_days',0)} Tage Trendkontext</div>
 <div class="bg">
 <span>PGIM</span><span>T. Rowe Price</span><span>MK Global Kapital</span><span>Franklin Templeton</span><span>Eurizon</span><span>Bitcoin Suisse</span><span>KKR</span><span>Aegon AM</span><span>Bendura</span><span>DNB AM</span><span>Insight</span><span>JOHCM</span><span>Maverix</span>
 </div>
