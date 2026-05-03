@@ -591,7 +591,8 @@ def get_today_str():
     monate = ["", "Januar", "Februar", "Maerz", "April", "Mai", "Juni",
               "Juli", "August", "September", "Oktober", "November", "Dezember"]
     return (f"{tage[now.weekday()]}, {now.day}. {monate[now.month]} {now.year}",
-            now.strftime("%Y%m%d"), now.strftime("%H:%M"), now.weekday() >= 5)
+            now.strftime("%Y%m%d"), now.strftime("%H:%M"), now.weekday() >= 5,
+            now.weekday() == 0)  # is_monday flag
 
 def load_previous_report():
     HISTORY_DIR.mkdir(parents=True, exist_ok=True)
@@ -740,7 +741,19 @@ def fetch_rss_intelligence():
     items = []
     client_specific = []  # Items from CLIENT_FEEDS (per-client monitoring)
     health = {"ok": 0, "fail": 0, "sources": set()}
-    cutoff = datetime.now(timezone.utc) - timedelta(hours=28)
+    
+    # DYNAMIC TIME WINDOW: Montag faengt Wochenende auf (Fr-Mittag bis Mo-frueh)
+    # Andere Werktage: Standard 28h-Fenster
+    now = datetime.now(timezone.utc)
+    if now.weekday() == 0:  # Monday (0=Mon, 6=Sun)
+        # Catch full weekend: from Friday 12:00 UTC until now
+        # ca. 67h zurueck bei Lauf Mo 06:00 UTC = 67h bis Fr 11:00 UTC
+        cutoff = now - timedelta(hours=72)
+        print(f"  Monday-Modus: 72h-Fenster aktiv (faengt Wochenend-Berichterstattung seit Freitag-Mittag auf)")
+    else:
+        # Tu-Fr standard window
+        cutoff = now - timedelta(hours=28)
+    
     client_mentions = {client: [] for client in CLIENT_KEYWORDS}
     client_feed_set = set(CLIENT_FEEDS)
 
@@ -855,7 +868,7 @@ def load_recent_summaries(days=5):
 def run_briefing():
     """Two-pass briefing: Opus 4.7 researches, Sonnet 4.6 positions."""
     client = anthropic.Anthropic()
-    date_str, date_file, time_str, is_weekend = get_today_str()
+    date_str, date_file, time_str, is_weekend, is_monday = get_today_str()
     prev = load_previous_report()
     prev_sum = prev.get("summary", "") if prev else ""
     multi_day = load_recent_summaries(5)
@@ -908,7 +921,12 @@ def run_briefing():
 
     # --- PASS 1: Research ---
     diff = f"\nVORTAG: {prev_sum[:600]}\nKennzeichne: [NEU]/[ESKALATION]/[ENTSPANNUNG]/[FORTLAUFEND]\n" if prev_sum else ""
-    wknd = "\nWochenende: Fokus auf Analysen, Ausblicke, Hintergrund.\n" if is_weekend else ""
+    if is_monday:
+        wknd = "\nMONTAG-MODUS — WOCHENEND-AUFHOLER: Beruecksichtige die KOMPLETTE Berichterstattung von Freitag-Mittag bis Montag-frueh (72h-Fenster). Wochenende ist NICHT zu vernachlaessigen — Markt-Bewegungen, Wirtschaftspresse-Sonntagsausgaben (FAS, NZZ am Sonntag, SonntagsBlick), politische Entwicklungen und internationale Markt-Sessions am Sonntag-Abend (Asien-Eroeffnung) muessen erfasst werden. Was wurde am Wochenende publiziert, was Montag den Markt bewegt?\n"
+    elif is_weekend:
+        wknd = "\nWochenende: Fokus auf Analysen, Ausblicke, Hintergrund.\n"
+    else:
+        wknd = ""
 
     # Build client profile context block (stable facts only)
     profile_block = ""
@@ -963,7 +981,7 @@ G) KONSENS vs. KONTRARIAN:
 H) BLINDE FLECKEN:
    Was muesste in der Berichterstattung sein, ist es aber nicht?
 
-Stand: {date_str}, {time_str} CET. Erfasse die LETZTEN 24 STUNDEN bis 7 TAGE.{wknd}
+Stand: {date_str}, {time_str} CET. Erfasse {"die LETZTEN 72 STUNDEN (Wochenend-Aufholer)" if is_monday else "die LETZTEN 24 STUNDEN"} bis 7 TAGE.{wknd}
 
 === TEIL A: MARKT-RECHERCHE ===
 

@@ -2,7 +2,7 @@ name: TE Daily Media Intelligence
 
 on:
   schedule:
-    - cron: '0 6 * * *'  # 06:00 UTC = 07:00 CET
+    - cron: '0 6 * * 1-5'  # Mo-Fr 06:00 UTC = 07:00 CET — werktags only (Wochenend-Berichterstattung wird Montag aufgeholt)
   workflow_dispatch:       # Manual trigger
 
 permissions:
