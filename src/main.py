@@ -1362,6 +1362,10 @@ REGELN ABSOLUT:
     hp = OUTPUT_DIR / f"{date_file}_TE_Media_Intelligence.html"
     with open(hp,"w",encoding="utf-8") as f: f.write(html)
 
+    # Save markdown source — needed by email module for teaser extraction
+    mp = OUTPUT_DIR / f"{date_file}_TE_Media_Intelligence.md"
+    with open(mp,"w",encoding="utf-8") as f: f.write(full)
+
     tp = OUTPUT_DIR / f"{date_file}_TE_Media_Intelligence.txt"
     with open(tp,"w",encoding="utf-8") as f:
         f.write(f"TE Communications — Daily Media Intelligence v3.1\n{date_str}, {time_str} CET\n")
@@ -1399,7 +1403,10 @@ def generate_html(text, date_str, time_str, has_diff, meta):
                 in_sec = False
             sc += 1
             op = "open" if sc <= 4 else ""
-            body += f'<details class="sec" {op}><summary class="sh"><span class="sn">{sc}.</span><span class="st">{title}</span><span class="ch">&#9660;</span></summary><div class="sb">'
+            # Generate anchor ID from title for deep-linking from email
+            anchor = re.sub(r'[^\w\s-]', '', title.lower())
+            anchor = re.sub(r'[\s_]+', '-', anchor).strip('-')[:60]
+            body += f'<details class="sec" id="{anchor}" {op}><summary class="sh"><span class="sn">{sc}.</span><span class="st">{title}</span><span class="ch">&#9660;</span></summary><div class="sb">'
             in_sec = True
         elif line.startswith("### "):
             t = re.sub(r'\*\*(.+?)\*\*', r'\1', line[4:])
@@ -1510,6 +1517,16 @@ strong{{color:#111827}}
 <button onclick="document.querySelectorAll('details.sec').forEach(d=>d.open=false)">Alle schliessen</button>
 </div>
 {body}
+<script>
+// Auto-open section when arriving via deep-link (e.g., from email)
+if (window.location.hash) {{
+  const target = document.querySelector(window.location.hash);
+  if (target && target.tagName === 'DETAILS') {{
+    target.open = true;
+    setTimeout(() => target.scrollIntoView({{behavior:'smooth', block:'start'}}), 100);
+  }}
+}}
+</script>
 <div class="ft">
 <b>Methodik:</b> Zwei-Pass-Architektur — Pass 1 (Opus 4.7 + Web Search) tiefe Marktrecherche, Pass 2 (Sonnet 4.6) PR-Positionierung. Opus 4.7 ist das aktuell leistungsstaerkste oeffentlich verfuegbare Anthropic-Modell. {meta['rss_ok']} RSS-Feeds aus {meta['rss_sources']} Medienquellen. 24h-Zeitfilter. 14 Themenfelder. Vortagesvergleich.<br><br>
 <b>Qualitaetshinweis:</b> Automatisiert erstellt. Kurse und Zahlen vor Verwendung in Kundenkommunikation gegen zweite Quelle pruefen.<br><br>

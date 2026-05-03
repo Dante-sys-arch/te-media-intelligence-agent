@@ -59,4 +59,5 @@ jobs:
           path: |
             output/*.html
             output/*.txt
+            output/*.md
           retention-days: 90

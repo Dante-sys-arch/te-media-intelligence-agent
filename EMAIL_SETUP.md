@@ -1,63 +1,91 @@
-# E-Mail-Versand einrichten (5 Minuten)
+# E-Mail-Versand einrichten (v3.10 Teaser-Struktur)
 
-Damit der tägliche Report automatisch per E-Mail an Dich und das Team verschickt wird, brauchst Du **drei GitHub Secrets**.
-
-## Schritt 1 — Gmail App-Passwort erstellen (3 Minuten)
-
-Du brauchst ein dediziertes Gmail-Konto (oder ein bestehendes), das die Reports verschickt.
-
-1. Gehe zu **https://myaccount.google.com/security**
-2. Aktiviere **2-Faktor-Authentifizierung** (falls noch nicht aktiv) — Pflicht für App-Passwörter
-3. Gehe zu **https://myaccount.google.com/apppasswords**
-4. App-Name eingeben: `TE Media Intelligence`
-5. **Erstellen** → 16-stelliges Passwort wird angezeigt (z.B. `xxxx xxxx xxxx xxxx`)
-6. **Notiere dieses Passwort** — Du brauchst es gleich, ohne Leerzeichen
-
-Wichtig: Das ist NICHT Dein normales Gmail-Passwort. App-Passwörter sind sicherer und können jederzeit widerrufen werden.
-
-## Schritt 2 — GitHub Secrets eintragen (2 Minuten)
-
-Gehe zu **https://github.com/Dante-sys-arch/te-media-intelligence-agent/settings/secrets/actions**
-
-Klicke auf **New repository secret** und trage diese drei Secrets ein:
-
-### Secret 1: `SMTP_USER`
-- **Name:** `SMTP_USER`
-- **Value:** Deine Gmail-Adresse, z.B. `te.intelligence@gmail.com`
-
-### Secret 2: `SMTP_PASS`
-- **Name:** `SMTP_PASS`
-- **Value:** Das 16-stellige App-Passwort von Schritt 1, ohne Leerzeichen
-
-### Secret 3: `EMAIL_RECIPIENTS`
-- **Name:** `EMAIL_RECIPIENTS`
-- **Value:** Komma-separierte Liste der Empfänger, z.B.:
-  ```
-  sdj@te-communications.com,team@te-communications.com,bo@te-communications.com
-  ```
-
-## Schritt 3 — Testen
-
-Starte den Workflow manuell:
-**https://github.com/Dante-sys-arch/te-media-intelligence-agent/actions** → Run workflow
-
-Nach ca. 5 Minuten sollte der Report im Posteingang aller Empfänger sein.
+Der Agent kann den Tagesreport als anteasernde E-Mail mit Deep-Links zum Dashboard an Kollegen versenden.
 
 ## Was die E-Mail enthält
 
-- Begrüßung mit Datum
-- Großer "Report öffnen"-Button → Dashboard
-- Übersicht der Report-Inhalte (Stichpunkte)
-- Hinweis "Als App auf dem Home-Bildschirm"
-- Anhang: Vollständiger HTML-Report
+- Header mit Datum + großer "Vollständigen Report öffnen"-Button
+- 13 Abschnitts-Anteaser:
+  - Quellenlage
+  - Top 5 Themen
+  - Markt-Narrativ
+  - Tiefenanalyse (Themen-Übersicht)
+  - White Spaces
+  - Konkurrenz-Beobachtung
+  - Kunden-Live-Recherche (Sprecher)
+  - Termine 7 Tage
+  - Themen-Priorisierung
+  - Positionierungs-Mapping (kompakt)
+  - Top-7 Pitches (Titel + Kunde)
+  - Mehrtages-Trends
+  - Gesamtfazit
+- Jeder Anteaser: 350-600 Zeichen Kurzfassung + Deep-Link
+- Footer mit Methodik + Kunden-Liste
 
-## Wenn keine E-Mail kommt
+## Was NICHT in der E-Mail steht
 
-Schau in die Workflow-Logs:
-- Wenn dort steht `[EMAIL] SMTP_USER or SMTP_PASS not configured` → Secrets fehlen
-- Wenn dort steht `SMTP authentication failed` → App-Passwort falsch eingegeben
-- Wenn dort steht `Sent successfully` aber Du bekommst nichts → Spam-Ordner prüfen
+- Volle Tiefenanalyse pro Thema (8-Punkte-Framework)
+- Komplette Pitch-Mails
+- Detailliertes Quellenverzeichnis
 
-## Empfänger ändern
+→ All das ist im Dashboard, jeder Anteaser hat den Deep-Link zum jeweiligen Abschnitt.
 
-Einfach das Secret `EMAIL_RECIPIENTS` aktualisieren (neuer Wert überschreibt alten). Beim nächsten Lauf gilt die neue Liste.
+---
+
+## Setup in 3 Schritten
+
+### 1. Dedizierte Gmail-Adresse anlegen
+
+1. https://accounts.google.com/signup
+2. Adresse z.B. `te.daily.briefing@gmail.com`
+3. **2-Faktor-Authentifizierung aktivieren** (Pflicht für App-Passwort):
+   https://myaccount.google.com/security → "Bestätigung in zwei Schritten"
+4. **App-Passwort generieren:**
+   https://myaccount.google.com/apppasswords
+   - App-Name: "TE Agent"
+   - 16-stelligen Code kopieren (NICHT das normale Passwort!)
+
+### 2. GitHub Secrets eintragen
+
+https://github.com/Dante-sys-arch/te-media-intelligence-agent/settings/secrets/actions
+
+→ "New repository secret" dreimal:
+
+| Name | Wert |
+|---|---|
+| `SMTP_USER` | `te.daily.briefing@gmail.com` |
+| `SMTP_PASS` | 16-stelliges App-Passwort (OHNE Leerzeichen) |
+| `EMAIL_RECIPIENTS` | Komma-separiert: `sdj@te-communications.com,kollege1@te-communications.com` |
+
+### 3. Test-Lauf
+
+https://github.com/Dante-sys-arch/te-media-intelligence-agent/actions
+→ "Run workflow"
+
+Logs prüfen — Schritt "Send report via email":
+- `[EMAIL] ✓ Sent successfully to: ...` → Alles OK
+- `SMTP authentication failed` → App-Passwort neu generieren
+- `No EMAIL_RECIPIENTS configured` → Secret-Namen exakt prüfen
+
+---
+
+## Empfänger jederzeit anpassen
+
+GitHub → Settings → Secrets → `EMAIL_RECIPIENTS` → "Update"
+- Adressen mit Komma trennen
+- Wirksam ab nächstem Lauf — kein Code-Push nötig
+
+---
+
+## Workflow-Verhalten
+
+- E-Mail-Versand passiert NACH erfolgreichem Lauf
+- `continue-on-error: true` — falls E-Mail-Versand scheitert, bleibt der Report trotzdem im Dashboard
+- Reply-To auf `sdj@te-communications.com` — Antworten landen bei Dir
+
+## Versand-Sicherheit
+
+- TLS via SMTP_SSL (Port 465)
+- App-Passwort statt normales Passwort
+- 2FA auf der Gmail-Adresse Pflicht
+- Keine Anhänge — nur HTML-Body mit Deep-Links
