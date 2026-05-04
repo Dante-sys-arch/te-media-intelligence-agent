@@ -1,0 +1,40 @@
+{
+  "date": "Montag, 4. Mai 2026",
+  "time": "09:26",
+  "summary": "# 10 Stichpunkte — Hauptthemen Tagesreport 4. Mai 2026\n\n---\n\n1. **Project Freedom** — US-Marine eskortiert ab heute Schiffe durch die Straße von Hormuz; Iran wertet Einmischung als Waffenruhebruch → akute Eskalationsgefahr\n\n2. **Trump-EU-Autozölle 25 %** — Section 232 tritt diese Woche in Kraft; deutsche OEMs (BMW, Mercedes, VW, Porsche, Audi) maximal exponiert\n\n3. **Berkshire-Generationswechsel** — Abel als neuer CEO signalisiert Kontinuität; Rekord-Cash von 397,4 Mrd. USD bleibt vorerst unangetastet\n\n4. **GameStop bietet 56 Mrd. USD für eBay** — 125 USD/Aktie, 20 % Premium, 20 Mrd. USD TD-Bank-Finanzierung; größte Reverse-Takeover-Story seit Jahren\n\n5. **OPEC+ erhöht symbolisch um 188.000 bpd** — UAE-Austritt offiziell vollzogen; reale Fördersteigerung hängt von Hormus-Öffnung ab\n\n6. **Hormus-Blockade als Ölpreistreiber** — Brent stabilisiert sich; tatsächliche Versorgungslage unklar bis Eskort-Operationen greifen\n\n7. **Drei überlagerte Schockschichten** — Geopolitik + Handelspolitik + Strukturwandel (AI, Private Credit) treffen gleichzeitig auf die Märkte\n\n8. **DAX-Eröffnung unverändert** — Märkte reagieren auffällig gelassen trotz Nachrichtendichte; Pre-Market-Datenlage noch eingeschränkt\n\n9. **Quellenlage sehr belastbar** — 755 RSS-Artikel aus 209 Quellen; stärkste Abdeckung bei deutschen Leitmedien und OPEC/Pentagon-Statements\n\n10. **Spätzyklus-Signale häufen sich** — GameStop/eBay-Deal und AI-Re-Rating bei Private Credit gelten als Indikatoren für Marktüberdehnung",
+  "hash": "e0753e69654a5633058bf25a5440b3f0",
+  "meta": {
+    "date": "Montag, 4. Mai 2026",
+    "time": "09:26",
+    "weekend": false,
+    "rss_total": 213,
+    "rss_ok": 162,
+    "rss_fail": 77,
+    "rss_sources": 209,
+    "rss_items": 755,
+    "rss_time": 8.3,
+    "client_mentions": {
+      "PGIM": 9,
+      "T. Rowe Price": 14,
+      "MK Global Kapital": 0,
+      "Franklin Templeton": 11,
+      "Eurizon": 10,
+      "Bitcoin Suisse": 9,
+      "KKR": 14,
+      "Aegon AM": 9,
+      "Bendura Bank": 9,
+      "DNB AM": 7,
+      "Insight Investment": 8,
+      "JOHCM": 4,
+      "Maverix": 5
+    },
+    "history_days": 5,
+    "m1": "claude-opus-4-7",
+    "c1": 39215,
+    "t1": 386.0,
+    "m2": "claude-opus-4-7",
+    "c2": 34931,
+    "t2": 275.5,
+    "total": 78522
+  }
+}
