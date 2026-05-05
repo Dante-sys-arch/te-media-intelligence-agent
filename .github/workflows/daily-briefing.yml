@@ -1,9 +1,13 @@
 name: TE Daily Media Intelligence
 
 on:
-  schedule:
-    - cron: '0 6 * * 1-5'  # Mo-Fr 06:00 UTC = 07:00 CET — werktags only (Wochenend-Berichterstattung wird Montag aufgeholt)
-  workflow_dispatch:       # Manual trigger
+  # GESTOPPT auf User-Wunsch (03.05.2026):
+  # Automatischer Cron-Schedule deaktiviert — keine taeglichen Laeufe mehr.
+  # Workflow laeuft NUR noch bei manuellem Trigger ueber GitHub Actions UI.
+  # Um wieder zu aktivieren: untenstehende Zeile auskommentieren.
+  # schedule:
+  #   - cron: '0 6 * * 1-5'  # Mo-Fr 06:00 UTC = 07:00 CET
+  workflow_dispatch:       # Manual trigger only
 
 permissions:
   contents: write
