@@ -1,0 +1,40 @@
+{
+  "date": "Dienstag, 5. Mai 2026",
+  "time": "09:06",
+  "summary": "# 10 Stichpunkte — Hauptthemen Tagesreport 5. Mai 2026\n\n1. **UniCredit Q1-Rekordgewinn** — 3,22 Mrd. € Nettogewinn (+16 %), deutlich über Konsens (2,68 Mrd.); formales 35-Mrd.-€-Gebot auf Commerzbank-Anteilserhöhung über 30 % heute eingereicht\n\n2. **Rheinmetall Q1-Umsatzverfehlung** — Umsatz +7,7 % auf 1,94 Mrd. € (Erwartung: 2,3 Mrd.); operative Marge +1,1 Pp auf 11,6 % im Rahmen; Auftragsbestand 73 Mrd. €\n\n3. **Audi Q1-Gewinnrückgang** — vierter Rückgang in Folge; Belastung durch Zollumfeld und Nachfrageschwäche; VW-Konzernkontext\n\n4. **Trump-EU-Autozölle 25 %** — Verhandlungstreffen Šefčovič/Greer heute; Eskalationsrisiko für europäische Automobilindustrie; Ausgang offen\n\n5. **Iran/Hormus — Ölpreisvolatilität** — Brent zwischen 109 und 126 USD; US-„Projekt Freiheit\" blockiert ~42 Schiffe; Iran droht Vergeltung; OPEC+ moderates Angebotsplus\n\n6. **Palantir** — Thema im Report präsent (KI-/Rüstungskontext); Kursrelevanz für Tech- und Defense-Investoren\n\n7. **Kundenabdeckung mit Lücken** — T. Rowe Price, Franklin Templeton, Bitcoin Suisse, Insight, Eurizon, Aegon, DNB, Bendura, JOHCM, Maverix, MK Global, PGIM-DACH ohne Eigenanlass; Pitches via Themenanknüpfung\n\n8. **Geopolitisches Eskalationscluster** — Iran/Hormus + Trump-Zölle + Rüstungsausgaben bilden übergreifendes Narrativ für Asset-Allocation-Kommentare\n\n9. **Makro-Datenlage überdurchschnittlich belastbar** — Primärquellen mehrfach verifiziert (Bloomberg, Handelsblatt, Reuters); Einschränkung nur bei DNB, Aegon, Insight (keine neuen PRs)\n\n10. **Berichterstattungs-Zeitfenster** — Report-Stand 09:06 CET; Šefčovič/Greer-Treffen und weitere Q1-Meldungen können Lage noch intraday verändern",
+  "hash": "a16640077baefe10a344ab2a41654b89",
+  "meta": {
+    "date": "Dienstag, 5. Mai 2026",
+    "time": "09:06",
+    "weekend": false,
+    "rss_total": 213,
+    "rss_ok": 162,
+    "rss_fail": 77,
+    "rss_sources": 204,
+    "rss_items": 762,
+    "rss_time": 9.4,
+    "client_mentions": {
+      "PGIM": 10,
+      "T. Rowe Price": 13,
+      "MK Global Kapital": 0,
+      "Franklin Templeton": 10,
+      "Eurizon": 9,
+      "Bitcoin Suisse": 10,
+      "KKR": 13,
+      "Aegon AM": 9,
+      "Bendura Bank": 9,
+      "DNB AM": 9,
+      "Insight Investment": 8,
+      "JOHCM": 5,
+      "Maverix": 5
+    },
+    "history_days": 5,
+    "m1": "claude-opus-4-7",
+    "c1": 39734,
+    "t1": 372.4,
+    "m2": "claude-opus-4-7",
+    "c2": 30813,
+    "t2": 255.2,
+    "total": 74864
+  }
+}
